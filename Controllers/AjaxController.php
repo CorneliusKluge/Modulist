@@ -34,6 +34,6 @@ class AjaxController {
         include("Views/Services/Field/FieldAddView.php");
         $output = ob_get_clean();
 
-        return $output;
+        echo $output;
     }
 }
