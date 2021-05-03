@@ -4,7 +4,7 @@ namespace Modulist\Services;
 
 class DatabaseService {
     static function getDatabaseObject() {
-        $db = mysqli_connect("localhost", "", "", "");
+        $db = mysqli_connect("localhost", "modulist_admin", "123456", "modulist");
         if(!$db) {
             exit("Verbindugsfehler: " . mysqli_connect_error());
         }
