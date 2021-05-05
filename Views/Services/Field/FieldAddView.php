@@ -1,6 +1,4 @@
-<h2>Studienrichtung hinzufügen</h2>
-
-<form method="POST">
+<form method="POST" id="field_add_form">
     <label for="field_add_name">Name:</label>
     <input type="string" id="field_add_name" name="field_add_name"/>
 
@@ -17,7 +15,7 @@
             if($result->num_rows) {
                 foreach($result as $course) {
                 ?>
-                    <option value="<?php echo $course["id"];?>"><?php echo $course["name"];?></option>
+                    <option value="<?php echo $course["ID"];?>"><?php echo $course["name"];?></option>
                 <?php
                 }
             }
@@ -26,5 +24,5 @@
 
     <br>
 
-    <input type="submit" name="field_add_submit"/>
+    <button type="button" id="field_add_submit">Speichern</button>
 </form>

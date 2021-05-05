@@ -16,6 +16,7 @@ include("Controllers/StudyManagementController.php");
 // Models
 include("Models/ModuleModel.php");
 include("Models/CourseModel.php");
+include("Models/FieldModel.php");
 
 //Services
 include("Services/DatabaseService.php");
