@@ -3,7 +3,9 @@
 namespace Modulist;
 
 use Modulist\Controllers\AjaxController;
+use Modulist\Controllers\CourseController;
 use Modulist\Controllers\ExportController;
+use Modulist\Controllers\FieldController;
 use Modulist\Controllers\ModuleController;
 use Modulist\Controllers\StudyManagementController;
 
@@ -12,6 +14,8 @@ include("Controllers/ModuleController.php");
 include("Controllers/ExportController.php");
 include("Controllers/AjaxController.php");
 include("Controllers/StudyManagementController.php");
+include("Controllers/CourseController.php");
+include("Controllers/FieldController.php");
 
 // Models
 include("Models/ModuleModel.php");
@@ -38,6 +42,12 @@ class MainController {
                 break;
             case "studymanagement":
                 new StudyManagementController();
+                break;
+            case "course":
+                new CourseController();
+                break;
+            case "field":
+                new FieldController();
                 break;
             case "ajax":
                 new AjaxController();

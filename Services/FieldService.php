@@ -72,7 +72,7 @@ class FieldService {
 
             FieldModel::deleteField($id);
 
-            echo "Der ausgewählte Studiengang wurde erfolgreich gelöscht";
+            echo "Die ausgewählte Studienrichtung wurde erfolgreich gelöscht";
 
             return true;
         }

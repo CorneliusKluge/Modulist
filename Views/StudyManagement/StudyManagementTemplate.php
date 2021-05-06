@@ -9,7 +9,7 @@
         
         <div id="course_message_container"></div>
         <div class="course_management_container">
-            <button type="button" id="course_add_button"></button>
+            <button type="button" id="course_add_button">Erstellen</button>
             <div id="course_list_container"></div>
         </div>
         <div id="course_deleteForm_container"></div>

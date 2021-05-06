@@ -27,13 +27,7 @@ class FieldModel {
         $nameEN = mysqli_real_escape_string($db, $nameEN);
         $courseID = mysqli_real_escape_string($db, $courseID);
 
-        if(empty($nameEN)) {
-            $insert = "INSERT INTO fields (name, nameEN, courseID) VALUES ('$name', NULL, $courseID)";
-        }
-        else {
-            $insert = "INSERT INTO fields (name, nameEN, courseID) VALUES ('$name', '$nameEN', $courseID)";
-        }
-
+        $insert = "INSERT INTO fields (name, nameEN, courseID) VALUES ('$name', NULLIF('$nameEN', ''), $courseID)";
         $result = mysqli_query($db, $insert);
 
         return $result;
