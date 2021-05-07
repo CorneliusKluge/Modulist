@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Mai 2021 um 14:24
+-- Erstellungszeit: 07. Mai 2021 um 09:45
 -- Server-Version: 10.4.13-MariaDB
 -- PHP-Version: 7.4.7
 
@@ -31,7 +31,7 @@ CREATE TABLE `categories` (
   `name` text NOT NULL,
   `presenceFlag` tinyint(1) NOT NULL,
   `position` int(11) NOT NULL,
-  `creditHours` float NOT NULL,
+  `creditHours` float DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -43,7 +43,7 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `courses` (
   `name` text NOT NULL,
-  `nameEN` text NOT NULL,
+  `nameEN` text DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -56,8 +56,8 @@ CREATE TABLE `courses` (
 CREATE TABLE `exams` (
   `moduleID` int(11) NOT NULL,
   `examType` int(11) NOT NULL,
-  `examDuration` int(11) NOT NULL,
-  `examCircumference` text NOT NULL,
+  `examDuration` int(11) DEFAULT NULL,
+  `examCircumference` text DEFAULT NULL,
   `examPeriod` text NOT NULL,
   `examWeighting` int(11) NOT NULL,
   `ID` int(11) NOT NULL
@@ -84,12 +84,12 @@ CREATE TABLE `fields` (
 
 CREATE TABLE `literature` (
   `authors` text NOT NULL,
-  `year` int(11) NOT NULL,
+  `year` int(11) DEFAULT NULL,
   `title` text NOT NULL,
-  `edition` text NOT NULL,
-  `place` text NOT NULL,
-  `publishingCompany` text NOT NULL,
-  `ISBN` text NOT NULL,
+  `edition` text DEFAULT NULL,
+  `place` text DEFAULT NULL,
+  `publishingCompany` text DEFAULT NULL,
+  `ISBN` text DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -101,31 +101,31 @@ CREATE TABLE `literature` (
 
 CREATE TABLE `modules` (
   `name` text NOT NULL,
-  `nameEN` text NOT NULL,
-  `code` text NOT NULL,
-  `summary` text NOT NULL,
-  `summaryEN` text NOT NULL,
-  `type` text NOT NULL,
-  `semester` int(11) NOT NULL,
-  `duration` int(11) NOT NULL,
-  `credits` int(11) NOT NULL,
-  `usability` text NOT NULL,
-  `examRequirement` text NOT NULL,
-  `participationRequirement` text NOT NULL,
-  `studyContent` text NOT NULL,
-  `knowledgeBroadening` text NOT NULL,
-  `knowledgeDeepening` text NOT NULL,
-  `instrumentalCompetence` text NOT NULL,
-  `systemicCompetence` text NOT NULL,
-  `communicativeCompetence` text NOT NULL,
-  `responsible` text NOT NULL,
-  `lectureLanguage` text NOT NULL,
-  `frequency` text NOT NULL,
-  `media` text NOT NULL,
-  `basicLiteraturePreNote` text NOT NULL,
-  `basicLiteraturePostNote` text NOT NULL,
-  `deepeningLiteraturePreNote` text NOT NULL,
-  `deepeningLiteraturePostNote` text NOT NULL,
+  `nameEN` text DEFAULT NULL,
+  `code` text DEFAULT NULL,
+  `summary` text DEFAULT NULL,
+  `summaryEN` text DEFAULT NULL,
+  `type` text DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `credits` int(11) DEFAULT NULL,
+  `usability` text DEFAULT NULL,
+  `examRequirement` text DEFAULT NULL,
+  `participationRequirement` text DEFAULT NULL,
+  `studyContent` text DEFAULT NULL,
+  `knowledgeBroadening` text DEFAULT NULL,
+  `knowledgeDeepening` text DEFAULT NULL,
+  `instrumentalCompetence` text DEFAULT NULL,
+  `systemicCompetence` text DEFAULT NULL,
+  `communicativeCompetence` text DEFAULT NULL,
+  `responsible` text DEFAULT NULL,
+  `lectureLanguage` text DEFAULT NULL,
+  `frequency` text DEFAULT NULL,
+  `media` text DEFAULT NULL,
+  `basicLiteraturePreNote` text DEFAULT NULL,
+  `basicLiteraturePostNote` text DEFAULT NULL,
+  `deepeningLiteraturePreNote` text DEFAULT NULL,
+  `deepeningLiteraturePostNote` text DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -138,7 +138,7 @@ CREATE TABLE `modules` (
 CREATE TABLE `module_category_mm` (
   `moduleID` text NOT NULL,
   `categoryID` text NOT NULL,
-  `workload` int(11) NOT NULL,
+  `workload` int(11) DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
