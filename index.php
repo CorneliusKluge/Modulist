@@ -21,6 +21,8 @@ include("Controllers/FieldController.php");
 include("Models/ModuleModel.php");
 include("Models/CourseModel.php");
 include("Models/FieldModel.php");
+include("Models/CategoryModel.php");
+include("Models/LiteratureModel.php");
 
 //Services
 include("Services/DatabaseService.php");
