@@ -27,8 +27,6 @@ class LiteratureModel {
         $publisher = mysqli_real_escape_string($db, $publisher);
         $isbn = mysqli_real_escape_string($db, $isbn);
 
-
-    // repeat for every variable:
         if(empty($releaseDate)) {
             $releaseDate = "NULL";
         }
@@ -39,5 +37,24 @@ class LiteratureModel {
         $result = mysqli_query($db, $insert);
 
         return $result;
+    }
+
+    static function getLiteratureAddView(){
+
+    }
+    static function getLiteratureListView(){
+
+    }
+    static function getLiteratureChangeView(){
+
+    }
+    static function literatureChangeSubmit(){
+
+    }
+    static function getLiteratureDeleteView(){
+
+    }
+    static function literatureDeleteSubmit(){
+        
     }
 }
