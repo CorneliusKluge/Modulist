@@ -15,7 +15,16 @@ class LiteratureModel {
         return $result; // Return the result
     }
     
-    static function addLiterature($ID, $authors, $title, $releaseDate, $edition, $releasePlace, $publisher, $isbn) {
+    static function addLiterature(
+        $ID, 
+        $authors, 
+        $title, 
+        $releaseDate, 
+        $edition,
+        $releasePlace, 
+        $publisher, 
+        $isbn
+    ) {
         $db = DatabaseService::getDatabaseObject();
 
         $ID = mysqli_real_escape_string($db, $ID);
@@ -32,7 +41,7 @@ class LiteratureModel {
         }
         $insert = "INSERT INTO literature (ID, authors, title, releaseDate, edition, releasePlace, publisher, isbn) VALUES (
             '$ID', '$authors', '$title', $releaseDate, NULLIF('$edition', ''), NULLIF('$releasePlace', ''), NULLIF('$publisher', ''), NULLIF('$isbn', '')
-            )";
+        )";
     
         $result = mysqli_query($db, $insert);
 
