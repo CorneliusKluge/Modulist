@@ -10,9 +10,11 @@ use Modulist\Controllers\LiteratureController;
 use Modulist\Controllers\ModuleController;
 use Modulist\Controllers\StudyManagementController;
 use Modulist\Models\LiteratureModel;
+use Modulist\Controllers\CategoryController;
 
 // Controllers
 include("Controllers/ModuleController.php");
+include("Controllers/CategoryController.php");
 include("Controllers/ExportController.php");
 include("Controllers/AjaxController.php");
 include("Controllers/StudyManagementController.php");
@@ -42,6 +44,9 @@ class MainController {
         switch($subcontroller) {
             case "module":
                 new ModuleController();
+                break;
+            case "Category":
+                new CategoryController();
                 break;
             case "export":
                 new ExportController();
