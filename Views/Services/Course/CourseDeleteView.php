@@ -9,6 +9,6 @@ Sind Sie sicher, dass Sie den Studiengang <?php echo $result->name;?> löschen m
 else {
 ?>
 Der ausgewählte Studiengang konnte nicht gefunden werden.
-<button class="button_close">Ok</button>
+<button class="button_close">OK</button>
 <?php
 }

@@ -9,6 +9,6 @@ Sind Sie sicher, dass Sie die Studienrichtung <?php echo $result->name;?> lösch
 else {
 ?>
 Die ausgewählte Studienrichtung konnte nicht gefunden werden.
-<button class="button_close">Ok</button>
+<button class="button_close">OK</button>
 <?php
 }

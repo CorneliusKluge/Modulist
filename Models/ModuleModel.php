@@ -3,6 +3,7 @@
 namespace Modulist\Models;
 
 use Modulist\Services\DatabaseService;
+use mysqli;
 
 class ModuleModel {
     static function getAllModules() {
@@ -29,6 +30,7 @@ class ModuleModel {
         }
         return $result;
     }
+    
     static function getModuleByModuleCode($moduleCode) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -45,4 +47,270 @@ class ModuleModel {
         }
         return $result;
     }
+
+    static function getModuleByName($name){
+        $db = DatabaseService::getDatabaseObject();
+
+        $name = mysqli_real_escape_string($db, $name);
+        
+        $query = "SELECT * FROM modules WHERE name = '$name'";
+        $result = mysqli_query($db, $query);
+
+        if($result->num_rows) {
+            $result = mysqli_fetch_object($result);
+        }
+        else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    static function getModuleIDByName($name){
+        $db = DatabaseService::getDatabaseObject();
+
+        $name = mysqli_real_escape_string($db, $name);
+        
+        $query = "SELECT ID FROM modules WHERE name = '$name'";
+        $result = mysqli_query($db, $query);
+
+        if($result->num_rows) {
+            $result = mysqli_fetch_object($result);
+        }
+        else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    static function addModule(
+        $name, 
+        $nameEN, 
+        $code, 
+        $field,
+        $summary, 
+        $summaryEN,
+        $type,
+        $semester,
+        $duration,
+        $credits,
+        $usability,
+        $examRequirement,
+        $participationRequirement,
+        $studyContent,
+        $knowledgeBroadening,
+        $knowledgeDeepening,
+        $instrumentalCompetence,
+        $systemicCompetence,
+        $communicativeCompetence,
+        $categories, 
+        $exams,
+        $responsible,
+        $lectureLanguage,
+        $frequency,
+        $media,
+        $basicLiteraturePreNote,
+        $basicLiterature,
+        $basicLiteraturePostNote,
+        $deepeningLiteraturePreNote,
+        $deepeningLiterature,
+        $deepeningLiteraturePostNote
+    ) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $name = mysqli_real_escape_string($db, $name);
+        $nameEN = mysqli_real_escape_string($db, $nameEN);
+        $code = mysqli_real_escape_string($db, $code); 
+        $field = mysqli_real_escape_string($db, $field);
+        $summary = mysqli_real_escape_string($db, $summary); 
+        $summaryEN = mysqli_real_escape_string($db, $summaryEN);
+        $type = mysqli_real_escape_string($db, $type);
+        $semester = mysqli_real_escape_string($db, $semester);
+        $duration = mysqli_real_escape_string($db, $duration);
+        $credits = mysqli_real_escape_string($db, $credits);
+        $usability = mysqli_real_escape_string($db, $usability);
+        $examRequirement = mysqli_real_escape_string($db, $examRequirement);
+        $participationRequirement = mysqli_real_escape_string($db, $participationRequirement);
+        $studyContent = mysqli_real_escape_string($db, $studyContent);
+        $knowledgeBroadening = mysqli_real_escape_string($db, $knowledgeBroadening);
+        $knowledgeDeepening = mysqli_real_escape_string($db, $knowledgeDeepening);
+        $instrumentalCompetence = mysqli_real_escape_string($db, $instrumentalCompetence);
+        $systemicCompetence = mysqli_real_escape_string($db, $systemicCompetence);
+        $communicativeCompetence = mysqli_real_escape_string($db, $communicativeCompetence);
+        $responsible = mysqli_real_escape_string($db, $responsible);
+        $lectureLanguage = mysqli_real_escape_string($db, $lectureLanguage);
+        $frequency = mysqli_real_escape_string($db, $frequency);
+        $media = mysqli_real_escape_string($db, $media);
+        $basicLiteraturePreNote = mysqli_real_escape_string($db, $basicLiteraturePreNote);
+        $basicLiteraturePostNote = mysqli_real_escape_string($db, $basicLiteraturePostNote);
+        $deepeningLiteraturePreNote = mysqli_real_escape_string($db, $deepeningLiteraturePreNote);
+        $deepeningLiteraturePostNote = mysqli_real_escape_string($db, $deepeningLiteraturePostNote);
+
+        if(empty($semester)){
+            $semester = "NULL";
+        }
+
+        if(empty($duration)){
+            $duration = "NULL";
+        }
+
+        if(empty($credits)){
+            $credits = "NULL";
+        }
+    
+        $insert = "INSERT INTO modules (name, nameEN, code, summary, summaryEN, type, semester, duration, credits, usability, 
+                                        examRequirement, participationRequirement, studyContent, knowledgeBroadening, 
+                                        knowledgeDeepening, instrumentalCompetence, systemicCompetence, communicativeCompetence,
+                                        responsible, lectureLanguage, frequency, media, basicLiteraturePreNote, 
+                                        basicLiteraturePostNote, deepeningLiteraturePreNote, deepeningLiteraturePostNote) 
+                    VALUES ('$name', NULLIF('$nameEN',''), NULLIF('$code',''), NULLIF('$summary',''), NULLIF('$summaryEN',''), NULLIF('$type',''), 
+                    $semester, $duration, $credits, NULLIF('$usability',''), NULLIF('$examRequirement',''), NULLIF('$participationRequirement',''),
+                    NULLIF('$studyContent',''), NULLIF('$knowledgeBroadening',''), NULLIF('$knowledgeDeepening',''), NULLIF('$instrumentalCompetence',''),
+                    NULLIF('$systemicCompetence',''), NULLIF('$communicativeCompetence',''), NULLIF('$responsible',''), NULLIF('$lectureLanguage',''),
+                    NULLIF('$frequency',''), NULLIF('$media',''), NULLIF('$basicLiteraturePreNote',''), NULLIF('$basicLiteraturePostNote',''), 
+                    NULLIF('$deepeningLiteraturePreNote',''), NULLIF('$deepeningLiteraturePostNote',''))";
+        
+
+        $result = mysqli_query($db, $insert);
+
+        $fieldAdded = ModuleModel::addFieldToModule($name, $field);
+        $categoriesAdded = ModuleModel::addCategoriesToModule($name, $categories);
+        $examsAdded = ModuleModel::addExamToModule($name, $exams);
+        $basicLiteratureAdded = ModuleModel::addLiteratureToModule($name, $basicLiterature, true);
+        $deepeningLiteratureAdded = ModuleModel::addLiteratureToModule($name, $deepeningLiterature, false);
+
+        return $result;
+    }
+
+    static function addFieldToModule($modulName, $field){
+        $db = DatabaseService::getDatabaseObject();
+
+        if(!empty($field)){
+            $moduleID = ModuleModel::getModuleIDByName($modulName);
+
+            if(empty($moduleID)){
+                return false;
+            }
+
+            $insert = "INSERT INTO module_field_mm (moduleID, fieldID) VALUES ('$moduleID', '$field')";
+            $result = mysqli_query($db, $insert);
+        }
+    }
+    
+    static function addCategoriesToModule($modulName, $categories){
+        //does it work like this?
+        $db = DatabaseService::getDatabaseObject();
+
+        if(!empty($categories)){
+            $moduleID = ModuleModel::getModuleIDByName($modulName);
+
+            if(empty($moduleID)){
+                return false;
+            }
+
+            foreach($categories as $row){ //$categories = array ("0" >= array($categoryID, $workload),...)
+                $categoryID = mysqli_real_escape_string($db, $categories[$row][0]);
+                $workload = mysqli_real_escape_string($db, $categories[$row][1]);
+
+                if(empty($categoryID)){
+                    return false;
+                }
+                
+                if(empty($workload)){
+                    $workload = "NULL";
+                }
+                
+                $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload) VALUES ('$moduleID', '$categoryID', $workload)";
+                
+                $result = mysqli_query($db, $insert);
+            }
+        }
+        return $result;
+    }
+
+    static function addExamToModule($modulName, $exams){
+        $db = DatabaseService::getDatabaseObject();
+
+        if(!empty($exams)){
+            $moduleID = ModuleModel::getModuleIDByName($modulName);
+
+            if(empty($moduleID)){
+                return false;
+            }
+
+            foreach($exams as $row){ 
+                $examType = mysqli_real_escape_string($db, $exams[$row][0]);
+                $examDuration = mysqli_real_escape_string($db, $exams[$row][1]);
+                $examCircumference = mysqli_real_escape_string($db, $exams[$row][2]);
+                $examPeriod = mysqli_real_escape_string($db, $exams[$row][3]);
+                $examWeighting = mysqli_real_escape_string($db, $exams[$row][4]);
+
+                if(empty($examType)){
+                    $examType = 0;
+                }
+                
+                if(empty($examDuration)){
+                    $examDuration = "NULL";
+                }
+
+                if(empty($examWeighting)){
+                    $examWeighting = "NULL";
+                }
+
+                if(empty($examCircumference)){
+                    if(empty($examPeriod)){
+                        $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examWeighting) 
+                                    VALUES ('$moduleID', '$examType', $examDuration, NULL, NULL, $examWeighting)";
+                    }
+                    else{
+                        $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examWeighting) 
+                                    VALUES ('$moduleID', '$examType', $examDuration, NULL, '$examPeriod', $examWeighting)";
+                    }
+                }
+                else if(empty($examPeriod)){
+                    $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examWeighting) 
+                                VALUES ('$moduleID', '$examType', $examDuration, '$examCircumference', NULL, $examWeighting)";
+                }
+                else{
+                    $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examWeighting) 
+                                VALUES ('$moduleID', '$examType', $examDuration, '$examCircumference', '$examPeriod', $examWeighting)";
+                }
+                $result = mysqli_query($db, $insert);
+            }
+        }
+        return $result;
+    }
+
+    static function addLiteratureToModule($modulName, $literature, $basicLiteratureFlag){
+        $db = DatabaseService::getDatabaseObject();
+
+        if(!empty($literature)){
+            $moduleID = ModuleModel::getModuleIDByName($modulName);
+            foreach($literature as $literatureID){
+                $literatureID = mysqli_real_escape_string($db, $literatureID);
+                
+                $insert = "INSERT INTO module_literature_mm (moduleID, literatureID, basicLiteratureFlag) 
+                            VALUES ('$moduleID', '$literatureID', $basicLiteratureFlag)";
+                
+                $result = mysqli_query($db, $insert);
+            }
+        }
+        return $result;
+    }    
+
+  
+
+    static function getAllLiterature(){
+        $db = DatabaseService::getDatabaseObject();
+
+        $query = "SELECT * FROM literature";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
+
+    /*NOTES
+        examTypes: 
+            0: not known
+    */
 }
