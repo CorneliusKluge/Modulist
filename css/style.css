@@ -90,6 +90,7 @@ h4 {
     display: block;
     width: 400px;
     min-height: 50px;
+    flex-grow: 2;
     margin: 0 25px;
 }
 

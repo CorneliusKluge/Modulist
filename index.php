@@ -9,7 +9,6 @@ use Modulist\Controllers\FieldController;
 use Modulist\Controllers\LiteratureController;
 use Modulist\Controllers\ModuleController;
 use Modulist\Controllers\StudyManagementController;
-use Modulist\Models\LiteratureModel;
 use Modulist\Controllers\CategoryController;
 
 // Controllers

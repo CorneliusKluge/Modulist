@@ -6,12 +6,12 @@ use Modulist\Models\LiteratureModel;
 use Modulist\Services\LiteratureService;
 
 class LiteratureController {
-    function __construct($literatureID) {
+    function __construct() {
         if(isset($_POST["literature_add_submit"])) {
-            $this->submitNewLiterature($literatureID); // erstellt neuen Literatur-Eintrag
+            $this->submitNewLiterature(); // erstellt neuen Literatur-Eintrag
         }
         if(isset($_POST["literate_add"])) {
-            $this->getLiteratureAddView($literatureID); // ruft Literatur-Formular ab
+            $this->getLiteratureAddView(); // ruft Literatur-Formular ab
         }
         if(isset($_POST["literature_list"])) {
             $this->getLiteratureListView(); // ruft Literatur-Liste ab
@@ -30,10 +30,9 @@ class LiteratureController {
         }
     }
 
-    function submitNewLiterature($literatureID) {
+    function submitNewLiterature() {
         ob_start();
         $bool = LiteratureModel::addLiterature(
-            $literatureID,
             $_POST["literature_add_authors"],
             $_POST["literature_add_title"],
             $_POST["literature_add_releaseDate"],
@@ -50,7 +49,7 @@ class LiteratureController {
 
     }
 
-    function getLiteratureAddView($literatureID){
+    function getLiteratureAddView(){
         ob_start();
         include("Views/Services/Literature/LiteratureAddView.php");
         $output = ob_get_clean();

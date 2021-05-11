@@ -12,7 +12,7 @@ class LiteratureService{
     static function changeLiterature($literatureID){
 
     } 
-    static function deleteLiterature($literatureID){
+    static function deleteLiterature(){
         
     }
 }
