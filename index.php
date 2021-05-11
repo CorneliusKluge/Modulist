@@ -8,9 +8,11 @@ use Modulist\Controllers\ExportController;
 use Modulist\Controllers\FieldController;
 use Modulist\Controllers\ModuleController;
 use Modulist\Controllers\StudyManagementController;
+use Modulist\Controllers\ModuleCategoryController;
 
 // Controllers
 include("Controllers/ModuleController.php");
+include("Controllers/ModuleCategoryController.php");
 include("Controllers/ExportController.php");
 include("Controllers/AjaxController.php");
 include("Controllers/StudyManagementController.php");
@@ -36,6 +38,9 @@ class MainController {
         switch($subcontroller) {
             case "module":
                 new ModuleController();
+                break;
+            case "modulecategory":
+                new ModuleCategoryController();
                 break;
             case "export":
                 new ExportController();
