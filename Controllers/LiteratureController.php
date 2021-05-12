@@ -46,7 +46,6 @@ class LiteratureController {
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
         echo json_encode($returnArray);
-
     }
 
     function getLiteratureAddView(){
@@ -54,7 +53,7 @@ class LiteratureController {
         include("Views/Services/Literature/LiteratureAddView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function getLiteratureListView(){
@@ -63,7 +62,7 @@ class LiteratureController {
         include("Views/Services/Literature/LiteratureListView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function getLiteratureChangeView($literatureID){
@@ -72,12 +71,12 @@ class LiteratureController {
             include("Views/Services/Literature/LiteratureChangeView.php");
             $output = ob_get_clean();
 
-            echo $output;
+            return $output;
         }
     }
     function submitChangedLiterature($literatureID){
         ob_start();
-        $bool = LiteratureService::changeLiterature(
+        $bool = LiteratureModel::changeLiterature(
             $literatureID,
             $_POST["literature_add_authors"],
             $_POST["literature_add_title"],
@@ -91,7 +90,7 @@ class LiteratureController {
 
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
-        echo json_encode($returnArray);
+        return json_encode($returnArray);
     }
 
     function getLiteratureDeleteView(){
@@ -109,7 +108,7 @@ class LiteratureController {
 
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
-        echo json_encode($returnArray);        
+        return json_encode($returnArray);        
     }
 
 }

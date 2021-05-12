@@ -1,4 +1,4 @@
-<h1>Liste der Module</h1>
+<h2>Liste der Module</h2>
 
 <br>
 <?php

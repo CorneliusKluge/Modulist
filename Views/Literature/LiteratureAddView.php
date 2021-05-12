@@ -37,4 +37,5 @@
         <label class="form_label" for="literature_add_isbn">ISBN:</label>
         <input class="form_input" type="string" id="literature_add_isbn" name="literature_add_isbn"/>
     </div>
+    <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>
