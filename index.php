@@ -25,6 +25,7 @@ include("Models/CourseModel.php");
 include("Models/FieldModel.php");
 include("Models/CategoryModel.php");
 include("Models/LiteratureModel.php");
+include("Models/ExamModel.php");
 
 //Services
 include("Services/DatabaseService.php");
@@ -59,7 +60,7 @@ class MainController {
                 break;
             case "literature":
                 new LiteratureController();
-                break
+                break;
         }
     }
 }
