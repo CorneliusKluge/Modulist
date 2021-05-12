@@ -9,9 +9,11 @@ use Modulist\Controllers\FieldController;
 use Modulist\Controllers\LiteratureController;
 use Modulist\Controllers\ModuleController;
 use Modulist\Controllers\StudyManagementController;
+use Modulist\Controllers\CategoryController;
 
 // Controllers
 include("Controllers/ModuleController.php");
+include("Controllers/CategoryController.php");
 include("Controllers/ExportController.php");
 include("Controllers/AjaxController.php");
 include("Controllers/StudyManagementController.php");
@@ -27,7 +29,7 @@ include("Models/CategoryModel.php");
 include("Models/LiteratureModel.php");
 include("Models/ExamModel.php");
 
-//Services
+// Services
 include("Services/DatabaseService.php");
 include("Services/ModuleService.php");
 include("Services/ExportService.php");
@@ -42,6 +44,9 @@ class MainController {
         switch($subcontroller) {
             case "module":
                 new ModuleController();
+                break;
+            case "Category":
+                new CategoryController();
                 break;
             case "export":
                 new ExportController();

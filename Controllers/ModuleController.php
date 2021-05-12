@@ -18,7 +18,7 @@ class ModuleController {
         $template = sprintf(
             $template,
             $this->getModuleAddView(), // Calls the method "getModuleAddView" and write its output/return value into the template
-            "",
+            $this->getModuleListView(),
             "" 
         );
 
@@ -46,6 +46,7 @@ class ModuleController {
 
     function getModuleListView(){
         ob_start();
+        $result = ModuleModel::getModulesForList();
         include("Views/Module/ModuleListView.php"); // Include the View which contains the list with all modules
         $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
 
@@ -58,6 +59,9 @@ class ModuleController {
         $exams = array(array($_POST["module_add_examType"] ?? null, $_POST["module_add_examDuration"] ?? null,
                                 $_POST["module_add_examCircumference"] ?? null,  $_POST["module_add_examPeriod"] ?? null, 
                                 $_POST["module_add_examWeighting"] ?? null));
+        $basicLiterature = array($_POST["module_add_basicLiterature"] ?? null);
+        $deepeningLiterature = array($_POST["module_add_deepeningLiterature"] ?? null);
+
         $bool = ModuleService::addField(
             $_POST["module_add_name"] ?? null,
             $_POST["module_add_nameEN"] ?? null,
@@ -89,17 +93,16 @@ class ModuleController {
             $_POST["module_add_media"] ?? null,
             $_POST["module_add_basicLiteraturePreNote"] ?? null,
 
-            //TODO: post as array(literaturID_1, literaturID_2,...)
-            $_POST["module_add_basicLiterature"] ?? null,
+            $basicLiterature,
 
             $_POST["module_add_basicLiteraturePostNote"] ?? null,
             $_POST["module_add_deepeningLiteraturePreNote"] ?? null,
 
-            //TODO: post as array(literaturID_1, literaturID_2,...)
-            $_POST["module_add_deepeningLiterature"] ?? null,
+            $deepeningLiterature,
 
             $_POST["module_add_deepeningLiteraturePostNote"] ?? null,
         );
         $output = ob_get_clean();
+        echo $output;
     }
 }

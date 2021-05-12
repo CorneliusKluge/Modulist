@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    margin: 0 25px;
+    background-color: #007EB6;
+    background-image: url("../img/muster-modulist.png");
+    background-size: 500px;
+    background-repeat: repeat;
+}
+
+/*------------------------navbar------------------------*/
+
+nav {
+    height: 50px;
+}
+
+/*------------------------heading------------------------*/
+
+h1 {
+    padding-left: 50px;
+    font-family: 'Source Sans Pro',sans-serif;
+    color: white;
+    /* background-color: #09497D; */
+}
+
+h2 {
+    width: 100%;
+}
+
+h3 {
+    width: 100%;
+    margin: 10px 0 0 25px;
+    padding: 5px 15px;
+    background-color: #808080;
+    color: #fff;
+}
+
+h4 {
+    width: 100%;
+    margin: 10px 0 0 25px;
+    padding: 5px 15px;
+    background-color: #808080;
+    color: #fff;
+}
+
+/*-------------------general content-------------------*/
+
+.button {
+    display: block;
+    margin: 25px;
+    padding: 5px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    background-color: #fff;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: large;
+    font-weight: 700;
+    transition-duration: .2s;
+}
+.button:hover {
+    transition-duration: .2s;
+    color: #fff;
+    background-color: #09497D;
+    cursor: pointer;
+}
+
+/*------------------------form------------------------*/
+
+.form_container {
+    width: auto;
+    display: flex;
+    margin: 0;
+    padding: 0 25px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    flex-flow: row wrap;
+    align-items: flex-end; /* maybe center or baseline...? */
+    background-color: #fff;
+}
+
+.form_container h2 {
+    width: 100%;
+    margin: 10px 0 0 25px;
+    padding: 5px 15px;
+    background-color: #808080;
+    color: white;
+}
+
+.form_item {
+    display: block;
+    width: 400px;
+    min-height: 50px;
+    flex-grow: 2;
+    margin: 0 25px;
+}
+
+.form_label {
+    display: block;
+    width: calc(100% - 30px); /* substract the padding width (so that columns remain at 400px)  */
+    padding: 10px 15px;
+    margin: 20px 0 15px 0;
+    background-color: #c0c0c0;
+    font-weight: 600;
+}
+
+.form_input {
+    display: block;
+    height: 20px;
+    width: calc(100% - 23px); /* substract the padding width and input border (so that columns remain at 400px) */
+    margin-left: 15px; 
+}
+
+.form_select {
+    height: 26px;
+    width: calc(100% - 15px); /* substract the margin width (so that columns remain at 400px)  */
+    margin-left: 15px; 
+}
+
+.form_submit {
+    align-self: flex-end;
+    /* margin-left: calc(100% - 50px); */
+    margin-left: 90%;
+}

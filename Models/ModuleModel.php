@@ -14,6 +14,17 @@ class ModuleModel {
 
         return $result; // Return the result
     }
+
+    static function getModulesForList(){
+        $db = DatabaseService::getDatabaseObject();
+        
+        //TODO: update sql statement if other colums needed 
+        $query = "SELECT t1.*, t2.totalworkload FROM modules as t1 LEFT JOIN (SELECT moduleID, SUM(workload) as totalworkload FROM module_category_mm GROUP BY moduleID) as t2 ON t1.ID = t2.moduleID";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
     static function getModuleByID($id) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -30,13 +41,13 @@ class ModuleModel {
         }
         return $result;
     }
-    
+
     static function getModuleByModuleCode($moduleCode) {
         $db = DatabaseService::getDatabaseObject();
 
         $moduleCode = mysqli_real_escape_string($db, $moduleCode);
         
-        $query = "SELECT * FROM modules WHERE moduleCode = '$moduleCode'";
+        $query = "SELECT * FROM modules WHERE code = '$moduleCode'";
         $result = mysqli_query($db, $query);
 
         if($result->num_rows) {
@@ -54,23 +65,6 @@ class ModuleModel {
         $name = mysqli_real_escape_string($db, $name);
         
         $query = "SELECT * FROM modules WHERE name = '$name'";
-        $result = mysqli_query($db, $query);
-
-        if($result->num_rows) {
-            $result = mysqli_fetch_object($result);
-        }
-        else {
-            $result = false;
-        }
-        return $result;
-    }
-
-    static function getModuleIDByName($name){
-        $db = DatabaseService::getDatabaseObject();
-
-        $name = mysqli_real_escape_string($db, $name);
-        
-        $query = "SELECT ID FROM modules WHERE name = '$name'";
         $result = mysqli_query($db, $query);
 
         if($result->num_rows) {
@@ -171,12 +165,17 @@ class ModuleModel {
         
 
         $result = mysqli_query($db, $insert);
-
+        var_dump($result);
         $fieldAdded = ModuleModel::addFieldToModule($name, $field);
+        var_dump($fieldAdded);
         $categoriesAdded = ModuleModel::addCategoriesToModule($name, $categories);
+        var_dump($categoriesAdded);
         $examsAdded = ModuleModel::addExamToModule($name, $exams);
+        var_dump($examsAdded);
         $basicLiteratureAdded = ModuleModel::addLiteratureToModule($name, $basicLiterature, true);
+        var_dump($basicLiteratureAdded);
         $deepeningLiteratureAdded = ModuleModel::addLiteratureToModule($name, $deepeningLiterature, false);
+        var_dump($deepeningLiteratureAdded);
 
         return $result;
     }
@@ -185,31 +184,31 @@ class ModuleModel {
         $db = DatabaseService::getDatabaseObject();
 
         if(!empty($field)){
-            $moduleID = ModuleModel::getModuleIDByName($modulName);
+            $moduleID = ModuleModel::getModuleByName($modulName)->ID;
 
             if(empty($moduleID)){
                 return false;
             }
 
-            $insert = "INSERT INTO module_field_mm (moduleID, fieldID) VALUES ('$moduleID', '$field')";
+            $insert = "INSERT INTO module_field_mm (moduleID, fieldID) VALUES ($moduleID, $field)";
             $result = mysqli_query($db, $insert);
+            return $result;
         }
     }
     
     static function addCategoriesToModule($modulName, $categories){
-        //does it work like this?
         $db = DatabaseService::getDatabaseObject();
 
         if(!empty($categories)){
-            $moduleID = ModuleModel::getModuleIDByName($modulName);
+            $moduleID = ModuleModel::getModuleByName($modulName)->ID;
 
             if(empty($moduleID)){
                 return false;
             }
 
             foreach($categories as $row){ //$categories = array ("0" >= array($categoryID, $workload),...)
-                $categoryID = mysqli_real_escape_string($db, $categories[$row][0]);
-                $workload = mysqli_real_escape_string($db, $categories[$row][1]);
+                $categoryID = mysqli_real_escape_string($db, $row[0]);
+                $workload = mysqli_real_escape_string($db, $row[1]);
 
                 if(empty($categoryID)){
                     return false;
@@ -229,20 +228,19 @@ class ModuleModel {
 
     static function addExamToModule($modulName, $exams){
         $db = DatabaseService::getDatabaseObject();
-
         if(!empty($exams)){
-            $moduleID = ModuleModel::getModuleIDByName($modulName);
+            $moduleID = ModuleModel::getModuleByName($modulName)->ID;
 
             if(empty($moduleID)){
                 return false;
             }
 
             foreach($exams as $row){ 
-                $examType = mysqli_real_escape_string($db, $exams[$row][0]);
-                $examDuration = mysqli_real_escape_string($db, $exams[$row][1]);
-                $examCircumference = mysqli_real_escape_string($db, $exams[$row][2]);
-                $examPeriod = mysqli_real_escape_string($db, $exams[$row][3]);
-                $examWeighting = mysqli_real_escape_string($db, $exams[$row][4]);
+                $examType = mysqli_real_escape_string($db, $row[0]);
+                $examDuration = mysqli_real_escape_string($db, $row[1]);
+                $examCircumference = mysqli_real_escape_string($db, $row[2]);
+                $examPeriod = mysqli_real_escape_string($db, $row[3]);
+                $examWeighting = mysqli_real_escape_string($db, $row[4]);
 
                 if(empty($examType)){
                     $examType = 0;
@@ -284,33 +282,16 @@ class ModuleModel {
         $db = DatabaseService::getDatabaseObject();
 
         if(!empty($literature)){
-            $moduleID = ModuleModel::getModuleIDByName($modulName);
+            $moduleID = ModuleModel::getModuleByName($modulName)->ID;
             foreach($literature as $literatureID){
                 $literatureID = mysqli_real_escape_string($db, $literatureID);
-                
+                 
                 $insert = "INSERT INTO module_literature_mm (moduleID, literatureID, basicLiteratureFlag) 
-                            VALUES ('$moduleID', '$literatureID', $basicLiteratureFlag)";
+                            VALUES ($moduleID, $literatureID, $basicLiteratureFlag)";
                 
                 $result = mysqli_query($db, $insert);
             }
         }
         return $result;
     }    
-
-  
-
-    static function getAllLiterature(){
-        $db = DatabaseService::getDatabaseObject();
-
-        $query = "SELECT * FROM literature";
-        $result = mysqli_query($db, $query);
-
-        return $result;
-    }
-
-
-    /*NOTES
-        examTypes: 
-            0: not known
-    */
 }
