@@ -24,7 +24,7 @@
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="literature_add_releasePlace">Ort der Veröffentlichung::</label>
+        <label class="form_label" for="literature_add_releasePlace">Ort der Veröffentlichung:</label>
         <input class="form_input" type="string" id="literature_add_releasePlace" name="literature_add_releasePlace"/>
     </div>
 

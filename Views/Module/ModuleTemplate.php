@@ -11,19 +11,19 @@
         </script>
     </head>
     <body>
-        <nav class="navbar">
-            <div>
-                <a class="img-logo"></a>
+        <header>
+            <a class="img-logo"></a>
+            <nav class="navbar">
                 <ul class="navbar_container">
-                    <li class="navbar_entry"><a>Home</a></li>
-                    <li class="navbar_entry"><a>Modulverwaltung</a></li>
-                    <li class="navbar_entry"><a>Modulkategorieverwaltung</a></li>
-                    <li class="navbar_entry"><a>Literaturverwaltung</a></li>
-                    <li class="navbar_entry"><a>Export</a></li>
-                    <!-- <li class="navbar_entry"><a>Optionen</a></li> -->
+                    <li class="navbar_entry"><a href="#">Home</a></li>
+                    <li class="navbar_entry"><a href="index.php?subcontroller=module">Modulverwaltung</a></li>
+                    <li class="navbar_entry"><a href="index.php?subcontroller=category">Modulkategorieverwaltung</a></li>
+                    <li class="navbar_entry"><a href="index.php?subcontroller=literature">Literaturverwaltung</a></li>
+                    <li class="navbar_entry"><a href="index.php?subcontroller=export">Export</a></li>
+                    <!-- <li class="navbar_entry"><a  href="index.php?subcontroller=options">Optionen</a></li> -->
                 </ul>
-            </div>
-        </nav>
+            </nav>
+        </header>
         <h1>Modulverwaltung</h1>
         %1$s
 

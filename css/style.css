@@ -99,6 +99,23 @@ h4 {
     padding: 8px;
 }
 
+.navbar_entry > a:link {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar_entry > a:visited {
+    color: #fff;
+
+}
+.navbar_entry > a:hover {
+    color: #09497D;
+
+}
+.navbar_entry > a:active {
+    color: #09497D;
+
+}
+
 /*------------------------form------------------------*/
 
 .form_container {
@@ -168,4 +185,58 @@ h4 {
     align-self: flex-end;
     margin-left: calc(100% - 111px); /* substract the margins + half of buttons width */
     /* margin-left: 90%; */
+}
+
+/*------------------------table------------------------*/ 
+
+.table_container {
+    width: auto;
+    margin-top: 30px;
+    /* padding: 0 25px; */
+    border: 2px solid #000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    background-color: #fff;
+}
+
+.table_container_header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    padding: 5px 15px;
+    background-color: #808080;
+    color: white;
+}
+
+.table_container h2 {
+    display: inline-block;
+    width: unset;
+    padding: 0 25px;
+}
+
+.table_search_button {
+    display: inline-block;
+    align-self: center;
+    position: absolute;
+    right: calc(30% + 75px);
+    width: 30px;
+    height: 30px;
+    margin: -10px 10px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #00C927;
+}
+
+.table_search_input {
+    display: inline-block;
+    align-self: center;
+    position: absolute;
+    right: 50px;
+    width: 30%;
+    height: 30px;
+    border-radius: 8px;
+    border-style: none;
+    font-size: large;
 }
