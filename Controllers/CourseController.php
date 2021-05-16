@@ -45,7 +45,7 @@ class CourseController {
     function getCourseAddView() {
         ob_start();
         $result = CourseModel::getAllCourses();
-        include("Views/Services/Course/CourseAddView.php");
+        include("Views/Course/CourseAddView.php");
         $output = ob_get_clean();
 
         echo $output;
@@ -53,7 +53,7 @@ class CourseController {
     function getCourseListView() {
         ob_start();
         $result = CourseModel::getAllCourses();
-        include("Views/Services/Course/CourseListView.php");
+        include("Views/Course/CourseListView.php");
         $output = ob_get_clean();
 
         echo $output;
@@ -61,7 +61,7 @@ class CourseController {
     function getCourseChangeView($courseID) {
         if($result = CourseModel::getCourseByID($courseID)) {
             ob_start();
-            include("Views/Services/Course/CourseChangeView.php");
+            include("Views/Course/CourseChangeView.php");
             $output = ob_get_clean();
     
             echo $output;
@@ -83,7 +83,7 @@ class CourseController {
     function getCourseDeleteView($courseID) {
         ob_start();
         $result = CourseModel::getCourseByID($courseID);
-        include("Views/Services/Course/CourseDeleteView.php");
+        include("Views/Course/CourseDeleteView.php");
         $output = ob_get_clean();
 
         echo $output;
