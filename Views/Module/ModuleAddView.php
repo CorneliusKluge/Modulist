@@ -37,12 +37,12 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_summary">Zusammenfassung:</label>
-        <input class="module_add_editor" type="string" id="module_add_summary" name="module_add_summary"/>
+        <input class="form_editor" type="string" id="module_add_summary" name="module_add_summary"/>
     </div>
     
     <div class="form_item">
         <label class="form_label" for="module_add_summaryEN">Zusammenfassung (Englisch):</label>
-        <input class="module_add_editor" type="string" id="module_add_summaryEN" name="module_add_summaryEN"/>
+        <input class="form_editor" type="string" id="module_add_summaryEN" name="module_add_summaryEN"/>
     </div>
 
     <div class="form_item">        
@@ -82,7 +82,7 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_studyContent">Lerninhalte:</label>
-        <input class="module_add_editor" type="string" id="module_add_studyContent" name="module_add_studyContent"/>
+        <input class="form_editor" type="string" id="module_add_studyContent" name="module_add_studyContent"/>
     </div>
     
     <h3>Lernergebnisse</h3>
@@ -91,29 +91,29 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_knowledgeBroadening">Wissensverbreiterung:</label>
-        <input class="module_add_editor" type="string" id="module_add_knowledgeBroadening" name="module_add_knowledgeBroadening"/>
+        <input class="form_editor" type="string" id="module_add_knowledgeBroadening" name="module_add_knowledgeBroadening"/>
     </div>
 
     <div class="form_item">
         <label class="form_label" for="module_add_knowledgeDeepening">Wissensvertiefung:</label>
-        <input class="module_add_editor" type="string" id="module_add_knowledgeDeepening" name="module_add_knowledgeDeepening"/>
+        <input class="form_editor" type="string" id="module_add_knowledgeDeepening" name="module_add_knowledgeDeepening"/>
     </div>
     
     <h4>Können/Kompetenz</h4>
 
     <div class="form_item">
         <label class="form_label" for="module_add_instrumentalCompetence">Instrumentale Kompetenz:</label>
-        <input class="module_add_editor" type="string" id="module_add_instrumentalCompetence" name="module_add_instrumentalCompetence"/>
+        <input class="form_editor" type="string" id="module_add_instrumentalCompetence" name="module_add_instrumentalCompetence"/>
     </div>
 
     <div class="form_item">
         <label class="form_label" for="module_add_systemicCompetence">Systemische Kompetenz:</label>
-        <input class="module_add_editor" type="string" id="module_add_systemicCompetence" name="module_add_systemicCompetence"/>
+        <input class="form_editor" type="string" id="module_add_systemicCompetence" name="module_add_systemicCompetence"/>
     </div>
 
     <div class="form_item">
         <label class="form_label" for="module_add_communicativeCompetence">Kommunikative Kompetenz:</label>
-        <input class="module_add_editor" type="string" id="module_add_communicativeCompetence" name="module_add_communicativeCompetence"/>
+        <input class="form_editor" type="string" id="module_add_communicativeCompetence" name="module_add_communicativeCompetence"/>
     </div>
    
     <h3>Lehr- und Lernformen/Workload</h3>
@@ -142,10 +142,15 @@
     </div>
 
     <div class="form_item">
-        <input class="form_radio" type="radio" id="module_add_TheoryFlag_theory" name="module_add_TheoryFlag" value="1"/>
-        <label for="module_add_TheoryFlag">EVL Theorie</label>
-        <input class="form_radio" type="radio" id="module_add_TheoryFlag_practical" name="module_add_TheoryFlag" value="0"/>
-        <label for="module_add_TheoryFlag">EVL Praxis</label>
+    <label class="form_label">Einteilung EVL Theorie/Praxis</label>
+        <div class="form_radio_entry">
+            <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_theory" name="module_add_TheoryFlag" value="1"/>
+            <label class="form_radio_label" for="module_add_TheoryFlag">EVL Theorie</label>
+        </div>
+        <div class="form_radio_entry">
+            <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_practical" name="module_add_TheoryFlag" value="0"/>
+            <label class="form_radio_label" for="module_add_TheoryFlag">EVL Praxis</label>
+        </div>
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
@@ -212,7 +217,7 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_basicLiteraturePreNote">Basisliteratur (Vorbemerkungen):</label>
-        <input class="module_add_editor" type="string" id="module_add_basicLiteraturePreNote" name="module_add_basicLiteraturePreNote"/>
+        <input class="form_editor" type="string" id="module_add_basicLiteraturePreNote" name="module_add_basicLiteraturePreNote"/>
     </div>
     
     <div class="form_item">
@@ -238,12 +243,12 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_basicLiteraturePostNote">Basisliteratur (Nachbemerkungen):</label>
-        <input class="module_add_editor" type="string" id="module_add_basicLiteraturePostNote" name="module_add_basicLiteraturePostNote"/>
+        <input class="form_editor" type="string" id="module_add_basicLiteraturePostNote" name="module_add_basicLiteraturePostNote"/>
     </div>
 
     <div class="form_item">
         <label class="form_label" for="module_add_deepeningLiteraturePreNote">Vertiefende Literatur (Vorbemerkungen):</label>
-        <input class="module_add_editor" type="string" id="module_add_deepeningLiteraturePreNote" name="module_add_deepeningLiteraturePreNote"/>
+        <input class="form_editor" type="string" id="module_add_deepeningLiteraturePreNote" name="module_add_deepeningLiteraturePreNote"/>
     </div>
 
     <div class="form_item">
@@ -268,10 +273,8 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_deepeningLiteraturePostNote">Vertiefende Literatur (Nachbemerkungen):</label>
-        <input  class="module_add_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
+        <input  class="form_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
     </div>
 
-    <hr>
-
-    <input type="submit" name="module_add_submit"/>
+    <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>

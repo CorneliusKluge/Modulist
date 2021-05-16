@@ -1,12 +1,12 @@
-<h1>Liste der Module</h1>
-
-<br>
-<?php
+<div class="table_container">
+    <div class="table_container_header">
+        <h2>Liste der Module</h2>
+        <input class="table_search_button button" type="button" id="module_list_add" name="module_list_add"/>
+        <input class="table_search_input" type="search" id="module_list_search" placeholder="Suchen..." name="module_list_search"/>
+    </div>
+    <?php
         if($result->num_rows) {
-            ?>
-<div>
-    <input type="search" id="module_list_search" name="module_list_search" placeholder="Suche">
-    <input type="button" id="module_list_add" name="module_list_add">
+    ?>
 <table id="module_list_table">
     <!--what should be part of the table?-->
     <th>Modulname</th>
@@ -111,3 +111,4 @@
         }
     ?>
 </table>
+</div>

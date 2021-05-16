@@ -7,27 +7,19 @@ use Modulist\Services\LiteratureService;
 
 class LiteratureController {
     function __construct() {
-        if(isset($_POST["literature_add_submit"])) {
-            $this->submitNewLiterature(); // erstellt neuen Literatur-Eintrag
-        }
-        if(isset($_POST["literate_add"])) {
-            $this->getLiteratureAddView(); // ruft Literatur-Formular ab
-        }
-        if(isset($_POST["literature_list"])) {
-            $this->getLiteratureListView(); // ruft Literatur-Liste ab
-        }
-        if(isset($_POST["literature_change"])) {
-            $this->getLiteratureChangeView($_POST["literature_change"]); // ruft zu bearbeitenden Eintrag auf
-        }
-        if(isset($_POST["literature_change_submit"])) {
-            $this->submitChangedLiterature($_POST["literature_change_submit"]); // sendet bearbeiteten Eintrag ab
-        }
-        if(isset($_POST["literature_delete"])) {
-            $this->getLiteratureDeleteView($_POST["literature_delete"]); // Löschbestätigung aufrufen
-        }
-        if(isset($_POST["literature_delete_submit"])) {
-            $this->submitLiteratureDelete($_POST["literature_delete_submit"]); // Eintrag löschen
-        }
+        ob_start(); // Start output buffering
+        include("Views/Literature/LiteratureTemplate.php"); // Include the Template
+        $template = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+
+        // Fill the template with views
+        $template = sprintf(
+            $template,
+            $this->getLiteratureAddView(), // Calls the method "getModuleAddView" and write its output/return value into the template
+            $this->getLiteratureListView(),
+            "" 
+        );
+
+        echo $template; // Output the template
     }
 
     function submitNewLiterature() {
@@ -46,38 +38,37 @@ class LiteratureController {
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
         echo json_encode($returnArray);
-
     }
 
     function getLiteratureAddView(){
         ob_start();
-        include("Views/Services/Literature/LiteratureAddView.php");
+        include("Views/Literature/LiteratureAddView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function getLiteratureListView(){
         ob_start();
         $result = LiteratureModel::getAllLiterature();
-        include("Views/Services/Literature/LiteratureListView.php");
+        include("Views/Literature/LiteratureListView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function getLiteratureChangeView($literatureID){
         if($resultLiterature = LiteratureModel::getLiteratureByID($literatureID)){
             ob_start();
-            include("Views/Services/Literature/LiteratureChangeView.php");
+            include("Views/Literature/LiteratureChangeView.php");
             $output = ob_get_clean();
 
-            echo $output;
+            return $output;
         }
     }
     function submitChangedLiterature($literatureID){
         ob_start();
-        $bool = LiteratureService::changeLiterature(
+        $bool = LiteratureModel::changeLiterature(
             $literatureID,
             $_POST["literature_add_authors"],
             $_POST["literature_add_title"],
@@ -91,12 +82,12 @@ class LiteratureController {
 
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
-        echo json_encode($returnArray);
+        return json_encode($returnArray);
     }
 
     function getLiteratureDeleteView(){
         ob_start();
-        include("Views/Services/Literature/LiteratureDeleteView.php");
+        include("Views/Literature/LiteratureDeleteView.php");
         $output = ob_get_clean();
 
         echo $output;
@@ -109,7 +100,7 @@ class LiteratureController {
 
         $returnArray["output"] = $output;
         $returnArray["success"] = $bool;
-        echo json_encode($returnArray);        
+        return json_encode($returnArray);        
     }
 
 }
