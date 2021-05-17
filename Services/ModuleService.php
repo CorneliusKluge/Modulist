@@ -38,17 +38,18 @@ class ModuleService {
         $deepeningLiterature, //as array(LiteratureID_1, LiteraturID_2,...)
         $deepeningLiteraturePostNote
     ) {
-        if(isset($name, $code)) {
-            if(!empty($name) && !empty($code)) {
+        if(isset($name)) {
+            if(!empty($name)) {
                 if(ModuleModel::getModuleByName($name)) {
                     echo "Ein Modul mit diesem Namen gibt es bereits.";
                     return false;
                 }
-
-                if(ModuleModel::getModuleByModuleCode($code)){
-                    echo "Ein Modul mit diesem Modulcode gibt es bereits.";
-                    return false;
-                }
+                if(!empty($code)) {
+                    if(ModuleModel::getModuleByModuleCode($code)){
+                        echo "Ein Modul mit diesem Modulcode gibt es bereits.";
+                        return false;
+                    }
+                }      
 //TODO: insert more conditions (literatureModel checks, categoryModel ckecks, ...)
             /*  if(!CourseModel::isCourseByID($code)) {
                     echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";

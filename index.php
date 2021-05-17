@@ -27,8 +27,9 @@ include("Models/CourseModel.php");
 include("Models/FieldModel.php");
 include("Models/CategoryModel.php");
 include("Models/LiteratureModel.php");
+include("Models/ExamModel.php");
 
-//Services
+// Services
 include("Services/DatabaseService.php");
 include("Services/ModuleService.php");
 include("Services/ExportService.php");

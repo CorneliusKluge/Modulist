@@ -47,7 +47,7 @@ class FieldController {
     function getFieldAddView() {
         ob_start();
         $result = CourseModel::getAllCourses();
-        include("Views/Services/Field/FieldAddView.php");
+        include("Views/Field/FieldAddView.php");
         $output = ob_get_clean();
 
         echo $output;
@@ -55,7 +55,7 @@ class FieldController {
     function getFieldListView() {
         ob_start();
         $result = FieldModel::getAllFieldsJoinCourse();
-        include("Views/Services/Field/FieldListView.php");
+        include("Views/Field/FieldListView.php");
         $output = ob_get_clean();
 
         echo $output;
@@ -64,7 +64,7 @@ class FieldController {
         if($resultField = FieldModel::getFieldByID($fieldID)) {
             ob_start();
             $resultCourses = CourseModel::getAllCourses();
-            include("Views/Services/Field/FieldChangeView.php");
+            include("Views/Field/FieldChangeView.php");
             $output = ob_get_clean();
     
             echo $output;
@@ -87,7 +87,7 @@ class FieldController {
     function getFieldDeleteView($fieldID) {
         ob_start();
         $result = FieldModel::getFieldByID($fieldID);
-        include("Views/Services/Field/FieldDeleteView.php");
+        include("Views/Field/FieldDeleteView.php");
         $output = ob_get_clean();
 
         echo $output;
