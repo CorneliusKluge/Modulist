@@ -52,4 +52,15 @@ class CategoryController {
         );
         $output = ob_get_clean();
     }
+
+    function categoryChangeSubmit() {
+        ob_start();
+        $bool = CategoryService::changeCategory(
+            $_POST["module_add_name"] ?? null,
+            $_POST["module_add_presenceFlag"] ?? null,
+            $_POST["module_add_position"] ?? null,
+            $_POST["module_add_creditHours"] ?? null
+        );
+        $output = ob_get_clean();
+    }
 }
