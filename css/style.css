@@ -194,6 +194,9 @@ h4 {
     /* margin-left: 90%; */
 }
 
+input[type="submit"].table_add_button {
+    background: url('../img/plusIcon_1.svg');
+}
 /*------------------------table------------------------*/ 
 
 .table_container {
@@ -227,10 +230,8 @@ h4 {
     display: inline-block;
     align-self: center;
     position: absolute;
-    right: calc(30% + 75px);
     width: 30px;
     height: 30px;
-    margin: -10px 10px;
     padding: 5px;
     border-radius: 50%;
     background-color: #00C927;

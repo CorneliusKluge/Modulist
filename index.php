@@ -36,6 +36,7 @@ include("Services/ExportService.php");
 include("Services/FieldService.php");
 include("Services/CourseService.php");
 include("Services/LiteratureService.php");
+include("Services/CategoryService.php");
 
 class MainController {
     function __construct() {
@@ -45,7 +46,7 @@ class MainController {
             case "module":
                 new ModuleController();
                 break;
-            case "Category":
+            case "category":
                 new CategoryController();
                 break;
             case "export":

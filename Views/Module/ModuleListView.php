@@ -1,7 +1,16 @@
 <div class="table_container">
     <div class="table_container_header">
         <h2>Liste der Module</h2>
-        <input class="table_search_button button" type="button" id="module_list_add" name="module_list_add"/>
+<!--TODO: place it right (stylesheet.css)-->
+        <form method="POST" style="
+            padding: 5px;
+            position: absolute;
+            right: calc(30% + 75px);
+            height: 30px;
+            width: 30px;
+            margin: -10px 10px;">
+            <input class="table_add_button button" type="submit" id="module_list_add" name="module_list_add" value=""/>
+        </form>
         <input class="table_search_input" type="search" id="module_list_search" placeholder="Suchen..." name="module_list_search"/>
     </div>
     <?php
@@ -15,7 +24,7 @@
 <!--<th>Zusammenfassung</th>
     <th>Zusammenfassung (Englisch)</th>-->
     <th>Modultyp</th>
-    <th?>Semester</th>
+    <th>Semester</th>
 <!--<th>Dauer</th>-->
     <th>Credits</th>
 <!--<th>Verwendbarkeit</th>
@@ -83,7 +92,7 @@
                     <td><?php echo $module["examCircumference"];?></td>
                     <td><?php echo $module["examPeriod"];?></td>
                     <td><?php echo $module["examWeighting"];?></td>-->
-                    <td><?php echo $module["responsible"];?></td>
+                    <td><?php echo $module["responsibleName"];?></td>
                     <!--<td><?php echo $module["lectureLanguage"];?></td>-->
                     <td><?php echo $module["frequency"];?></td>
                     <!--<td><?php echo $module["media"];?></td>-->
@@ -98,16 +107,23 @@
                     
                     <td><!--TODO: proof validity and show result--></td>
                     <td>
-                        <button id="module_list_edit" name="module_list_edit" value="<?php echo $module["ID"];?>">Bearbeiten</button>
-                        <button id="module_list_delete" name="module_list_delete" value="<?php echo $module["ID"];?>">Löschen</button>
-                        <label id="module_list_lockLabel">
-                            <input type="checkbox" id="module_list_lock" name="module_list_lock"/>
+                        <form method="POST">
+                            <button type="submit" id="module_change_module" name="module_change_module" value="<?php echo $module["ID"];?>">Bearbeiten</button>
+                        </form>
+                        <form method="POST">
+                            <button type="submit" id="module_delete_module" name="module_delete_module" value="<?php echo $module["ID"];?>">Löschen</button>
+                        </form>
+                        <label id="module_lock_moduleLabel">
+                            <input type="checkbox" id="module_lock_module" name="module_lock_module"/>
                             <span></span>
                         </label>
                     </td>
                 </tr>
             <?php
             }
+        }
+        else{
+            echo "Aktuell sind keine Module eingetragen.";
         }
     ?>
 </table>
