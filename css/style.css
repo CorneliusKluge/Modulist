@@ -8,6 +8,13 @@ body {
     background-repeat: repeat;
 }
 
+@font-face {
+    font-family: 'Source Sans Pro',sans-serif;
+    src: url('../fonts/SourceSansPro-Regular.ttf');
+    font-family: 'Source Sans Bold',sans-serif;
+    src: url('../fonts/SourceSansPro-Bold.ttf');
+}
+
 /*------------------------headings------------------------*/
 
 h1 {
@@ -47,7 +54,7 @@ h4 {
     border: 2px solid #000;
     border-radius: 8px;
     background-color: #fff;
-    font-family: 'Source Sans Pro',sans-serif;
+    font-family: 'Source Sans Bold',sans-serif;
     font-size: large;
     font-weight: 700;
     text-align: center;
@@ -191,7 +198,7 @@ h4 {
 
 .table_container {
     width: auto;
-    margin-top: 30px;
+    margin: 30px 0;
     /* padding: 0 25px; */
     border: 2px solid #000;
     border-top-left-radius: 10px;
@@ -216,7 +223,7 @@ h4 {
     padding: 0 25px;
 }
 
-.table_search_button {
+.table_add_button {
     display: inline-block;
     align-self: center;
     position: absolute;
@@ -227,6 +234,7 @@ h4 {
     padding: 5px;
     border-radius: 50%;
     background-color: #00C927;
+    background-image: url('../img/plusIcon_1.svg');
 }
 
 .table_search_input {
