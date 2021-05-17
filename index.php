@@ -64,7 +64,7 @@ class MainController {
                 break;
             case "literature":
                 new LiteratureController();
-                break
+                break;
         }
     }
 }
