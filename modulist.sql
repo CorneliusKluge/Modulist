@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Mai 2021 um 13:41
--- Server-Version: 10.4.13-MariaDB
--- PHP-Version: 7.4.7
+-- Erstellungszeit: 17. Mai 2021 um 16:15
+-- Server-Version: 10.4.18-MariaDB
+-- PHP-Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,7 +52,8 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`name`, `nameEN`, `ID`) VALUES
-('Informationstechnologie', NULL, 1);
+('Informationstechnologie', NULL, 1),
+('Betriebswirtschaft', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -102,8 +103,8 @@ CREATE TABLE `literature` (
   `title` text NOT NULL,
   `edition` text DEFAULT NULL,
   `place` text DEFAULT NULL,
-  `publishingCompany` text DEFAULT NULL,
-  `ISBN` text DEFAULT NULL,
+  `publisher` text DEFAULT NULL,
+  `isbn` text DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -270,7 +271,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT für Tabelle `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `exams`

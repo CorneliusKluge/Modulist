@@ -238,6 +238,10 @@ input[type="submit"].table_add_button {
     background-image: url('../img/plusIcon_1.svg');
 }
 
+input[type="submit"].table_add_button {
+    background: url('../img/plusIcon_1.svg');
+}
+
 .table_search_input {
     display: inline-block;
     align-self: center;
@@ -248,4 +252,26 @@ input[type="submit"].table_add_button {
     border-radius: 8px;
     border-style: none;
     font-size: large;
+}
+
+/*------------------------studymanagement------------------------*/
+
+.course_container,
+.field_container {
+    width: auto;
+    margin: 30px 0;
+    /* padding: 0 25px; */
+    /* border: 2px solid #000; */
+    flex-flow: row wrap;
+    align-items: flex-end;
+    /* background-color: #fff; */
+}
+
+.course_container ~ h2,
+.field_container ~ h2 { 
+    width: calc(100% - 100px);
+    margin: 10px 0;
+    padding: 5px 50px;
+    background-color: #808080;
+    color: white;
 }
