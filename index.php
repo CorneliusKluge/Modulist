@@ -37,6 +37,9 @@ include("Services/FieldService.php");
 include("Services/CourseService.php");
 include("Services/LiteratureService.php");
 
+// PDF-Bibliothek
+require_once('libs/dompdf/autoload.inc.php');
+
 class MainController {
     function __construct() {
         $subcontroller = $_GET["subcontroller"] ?? null;

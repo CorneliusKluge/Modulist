@@ -293,5 +293,18 @@ class ModuleModel {
             }
         }
         return $result;
+    }
+    static function getAllModulesOfCourse($courseID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $courseID = mysqli_real_escape_string($db, $courseID);
+
+        $query = "SELECT t1.* FROM modules AS t1
+                    JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
+                    JOIN fields AS t3 ON t2.fieldID = t3.id
+                    WHERE t3.courseID = $courseID";
+        $result = mysqli_query($db, $query);
+
+        return $result;
     }    
 }

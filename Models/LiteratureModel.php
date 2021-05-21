@@ -108,5 +108,24 @@ class LiteratureModel {
 
         return $result;
     }
+    static function getBasicLiteratureByModuleID($moduleID) {
+        $db = DatabaseService::getDatabaseObject();
 
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+
+        $query = "SELECT t1.* FROM literature AS t1 JOIN module_literature_mm AS t2 ON t1.id = t2.literatureID WHERE t2.moduleID = $moduleID AND t2.basicLiteratureFlag = true";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+    static function getDeepeningLiteratureByModuleID($moduleID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+
+        $query = "SELECT t1.* FROM literature AS t1 JOIN module_literature_mm AS t2 ON t1.id = t2.literatureID WHERE t2.moduleID = $moduleID AND t2.basicLiteratureFlag = false";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
 }
