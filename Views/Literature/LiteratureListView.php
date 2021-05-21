@@ -1,13 +1,7 @@
 <div class="table_container">
     <div class="table_container_header">
         <h2>Liste der Literaturangaben</h2>
-        <form method="POST" style="
-            padding: 5px;
-            position: absolute;
-            right: calc(30% + 75px);
-            height: 30px;
-            width: 30px;
-            margin: -10px 10px;">
+        <form method="POST">
             <input class="table_add_button button" name="literature_add_button" type="submit" value=""/>
         </form>
         <input class="table_search_input" type="search" id="literature_list_search" placeholder="Suchen..." name="literature_list_search"/>
