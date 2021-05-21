@@ -16,32 +16,29 @@ class LiteratureModel {
     }
     
     static function addLiterature(
-        // $ID, 
         $authors, 
         $title, 
-        $releaseDate, 
+        $year, 
         $edition,
-        $releasePlace, 
+        $place, 
         $publisher, 
         $isbn
     ) {
         $db = DatabaseService::getDatabaseObject();
 
-        // $ID = mysqli_real_escape_string($db, $ID);
         $authors = mysqli_real_escape_string($db, $authors);
         $title = mysqli_real_escape_string($db, $title);
-        $releaseDate = mysqli_real_escape_string($db, $releaseDate);
+        $year = mysqli_real_escape_string($db, $year);
         $edition = mysqli_real_escape_string($db, $edition);
-        $releasePlace = mysqli_real_escape_string($db, $releasePlace);
+        $place = mysqli_real_escape_string($db, $place);
         $publisher = mysqli_real_escape_string($db, $publisher);
         $isbn = mysqli_real_escape_string($db, $isbn);
 
-        if(empty($releaseDate)) {
-            $releaseDate = "NULL";
+        if(empty($year)) {
+            $year = "NULL";
         }
-        $insert = "INSERT INTO literature (ID, authors, title, releaseDate, edition, releasePlace, publisher, isbn) VALUES (
-            -- '$ ID',
-            '$authors', '$title', $releaseDate, NULLIF('$edition', ''), NULLIF('$releasePlace', ''), NULLIF('$publisher', ''), NULLIF('$isbn', '')
+        $insert = "INSERT INTO literature (authors, year, title, edition, place, publisher, isbn) VALUES (
+            '$authors', $year, '$title', NULLIF('$edition', ''), NULLIF('$place', ''), NULLIF('$publisher', ''), NULLIF('$isbn', '')
         )";
     
         $result = mysqli_query($db, $insert);
@@ -54,7 +51,7 @@ class LiteratureModel {
 
         $id = mysqli_real_escape_string($db, $id);
 
-        $query = "SELECT * FROM literature WHERE id = $id";
+        $query = "SELECT * FROM literature WHERE ID = $id";
         $result = mysqli_query($db, $query);
 
         if($result->num_rows) {
@@ -67,33 +64,34 @@ class LiteratureModel {
         return $result;
     }
 
-    static function changeLiterature($ID, $authors, $title, $releaseDate, $edition, $releasePlace, $publisher, $isbn){
+    static function changeLiterature($id, $authors, $title, $year, $edition, $place, $publisher, $isbn){
         $db = DatabaseService::getDatabaseObject();
 
-        $ID = mysqli_real_escape_string($db, $ID);
+        $id = mysqli_real_escape_string($db, $id);
         $authors = mysqli_real_escape_string($db, $authors);
         $title = mysqli_real_escape_string($db, $title);
-        $releaseDate = mysqli_real_escape_string($db, $releaseDate);
+        $year = mysqli_real_escape_string($db, $year);
         $edition = mysqli_real_escape_string($db, $edition);
-        $releasePlace = mysqli_real_escape_string($db, $releasePlace);
+        $place = mysqli_real_escape_string($db, $place);
         $publisher = mysqli_real_escape_string($db, $publisher);
         $isbn = mysqli_real_escape_string($db, $isbn);
 
-        if(empty($releaseDate)) {
-            $releaseDate = "NULL";
+        if(empty($year)) {
+            $year = "NULL";
         }
         $update = "UPDATE literature SET 
             authors = '$authors',
+            year = $year,
             title = '$title',
-            releaseDate = $releaseDate,
             edition = NULLIF('$edition', ''),
-            releasePlace = NULLIF('$releasePlace', ''),
+            place = NULLIF('$place', ''),
             publisher = NULLIF('$publisher', ''),
             isbn = NULLIF('$isbn', '')
-        WHERE id = $ID";
+        WHERE ID = $id";
     
         $result = mysqli_query($db, $update);
-        
+        var_dump($result);
+
         return $result;
 
     }
@@ -103,7 +101,7 @@ class LiteratureModel {
 
         $id = mysqli_real_escape_string($db, $id);
 
-        $query = "DELETE FROM literature WHERE id = $id";
+        $query = "DELETE FROM literature WHERE ID = $id";
         $result = mysqli_query($db, $query);
 
         return $result;

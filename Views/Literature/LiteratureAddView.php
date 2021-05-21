@@ -14,8 +14,8 @@
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="literature_add_releaseDate">Jahr der Veröffentlichung:</label>
-        <input class="form_input" type="string" id="literature_add_releaseDate" name="literature_add_releaseDate"/>
+        <label class="form_label" for="literature_add_year">Jahr der Veröffentlichung:</label>
+        <input class="form_input" type="string" id="literature_add_year" name="literature_add_year"/>
     </div>
  
     <div class="form_item">
@@ -24,8 +24,8 @@
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="literature_add_releasePlace">Ort der Veröffentlichung:</label>
-        <input class="form_input" type="string" id="literature_add_releasePlace" name="literature_add_releasePlace"/>
+        <label class="form_label" for="literature_add_place">Ort der Veröffentlichung:</label>
+        <input class="form_input" type="string" id="literature_add_place" name="literature_add_place"/>
     </div>
 
     <div class="form_item">
@@ -37,5 +37,5 @@
         <label class="form_label" for="literature_add_isbn">ISBN:</label>
         <input class="form_input" type="string" id="literature_add_isbn" name="literature_add_isbn"/>
     </div>
-    <input class="form_submit button" type="submit" name="module_add_submit"/>
+    <input class="form_submit button" type="submit" name="literature_add_submit"/>
 </form>

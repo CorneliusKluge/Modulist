@@ -1,28 +1,41 @@
-<form method="POST" id="literature_change_form">
-    <label for="literature_change_authors">Autor:</label>
-    <input type="string" id="literature_change_authors" name="literature_change_autors" value="<?php echo $resultliterature->authors;?>"/>
+<!-- %s  -->
 
-    <br>
+<form method="POST" class="form_container">
+    <h2>Literatur bearbeiten</h2>
 
-    <label for="literature_change_title">Titel:</label>
-    <input type="string" id="literature_change_title" name="literature_change_title" value="<?php echo $resultliterature->title;?>"/>
+    <div class="form_item">
+        <label class="form_label" for="literature_change_authors">Autoren:</label>
+        <input class="form_input" type="string" id="literature_change_authors" name="literature_change_authors" value="<?php echo $result->authors;?>"/>
+    </div>
 
-    <br>
+    <div class="form_item">
+        <label class="form_label" for="literature_change_title">Titel:</label>
+        <input class="form_input" type="string" id="literature_change_title" name="literature_change_title" value="<?php echo $result->title;?>"/>
+    </div>
 
-    <label for="literature_change_course">Studiengang:</label>
-    <select id="literature_change_course" name="literature_change_course">
-        <?php
-            if($resultCourses->num_rows) {
-                foreach($resultCourses as $course) {
-                ?>
-                    <option value="<?php echo $course["ID"];?>" <?php if($resultliterature->courseID == $course["ID"]) echo "selected";?>><?php echo $course["name"];?></option>
-                <?php
-                }
-            }
-        ?>
-    </select>
+    <div class="form_item">
+        <label class="form_label" for="literature_change_year">Jahr der Veröffentlichung:</label>
+        <input class="form_input" type="string" id="literature_change_year" name="literature_change_year" value="<?php echo $result->year;?>"/>
+    </div>
+ 
+    <div class="form_item">
+        <label class="form_label" for="literature_change_edition">Auflage:</label>
+        <input class="form_input" id="literature_change_edition" name="literature_change_edition" value="<?php echo $result->edition;?>"/>
+    </div>
 
-    <br>
+    <div class="form_item">
+        <label class="form_label" for="literature_change_place">Ort der Veröffentlichung:</label>
+        <input class="form_input" type="string" id="literature_change_place" name="literature_change_place" value="<?php echo $result->place;?>"/>
+    </div>
 
-    <button type="button" id="literature_change_submit" data-id="<?php echo $resultliterature->ID;?>">Speichern</button>
+    <div class="form_item">
+        <label class="form_label" for="literature_change_publisher">Verlag:</label>
+        <input class="form_input" type="string" id="literature_change_publisher" name="literature_change_publisher" value="<?php echo $result->publisher;?>"/>
+    </div>
+
+    <div class="form_item">
+        <label class="form_label" for="literature_change_isbn">ISBN:</label>
+        <input class="form_input" type="string" id="literature_change_isbn" name="literature_change_isbn" value="<?php echo $result->isbn;?>"/>
+    </div>
+    <input class="form_submit button" type="submit" name="literature_change_submit"/>
 </form>

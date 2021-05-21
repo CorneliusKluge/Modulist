@@ -36,6 +36,7 @@ include("Services/ExportService.php");
 include("Services/FieldService.php");
 include("Services/CourseService.php");
 include("Services/LiteratureService.php");
+include("Services/CategoryService.php");
 
 // PDF-Bibliothek
 require_once('libs/dompdf/autoload.inc.php');
@@ -48,7 +49,7 @@ class MainController {
             case "module":
                 new ModuleController();
                 break;
-            case "Category":
+            case "category":
                 new CategoryController();
                 break;
             case "export":
