@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Mai 2021 um 16:15
--- Server-Version: 10.4.18-MariaDB
--- PHP-Version: 7.4.16
+-- Erstellungszeit: 21. Mai 2021 um 16:21
+-- Server-Version: 10.4.13-MariaDB
+-- PHP-Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,8 +52,7 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`name`, `nameEN`, `ID`) VALUES
-('Informationstechnologie', NULL, 1),
-('Betriebswirtschaft', NULL, 2);
+('Informationstechnologie', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -175,7 +174,8 @@ CREATE TABLE `module_category_mm` (
 
 CREATE TABLE `module_field_mm` (
   `moduleID` int(11) NOT NULL,
-  `fieldID` int(11) NOT NULL,
+  `fieldID` int(11) DEFAULT NULL,
+  `courseID` int(11) NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -183,8 +183,8 @@ CREATE TABLE `module_field_mm` (
 -- Daten für Tabelle `module_field_mm`
 --
 
-INSERT INTO `module_field_mm` (`moduleID`, `fieldID`, `ID`) VALUES
-(1, 1, 1);
+INSERT INTO `module_field_mm` (`moduleID`, `fieldID`, `courseID`, `ID`) VALUES
+(1, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +271,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT für Tabelle `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT für Tabelle `exams`
