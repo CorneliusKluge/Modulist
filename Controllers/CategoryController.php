@@ -2,65 +2,121 @@
 
 namespace Modulist\Controllers;
 use Modulist\Services\CategoryService;
+use Modulist\Models\CategoryModel;
 
 class CategoryController {
     function __construct() { // Method which gets triggered whenever an object of the class "ModuleController" is created
         ob_start(); // Start output buffering
         include("Views/Category/CategoryTemplate.php"); // Include the Template
-        $template = ob_end_clean(); // Get the content of the output buffer and stop output buffering
+        $template = ob_get_clean(); // Get the content of the output buffer and stop output buffering
 
         // Fill the template with views
         $template = sprintf(
             $template,
-            $this->getCategoryAddView() // Calls the method "getModuleAddView" and write its output/return value into the template
+            $this->getCategoryView(),
+            $this->getCategoryListView(),
+            "",
+            "" 
         );
 
         echo $template; // Output the template
     }
     
+    function getCategoryView() {
+        if(isset($_POST["category_add_button"])) {
+            $view1 = $this->getCategoryAddView(); // Calls the method "getCategoryAddView" and write its output/return value into the template
+            return $view1;
+        }
+
+        if(isset($_POST["category_add_submit"])) {
+            return $this->submitNewCategory();
+        }
+        if(isset($_POST["category_change_button"])) {
+            $view1 = $this->getCategoryChangeView($_POST["category_change_button"]);
+            return $view1;
+        }
+
+        if(isset($_POST["category_change_submit"])) {
+            $this->categoryChangeSubmit($_POST["category_change_submit"]);
+        }
+
+        if(isset($_POST["category_delete_button"])) {
+            $view1 = $this->getCategoryDeleteView($_POST["category_delete_button"]);
+            return $view1;
+        }
+
+        if(isset($_POST["category_delete_submit"])) {
+            $this->submitCategoryDelete($_POST["category_delete_submit"]);
+        }
+    }
+
     function getCategoryAddView() {
         ob_start(); // Start output buffering
-        if(isset($_POST["module_category_add_submit"])) { // Check if form has been submitted
-            // Not written yet
-        }
-        $output = ob_end_clean(); // Get the content of the output buffer and stop output buffering
-
-        ob_start(); // Start output buffering
         include("Views/Category/CategoryAddView.php"); // Include the View which contains the formular to create a new module
-        $view = ob_end_clean(); // Get the content of the output buffer and stop output buffering
-
-        $view = sprintf($view, $output); //  Insert the content of the variable $output into the view
-
+        $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
         return $view; // Return the view
     }
+
+function submitNewCategory() {
+        // Get the content of the output buffer and stop output buffering
+   
+       ob_start();
+       $bool = CategoryService::addCategory(
+           $_POST["category_add_name"] ?? NULL,
+           $_POST["category_add_presenceFlag"] ?? NULL,
+           $_POST["category_add_position"] ?? NULL
+       );
+       $output = ob_get_clean();
+
+       return $output;
+   }
 
     function getCategoryListView(){
         ob_start();
-        include("Views/Module/CategoryListView.php"); // Include the View which contains the list with all modules
+        $categories = CategoryModel::getAllCategories();
+        include("Views/Category/CategoryListView.php");
         $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
-
         return $view; // Return the view
     }
 
-    function categoryAddSubmit() {
-        ob_start();
-        $bool = CategoryService::addCategory(
-            $_POST["module_add_name"] ?? null,
-            $_POST["module_add_presenceFlag"] ?? null,
-            $_POST["module_add_position"] ?? null,
-            $_POST["module_add_creditHours"] ?? null
-        );
-        $output = ob_get_clean();
-    }
-
-    function categoryChangeSubmit() {
+    function categoryChangeSubmit($id) {
         ob_start();
         $bool = CategoryService::changeCategory(
-            $_POST["module_add_name"] ?? null,
-            $_POST["module_add_presenceFlag"] ?? null,
-            $_POST["module_add_position"] ?? null,
-            $_POST["module_add_creditHours"] ?? null
+            $id,
+            $_POST["category_change_name"] ?? null,
+            $_POST["category_change_presenceFlag"] ?? null,
+            $_POST["category_change_position"] ?? null
         );
         $output = ob_get_clean();
+
+        echo $output;
+    }
+
+    function getCategoryChangeView($categoryID){
+        ob_start();
+        
+        $result = CategoryModel::getCategoryByID($categoryID);
+        include("Views/Category/CategoryChangeView.php");
+        $output = ob_get_clean();
+
+        return $output;
+    }
+
+    function getCategoryDeleteView($id){
+        ob_start();
+        $result = CategoryModel::getCategoryByID($id);
+        include("Views/Category/CategoryDeleteView.php");
+        $output = ob_get_clean();
+        
+        echo $output;
+    }
+
+    function submitCategoryDelete($categoryID){
+        ob_start();
+
+        $bool = CategoryModel::deleteCategory($categoryID);
+        
+        $output = ob_get_clean();   
+        echo $output;
     }
 }
