@@ -37,5 +37,5 @@
         <label class="form_label" for="literature_change_isbn">ISBN:</label>
         <input class="form_input" type="string" id="literature_change_isbn" name="literature_change_isbn" value="<?php echo $result->isbn;?>"/>
     </div>
-    <input class="form_submit button" type="submit" name="literature_change_submit"/>
+    <button class="form_submit button" type="submit" name="literature_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

@@ -15,11 +15,11 @@
             <a class="img-logo"></a>
             <nav class="navbar">
                 <ul class="navbar_container">
-                    <li class="navbar_entry"><a href="index.php?subcontroller=module">Module</a></li>
-                    <li class="navbar_entry"><a href="index.php?subcontroller=category">Modulkategorien</a></li>
-                    <li class="navbar_entry"><a href="index.php?subcontroller=literature">Literatur</a></li>
-                    <li class="navbar_entry"><a href="index.php?subcontroller=studymanagement">Studienverwaltung</a></li>
-                    <li class="navbar_entry"><a href="index.php?subcontroller=export">Export</a></li>
+                    <li class="navbar_entry"><a href="./module">Module</a></li>
+                    <li class="navbar_entry"><a href="./category">Modulkategorien</a></li>
+                    <li class="navbar_entry"><a href="./literature">Literatur</a></li>
+                    <li class="navbar_entry"><a href="./studymanagement">Studienverwaltung</a></li>
+                    <li class="navbar_entry"><a href="./export">Export</a></li>
                     <!-- <li class="navbar_entry"><a  href="index.php?subcontroller=options">Optionen</a></li> -->
                 </ul>
             </nav>

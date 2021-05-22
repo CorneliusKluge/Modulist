@@ -2,13 +2,7 @@
     <div class="table_container_header">
         <h2>Liste der Module</h2>
 <!--TODO: place it right (stylesheet.css)-->
-        <form method="POST" style="
-            padding: 5px;
-            position: absolute;
-            right: calc(30% + 75px);
-            height: 30px;
-            width: 30px;
-            margin: -10px 10px;">
+        <form method="POST">
             <input class="table_add_button button" type="submit" id="module_list_add" name="module_list_add" value=""/>
         </form>
         <input class="table_search_input" type="search" id="module_list_search" placeholder="Suchen..." name="module_list_search"/>
@@ -106,12 +100,12 @@
                     <td><?php echo $module["deepeningLiteraturePostNote"];?></td>-->
                     
                     <td><!--TODO: proof validity and show result--></td>
-                    <td>
+                    <td class="table_row_functions">
                         <form method="POST">
-                            <button type="submit" id="module_change_module" name="module_change_module" value="<?php echo $module["ID"];?>">Bearbeiten</button>
+                            <button type="submit" id="module_change_module" class="table_edit_button button" name="module_change_module" value="<?php echo $module["ID"];?>"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" id="module_delete_module" name="module_delete_module" value="<?php echo $module["ID"];?>">Löschen</button>
+                            <button type="submit" id="module_delete_module" class="table_delete_button button" name="module_delete_module" value="<?php echo $module["ID"];?>"></button>
                         </form>
                         <label id="module_lock_moduleLabel">
                             <input type="checkbox" id="module_lock_module" name="module_lock_module"/>
