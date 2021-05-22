@@ -19,8 +19,8 @@ class ExportService {
             $view = ob_get_clean();
 
             $template = sprintf($template, $view);
-
-            ExportService::exportFile($view, "Modulhandbuch");
+            
+            ExportService::exportFile($template, "Modulhandbuch");
         }
         else {
             ob_start();

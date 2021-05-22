@@ -1,16 +1,26 @@
-<h1>
-    Modulhandbuch für den Studiengang
-    <span>Informationstechnlogie</span>
-    mit den Studienrichtungen
-    <span>Informationstechnik und Medieninformatik</span> // ???
+
+<div class="heading_container">
+    <h1>Modulhandbuch für den Studiengang</h1>
+    Informationstechnlogie
+    <h1>mit den Studienrichtungen</h1>
+    Informationstechnik und Medieninformatik
     <br>
-    an der
-    Berufsakademie Sachsen
-    Staatliche Studienakademie Dresden
-</h1>
-Der  jeweils  ausgewiesene  Modulverantwortliche  ist  Ansprechpartner  für  die  fachliche  Erstellung  und  Fragen und Anforderungen zur inhaltlichen Weiterentwicklung des Moduls.
-Der  Leiter  des Studiengangs  Informationstechnologie ist  für  die  inhaltliche  und  organisatorische  Gestaltung  verantwortlich  und  steht  für  Fragen  und  Hinweise  zur  Verfügung  (siehe  Sächsisches  Berufsakademiegesetz §19)
-Herr Prof. Dr.-Ing. Lutz ZipfelE-Mail: lutz.zipfel@ba-dresden.de
+    <br>
+    <br>
+    <h1>an der Berufsakademie Sachsen Staatliche Studienakademie Dresden</h1>
+</div>
+
+<span class="page_break"></span>
+
+<div class="intro_container">
+    Der  jeweils  ausgewiesene  Modulverantwortliche  ist  Ansprechpartner  für  die  fachliche  Erstellung  und  Fragen und Anforderungen zur inhaltlichen Weiterentwicklung des Moduls.
+    Der  Leiter  des Studiengangs  Informationstechnologie ist  für  die  inhaltliche  und  organisatorische  Gestaltung  verantwortlich  und  steht  für  Fragen  und  Hinweise  zur  Verfügung  (siehe  Sächsisches  Berufsakademiegesetz §19)
+    <div class="intro_name_mail_grid">
+        Herr Prof. Dr.-Ing. Lutz Zipfel 
+        lutz.zipfel@ba-dresden.de
+    </div>
+</div>
+
 
 <b>Erläuterung des Modulcode</b>
 <br>
@@ -100,6 +110,8 @@ Standortcode:
 5 - Studienort Leipzig
 6 - Studienort Riesa
 7 - Studienort Plauen
+
+<span class="page_break"></span>
 
 <b>Inhaltsverzeichnis</b>
 <?php
