@@ -99,7 +99,7 @@ class ModuleController {
         $resultCategories = CategoryModel::getAllCategories();
         $resultLiterature = LiteratureModel::getAllLiterature();
         $resultModule_Category = ModuleModel::getAllModuleCategories($moduleID);
-        $resultExams = ExamModel::getExamsByModuleID($moduleID);
+        $resultExams = mysqli_fetch_object(ExamModel::getExamsByModuleID($moduleID));
         include("Views/Module/ModuleChangeView.php");
         $view = ob_get_clean();
 

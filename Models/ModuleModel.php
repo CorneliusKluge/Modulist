@@ -539,5 +539,17 @@ class ModuleModel {
         $result = mysqli_query($db, $query);
 
         return $result;
+    }
+    static function getAllModulesOfField($fieldID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $fieldID = mysqli_real_escape_string($db, $fieldID);
+
+        $query = "SELECT t1.* FROM modules AS t1
+                    JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
+                    WHERE t2.fieldID = $fieldID";
+        $result = mysqli_query($db, $query);
+
+        return $result;
     }    
 }

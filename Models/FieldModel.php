@@ -117,4 +117,14 @@ class FieldModel {
 
         return $result;
     }
+    static function getFieldsByCourseID($courseID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $courseID = mysqli_real_escape_string($db, $courseID);
+
+        $query = "SELECT * FROM fields WHERE courseID = $courseID";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
 }

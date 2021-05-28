@@ -181,7 +181,7 @@ class ModuleService {
                 if(!empty($moduleID)) {
                     $moduleFieldIDs = ModuleModel::getAllModuleFields($moduleID)->ID;
                     $moduleCategoryIDs = ModuleModel::getAllModuleCategories($moduleID)->ID;
-                    $moduleExamIDs = ExamModel::getExamsByModuleID($moduleID)->ID;
+                    $moduleExamIDs = mysqli_fetch_object(ExamModel::getExamsByModuleID($moduleID))->ID;
                     $moduleLiteratureIDs = ModuleModel::getWholeModuleLiterature($moduleID)->ID;
                 }
                 

@@ -14,8 +14,6 @@ class ExamModel {
         $query = "SELECT * FROM exams WHERE moduleID = $moduleID";
         $result = mysqli_query($db, $query);
 
-        $result = mysqli_fetch_object($result);
-
         return $result;
     }
 
