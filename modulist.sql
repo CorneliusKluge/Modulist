@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Mai 2021 um 18:38
+-- Erstellungszeit: 28. Mai 2021 um 16:08
 -- Server-Version: 10.4.13-MariaDB
 -- PHP-Version: 7.4.7
 
@@ -164,6 +164,7 @@ CREATE TABLE `module_category_mm` (
   `categoryID` int(11) NOT NULL,
   `workload` int(11) DEFAULT NULL,
   `theoryFlag` tinyint(1) DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
