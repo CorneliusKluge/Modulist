@@ -5,15 +5,15 @@ namespace Modulist\Services;
 use Modulist\Models\CategoryModel;
 
 class CategoryService {
-    static function addCategory($name, $presenceFlag, $position, $creditHours) {
-        if(isset($name, $presenceFlag, $position)) {
-            if(!empty($name) && !empty($presenceFlag) && !empty($position)) {
+    static function addCategory($name, $presenceFlag, $position) {
+        if(isset($name, $position)) {
+            if(!empty($name) && !empty($position)) {
                 if(CategoryModel::getCategoryByName($name)) {
                     echo "Eine Modulkategorie mit diesem Namen gibt es bereits.";
                     return false;
                 }
 
-                CategoryModel::addCategory($name, $presenceFlag, $position, $creditHours);
+                CategoryModel::addCategory($name, $presenceFlag, $position);
 
                 echo "Die Modulkategorie wurde erfolgreich eingetragen.";
 
@@ -27,11 +27,11 @@ class CategoryService {
             echo "Bitte füllen Sie alle Pflichtfelder aus.";
         }
     }
-    static function changeCategory($name, $presenceFlag, $position, $creditHours) {
-        if(isset($name, $presenceFlag, $position)) {
-            if(!empty($name) && !empty($presenceFlag) && !empty($position)) {
+    static function changeCategory($id, $name, $presenceFlag, $position) {
+        if(isset($name, $position)) {
+            if(!empty($name) && !empty($position)) {
 
-                CategoryModel::changeCategory($name, $presenceFlag, $position, $creditHours);
+                CategoryModel::changeCategory($id, $name, $presenceFlag, $position);
 
                 echo "Die Modulkategorie wurde erfolgreich geändert.";
 
@@ -46,18 +46,16 @@ class CategoryService {
         }
     }
 
-    static function deleteCategory($name) {
-        if(isset($name)) {
-            if(!CategoryModel::getCategoryByName($name)) {
-                echo "Die ausgewählte Modulkategorie konnte nicht gefunden werden.";
-                return false;
-            }
-
-            CategoryModel::deleteCategory($name);
-
-            echo "Die ausgewählte Modulkategorie wurde erfolgreich gelöscht";
-
-            return true;
+    static function deleteCategory($id) {
+        if(!CategoryModel::getCategoryByID($id)) {
+            echo "Die ausgewählte Modulkategorie konnte nicht gefunden werden.";
+            return false;
         }
+
+        CategoryModel::deleteCategory($id);
+
+        echo "Die ausgewählte Modulkategorie wurde erfolgreich gelöscht";
+
+        return true;
     }
 }

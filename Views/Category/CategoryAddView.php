@@ -1,23 +1,20 @@
-<form method="POST" id="Category_add_form">
-    <label for="Category_add_name">Name:</label>
-    <input type="string" id="Category_add_name" name="Category_add_name"/>
+<form method="POST" class="form_container">
+    <h2>Modulkategorie hinzufügen</h2>
 
-    <br>
+    <div class="form_item">
+        <label class="form_label" for="category_add_name">Name:</label>
+        <input class="form_input" type="string" id="category_add_name" name="category_add_name"/>
+    </div>
 
-    <label for="Category_add_presenceFlag">Präsenz:</label>
-    <input type="checkbox" id="Category_add_presenceFlag" name="Category_add_presenceFlag"/>
+    <div class="form_item">
+        <label class="form_label" for="category_add_presenceFlag">Präsenz:</label>
+        <input class="form_input" type="checkbox" value="1" id="category_add_presenceFlag" name="category_add_presenceFlag"/>
+    </div>
 
-    <br>
-
-    <label for="Category_add_position">Position:</label>
-    <input type="number" id="Category_add_position" name="Category_add_position"/>
-
-    <br>
-
-    <label for="Category_add_creditHours">Workloadstunden:</label>
-    <input type="string" id="Category_add_creditHours" name="Category_add_creditHours"/>
-
-    <br>
-
-    <button type="button" id="Category_add_submit">Speichern</button>
+    <div class="form_item">
+        <label class="form_label" for="category_add_position">Position:</label>
+        <input class="form_input" type="number" id="category_add_position" name="category_add_position"/>
+    </div>
+ 
+    <input class="form_submit button" type="submit" name="category_add_submit"/>
 </form>

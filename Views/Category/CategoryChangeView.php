@@ -1,23 +1,31 @@
-<form method="POST" id="Category_change_form">
-    <label for="Category_change_name">Name:</label>
-    <input type="string" id="Category_change_name" name="Category_change_name" value="<?php echo $result->name;?>"/>
+<?php
+if($result) {
+?>
+<form method="POST" class="form_container">
+    <h2>Modulkategorie hinzufügen</h2>
 
-    <br>
+    <div class="form_item">
+        <label class="form_label" for="category_change_name">Name:</label>
+        <input class="form_input" type="string" id="category_change_name" name="category_change_name" value="<?php echo $result->name;?>"/>
+    </div>
 
-    <label for="Category_change_presenceFlag">Präsenz:</label>
-    <input type="checkbox" id="Category_change_presenceFlag" name="Category_change_presenceFlag" value="<?php echo $result->presenceFlag;?>"/>
+    <div class="form_item">
+        <label class="form_label" for="category_change_presenceFlag">Präsenz:</label>
+        <input class="form_input" type="checkbox" value="1" id="category_change_presenceFlag" name="category_change_presenceFlag" value="<?php echo $result->presenceFlag;?>"/>
+    </div>
 
-    <br>
+    <div class="form_item">
+        <label class="form_label" for="category_change_position">Position:</label>
+        <input class="form_input" type="number" id="category_change_position" name="category_change_position" value="<?php echo $result->position;?>"/>
+    </div>
 
-    <label for="Category_change_position">Position:</label>
-    <input type="number" id="Category_change_position" name="Category_change_position" value="<?php echo $result->position;?>"/>
-
-    <br>
-
-    <label for="Category_change_creditHours">Workloadstunden:</label>
-    <input type="string" id="Category_change_creditHours" name="Category_change_creditHours" value="<?php echo $result->creditHours;?>"/>
-
-    <br>
-
-    <button type="button" id="Category_change_submit" data-id="<?php echo $result->ID;?>">Bearbeitung Speichern</button>
+    <button type="submit" name="category_change_submit" id="category_change_submit" class="form_submit button" value="<?php echo $result->ID;?>">Bearbeitung Speichern</button>
 </form>
+<?php
+}
+else {
+?>
+Die ausgewählte Modulkategorie konnte nicht gefunden werden.
+<button class="button_close">OK</button>
+<?php
+}

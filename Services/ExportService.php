@@ -20,7 +20,6 @@ class ExportService {
             $view = ob_get_clean();
 
             $template = sprintf($template, $view);
-
             ExportService::exportFile($template, "Modulhandbuch");
         }
         else {

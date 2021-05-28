@@ -1,41 +1,43 @@
-<h1>Liste der Modulkategorien</h1>
-
-%s
-
-<br>
-
-<div>
-    <input type="search" id="category_list_search" name="category_list_search" placeholder="Suche">
-    <input type="button" id="category_list_add" name="category_list_add">
-<table>
-    <!--what should be part of the table?-->
-    <th>Name</th>
-    <th>Präsenz</th>
-    <th>Position</th>
-    <th>Workload</th>
-
+<div class="table_container">
+    <div class="table_container_header">
+        <h2>Liste der Modulkategorieangaben</h2>
+        <form method="POST">
+            <input class="table_add_button button" name="category_add_button" type="submit" value=""/>
+        </form>
+        <input class="table_search_input" type="search" id="category_list_search" placeholder="Suchen..." name="category_list_search"/>
+    </div>
+<!--TODO: place it right (stylesheet.css)-->
     <?php
-        if($result->num_rows) {
-            foreach($result as $category) {
+        if($categories->num_rows) {
+    ?>
+    <table id="category_list_table">
+        <th>Name</th>
+        <th>Präsenz</th>
+        <th>Position</th>
+        <?php foreach($categories as $category) {
             ?>
                 <tr>
-                    <!--what should be part of the table?-->
+                    <!-- TODO: echo category["alles"] ((basically)) -->
                     <td><?php echo $category["name"];?></td>
                     <td><?php echo $category["presenceFlag"];?></td>
                     <td><?php echo $category["position"];?></td>
-                    <td><?php echo $category["creditHours"];?></td>
-                    
+  
+                    <td><!--TODO: proof validity and show result--></td>
                     <td>
-                        <input type="button" id="category_list_edit" name="category_list_edit"/>
-                        <input type="button" id="category_list_delete" name="category_list_delete"/>
-                        <label id="category_list_lockLabel">
-                            <input type="checkbox" id="category_list_lock" name="category_list_lock"/>
-                            <span></span>
-                        </label>
+                        <form method="POST">
+                            <button type="submit" name="category_change_button" value="<?php echo $category["ID"];?>">Bearbeiten</button>
+                        </form>
+                        <form method="POST">
+                            <button type="submit" name="category_delete_button" value="<?php echo $category["ID"];?>">Löschen</button>
+                        </form>
                     </td>
                 </tr>
             <?php
             }
         }
+        else{
+            echo "Aktuell sind keine Modulkategorien eingetragen.";
+        }
     ?>
-</table>
+    </table>
+</div>
