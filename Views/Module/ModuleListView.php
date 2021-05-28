@@ -61,8 +61,8 @@
                     <!--<td><?php echo $module["nameEN"];?></td>-->
                     <td><?php echo $module["code"];?></td>
                     <!--<td><?php echo $module["summary"];?></td>
-                    <td><?php echo $module["summaryEN"];?></td>
-                    <td><?php echo $module["type"];?></td>-->
+                    <td><?php echo $module["summaryEN"];?></td>-->
+                    <td><?php echo $module["type"];?></td>
                     <td><?php echo $module["semester"];?></td>
                     <!--<td><?php echo $module["duration"];?></td>-->
                     <td><?php echo $module["credits"];?></td>
@@ -102,15 +102,12 @@
                     <td><!--TODO: proof validity and show result--></td>
                     <td class="table_row_functions">
                         <form method="POST">
-                            <button type="submit" id="module_change_module" class="table_edit_button button" name="module_change_module" value="<?php echo $module["ID"];?>"></button>
+                            <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>">Bearbeiten</button>
                         </form>
                         <form method="POST">
-                            <button type="submit" id="module_delete_module" class="table_delete_button button" name="module_delete_module" value="<?php echo $module["ID"];?>"></button>
+                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>">Löschen</button>
                         </form>
-                        <label id="module_lock_moduleLabel">
-                            <input type="checkbox" id="module_lock_module" name="module_lock_module"/>
-                            <span></span>
-                        </label>
+                        <input type="checkbox" name="module_lock_checkbox"/>
                     </td>
                 </tr>
             <?php

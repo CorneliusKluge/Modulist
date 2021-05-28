@@ -84,24 +84,21 @@ class ModuleModel {
 
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
-        if(!empty($moduleID)) {
-            $query = "SELECT * FROM module_category_mm WHERE moduleID = $moduleID";
+        $query = "SELECT * FROM module_category_mm WHERE moduleID = $moduleID";
 
-            $result = mysqli_query($db, $query);
-        }
+        $result = mysqli_query($db, $query);
+
         return $result;
     }
 
     static function getAllModuleFields($moduleID) {
         $db = DatabaseService::getDatabaseObject();
-
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
-        if(!empty($moduleID)) {
-            $query = "SELECT * FROM module_field_mm WHERE moduleID = $moduleID";
+        $query = "SELECT * FROM module_field_mm WHERE moduleID = $moduleID";
 
-            $result = mysqli_query($db, $query);
-        }
+        $result = mysqli_query($db, $query);
+        
         return $result;
     }
 
@@ -110,11 +107,10 @@ class ModuleModel {
 
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
-        if(!empty($moduleID)) {
-            $query = "SELECT * FROM module_literature_mm WHERE moduleID = $moduleID";
+        $query = "SELECT * FROM module_literature_mm WHERE moduleID = $moduleID";
 
-            $result = mysqli_query($db, $query);
-        }
+        $result = mysqli_query($db, $query);
+        
         return $result;
     }
 
@@ -261,21 +257,26 @@ class ModuleModel {
         return $result;
     }
 
-    static function addFieldToModule($moduleID, $field){
+
+    static function addFieldToModule($moduleID, $fields, $courseID){
         $db = DatabaseService::getDatabaseObject();
 
-        if(!empty($field)) {
+        $courseID = mysqli_real_escape_string($db, $courseID);
 
-            $field = mysqli_real_escape_string($db, $field);
-
+        if(!empty($fields)) {
             if(empty($moduleID)) {
                 return false;
             }
+            if($fields->num_rows) {
+                foreach($fields as $field) {
+                    $field = mysqli_real_escape_string($db, $field);
 
-            $insert = "INSERT INTO module_field_mm (moduleID, fieldID) VALUES ($moduleID, $field)";
-            $result = mysqli_query($db, $insert);
-            return $result;
+                    $insert = "INSERT INTO module_field_mm (moduleID, fieldID, courseID) VALUES ($moduleID, $field, $courseID)";
+                    $result = mysqli_query($db, $insert);
+                }
+            }
         }
+        return $result;
     }
     
     static function addCategoriesToModule($moduleID, $categories) {
@@ -290,6 +291,8 @@ class ModuleModel {
             foreach($categories as $row){ //$categories = array ("0" >= array($categoryID, $workload),...)
                 $categoryID = mysqli_real_escape_string($db, $row[0]);
                 $workload = mysqli_real_escape_string($db, $row[1]);
+                $theoryFlag_t = mysqli_real_escape_string($db, $row[2]);
+                $theoryFlag_p = mysqli_real_escape_string($db, $row[3]);
 
                 if(empty($categoryID)) {
                     return false;
@@ -298,8 +301,23 @@ class ModuleModel {
                 if(empty($workload)) {
                     $workload = "NULL";
                 }
+
+                if(empty($theoryFlag_t) && empty($theoryFlag_p)){
+                    $theoryFlag = "NULL";
+                }
+                else {
+                    if(!empty($theoryFlag_t) && !empty($theoryFlag_p)) {
+                        return false;
+                    }
+                    else if(!empty($theoryFlag_t)) {
+                        $theoryFlag = $theoryFlag_t;
+                    }
+                    else {
+                        $theoryFlag = $theoryFlag_p;
+                    }
+                }
                 
-                $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload) VALUES ($moduleID, $categoryID, $workload)";
+                $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload, theoryFlag) VALUES ($moduleID, $categoryID, $workload, $theoryFlag)";
                 
                 $result = mysqli_query($db, $insert);
             }

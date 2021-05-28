@@ -9,8 +9,9 @@ class ModuleService {
     static function addModule(
         $name, 
         $nameEN, 
-        $code, 
-        $field,
+        $code,
+        $course, 
+        $fields,
         $summary, 
         $summaryEN,
         $type,
@@ -91,12 +92,19 @@ class ModuleService {
 
                 $moduleID = ModuleModel::getModuleByName($name)->ID;
 
-                $fieldAdded = ModuleModel::addFieldToModule($moduleID, $field);
+                $fieldAdded = ModuleModel::addFieldToModule($moduleID, $fields, $course);
                 $categoriesAdded = ModuleModel::addCategoriesToModule($moduleID, $categories);
                 $examsAdded = ExamModel::addExamToModule($moduleID, $exams);
-                $basicLiteratureAdded = ModuleModel::addLiteratureToModule($moduleID, $basicLiterature, true);
-                $deepeningLiteratureAdded = ModuleModel::addLiteratureToModule($moduleID, $deepeningLiterature, false);
-               
+                $basicLiteratureAdded = ModuleModel::addLiteratureToModule($moduleID, $basicLiterature, 1);
+                $deepeningLiteratureAdded = ModuleModel::addLiteratureToModule($moduleID, $deepeningLiterature, 0);
+                
+                //var_dump($moduleID);
+                var_dump($fieldAdded);
+                //var_dump($categoriesAdded);
+                //var_dump($examsAdded);
+                //var_dump($basicLiteratureAdded);
+                //var_dump($deepeningLiteratureAdded);
+
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
                     echo "Das Modul wurde erfolgreich eingetragen.";
                 }
@@ -122,7 +130,6 @@ class ModuleService {
                 echo "Das ausgewählte Modul konnte nicht gefunden werden.";
                 return false;
             }
-            var_dump($id);
 
             $moduleDeleted = ModuleModel::deleteModule($id);
             $fieldDeleted = ModuleModel::deleteModuleField($id);
@@ -145,8 +152,9 @@ class ModuleService {
         $moduleID,
         $name, 
         $nameEN, 
-        $code, 
-        $field,
+        $code,
+        $course, 
+        $fields,
         $summary, 
         $summaryEN,
         $type,
@@ -178,14 +186,24 @@ class ModuleService {
     ) {
         if(isset($name)) {
             if(!empty($name)) {
-                if(!empty($moduleID)) {
-                    $moduleFieldIDs = ModuleModel::getAllModuleFields($moduleID)->ID;
-                    $moduleCategoryIDs = ModuleModel::getAllModuleCategories($moduleID)->ID;
-                    $moduleExamIDs = mysqli_fetch_object(ExamModel::getExamsByModuleID($moduleID))->ID;
-                    $moduleLiteratureIDs = ModuleModel::getWholeModuleLiterature($moduleID)->ID;
+                $moduleFields = ModuleModel::getAllModuleFields($moduleID);
+                $moduleCategories= ModuleModel::getAllModuleCategories($moduleID);
+                $moduleExams = ExamModel::getExamsByModuleID($moduleID);
+                $moduleLiterature = ModuleModel::getWholeModuleLiterature($moduleID);
+                var_dump($moduleFields);
+                foreach($moduleFields as $moduleField) {
+                    $moduleFieldIDs[] = $moduleField["ID"];
                 }
-                
-   
+                foreach($moduleCategories as $moduleCategory) {
+                    $moduleCategoryIDs[] = $moduleCategory["ID"];
+                }
+                foreach($moduleExams as $moduleExam) {
+                    $moduleExamIDs[] = $moduleExam["ID"];
+                }
+                foreach($moduleLiterature as $moduleLiteratureRow) {
+                    $moduleLiteratureIDs[] = $moduleLiteratureRow["ID"];
+                }
+                   
 //TODO: insert more conditions (literatureModel checks, categoryModel ckecks, ...)
             /*  if(!CourseModel::isCourseByID($code)) {
                     echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";
@@ -224,17 +242,17 @@ class ModuleService {
                     $deepeningLiteraturePostNote
                 );
 //TODO: map ids and entries in corresponding arrays
-                if(!empty($field)) {
+                if(!empty($fields)) {
                     if(!empty($moduleFieldIDs)) {
                         foreach($moduleFieldIDs as $moduleFieldID) {
                             $isOldField = ModuleModel::isModuleFieldByIDs($moduleFieldID, $moduleID);
 
                             if($isOldField) {
-                                $fieldAdded = ModuleModel::updateFieldsOfModule($moduleFieldID,$moduleID, $field);
+                                $fieldAdded = ModuleModel::updateFieldsOfModule($moduleFieldID,$moduleID, $fields);
                             }
                             else {
-                                foreach($field as $fieldID) {
-                                    $fieldAdded = ModuleModel::addFieldToModule($moduleID, $fieldID);
+                                foreach($fields as $fieldID) {
+                                    $fieldAdded = ModuleModel::addFieldToModule($moduleID, $fieldID, $course);
                                 }
                             }
                         }
@@ -286,7 +304,7 @@ class ModuleService {
                     }
                 }
                 
-                if(!empty($$deepeningLiterature)) {
+                if(!empty($deepeningLiterature)) {
                     if(!empty($moduleLiteratureIDs)) {
                         foreach($moduleLiteratureIDs as $moduleLiteratureID) {
                             $isOldLiterature = ModuleModel::isModuleLiteratureByIDs($moduleLiteratureID, $moduleID);

@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="css/style.css">
         <script src="libs/tinymce/tinymce.min.js"></script>
+        <script src="js/module.js"></script>
         <script>
             tinymce.init({
                 selector: '.form_editor',

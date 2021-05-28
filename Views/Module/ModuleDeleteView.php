@@ -3,10 +3,10 @@ if($result) {
 ?>
 Sind Sie sicher, dass Sie das Modul <?php echo $result->name;?> löschen möchten?
 <form method="POST">
-<input type="submit" id="module_delete_submit" name="module_delete_submit" value="<?php echo $result->ID;?>"/>
+<button type="submit" id="module_delete_submit" name="module_delete_submit" value="<?php echo $result->ID;?>">Ja</button>
 </form>
 <form method="POST">
-<input class="button_close" type="submit">Abbrechen</input>
+<button class="button_close" type="submit">Abbrechen</button>
 </form>
 <?php
 }
