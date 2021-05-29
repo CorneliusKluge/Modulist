@@ -4,7 +4,6 @@
         <form method="POST">
             <input class="table_add_button button" name="literature_add_button" type="submit" value=""/>
         </form>
-        <input class="table_search_input" type="search" id="literature_list_search" placeholder="Suchen..." name="literature_list_search"/>
     </div>
 <!--TODO: place it right (stylesheet.css)-->
     <?php

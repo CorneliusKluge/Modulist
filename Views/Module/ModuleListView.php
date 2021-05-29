@@ -5,7 +5,6 @@
         <form method="POST">
             <input class="table_add_button button" type="submit" id="module_list_add" name="module_list_add" value=""/>
         </form>
-        <input class="table_search_input" type="search" id="module_list_search" placeholder="Suchen..." name="module_list_search"/>
     </div>
     <?php
         if($result->num_rows) {

@@ -18,25 +18,29 @@
             </nav>
         </header>
         <h1>Studienverwaltung</h1>
-        <h2>Studiengänge verwalten</h2>
         <div class="course_container">
+            <div class="course_container_header">
+                <h2>Studiengänge verwalten</h2>
+                <button type="button" id="course_add_button" class="table_add_button button" value=""></button>
+            </div>
             <div id="course_form_container"></div>
-            
+        
             <div id="course_message_container"></div>
             <div class="course_management_container">
-                <button type="button" id="course_add_button">Erstellen</button>
                 <div id="course_list_container"></div>
             </div>
             <div id="course_deleteForm_container"></div>
         </div>
 
-        <h2>Studienrichtungen verwalten</h2>
         <div class="field_container">
+            <div class="field_container_header">
+                <h2>Studienrichtungen verwalten</h2>
+                <button type="button" id="field_add_button" class="table_add_button button" value=""></button>
+            </div>
             <div id="field_form_container"></div>
-
-            <div id="field_message_container"></div>
+            <div id="field_message_container" class="message_container"></div>
             <div class="field_management_container">
-                <button type="button" id="field_add_button">Erstellen</button>
+               
                 <div id="field_list_container"></div>
             </div>
             <div id="field_deleteForm_container"></div>
