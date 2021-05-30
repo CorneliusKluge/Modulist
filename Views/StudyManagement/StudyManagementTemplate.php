@@ -29,7 +29,7 @@
             <div class="course_management_container">
                 <div id="course_list_container"></div>
             </div>
-            <div id="course_deleteForm_container"></div>
+            <div id="course_deleteForm_container" class="message_container"></div>
         </div>
 
         <div class="field_container">
@@ -43,9 +43,9 @@
                
                 <div id="field_list_container"></div>
             </div>
-            <div id="field_deleteForm_container"></div>
+            <div id="field_deleteForm_container" class="message_container"></div>
         </div>
 
-        <div id="overlay"></div>
+        <div id="overlay" class="overlay overlay--invisible"></div>
     </body>
 </html>

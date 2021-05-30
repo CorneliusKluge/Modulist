@@ -66,6 +66,30 @@ h4 {
     cursor: pointer;
 }
 
+.overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.overlay--invisible {
+    visibility: hidden;
+}
+
+.message_container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.messager_button_container {
+    margin: 5px;
+}
+
+
 /*------------------------navbar------------------------*/
 
 .navbar {
@@ -202,7 +226,6 @@ h4 {
 .table_container {
     width: auto;
     margin: 30px 0;
-    /* padding: 0 25px; */
     border: 2px solid #000;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -248,6 +271,14 @@ h4 {
     transition-duration: 0.3s;
 }
 
+th {
+    padding: 5px;
+}
+
+td {
+    text-align: center;
+    padding-left: 3px;
+}
 
 .table_row_functions {
     display: flex;
@@ -332,6 +363,33 @@ h4 {
     background-color: #fff;
 }
 
-.message_container {
-    text-align: center;
+/*------------------------export------------------------*/
+.export_module_manual_container,
+.export_study_schedule_container,
+.export_exam_schedules_container {
+    margin: 30px 0;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+.module_manual_container_header,
+.study_schedule_container_header,
+.exam_schedules_container_header {
+    display: flex;
+    width: auto;
+    margin-bottom: 10px;
+    padding: 0 25px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    background-color: #808080;
+}
+
+.module_manual_container_header h2,
+.study_schedule_container_header h2,
+.exam_schedules_container_header h2 { 
+    display: inline-block;
+    width: calc(100% - 100px);
+    padding: 0 25px;
+    background-color: #808080;
+    color: white;
 }

@@ -101,10 +101,10 @@
                     <td><!--TODO: proof validity and show result--></td>
                     <td class="table_row_functions">
                         <form method="POST">
-                            <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>">Bearbeiten</button>
+                            <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>" class="button table_edit_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>">Löschen</button>
+                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
                         </form>
                         <input type="checkbox" name="module_lock_checkbox"/>
                     </td>
