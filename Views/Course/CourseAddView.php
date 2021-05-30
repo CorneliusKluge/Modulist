@@ -1,4 +1,4 @@
-<form method="POST" id="course_add_form" class="form_container">
+<form method="POST" id="course_add_form" class="course_form_container">
     <div class="form_item">
         <label class="form_label" for="course_add_name" >Name:</label>
         <input class="form_input" type="string" id="course_add_name" name="course_add_name"/>

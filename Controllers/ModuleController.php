@@ -31,7 +31,7 @@ class ModuleController {
     get Views
 */
     function decideModuleView() {
-        if(isset($_POST["module_list_add"])) {
+        if(isset($_POST["module_add_button"])) {
             $view1 = $this->getModuleAddView(); // Calls the method "getModuleAddView" and write its output/return value into the template
             return $view1;
         }
@@ -95,15 +95,19 @@ class ModuleController {
     function getModuleChangeView($moduleID){
         ob_start();
         $result = ModuleModel::getModuleByID($moduleID);
+        $oldFields = ModuleModel::getAllModuleFields($moduleID);
+        $oldCourse = mysqli_fetch_object(ModuleModel::getModuleCourse($moduleID));
+        $oldCategories = ModuleModel::getAllModuleCategories($moduleID);
+        $oldBasicLiterature = ModuleModel::getModuleBasicLiterature($moduleID);
+        $oldDeepeningLiterature = ModuleModel::getModuleDeepeningLiterature($moduleID);
+        $oldExams = ExamModel::getExamsByModuleID($moduleID);
         $resultCourse = CourseModel::getAllCourses();
-        $resultField = mysqli_fetch_object(FieldModel::getAllFieldsJoinCourse());
-        $resultCategories = mysqli_fetch_object(CategoryModel::getAllCategories());
-        $resultLiterature = mysqli_fetch_object(LiteratureModel::getAllLiterature());
-        $resultModule_Category = mysqli_fetch_object(ModuleModel::getAllModuleCategories($moduleID));
-        $resultExams = mysqli_fetch_object(ExamModel::getExamsByModuleID($moduleID));
+        $resultField = FieldModel::getAllFieldsJoinCourse();
+        $resultCategories = CategoryModel::getAllCategories();
+        $resultLiterature = LiteratureModel::getAllLiterature();
         include("Views/Module/ModuleChangeView.php");
         $view = ob_get_clean();
-
+        
         return $view;
     }
 
@@ -130,16 +134,14 @@ class ModuleController {
         $stillExams = true;
         $stillBasicLiterature = true;
         $stillDeepeningLiterature = true;
+
         ob_start();
-//TODO: include EVL TheoryFlag in $categories, add more categories to the array dynamically
         while($stillCategories) {
             $inputCategory = "module_add_category_".$i;
-            var_dump($i);
             if(isset($inputCategory)) {
                 $inputWorkload = "module_add_categoryWorkload_".$i;
-                $inputTheoryFlag_t = "module_add_TheoryFlag_theory_".$i;
-                $inputTheoryFlag_p = "module_add_TheoryFlag_practical_".$i;
-                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag_t] ?? null, $_POST[$inputTheoryFlag_p] ?? null);    
+                $inputTheoryFlag = "module_add_TheoryFlag_".$i;
+                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null); 
             }
             else {
                 $stillCategories = false;
@@ -270,13 +272,98 @@ class ModuleController {
     }
 
     function moduleChangeSubmit($moduleID){
+        $i = 0;
+        $j = 0;
+        $k = 0;
+        $l = 0;
+        $m = 0;
+        $stillCategories = true;
+        $stillFields = true;
+        $stillExams = true;
+        $stillBasicLiterature = true;
+        $stillDeepeningLiterature = true;
+
         ob_start();
-        $categories = array(array($_POST["module_change_category"] ?? null, $_POST["module_change_categoryWorkload"] ?? null));
-        $exams = array(array($_POST["module_change_examType"] ?? null, $_POST["module_change_examDuration"] ?? null,
-                                $_POST["module_change_examCircumference"] ?? null,  $_POST["module_change_examPeriod"] ?? null, 
-                                $_POST["module_change_examWeighting"] ?? null));
-        $basicLiterature = array($_POST["module_change_basicLiterature"] ?? null);
-        $deepeningLiterature = array($_POST["module_change_deepeningLiterature"] ?? null);
+        while($stillCategories) {
+            $inputCategory = "module_change_category_".$i;
+            if(isset($_POST[$inputCategory])) {
+                $inputWorkload = "module_change_categoryWorkload_".$i;
+                $inputTheoryFlag = "module_change_TheoryFlag_".$i;
+                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null); 
+            }
+            else {
+                $stillCategories = false;
+            }
+            $i++;
+            if($i = 5) {
+                $stillCategories = false;
+            }
+        }
+      
+
+        while($stillFields) {
+            $inputField = "module_change_field_".$j;
+            if(isset($inputField)) {
+                $fields[] = $_POST[$inputField] ?? null;
+            }
+            else {
+                $stillFields = false;
+            }
+
+            $j++;
+            if($j = 5) {
+                $stillFields = false;
+            }
+        }
+
+        while($stillExams) {
+            $inputExam = "module_change_examType_".$k;
+            if(isset($inputExam)) {
+                $inputDuration = "module_change_examDuration_".$k;
+                $inputCircumference = "module_change_examCircumference_".$k;
+                $inputPeriod = "module_change_examPeriod_".$k;
+                $inputWeighting = "module_change_examWeighting_".$k;
+                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputWeighting] ?? null);    
+            }
+            else {
+                $stillExams = false;
+            }
+
+            $k++;
+            if($k = 5) {
+                $stillExams = false;
+            }
+        }
+       
+        while($stillBasicLiterature) {
+            $inputBasicLiterarture = "module_change_basicLiterature_".$l;
+            if(isset($inputBasicLiterarture)) {
+                $basicLiterature[] = $_POST[$inputBasicLiterarture] ?? null;
+            }
+            else {
+                $stillBasicLiterature = false;
+            }
+
+            $l++;
+            if($l = 5) {
+                $stillBasicLiterature = false;
+            }
+        }
+        
+        while($stillDeepeningLiterature) {
+            $inputDeepeningLiterarture = "module_change_deepeningLiterature_".$m;
+            if(isset($inputDeepeningLiterarture)) {
+                $deepeningLiterature[] = $_POST[$inputDeepeningLiterarture] ?? null;
+            }
+            else {
+                $stillDeepeningLiterature = false;
+            }
+
+            $m++;
+            if($m = 5) {
+                $stillDeepeningLiterature = false;
+            }
+        }
 
         $bool = ModuleService::updateModule(
             $moduleID,
@@ -284,7 +371,7 @@ class ModuleController {
             $_POST["module_change_nameEN"] ?? null,
             $_POST["module_change_code"] ?? null,
             $_POST["module_change_course"] ?? null,
-            $_POST["module_change_field"] ?? null,
+            $fields,
             $_POST["module_change_summary"] ?? null,
             $_POST["module_change_summaryEN"] ?? null,
             $_POST["module_change_type"] ?? null,

@@ -3,9 +3,8 @@
         <h2>Liste der Module</h2>
 <!--TODO: place it right (stylesheet.css)-->
         <form method="POST">
-            <input class="table_add_button button" type="submit" id="module_list_add" name="module_list_add" value=""/>
+            <input class="table_add_button button" type="submit" id="module_add_button" name="module_add_button" value=""/>
         </form>
-        <input class="table_search_input" type="search" id="module_list_search" placeholder="Suchen..." name="module_list_search"/>
     </div>
     <?php
         if($result->num_rows) {
@@ -102,10 +101,10 @@
                     <td><!--TODO: proof validity and show result--></td>
                     <td class="table_row_functions">
                         <form method="POST">
-                            <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>">Bearbeiten</button>
+                            <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>" class="button table_edit_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>">Löschen</button>
+                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
                         </form>
                         <input type="checkbox" name="module_lock_checkbox"/>
                     </td>

@@ -2,8 +2,10 @@
 if($result) {
 ?>
 Sind Sie sicher, dass Sie die Studienrichtung <?php echo $result->name;?> löschen möchten?
-<button id="field_delete_submit" data-id="<?php echo $result->ID;?>">Ja</button>
-<button class="button_close">Abbrechen</button>
+<div class="messager_button_container">
+    <button id="field_delete_submit" data-id="<?php echo $result->ID;?>">Ja</button>
+    <button class="button_close">Abbrechen</button>
+</div>
 <?php
 }
 else {

@@ -66,6 +66,30 @@ h4 {
     cursor: pointer;
 }
 
+.overlay {
+    position: absolute;
+    background-color: rgba(0,0,0,0.8);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.overlay--invisible {
+    visibility: hidden;
+}
+
+.message_container {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.messager_button_container {
+    margin: 5px;
+}
+
+
 /*------------------------navbar------------------------*/
 
 .navbar {
@@ -179,7 +203,7 @@ h4 {
 
 .form_select {
     height: 26px;
-    width: calc(100% - 15px); /* substract the margin width (so that columns remain at 400px)  */
+    width: calc(100% - 15px); /* subtract the margin width (so that columns remain at 400px)  */
     margin-left: 15px; 
 }
 
@@ -188,19 +212,20 @@ h4 {
 }
 
 .form_submit {
+    width: 200px;
     align-self: flex-end;
     margin: 25px;
-    margin-left: calc(100% - 111px); /* substract the margins + half of buttons width */
-    /* margin-left: 90%; */
+    margin-left: calc(90% - 100px); /* subtract the margins + half of buttons width */
 }
 
-
+.form_item--invisible {
+    display: none;
+}
 /*------------------------table------------------------*/ 
 
 .table_container {
     width: auto;
     margin: 30px 0;
-    /* padding: 0 25px; */
     border: 2px solid #000;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -213,6 +238,7 @@ h4 {
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
+    margin-bottom: 10px;
     padding: 5px 15px;
     background-color: #808080;
     color: white;
@@ -228,7 +254,7 @@ h4 {
     display: inline-block;
     align-self: center;
     position: absolute;
-    right: calc(30% + 75px);
+    right: 50px;
     width: 30px;
     height: 30px;
     margin: 20px 10px;
@@ -245,6 +271,14 @@ h4 {
     transition-duration: 0.3s;
 }
 
+th {
+    padding: 5px;
+}
+
+td {
+    text-align: center;
+    padding-left: 3px;
+}
 
 .table_row_functions {
     display: flex;
@@ -288,36 +322,84 @@ h4 {
     transition-duration: 0.3s;
 }
 
-.table_search_input {
-    display: inline-block;
-    align-self: center;
-    position: absolute;
-    right: 50px;
-    width: 30%;
-    height: 30px;
-    border-radius: 8px;
-    border-style: none;
-    font-size: large;
-}
-
 /*------------------------studymanagement------------------------*/
 
 .course_container,
 .field_container {
-    width: auto;
     margin: 30px 0;
-    /* padding: 0 25px; */
-    /* border: 2px solid #000; */
-    flex-flow: row wrap;
-    align-items: flex-end;
-    /* background-color: #fff; */
+    border: 2px solid #000;
+    background-color: #fff;
 }
 
-.course_container ~ h2,
-.field_container ~ h2 { 
+.course_container_header,
+.field_container_header {
+    display: flex;
+    width: auto;
+    margin-bottom: 10px;
+    padding: 0 25px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    background-color: #808080;
+}
+
+.course_container h2,
+.field_container h2 { 
+    display: inline-block;
     width: calc(100% - 100px);
-    margin: 10px 0;
-    padding: 5px 50px;
+    padding: 0 25px;
     background-color: #808080;
     color: white;
+}
+
+.course_form_container,
+.field_form_container {
+    width: auto;
+    display: flex;
+    margin-bottom: 15px;
+    padding: 0 25px;
+    border-bottom: 2px solid #000;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    background-color: #fff;
+}
+
+/*------------------------export------------------------*/
+.export_module_manual_container,
+.export_study_schedule_container,
+.export_exam_schedules_container {
+    margin: 30px 0;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+.module_manual_container_header,
+.study_schedule_container_header,
+.exam_schedules_container_header {
+    display: flex;
+    width: auto;
+    margin-bottom: 10px;
+    padding: 0 25px;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    background-color: #808080;
+}
+
+.module_manual_container_header h2,
+.study_schedule_container_header h2,
+.exam_schedules_container_header h2 { 
+    display: inline-block;
+    width: calc(100% - 100px);
+    padding: 0 25px;
+    background-color: #808080;
+    color: white;
+}
+
+.export_form_container {
+    width: auto;
+    display: flex;
+    margin-bottom: 15px;
+    padding: 0 25px;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    background-color: #fff;
 }

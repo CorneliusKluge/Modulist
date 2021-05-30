@@ -12,8 +12,8 @@ if($result->num_rows) {
     <tr>
         <td><?php echo $course["name"];?></td>
         <td><?php echo $course["nameEN"];?></td>
-        <td><button type="button" class="button_change_course" data-id="<?php echo $course["ID"];?>">Bearbeiten</button></td>
-        <td><button type="button" class="button_delete_course" data-id="<?php echo $course["ID"];?>">Löschen</button></td>
+        <td><button type="button" class="button button_change_course table_edit_button" data-id="<?php echo $course["ID"];?>"></button></td>
+        <td><button type="button" class="button button_delete_course table_delete_button" data-id="<?php echo $course["ID"];?>"></button></td>
     </tr>
     <?php
     }

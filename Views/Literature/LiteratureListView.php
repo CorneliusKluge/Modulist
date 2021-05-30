@@ -4,7 +4,6 @@
         <form method="POST">
             <input class="table_add_button button" name="literature_add_button" type="submit" value=""/>
         </form>
-        <input class="table_search_input" type="search" id="literature_list_search" placeholder="Suchen..." name="literature_list_search"/>
     </div>
 <!--TODO: place it right (stylesheet.css)-->
     <?php
@@ -21,7 +20,6 @@
         <?php foreach($result as $literature) {
             ?>
                 <tr>
-                    <!-- TODO: echo literature["alles"] ((basically)) -->
                     <td><?php echo $literature["authors"];?></td>
                     <td><?php echo $literature["year"];?></td>
                     <td><?php echo $literature["title"];?></td>
@@ -31,12 +29,12 @@
                     <td><?php echo $literature["isbn"];?></td>
                     
                     <td><!--TODO: proof validity and show result--></td>
-                    <td>
+                    <td class="table_row_functions">
                         <form method="POST">
-                            <button type="submit" name="literature_change_button" value="<?php echo $literature["ID"];?>">Bearbeiten</button>
+                            <button type="submit" name="literature_change_button" value="<?php echo $literature["ID"];?>" class="button table_edit_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="literature_delete_button" value="<?php echo $literature["ID"];?>">Löschen</button>
+                            <button type="submit" name="literature_delete_button" value="<?php echo $literature["ID"];?>" class="button table_delete_button"></button>
                         </form>
                     </td>
                 </tr>

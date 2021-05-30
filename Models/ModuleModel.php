@@ -91,8 +91,21 @@ class ModuleModel {
         return $result;
     }
 
+    static function getModuleCourse($moduleID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+
+        $query = "SELECT distinct courseID FROM module_field_mm WHERE moduleID = $moduleID";
+
+        $result = mysqli_query($db, $query);
+        
+        return $result;
+    }
+
     static function getAllModuleFields($moduleID) {
         $db = DatabaseService::getDatabaseObject();
+
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
         $query = "SELECT * FROM module_field_mm WHERE moduleID = $moduleID";
@@ -114,11 +127,35 @@ class ModuleModel {
         return $result;
     }
 
+    static function getModuleBasicLiterature($moduleID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+
+        $query = "SELECT * FROM module_literature_mm WHERE moduleID = $moduleID AND basicLiteratureFlag = 1";
+
+        $result = mysqli_query($db, $query);
+        
+        return $result;
+    }
+
+     static function getModuleDeepeningLiterature($moduleID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+
+        $query = "SELECT * FROM module_literature_mm WHERE moduleID = $moduleID AND basicLiteratureFlag = 0";
+
+        $result = mysqli_query($db, $query);
+        
+        return $result;
+    }
+
     static function isModuleCategoryByIDs($categoryID, $moduleID) {
         $db = DatabaseService::getDatabaseObject();
 
-        $id = mysqli_real_escape_string($db, $categoryID);
-        $name = mysqli_real_escape_string($db, $moduleID);
+        $categoryID = mysqli_real_escape_string($db, $categoryID);
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
 
         $query = "SELECT id FROM module_category_mm WHERE categoryID = $categoryID AND moduleID <> $moduleID";
         $result = mysqli_query($db, $query);
@@ -134,8 +171,8 @@ class ModuleModel {
     static function isModuleFieldByIDs($fieldID, $moduleID) {
         $db = DatabaseService::getDatabaseObject();
 
-        $id = mysqli_real_escape_string($db, $fieldID);
-        $name = mysqli_real_escape_string($db, $moduleID);
+        $fieldID = mysqli_real_escape_string($db, $fieldID);
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
 
         $query = "SELECT id FROM module_field_mm WHERE fieldID = $fieldID AND moduleID <> $moduleID";
         $result = mysqli_query($db, $query);
@@ -151,8 +188,8 @@ class ModuleModel {
     static function isModuleLiteratureByIDs($literatureID, $moduleID) {
         $db = DatabaseService::getDatabaseObject();
 
-        $id = mysqli_real_escape_string($db, $literatureID);
-        $name = mysqli_real_escape_string($db, $moduleID);
+        $literatureID = mysqli_real_escape_string($db, $literatureID);
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
 
         $query = "SELECT id FROM module_literature_mm WHERE literatureID = $literatureID AND moduleID <> $moduleID";
         $result = mysqli_query($db, $query);
@@ -258,87 +295,74 @@ class ModuleModel {
     }
 
 
-    static function addFieldToModule($moduleID, $fields, $courseID){
+    static function addFieldToModule($moduleID, $field, $courseID){
         $db = DatabaseService::getDatabaseObject();
 
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $field = mysqli_real_escape_string($db, $field);
         $courseID = mysqli_real_escape_string($db, $courseID);
 
-        if(!empty($fields)) {
+        if(!empty($field)) {
             if(empty($moduleID)) {
                 return false;
             }
-            if($fields->num_rows) {
-                foreach($fields as $field) {
-                    $field = mysqli_real_escape_string($db, $field);
 
-                    $insert = "INSERT INTO module_field_mm (moduleID, fieldID, courseID) VALUES ($moduleID, $field, $courseID)";
-                    $result = mysqli_query($db, $insert);
-                }
-            }
+            $insert = "INSERT INTO module_field_mm (moduleID, fieldID, courseID) VALUES ($moduleID, $field, $courseID)";
+            $result = mysqli_query($db, $insert);
+            return $result;
         }
-        return $result;
+        return false;
     }
     
-    static function addCategoriesToModule($moduleID, $categories) {
+    static function addCategoriesToModule($moduleID, $category) {
         $db = DatabaseService::getDatabaseObject();
-
-        if(!empty($categories)) {
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $categoryID = mysqli_real_escape_string($db, $category[0]);
+        $workload = mysqli_real_escape_string($db, $category[1]);
+        $theoryFlag = mysqli_real_escape_string($db, $category[2]);
+  
+        if(!empty($category)) {
 
             if(empty($moduleID)) {
                 return false;
             }
 
-            foreach($categories as $row){ //$categories = array ("0" >= array($categoryID, $workload),...)
-                $categoryID = mysqli_real_escape_string($db, $row[0]);
-                $workload = mysqli_real_escape_string($db, $row[1]);
-                $theoryFlag_t = mysqli_real_escape_string($db, $row[2]);
-                $theoryFlag_p = mysqli_real_escape_string($db, $row[3]);
-
-                if(empty($categoryID)) {
-                    return false;
-                }
-                
-                if(empty($workload)) {
-                    $workload = "NULL";
-                }
-
-                if(empty($theoryFlag_t) && empty($theoryFlag_p)){
-                    $theoryFlag = "NULL";
-                }
-                else {
-                    if(!empty($theoryFlag_t) && !empty($theoryFlag_p)) {
-                        return false;
-                    }
-                    else if(!empty($theoryFlag_t)) {
-                        $theoryFlag = $theoryFlag_t;
-                    }
-                    else {
-                        $theoryFlag = $theoryFlag_p;
-                    }
-                }
-                
-                $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload, theoryFlag) VALUES ($moduleID, $categoryID, $workload, $theoryFlag)";
-                
-                $result = mysqli_query($db, $insert);
+            if(empty($categoryID)) {
+                return false;
             }
+            
+            if(empty($workload)) {
+                $workload = "NULL";
+            }
+
+            if(empty($theoryFlag) && $theoryFlag !== "0") {
+                $theoryFlag = "NULL";
+            }
+            
+            $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload, theoryFlag) VALUES ($moduleID, $categoryID, $workload, $theoryFlag)";
+            
+            $result = mysqli_query($db, $insert);
+            return $result;
         }
-        return $result;
+        return false;
     }
 
-    static function addLiteratureToModule($moduleID, $literature, $basicLiteratureFlag) {
+    static function addLiteratureToModule($moduleID, $literatureID, $basicLiteratureFlag) {
         $db = DatabaseService::getDatabaseObject();
 
-        if(!empty($literature)) {
-            foreach($literature as $literatureID) {
-                $literatureID = mysqli_real_escape_string($db, $literatureID);
-                 
-                $insert = "INSERT INTO module_literature_mm (moduleID, literatureID, basicLiteratureFlag) 
-                            VALUES ($moduleID, $literatureID, $basicLiteratureFlag)";
-                
-                $result = mysqli_query($db, $insert);
-            }
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $literatureID = mysqli_real_escape_string($db, $literatureID);
+        $basicLiteratureFlag = mysqli_real_escape_string($db, $basicLiteratureFlag);
+
+        if(!empty($literatureID)) {
+            $insert = "INSERT INTO module_literature_mm (moduleID, literatureID, basicLiteratureFlag) 
+                        VALUES ($moduleID, $literatureID, $basicLiteratureFlag)";
+            
+            $result = mysqli_query($db, $insert);
+            echo $insert;
+            return $result;
         }
-        return $result;
+        return false;
     }    
  
 /*
@@ -487,18 +511,20 @@ class ModuleModel {
     }
 
 //TODO: better this way or delete old entries and insert new? (all following updateMethods)
-    static function updateFieldsOfModule($id, $moduleID, $field){
+    static function updateFieldsOfModule($id, $moduleID, $field, $course){
         $db = DatabaseService::getDatabaseObject();
 
         if(!empty($field)) {
-
+            $id = mysqli_real_escape_string($db, $id);
+            $moduleID = mysqli_real_escape_string($db, $moduleID);
             $field = mysqli_real_escape_string($db, $field);
+            $course = mysqli_real_escape_string($db, $course);
 
             if(empty($moduleID)) {
                 return false;
             }
 
-            $insert = "UPDATE module_field_mm SET moduleID = $moduleID, fieldID = $field WHERE ID = $id)";
+            $insert = "UPDATE module_field_mm SET moduleID = $moduleID, fieldID = $field, courseID = $course WHERE ID = $id)";
             $result = mysqli_query($db, $insert);
             return $result;
         }
@@ -512,9 +538,13 @@ class ModuleModel {
             if(empty($moduleID)) {
                 return false;
             }
-                
+
+            $id = mysqli_real_escape_string($db, $id);
+            $moduleID = mysqli_real_escape_string($db, $moduleID);
+
             $categoryID = mysqli_real_escape_string($db, $category[0]);
             $workload = mysqli_real_escape_string($db, $category[1]);
+            $theoryFlag = mysqli_real_escape_string($db, $category[2]);
 
             if(empty($categoryID)) {
                 return false;
@@ -523,8 +553,12 @@ class ModuleModel {
             if(empty($workload)) {
                 $workload = "NULL";
             }
+
+            if(empty($theoryFlag) && $theoryFlag !== "0") {
+                $theoryFlag = "NULL";
+            }
                 
-            $insert = "UPDATE module_category_mm SET moduleID = $moduleID, categoryID = $categoryID, workload = $workload WHERE ID = $id";
+            $insert = "UPDATE module_category_mm SET moduleID = $moduleID, categoryID = $categoryID, workload = $workload, theoryFlag = $theoryFlag WHERE ID = $id";
                 
             $result = mysqli_query($db, $insert);
         }
@@ -534,8 +568,12 @@ class ModuleModel {
     static function updateLiteratureOfModule($id, $moduleID, $literatureID, $basicLiteratureFlag) {
         $db = DatabaseService::getDatabaseObject();
 
-        if(!empty($literature)) {
+        if(!empty($literatureID)) {
+            $id = mysqli_real_escape_string($db, $id);
+            $moduleID = mysqli_real_escape_string($db, $moduleID);
             $literatureID = mysqli_real_escape_string($db, $literatureID);
+            $basicLiteratureFlag = mysqli_real_escape_string($db, $basicLiteratureFlag);
+
                  
             $insert = "UPDATE module_literature_mm SET moduleID = $moduleID, literatureID = $literatureID, 
                                                        basicLiteratureFlag = $basicLiteratureFlag
@@ -545,6 +583,7 @@ class ModuleModel {
         }
         return $result;
     }
+
     static function getAllModulesOfCourse($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -558,6 +597,7 @@ class ModuleModel {
         
         return $result;
     }
+
     static function getAllModulesOfField($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
