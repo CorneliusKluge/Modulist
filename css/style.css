@@ -203,7 +203,7 @@ h4 {
 
 .form_select {
     height: 26px;
-    width: calc(100% - 15px); /* substract the margin width (so that columns remain at 400px)  */
+    width: calc(100% - 15px); /* subtract the margin width (so that columns remain at 400px)  */
     margin-left: 15px; 
 }
 
@@ -212,10 +212,10 @@ h4 {
 }
 
 .form_submit {
+    width: 200px;
     align-self: flex-end;
     margin: 25px;
-    margin-left: calc(100% - 111px); /* substract the margins + half of buttons width */
-    /* margin-left: 90%; */
+    margin-left: calc(90% - 100px); /* subtract the margins + half of buttons width */
 }
 
 .form_item--invisible {
@@ -392,4 +392,14 @@ td {
     padding: 0 25px;
     background-color: #808080;
     color: white;
+}
+
+.export_form_container {
+    width: auto;
+    display: flex;
+    margin-bottom: 15px;
+    padding: 0 25px;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    background-color: #fff;
 }
