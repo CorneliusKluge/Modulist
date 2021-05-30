@@ -88,7 +88,7 @@ if($result->num_rows) {
                 </tr>
                 <tr>
                     <td>Präsenzveranstaltungen</td>
-                    <td>// ???</td>
+                    <td><?php echo $module["presenceCreditHours"];?></td>
                 </tr>
                 <?php
                     $workload = 0;
@@ -97,11 +97,11 @@ if($result->num_rows) {
 
                     if($resultPresence->num_rows) {
                         foreach($resultPresence as $category) {
-                            $workload += $category["creditHours"];
+                            $workload += $category["workload"];
                         ?>
                         <tr>
                             <td><?php echo $category["name"];?></td>
-                            <td><?php echo $category["creditHours"];?></td>
+                            <td><?php echo $category["workload"];?></td>
                         </tr>
                         <?php
                         }
@@ -109,18 +109,18 @@ if($result->num_rows) {
                 ?>
                 <tr>
                     <td>Eigenverantwortliches Lernen</td>
-                    <td>// ???</td>
+                    <td><?php echo $module["selfLearningCreditHours"];?></td>
                 </tr>
                 <?php
-                    $resultNonPresence = CategoryModel::getNonPresenceCategoriesByModuleID($module["ID"]);
+                    $resultNonPresence = CategoryModel::getTheoryCategoriesByModuleID($module["ID"]);
 
                     if($resultNonPresence->num_rows) {
                         foreach($resultNonPresence as $category) {
-                            $workload += $category["creditHours"];
+                            $workload += $category["workload"];
                         ?>
                         <tr>
                             <td><?php echo $category["name"];?></td>
-                            <td><?php echo $category["creditHours"];?></td>
+                            <td><?php echo $category["workload"];?></td>
                         </tr>
                         <?php
                         }

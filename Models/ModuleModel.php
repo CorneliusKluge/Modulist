@@ -552,10 +552,10 @@ class ModuleModel {
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    JOIN fields AS t3 ON t2.fieldID = t3.id
-                    WHERE t3.courseID = $courseID";
+                    LEFT JOIN fields AS t3 ON t2.fieldID = t3.id
+                    WHERE t3.courseID = $courseID OR t2.courseID = $courseID";
         $result = mysqli_query($db, $query);
-
+        
         return $result;
     }
     static function getAllModulesOfField($fieldID) {
@@ -569,5 +569,56 @@ class ModuleModel {
         $result = mysqli_query($db, $query);
 
         return $result;
-    }    
+    }
+    static function getLVSByModuleIDAndSemster($moduleID, $semester) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $semester = mysqli_real_escape_string($db, $semester);
+
+        $query = "SELECT SUM(workload) AS LVS FROM module_category_mm WHERE moduleID = $moduleID AND semester = $semester AND theoryFlag IS NULL";
+        $result = mysqli_query($db, $query);
+
+        if($result->num_rows) {
+            $result = mysqli_fetch_object($result);
+            return $result->LVS;
+        }
+        else {
+            return "";
+        }
+    }
+    static function getEVLTheoryByModuleIDAndSemester($moduleID, $semester) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $semester = mysqli_real_escape_string($db, $semester);
+
+        $query = "SELECT SUM(workload) AS LVS FROM module_category_mm WHERE moduleID = $moduleID AND semester = $semester AND theoryFlag = 1";
+        $result = mysqli_query($db, $query);
+
+        if($result->num_rows) {
+            $result = mysqli_fetch_object($result);
+            return $result->LVS;
+        }
+        else {
+            return "";
+        }
+    }
+    static function getEVLPractiseByModuleIDAndSemester($moduleID, $semester) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $semester = mysqli_real_escape_string($db, $semester);
+
+        $query = "SELECT SUM(workload) AS LVS FROM module_category_mm WHERE moduleID = $moduleID AND semester = $semester AND theoryFlag = 0";
+        $result = mysqli_query($db, $query);
+
+        if($result->num_rows) {
+            $result = mysqli_fetch_object($result);
+            return $result->LVS;
+        }
+        else {
+            return "";
+        }
+    }
 }

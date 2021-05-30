@@ -1,9 +1,19 @@
+<?php
 
+use Modulist\Models\FieldModel;
+
+$fieldString = "";
+foreach($resultFields as $field) {
+    $fieldString .= $field["name"] . ", ";
+}
+$fieldString = substr($fieldString, 0, -2);
+$fieldString = substr_replace($fieldString, " und", strrpos($fieldString, ","), 1);
+?>
 <div class="heading_container">
     <h1>Modulhandbuch für den Studiengang</h1>
-    Informationstechnlogie
+    <?php echo $courseName;?>
     <h1>mit den Studienrichtungen</h1>
-    Informationstechnik und Medieninformatik
+    <?php echo $fieldString; ?>
     <br>
     <br>
     <br>
