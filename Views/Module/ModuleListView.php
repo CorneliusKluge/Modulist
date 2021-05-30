@@ -3,7 +3,7 @@
         <h2>Liste der Module</h2>
 <!--TODO: place it right (stylesheet.css)-->
         <form method="POST">
-            <input class="table_add_button button" type="submit" id="module_list_add" name="module_list_add" value=""/>
+            <input class="table_add_button button" type="submit" id="module_add_button" name="module_add_button" value=""/>
         </form>
     </div>
     <?php

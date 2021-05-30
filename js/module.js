@@ -283,3 +283,18 @@ function addDeepeningLiteratureEntry(addFlag) {
 
     div.appendChild(deepeningLiteratureInput);
 }
+
+function check_status(obj) {
+    var presenceFlag = obj.options[obj.selectedIndex].getAttribute('data-presenceFlag');
+    var id = obj.getAttribute('data-id');
+    var div = document.getElementById("module_add_TheoryFlag_" + id);
+
+    if(div) {
+        if(presenceFlag == 1) {
+            div.classList.add("form_item--invisible");
+        }
+        else {
+            div.classList.remove("form_item--invisible");
+        }
+    }
+}
