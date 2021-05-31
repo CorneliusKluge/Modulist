@@ -34,7 +34,7 @@
    
     <div class="form_item" id="module_change_field_div">
         <label class="form_label" for="module_change_field_0">Studienrichtung:</label>
-        <button type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)">Studienrichtung hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)"></button>
         <?php if($oldFields->num_rows) {
             $i = 0;
             foreach($oldFields as $oldField) {
@@ -157,177 +157,183 @@
     <h3>Lehr- und Lernformen/Workload</h3>
 
    
-    <div id="module_change_categories_div">   
-        <button type="button" name="module_change_categoryEntry" onclick="addCategoryEntry(false)">Kategorie hinzufügen</button>
-        <?php if($oldCategories->num_rows) {
-            $i = 0;
-            foreach($oldCategories as $oldCategory) {
-                $inputCategoryID = "module_change_category_".$i;
-                $inputWorkloadID = "module_change_categoryWorkload_".$i;
-                $inputTheoryFlagID_t = "module_change_TheoryFlag_theory_".$i;
-                $inputTheoryFlagID_p = "module_change_TheoryFlag_practical_".$i;
-                $inputTheoryFlagName = "module_change_TheoryFlag_".$i;
-            ?>
-            <div class="form_item">
-                <!--how to implement the workload of Classroom courses -->
-                <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:</label>
-                <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>">
-                    <?php
-                        if($resultCategories->num_rows) {
-                            foreach($resultCategories as $category) {
-                            ?>
-                                <option value="<?php echo $category["ID"];?>" <?php if($category["ID"] == $oldCategory["categoryID"]) {?> selected <?php }?>><?php echo $category["name"];?></option>
-                            <?php
+    <div class="form_group_container" id="module_change_categories_div">   
+        <button class="form_add_button button" type="button" name="module_change_categoryEntry" onclick="addCategoryEntry(false)"></button>
+        
+        <div class="form_group"> 
+            <?php if($oldCategories->num_rows) {
+                $i = 0;
+                foreach($oldCategories as $oldCategory) {
+                    $inputCategoryID = "module_change_category_".$i;
+                    $inputWorkloadID = "module_change_categoryWorkload_".$i;
+                    $inputTheoryFlagID_t = "module_change_TheoryFlag_theory_".$i;
+                    $inputTheoryFlagID_p = "module_change_TheoryFlag_practical_".$i;
+                    $inputTheoryFlagName = "module_change_TheoryFlag_".$i;
+                ?>
+                <div class="form_item">
+                    <!--how to implement the workload of Classroom courses -->
+                    <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:</label>
+                    <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>">
+                        <?php
+                            if($resultCategories->num_rows) {
+                                foreach($resultCategories as $category) {
+                                ?>
+                                    <option value="<?php echo $category["ID"];?>" <?php if($category["ID"] == $oldCategory["categoryID"]) {?> selected <?php }?>><?php echo $category["name"];?></option>
+                                <?php
+                                }
                             }
-                        }
-                    ?>
-                </select>
-            </div>
+                        ?>
+                    </select>
+                </div>
 
-            <div class="form_item">
-                <label class="form_label" for="<?php echo $inputWorkloadID;?>">Workload (h):</label>
-                <input class="form_input" type="number" id="<?php echo $inputWorkloadID;?>" name="<?php echo $inputWorkloadID;?>" value="<?php echo $oldCategory["workload"];?>"/>
-            </div>
-            <div class="form_item">
-                <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_t;?>" name="<?php echo $inputTheoryFlagName;?>" value="1" <?php if($oldCategory["theoryFlag"] === 1) {?> checked="checked" <?php }?>/>
-                <label for="<?php echo $inputTheoryFlagID_t;?>">EVL Theorie</label>
-                <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_p;?>" name="<?php echo $inputTheoryFlagName;?>" value="0" <?php if($oldCategory["theoryFlag"] === 0) {?> checked="checked" <?php }?>/>
-                <label for="<?php echo $inputTheoryFlagID_p;?>">EVL Praxis</label>
-            </div>
-            <?php
-            $i++;
+                <div class="form_item">
+                    <label class="form_label" for="<?php echo $inputWorkloadID;?>">Workload (h):</label>
+                    <input class="form_input" type="number" id="<?php echo $inputWorkloadID;?>" name="<?php echo $inputWorkloadID;?>" value="<?php echo $oldCategory["workload"];?>"/>
+                </div>
+                <div class="form_item">
+                    <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_t;?>" name="<?php echo $inputTheoryFlagName;?>" value="1" <?php if($oldCategory["theoryFlag"] === 1) {?> checked="checked" <?php }?>/>
+                    <label for="<?php echo $inputTheoryFlagID_t;?>">EVL Theorie</label>
+                    <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_p;?>" name="<?php echo $inputTheoryFlagName;?>" value="0" <?php if($oldCategory["theoryFlag"] === 0) {?> checked="checked" <?php }?>/>
+                    <label for="<?php echo $inputTheoryFlagID_p;?>">EVL Praxis</label>
+                </div>
+                <?php
+                $i++;
+                }
             }
-        }
-        else {
-            ?>
-            <div class="form_item">
-                <!--how to implement the workload of Classroom courses -->
-                <label class="form_label" for="module_change_category_0">Kategorie:</label>
-                <select class="form_select" id="module_change_category_0" name="module_change_category_0">
-                    <?php
-                        if($resultCategories->num_rows) {
-                            foreach($resultCategories as $category) {
-                            ?>
-                                <option value="<?php echo $category["ID"];?>"><?php echo $category["name"];?></option>
-                            <?php
+            else {
+                ?>
+                <div class="form_item">
+                    <!--how to implement the workload of Classroom courses -->
+                    <label class="form_label" for="module_change_category_0">Kategorie:</label>
+                    <select class="form_select" id="module_change_category_0" name="module_change_category_0">
+                        <?php
+                            if($resultCategories->num_rows) {
+                                foreach($resultCategories as $category) {
+                                ?>
+                                    <option value="<?php echo $category["ID"];?>"><?php echo $category["name"];?></option>
+                                <?php
+                                }
                             }
-                        }
-                    ?>
-                </select>
-            </div>
+                        ?>
+                    </select>
+                </div>
 
-            <div class="form_item">
-                <label class="form_label" for="module_change_categoryWorkload_0">Workload (h):</label>
-                <input class="form_input" type="number" id="module_change_categoryWorkload_0" name="module_change_categoryWorkload_0"/>
-            </div>
-            <div class="form_item">
-                <input class="form_radio" type="radio" id="module_change_TheoryFlag_theory_0" name="module_change_TheoryFlag_0" value="1"/>
-                <label for="module_change_TheoryFlag_theory_0">EVL Theorie</label>
-                <input class="form_radio" type="radio" id="module_change_TheoryFlag_practical_0" name="module_change_TheoryFlag_0" value="0"/>
-                <label for="module_change_TheoryFlag_practical_0">EVL Praxis</label>
-            </div>
-            <?php
-        }
-        ?>
+                <div class="form_item">
+                    <label class="form_label" for="module_change_categoryWorkload_0">Workload (h):</label>
+                    <input class="form_input" type="number" id="module_change_categoryWorkload_0" name="module_change_categoryWorkload_0"/>
+                </div>
+                <div class="form_item">
+                    <label class="form_label">Einteilung EVL Theorie/Praxis</label>
+                    <input class="form_radio" type="radio" id="module_change_TheoryFlag_theory_0" name="module_change_TheoryFlag_0" value="1"/>
+                    <label for="module_change_TheoryFlag_theory_0">EVL Theorie</label>
+                    <input class="form_radio" type="radio" id="module_change_TheoryFlag_practical_0" name="module_change_TheoryFlag_0" value="0"/>
+                    <label for="module_change_TheoryFlag_practical_0">EVL Praxis</label>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
-    <div id="module_change_exams_div">
-        <button type="button" name="module_change_examEntry" onclick="addExamEntry(false)">Prüfungsleistung hinzufügen</button>
-        <?php if($oldExams->num_rows) {
-            $i = 0;
-            foreach($oldExams as $oldExam) {
-                $inputExamType = "module_change_examType_".$i;
-                $inputDuration = "module_change_examDuration_".$i;
-                $inputCircumference = "module_change_examCircumference_".$i;
-                $inputPeriod = "module_change_examPeriod_".$i;
-                $inputWeightingID = "module_change_examWeighting_".$i;
+    <div class="form_group_container" id="module_change_exams_div">
+        <button class="form_add_button button" type="button" name="module_change_examEntry" onclick="addExamEntry(false)"></button>
+        
+        <div class="form_group"> 
+            <?php if($oldExams->num_rows) {
+                $i = 0;
+                foreach($oldExams as $oldExam) {
+                    $inputExamType = "module_change_examType_".$i;
+                    $inputDuration = "module_change_examDuration_".$i;
+                    $inputCircumference = "module_change_examCircumference_".$i;
+                    $inputPeriod = "module_change_examPeriod_".$i;
+                    $inputWeightingID = "module_change_examWeighting_".$i;
+                    ?>
+                    <div class="form_item" id="module_change_examType_div">
+                        <label class="form_label" for="<?php echo $inputExamType;?>">Art der PL:</label>
+                        <select class="form_select" id="<?php echo $inputExamType;?>" name="<?php echo $inputExamType;?>">
+                            <option value="1" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 1) {?> selected <?php }}?>>Klausurarbeit</option>
+                            <option value="2" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 2) {?> selected <?php }}?>>Mündliche Prüfung</option>
+                            <option value="3" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 3) {?> selected <?php }}?>>Mündliches Fachgespräch</option>
+                            <option value="4" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 4) {?> selected <?php }}?>>Präsentation</option>
+                            <option value="5" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 5) {?> selected <?php }}?>>Projektarbeit</option>
+                            <option value="6" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 6) {?> selected <?php }}?>>Präsentation</option>
+                            <option value="7" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 7) {?> selected <?php }}?>>Seminararbeit</option>
+                            <option value="8" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 8) {?> selected <?php }}?>>Programmentwurf</option>
+                            <option value="9" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 9) {?> selected <?php }}?>>Prüfung am Computer</option>
+                            <option value="10" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 10) {?> selected <?php }}?>>Praktische Prüfung</option>
+                            <option value="11" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 11) {?> selected <?php }}?>>Bachelorarbeit</option>
+                            <option value="12" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 12) {?> selected <?php }}?>>Bachelorverteidigung</option>
+                        </select>
+                    </div>
+
+                    <div class="form_item" id="module_change_examDuration_div">
+                        <label class="form_label" for="<?php echo $inputDuration;?>">Dauer (min):</label>
+                        <input class="form_input" type="string" id="<?php echo $inputDuration;?>" name="<?php echo $inputDuration;?>" value="<?php if(!empty($oldExam["examDuration"])) {echo $oldExam["examDuration"];}?>"/>
+                    </div>
+
+                    <div class="form_item" id="module_change_examCircumference_div">
+                        <label class="form_label" for="<?php echo $inputCircumference;?>">Umfang (Seiten):</label>
+                        <input class="form_input" type="string" id="<?php echo $inputCircumference;?>" name="<?php echo $inputCircumference;?>" value="<?php if(!empty($oldExam["examCircumference"])) {echo $oldExam["examCircumference"];}?>"/>
+                    </div>
+
+                    <div class="form_item" id="module_change_examPeriod_div">
+                        <label class="form_label" for="<?php echo $inputPeriod;?>">Prüfungszeitraum:</label>
+                        <input class="form_input" type="string" id="<?php echo $inputPeriod;?>" name="<?php echo $inputPeriod;?>"  value="<?php if(!empty($oldExam["examPeriod"])) {echo $oldExam["examPeriod"];}?>"/>
+                    </div>
+
+                    <div class="form_item" id="module_change_examWeighting_div">
+                        <label class="form_label" for="<?php echo $inputWeightingID;?>">Gewichtung:</label>
+                        <input class="form_input" type="string" id="<?php echo $inputWeightingID;?>" name="<?php echo $inputWeightingID;?>"  value="<?php if(!empty($oldExam["examWeighting"])) {echo $oldExam["examWeighting"];}?>"/>
+                    </div>
+                    <?php
+                    $i++;
+                }
+            }
+            else {
                 ?>
                 <div class="form_item" id="module_change_examType_div">
-                    <label class="form_label" for="<?php echo $inputExamType;?>">Art der PL:</label>
-                    <select class="form_select" id="<?php echo $inputExamType;?>" name="<?php echo $inputExamType;?>">
-                        <option value="1" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 1) {?> selected <?php }}?>>Klausurarbeit</option>
-                        <option value="2" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 2) {?> selected <?php }}?>>Mündliche Prüfung</option>
-                        <option value="3" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 3) {?> selected <?php }}?>>Mündliches Fachgespräch</option>
-                        <option value="4" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 4) {?> selected <?php }}?>>Präsentation</option>
-                        <option value="5" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 5) {?> selected <?php }}?>>Projektarbeit</option>
-                        <option value="6" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 6) {?> selected <?php }}?>>Präsentation</option>
-                        <option value="7" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 7) {?> selected <?php }}?>>Seminararbeit</option>
-                        <option value="8" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 8) {?> selected <?php }}?>>Programmentwurf</option>
-                        <option value="9" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 9) {?> selected <?php }}?>>Prüfung am Computer</option>
-                        <option value="10" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 10) {?> selected <?php }}?>>Praktische Prüfung</option>
-                        <option value="11" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 11) {?> selected <?php }}?>>Bachelorarbeit</option>
-                        <option value="12" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 12) {?> selected <?php }}?>>Bachelorverteidigung</option>
+                    <label class="form_label" for="module_change_examType_0">Art der PL:</label>
+                    <select class="form_select" id="module_change_examType_0" name="module_change_examType_0">
+                        <option value="1">Klausurarbeit</option>
+                        <option value="2">Mündliche Prüfung</option>
+                        <option value="3">Mündliches Fachgespräch</option>
+                        <option value="4">Präsentation</option>
+                        <option value="5">Projektarbeit</option>
+                        <option value="6">Präsentation</option>
+                        <option value="7">Seminararbeit</option>
+                        <option value="8">Programmentwurf</option>
+                        <option value="9">Prüfung am Computer</option>
+                        <option value="10">Praktische Prüfung</option>
+                        <option value="11">Bachelorarbeit</option>
+                        <option value="12">Bachelorverteidigung</option>
                     </select>
                 </div>
 
                 <div class="form_item" id="module_change_examDuration_div">
-                    <label class="form_label" for="<?php echo $inputDuration;?>">Dauer (min):</label>
-                    <input class="form_input" type="string" id="<?php echo $inputDuration;?>" name="<?php echo $inputDuration;?>" value="<?php if(!empty($oldExam["examDuration"])) {echo $oldExam["examDuration"];}?>"/>
+                    <label class="form_label" for="module_change_examDuration_0">Dauer (min):</label>
+                    <input class="form_input" type="string" id="module_change_examDuration_0" name="module_change_examDuration_0"/>
                 </div>
 
                 <div class="form_item" id="module_change_examCircumference_div">
-                    <label class="form_label" for="<?php echo $inputCircumference;?>">Umfang (Seiten):</label>
-                    <input class="form_input" type="string" id="<?php echo $inputCircumference;?>" name="<?php echo $inputCircumference;?>" value="<?php if(!empty($oldExam["examCircumference"])) {echo $oldExam["examCircumference"];}?>"/>
+                    <label class="form_label" for="module_change_examCircumference_0">Umfang (Seiten):</label>
+                    <input class="form_input" type="string" id="module_change_examCircumference_0" name="module_change_examCircumference_0"/>
                 </div>
 
                 <div class="form_item" id="module_change_examPeriod_div">
-                    <label class="form_label" for="<?php echo $inputPeriod;?>">Prüfungszeitraum:</label>
-                    <input class="form_input" type="string" id="<?php echo $inputPeriod;?>" name="<?php echo $inputPeriod;?>"  value="<?php if(!empty($oldExam["examPeriod"])) {echo $oldExam["examPeriod"];}?>"/>
+                    <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:</label>
+                    <input class="form_input" type="string" id="module_change_examPeriod_0" name="module_change_examPeriod_0"/>
                 </div>
 
                 <div class="form_item" id="module_change_examWeighting_div">
-                    <label class="form_label" for="<?php echo $inputWeightingID;?>">Gewichtung:</label>
-                    <input class="form_input" type="string" id="<?php echo $inputWeightingID;?>" name="<?php echo $inputWeightingID;?>"  value="<?php if(!empty($oldExam["examWeighting"])) {echo $oldExam["examWeighting"];}?>"/>
+                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:</label>
+                    <input class="form_input" type="string" id="module_change_examWeighting" name="module_change_examWeighting_0"/>
                 </div>
                 <?php
-                $i++;
             }
-        }
-        else {
             ?>
-            <div class="form_item" id="module_change_examType_div">
-                <label class="form_label" for="module_change_examType_0">Art der PL:</label>
-                <select class="form_select" id="module_change_examType_0" name="module_change_examType_0">
-                    <option value="1">Klausurarbeit</option>
-                    <option value="2">Mündliche Prüfung</option>
-                    <option value="3">Mündliches Fachgespräch</option>
-                    <option value="4">Präsentation</option>
-                    <option value="5">Projektarbeit</option>
-                    <option value="6">Präsentation</option>
-                    <option value="7">Seminararbeit</option>
-                    <option value="8">Programmentwurf</option>
-                    <option value="9">Prüfung am Computer</option>
-                    <option value="10">Praktische Prüfung</option>
-                    <option value="11">Bachelorarbeit</option>
-                    <option value="12">Bachelorverteidigung</option>
-                </select>
-            </div>
-
-            <div class="form_item" id="module_change_examDuration_div">
-                <label class="form_label" for="module_change_examDuration_0">Dauer (min):</label>
-                <input class="form_input" type="string" id="module_change_examDuration_0" name="module_change_examDuration_0"/>
-            </div>
-
-            <div class="form_item" id="module_change_examCircumference_div">
-                <label class="form_label" for="module_change_examCircumference_0">Umfang (Seiten):</label>
-                <input class="form_input" type="string" id="module_change_examCircumference_0" name="module_change_examCircumference_0"/>
-            </div>
-
-            <div class="form_item" id="module_change_examPeriod_div">
-                <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:</label>
-                <input class="form_input" type="string" id="module_change_examPeriod_0" name="module_change_examPeriod_0"/>
-            </div>
-
-            <div class="form_item" id="module_change_examWeighting_div">
-                <label class="form_label" for="module_change_examWeighting_0">Gewichtung:</label>
-                <input class="form_input" type="string" id="module_change_examWeighting" name="module_change_examWeighting_0"/>
-            </div>
-            <?php
-        }
-        ?>
+        </div>
     </div>
-
     <div class="form_item">
         <label class="form_label" for="module_change_responsibleName">Modulverantwortlicher (Name):</label>
         <input class="form_input" type="string" id="module_change_responsibleName" name="module_change_responsibleName" value="<?php echo $result->responsibleName;?>"/>
@@ -362,7 +368,7 @@
 
     <div class="form_item" id="module_change_basicLiterature_div">
         <label class="form_label" for="module_change_basicLiterature">Basisliteratur:</label>
-        <button type="button" name="module_change_basicLiteratureEntry" onclick="addBasicLiteratureEntry(false)">Basisliteratur hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_change_basicLiteratureEntry" onclick="addBasicLiteratureEntry(false)"></button>
         <?php if($oldBasicLiterature->num_rows) {
             $i = 0;
             foreach($oldBasicLiterature as $oldBasicLit) {
@@ -423,7 +429,7 @@
 
     <div class="form_item" id="module_change_deepeningLiterature_div">
         <label class="form_label" for="module_change_deepeningLiterature">Vertiefende Literatur:</label>
-        <button type="button" name="module_change_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(false)">Vertiefende Literatur hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_change_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(false)"></button>
         <?php if($oldDeepeningLiterature->num_rows) {
             $i = 0;
             foreach($oldDeepeningLiterature as $oldDeepeningLit) {
@@ -476,7 +482,5 @@
         <input  class="form_editor" type="string" id="module_change_deepeningLiteraturePostNote" name="module_change_deepeningLiteraturePostNote" value="<?php echo $result->deepeningLiteraturePostNote;?>"/>
     </div>
 
-    <hr>
-
-    <button type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
+    <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

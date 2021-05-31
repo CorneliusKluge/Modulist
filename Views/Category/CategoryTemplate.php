@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Modulkategorienverwaltung</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="/Modulist/favicon.ico">
     </head>
@@ -9,12 +10,11 @@
             <a class="img-logo"></a>
             <nav class="navbar">
                 <ul class="navbar_container">
-                        <li class="navbar_entry"><a href="./module">Module</a></li>
-                        <li class="navbar_entry"><a href="./category">Modulkategorien</a></li>
-                        <li class="navbar_entry"><a href="./literature">Literatur</a></li>
-                        <li class="navbar_entry"><a href="./studymanagement">Studienverwaltung</a></li>
-                        <li class="navbar_entry"><a href="./export">Export</a></li>
-                    <!-- <li class="navbar_entry"><a  href="index.php?subcontroller=options">Optionen</a></li> -->
+                    <li class="navbar_entry"><a href="./module">Module</a></li>
+                    <li class="navbar_entry"><a href="./category">Modulkategorien</a></li>
+                    <li class="navbar_entry"><a href="./literature">Literatur</a></li>
+                    <li class="navbar_entry"><a href="./studymanagement">Studienverwaltung</a></li>
+                    <li class="navbar_entry"><a href="./export">Export</a></li>
                 </ul>
             </nav>
         </header>
@@ -26,5 +26,6 @@
             %3$s
 
             %4$s
+        <div id="overlay" class="overlay overlay--invisible"></div>
     </body>
 </html>

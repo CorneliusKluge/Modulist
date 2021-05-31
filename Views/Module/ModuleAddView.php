@@ -1,6 +1,3 @@
-
-%s
-
 <form method="POST" class="form_container">
     <h2>Modul hinzufügen</h2>
 
@@ -37,7 +34,7 @@
 
     <div class="form_item" id="module_add_field_div">
         <label class="form_label" for="module_add_field_0">Studienrichtung:</label>
-        <button type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)">Studienrichtung hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)"></button>
         <select class="form_select" id="module_add_field_0" name="module_add_field_0">
             <?php
                 if($resultField->num_rows) {
@@ -137,82 +134,86 @@
    
     <h3>Lehr- und Lernformen/Workload</h3>
 
-    <div id="module_add_categories_div">
-        <button type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)">Kategorie hinzufügen</button>
-        <div class="form_item">
-            <!--how to implement the workload of Classroom courses -->
-            <label class="form_label" for="module_add_category_0">Kategorie:</label>
-            <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this);">
-                <?php
-                    if($resultCategories->num_rows) {
-                        foreach($resultCategories as $category) {
-                        ?>
-                            <option value="<?php echo $category["ID"];?>" data-presenceFlag="<?php echo $category["presenceFlag"];?>"><?php echo $category["name"];?></option>
-                        <?php
+    <div class="form_group_container" id="module_add_categories_div">
+        <button class="form_add_button button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
+        <div class="form_group"> 
+            <div class="form_item">
+                <!--how to implement the workload of Classroom courses -->
+                <label class="form_label" for="module_add_category_0">Kategorie:</label>
+                <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this);">
+                    <?php
+                        if($resultCategories->num_rows) {
+                            foreach($resultCategories as $category) {
+                            ?>
+                                <option value="<?php echo $category["ID"];?>" data-presenceFlag="<?php echo $category["presenceFlag"];?>"><?php echo $category["name"];?></option>
+                            <?php
+                            }
                         }
-                    }
-                ?>
-            </select>
-        </div>
-
-        <div class="form_item">
-            <label class="form_label" for="module_add_categoryWorkload_0">Workload (h):</label>
-            <input class="form_input" type="number" id="module_add_categoryWorkload_0" name="module_add_categoryWorkload_0"/>
-        </div>
-
-        <div class="form_item" id="module_add_TheoryFlag_0">
-            <label class="form_label">Einteilung EVL Theorie/Praxis</label>
-            <div class="form_radio_entry">
-                <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_theory_0" name="module_add_TheoryFlag_0" value="1"/>
-                <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Theorie</label>
+                    ?>
+                </select>
             </div>
-            <div class="form_radio_entry">
-                <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_practical_0" name="module_add_TheoryFlag_0" value="0"/>
-                <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Praxis</label>
+
+            <div class="form_item">
+                <label class="form_label" for="module_add_categoryWorkload_0">Workload (h):</label>
+                <input class="form_input" type="number" id="module_add_categoryWorkload_0" name="module_add_categoryWorkload_0"/>
+            </div>
+
+            <div class="form_item" id="module_add_TheoryFlag_0">
+                <label class="form_label">Einteilung EVL Theorie/Praxis</label>
+                <div class="form_radio_entry">
+                    <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_theory_0" name="module_add_TheoryFlag_0" value="1"/>
+                    <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Theorie</label>
+                </div>
+                <div class="form_radio_entry">
+                    <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_practical_0" name="module_add_TheoryFlag_0" value="0"/>
+                    <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Praxis</label>
+                </div>
             </div>
         </div>
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
-    <div id="module_add_exams_div">
-        <button type="button" name="module_add_examEntry" onclick="addExamEntry(true)">Prüfungsleistung hinzufügen</button>
+    <div class="form_group_container" id="module_add_exams_div">
+        <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
 
-        <div class="form_item" id="module_add_examType_div">
-            <label class="form_label" for="module_add_examType_0">Art der PL:</label>
-            <select class="form_select" id="module_add_examType_0" name="module_add_examType_0">
-                <option value="1">Klausurarbeit</option>
-                <option value="2">Mündliche Prüfungen</option>
-                <option value="3">Mündliches Fachgespräch</option>
-                <option value="4">Präsentation</option>
-                <option value="5">Projektarbeit</option>
-                <option value="6">Präsentation</option>
-                <option value="7">Seminararbeit</option>
-                <option value="8">Programmentwurf</option>
-                <option value="9">Prüfung am Computer</option>
-                <option value="10">Praktische Prüfung</option>
-                <option value="11">Bachelorarbeit</option>
-                <option value="12">Bachelorverteidigung</option>
-            </select>
-        </div>
+        <div class="form_group"> 
+            <div class="form_item" id="module_add_examType_div">
+                <label class="form_label" for="module_add_examType_0">Art der PL:</label>
+                <select class="form_select" id="module_add_examType_0" name="module_add_examType_0">
+                    <option value="1">Klausurarbeit</option>
+                    <option value="2">Mündliche Prüfungen</option>
+                    <option value="3">Mündliches Fachgespräch</option>
+                    <option value="4">Präsentation</option>
+                    <option value="5">Projektarbeit</option>
+                    <option value="6">Präsentation</option>
+                    <option value="7">Seminararbeit</option>
+                    <option value="8">Programmentwurf</option>
+                    <option value="9">Prüfung am Computer</option>
+                    <option value="10">Praktische Prüfung</option>
+                    <option value="11">Bachelorarbeit</option>
+                    <option value="12">Bachelorverteidigung</option>
+                </select>
+            </div>
 
-        <div class="form_item" id="module_add_examDuration_div">
-            <label class="form_label" for="module_add_examDuration_0">Dauer (min):</label>
-            <input class="form_input" type="string" id="module_add_examDuration_0" name="module_add_examDuration_0"/>
-        </div>
+            <div class="form_item" id="module_add_examDuration_div">
+                <label class="form_label" for="module_add_examDuration_0">Dauer (min):</label>
+                <input class="form_input" type="string" id="module_add_examDuration_0" name="module_add_examDuration_0"/>
+            </div>
 
-        <div class="form_item" id="module_add_examCircumference_div">
-            <label class="form_label" for="module_add_examCircumference_0">Umfang (Seiten):</label>
-            <input class="form_input" type="string" id="module_add_examCircumference_0" name="module_add_examCircumference_0"/>
-        </div>
+            <div class="form_item" id="module_add_examCircumference_div">
+                <label class="form_label" for="module_add_examCircumference_0">Umfang (Seiten):</label>
+                <input class="form_input" type="string" id="module_add_examCircumference_0" name="module_add_examCircumference_0"/>
+            </div>
 
-        <div class="form_item" id="module_add_examPeriod_div">
-            <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:</label>
-            <input class="form_input" type="string" id="module_add_examPeriod_0" name="module_add_examPeriod_0"/>
-        </div>
+            <div class="form_item" id="module_add_examPeriod_div">
+                <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:</label>
+                <input class="form_input" type="string" id="module_add_examPeriod_0" name="module_add_examPeriod_0"/>
+            </div>
 
-        <div class="form_item" id="module_add_examWeighting_div">
-            <label class="form_label" for="module_add_examWeighting_0">Gewichtung:</label>
-            <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
+            <div class="form_item" id="module_add_examWeighting_div">
+                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:</label>
+                <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
+            </div>
         </div>
     </div>    
 
@@ -250,8 +251,8 @@
 <!--TODO: add more-->    
     <div class="form_item" id="module_add_basicLiterature_div">
         <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:</label>
-        <button type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)">Basisliteratur hinzufügen</button>
-        <select  class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
+        <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
+        <select class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
                     foreach($resultLiterature as $literature) {
@@ -282,7 +283,7 @@
 <!--TODO: add more-->    
     <div class="form_item" id="module_add_deepeningLiterature_div">
         <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:</label>
-        <button type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)">Vertiefende Literatur hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>
         <select class="form_select" id="module_add_deepeningLiterature_0" name="module_add_deepeningLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {

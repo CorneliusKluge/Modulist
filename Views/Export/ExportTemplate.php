@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Export</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="/Modulist/favicon.ico">
     </head>

@@ -106,7 +106,9 @@
                         <form method="POST">
                             <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
                         </form>
-                        <input type="checkbox" name="module_lock_checkbox"/>
+                        <form>
+                            <button type="submit" name="module_lock_button" value="<?php echo $module["ID"];?>" class="button table_lock_button"/>
+                        </form>
                     </td>
                 </tr>
             <?php

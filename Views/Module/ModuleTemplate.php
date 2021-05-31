@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Modulverwaltung</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" type="image/x-icon" href="/Modulist/favicon.ico">
         <script src="libs/tinymce/tinymce.min.js"></script>
