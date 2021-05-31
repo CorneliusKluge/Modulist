@@ -3,6 +3,7 @@
     <head>
         <script src="js/studyManagement.js"></script>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/Modulist/favicon.ico">
     </head>
     <body>
         <header>
