@@ -7,7 +7,9 @@
             <form class="message_form" method="POST">
                 <button class="button message_button" type="submit" id="category_delete_submit" name="category_delete_submit" value="<?php echo $result->ID;?>">Ja</button>
             </form>
-            <button class="button message_button">Abbrechen</button>
+            <form method="POST">
+                <button class="button message_button">Abbrechen</button>
+            </form>
         </div>
     </div>
     <?php

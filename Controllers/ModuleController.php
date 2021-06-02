@@ -89,7 +89,7 @@ class ModuleController {
         include("Views/Module/ModuleDeleteView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
     
     function getModuleChangeView($moduleID){

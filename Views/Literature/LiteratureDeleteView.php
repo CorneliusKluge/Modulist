@@ -1,12 +1,16 @@
 <?php
 if($result) {
 ?>
+<div class="message_container">
 Sind Sie sicher, dass Sie die Literaturangaben <?php echo $result->title;?> löschen möchten?
-<div class="messager_button_container">
+<div class="message_button_container">
     <form method="POST">
-        <button type="submit" id="literature_delete_submit" name="literature_delete_submit" value="<?php echo $result->ID;?>">Ja</button>
+        <button class="button message_button" type="submit" id="literature_delete_submit" name="literature_delete_submit" value="<?php echo $result->ID;?>">Ja</button>
     </form>
-    <button class="button_close">Abbrechen</button>
+    <form method="POST">
+        <button class="button message_button">Abbrechen</button>
+    </form>
+</div>
 </div>
 <?php
 }

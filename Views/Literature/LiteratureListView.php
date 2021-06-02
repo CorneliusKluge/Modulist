@@ -34,7 +34,7 @@
                             <button type="submit" name="literature_change_button" value="<?php echo $literature["ID"];?>" class="button table_edit_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="literature_delete_button" value="<?php echo $literature["ID"];?>" class="button table_delete_button"></button>
+                            <button id="literature_delete_button" type="submit" name="literature_delete_button" value="<?php echo $literature["ID"];?>" class="button table_delete_button"></button>
                         </form>
                     </td>
                 </tr>

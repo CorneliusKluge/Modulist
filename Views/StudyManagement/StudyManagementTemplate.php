@@ -45,9 +45,10 @@
                
                 <div id="field_list_container"></div>
             </div>
-            <div id="field_deleteForm_container" class="message_container"></div>
+            <div id="field_deleteForm_container" class="message_container"></div> 
         </div>
 
         <div id="overlay" class="overlay overlay--invisible"></div>
+        <script src="js/deleteView.js"></script>
     </body>
 </html>

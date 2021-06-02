@@ -150,7 +150,7 @@
     </div>
 
     <div class="form_group_container" id="module_add_categories_div">
-        <button type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)">Kategorie hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
 
         <div class="form_group">
             <div class="form_item">
@@ -194,7 +194,7 @@
  
     <h3>Prüfungsleistungen (PL)</h3>
     <div class="form_group_container" id="module_add_exams_div">
-        <button type="button" name="module_add_examEntry" onclick="addExamEntry(true)">Prüfungsleistung hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
         <div class="form_group">
             <div class="form_item" id="module_add_examType_div">
                 <label class="form_label" for="module_add_examType_0">Art der PL:</label>

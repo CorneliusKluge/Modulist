@@ -108,7 +108,7 @@ function submitNewCategory() {
         include("Views/Category/CategoryDeleteView.php");
         $output = ob_get_clean();
         
-        echo $output;
+        return $output;
     }
 
     function submitCategoryDelete($categoryID){

@@ -172,7 +172,7 @@
     </div>
    
     <div class="form_group_container" id="module_change_categories_div">   
-        <button type="button" name="module_change_categoryEntry" onclick="addCategoryEntry(false)">Kategorie hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_change_categoryEntry" onclick="addCategoryEntry(false)"></button>
 
         <?php if($oldCategories->num_rows) {
             $i = 0;
@@ -274,7 +274,7 @@
  
     <h3>Prüfungsleistungen (PL)</h3>
     <div class="form_group_container" id="module_change_exams_div">
-        <button type="button" name="module_change_examEntry" onclick="addExamEntry(false)">Prüfungsleistung hinzufügen</button>
+        <button class="form_add_button button" type="button" name="module_change_examEntry" onclick="addExamEntry(false)"></button>
         <?php if($oldExams->num_rows) {
             $i = 0;
             foreach($oldExams as $oldExam) {

@@ -25,5 +25,7 @@
         %2$s
 
         %3$s
+        <div id="overlay" class="overlay overlay--invisible"></div>
+        <script src="js/deleteView.js"></script>
     </body>
 </html>

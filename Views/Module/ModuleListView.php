@@ -104,10 +104,10 @@
                             <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>" class="button table_edit_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
+                            <button id="module_delete_button" type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
                         </form>
                         <form method="POST">
-                            <button type="submit" name="module_lock_button" value="<?php echo $module["ID"];?>"></button>
+                            <button class="button table_lock_button" type="submit" name="module_lock_button" value="<?php echo $module["ID"];?>"></button>
                         </form>
                     </td>
                 </tr>

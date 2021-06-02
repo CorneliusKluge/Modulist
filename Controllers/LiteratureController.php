@@ -122,7 +122,7 @@ class LiteratureController {
         include("Views/Literature/LiteratureDeleteView.php");
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function submitLiteratureDelete($literatureID){
