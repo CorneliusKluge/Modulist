@@ -90,7 +90,6 @@ class LiteratureModel {
         WHERE ID = $id";
     
         $result = mysqli_query($db, $update);
-        var_dump($result);
 
         return $result;
 
