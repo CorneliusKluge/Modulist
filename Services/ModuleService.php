@@ -39,7 +39,10 @@ class ModuleService {
         $basicLiteraturePostNote,
         $deepeningLiteraturePreNote,
         $deepeningLiterature, 
-        $deepeningLiteraturePostNote
+        $deepeningLiteraturePostNote,
+        $overallGradeWeighting,
+        $presenceCreditHours,
+        $selfLearningCreditHours
     ) {
         if(isset($name)) {
             if(!empty($name)) {
@@ -87,7 +90,10 @@ class ModuleService {
                     $basicLiteraturePreNote,
                     $basicLiteraturePostNote,
                     $deepeningLiteraturePreNote,
-                    $deepeningLiteraturePostNote
+                    $deepeningLiteraturePostNote,
+                    $overallGradeWeighting,
+                    $presenceCreditHours,
+                    $selfLearningCreditHours
                 );
 
                 $moduleID = ModuleModel::getModuleByName($name)->ID;
@@ -186,7 +192,10 @@ class ModuleService {
         $basicLiteraturePostNote,
         $deepeningLiteraturePreNote,
         $deepeningLiterature, 
-        $deepeningLiteraturePostNote
+        $deepeningLiteraturePostNote,
+        $overallGradeWeighting,
+        $presenceCreditHours,
+        $selfLearningCreditHours
     ) {
         if(isset($name)) {
             if(!empty($name)) {
@@ -230,7 +239,10 @@ class ModuleService {
                     $basicLiteraturePreNote,
                     $basicLiteraturePostNote,
                     $deepeningLiteraturePreNote,
-                    $deepeningLiteraturePostNote
+                    $deepeningLiteraturePostNote,
+                    $overallGradeWeighting,
+                    $presenceCreditHours,
+                    $selfLearningCreditHours
                 );
 
                 if(!empty($fields)) {

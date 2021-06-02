@@ -233,7 +233,10 @@ class ModuleModel {
         $basicLiteraturePreNote,
         $basicLiteraturePostNote,
         $deepeningLiteraturePreNote,
-        $deepeningLiteraturePostNote
+        $deepeningLiteraturePostNote,
+        $overallGradeWeighting,
+        $presenceCreditHours,
+        $selfLearningCreditHours
     ) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -264,6 +267,9 @@ class ModuleModel {
         $basicLiteraturePostNote = mysqli_real_escape_string($db, $basicLiteraturePostNote);
         $deepeningLiteraturePreNote = mysqli_real_escape_string($db, $deepeningLiteraturePreNote);
         $deepeningLiteraturePostNote = mysqli_real_escape_string($db, $deepeningLiteraturePostNote);
+        $overallGradeWeighting = mysqli_real_escape_string($db, $overallGradeWeighting);
+        $presenceCreditHours = mysqli_real_escape_string($db, $presenceCreditHours);
+        $selfLearningCreditHours = mysqli_real_escape_string($db, $selfLearningCreditHours);
 
         if(empty($semester)) {
             $semester = "NULL";
@@ -276,18 +282,31 @@ class ModuleModel {
         if(empty($credits)) {
             $credits = "NULL";
         }
+
+        if(empty($overallGradeWeighting)) {
+            $overallGradeWeighting = "NULL";
+        }
+
+        if(empty($presenceCreditHours)) {
+            $presenceCreditHours = "NULL";
+        }
+
+        if(empty($selfLearningCreditHours)) {
+            $selfLearningCreditHours = "NULL";
+        }
     
         $insert = "INSERT INTO modules (name, nameEN, code, summary, summaryEN, type, semester, duration, credits, usability, 
                                         examRequirement, participationRequirement, studyContent, knowledgeBroadening, 
                                         knowledgeDeepening, instrumentalCompetence, systemicCompetence, communicativeCompetence,
                                         responsibleName, responsibleEmail, lectureLanguage, frequency, media, basicLiteraturePreNote, 
-                                        basicLiteraturePostNote, deepeningLiteraturePreNote, deepeningLiteraturePostNote) 
+                                        basicLiteraturePostNote, deepeningLiteraturePreNote, deepeningLiteraturePostNote, overallGradeWeighting,
+                                        presenceCreditHours, selfLearningCreditHours) 
                     VALUES ('$name', NULLIF('$nameEN',''), NULLIF('$code',''), NULLIF('$summary',''), NULLIF('$summaryEN',''), NULLIF('$type',''), 
                     $semester, $duration, $credits, NULLIF('$usability',''), NULLIF('$examRequirement',''), NULLIF('$participationRequirement',''),
                     NULLIF('$studyContent',''), NULLIF('$knowledgeBroadening',''), NULLIF('$knowledgeDeepening',''), NULLIF('$instrumentalCompetence',''),
                     NULLIF('$systemicCompetence',''), NULLIF('$communicativeCompetence',''), NULLIF('$responsibleName',''), NULLIF('$responsibleEmail',''), 
                     NULLIF('$lectureLanguage',''), NULLIF('$frequency',''), NULLIF('$media',''), NULLIF('$basicLiteraturePreNote',''), NULLIF('$basicLiteraturePostNote',''), 
-                    NULLIF('$deepeningLiteraturePreNote',''), NULLIF('$deepeningLiteraturePostNote',''))";
+                    NULLIF('$deepeningLiteraturePreNote',''), NULLIF('$deepeningLiteraturePostNote',''), $overallGradeWeighting, $presenceCreditHours, $selfLearningCreditHours)";
         
         $result = mysqli_query($db, $insert);
 
@@ -320,6 +339,7 @@ class ModuleModel {
         $categoryID = mysqli_real_escape_string($db, $category[0]);
         $workload = mysqli_real_escape_string($db, $category[1]);
         $theoryFlag = mysqli_real_escape_string($db, $category[2]);
+        $semester = mysqli_real_escape_string($db, $category[3]);
   
         if(!empty($category)) {
 
@@ -338,8 +358,12 @@ class ModuleModel {
             if(empty($theoryFlag) && $theoryFlag !== "0") {
                 $theoryFlag = "NULL";
             }
+
+            if(empty($semester)) {
+                $semester = "NULL";
+            }
             
-            $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload, theoryFlag) VALUES ($moduleID, $categoryID, $workload, $theoryFlag)";
+            $insert = "INSERT INTO module_category_mm (moduleID, categoryID, workload, theoryFlag, semester) VALUES ($moduleID, $categoryID, $workload, $theoryFlag, $semester)";
             
             $result = mysqli_query($db, $insert);
             return $result;
@@ -448,7 +472,10 @@ class ModuleModel {
         $basicLiteraturePreNote,
         $basicLiteraturePostNote,
         $deepeningLiteraturePreNote,
-        $deepeningLiteraturePostNote
+        $deepeningLiteraturePostNote,
+        $overallGradeWeighting,
+        $presenceCreditHours,
+        $selfLearningCreditHours
     ) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -479,6 +506,9 @@ class ModuleModel {
         $basicLiteraturePostNote = mysqli_real_escape_string($db, $basicLiteraturePostNote);
         $deepeningLiteraturePreNote = mysqli_real_escape_string($db, $deepeningLiteraturePreNote);
         $deepeningLiteraturePostNote = mysqli_real_escape_string($db, $deepeningLiteraturePostNote);
+        $overallGradeWeighting = mysqli_real_escape_string($db, $overallGradeWeighting);
+        $presenceCreditHours = mysqli_real_escape_string($db, $presenceCreditHours);
+        $selfLearningCreditHours = mysqli_real_escape_string($db, $selfLearningCreditHours);
 
         if(empty($semester)) {
             $semester = "NULL";
@@ -491,6 +521,18 @@ class ModuleModel {
         if(empty($credits)) {
             $credits = "NULL";
         }
+
+        if(empty($overallGradeWeighting)) {
+            $overallGradeWeighting = "NULL";
+        }
+
+        if(empty($presenceCreditHours)) {
+            $presenceCreditHours = "NULL";
+        }
+
+        if(empty($selfLearningCreditHours)) {
+            $selfLearningCreditHours = "NULL";
+        }
     
         $insert = "UPDATE modules SET name = '$name', nameEN = NULLIF('$nameEN',''), code = NULLIF('$code',''), summary = NULLIF('$summary',''),
                                       summaryEN = NULLIF('$summaryEN',''), type = NULLIF('$type',''), semester = $semester, duration = $duration,
@@ -502,7 +544,8 @@ class ModuleModel {
                                       responsibleEmail = NULLIF('$responsibleEmail',''), lectureLanguage = NULLIF('$lectureLanguage',''), 
                                       frequency = NULLIF('$frequency',''), media = NULLIF('$media',''), basicLiteraturePreNote = NULLIF('$basicLiteraturePreNote',''), 
                                       basicLiteraturePostNote = NULLIF('$basicLiteraturePostNote',''), deepeningLiteraturePreNote = NULLIF('$deepeningLiteraturePreNote',''), 
-                                      deepeningLiteraturePostNote = NULLIF('$deepeningLiteraturePostNote','')
+                                      deepeningLiteraturePostNote = NULLIF('$deepeningLiteraturePostNote',''), overallGradeWeighting = $overallGradeWeighting, 
+                                      presenceCreditHours = $presenceCreditHours, selfLearningCreditHours = $selfLearningCreditHours
                                   WHERE ID =  $moduleID";
         
         $result = mysqli_query($db, $insert);
@@ -510,8 +553,7 @@ class ModuleModel {
         return $result;
     }
 
-//TODO: better this way or delete old entries and insert new? (all following updateMethods)
-    static function updateFieldsOfModule($id, $moduleID, $field, $course){
+   /* static function updateFieldsOfModule($id, $moduleID, $field, $course){
         $db = DatabaseService::getDatabaseObject();
 
         if(!empty($field)) {
@@ -582,7 +624,7 @@ class ModuleModel {
             $result = mysqli_query($db, $insert);
         }
         return $result;
-    }
+    }*/
 
     static function getAllModulesOfCourse($courseID) {
         $db = DatabaseService::getDatabaseObject();
@@ -610,6 +652,7 @@ class ModuleModel {
 
         return $result;
     }
+
     static function getLVSByModuleIDAndSemster($moduleID, $semester) {
         $db = DatabaseService::getDatabaseObject();
 

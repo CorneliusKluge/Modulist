@@ -40,8 +40,8 @@
     <th>Prüfungszeitraum</th>
     <th>Gewichtung</th>-->
     <th>Verantwortlicher</th>
-<!--<th>Unterrichtssprache</th>-->
-    <th>Angebotsfrequenz</th>
+<!--<th>Unterrichtssprache</th>
+    <th>Angebotsfrequenz</th>-->
 <!--<th>Medien/Arbeitsmaterialien</th>
     <th>Basisliteratur (Vorbemerkung)</th>
     <th>Basisliteratur</th>
@@ -86,8 +86,8 @@
                     <td><?php echo $module["examPeriod"];?></td>
                     <td><?php echo $module["examWeighting"];?></td>-->
                     <td><?php echo $module["responsibleName"];?></td>
-                    <!--<td><?php echo $module["lectureLanguage"];?></td>-->
-                    <td><?php echo $module["frequency"];?></td>
+                    <!--<td><?php echo $module["lectureLanguage"];?></td>
+                    <td><?php echo $module["frequency"];?></td>-->
                     <!--<td><?php echo $module["media"];?></td>-->
 
                     <!--how to use other tables here (literature)?-->
@@ -106,13 +106,15 @@
                         <form method="POST">
                             <button type="submit" name="module_delete_button" value="<?php echo $module["ID"];?>" class="button table_delete_button"></button>
                         </form>
-                        <input type="checkbox" name="module_lock_checkbox"/>
+                        <form method="POST">
+                            <button type="submit" name="module_lock_button" value="<?php echo $module["ID"];?>"></button>
+                        </form>
                     </td>
                 </tr>
             <?php
             }
         }
-        else{
+        else {
             echo "Aktuell sind keine Module eingetragen.";
         }
     ?>

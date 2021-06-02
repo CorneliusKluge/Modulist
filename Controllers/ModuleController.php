@@ -138,10 +138,11 @@ class ModuleController {
         ob_start();
         while($stillCategories) {
             $inputCategory = "module_add_category_".$i;
-            if(isset($inputCategory)) {
+            if(isset($_POST[$inputCategory])) {
                 $inputWorkload = "module_add_categoryWorkload_".$i;
                 $inputTheoryFlag = "module_add_TheoryFlag_".$i;
-                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null); 
+                $inputSemester = "module_add_categorySemester_".$i;
+                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null, $_POST[$inputSemester] ?? null); 
             }
             else {
                 $stillCategories = false;
@@ -155,7 +156,7 @@ class ModuleController {
 
         while($stillFields) {
             $inputField = "module_add_field_".$j;
-            if(isset($inputField)) {
+            if(isset($_POST[$inputField])) {
                 $fields[] = $_POST[$inputField] ?? null;
             }
             else {
@@ -170,12 +171,13 @@ class ModuleController {
 
         while($stillExams) {
             $inputExam = "module_add_examType_".$k;
-            if(isset($inputExam)) {
+            if(isset($_POST[$inputExam])) {
                 $inputDuration = "module_add_examDuration_".$k;
                 $inputCircumference = "module_add_examCircumference_".$k;
                 $inputPeriod = "module_add_examPeriod_".$k;
                 $inputWeighting = "module_add_examWeighting_".$k;
-                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputWeighting] ?? null);    
+                $inputExamSemester = "module_add_examSemester_".$k;
+                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputExamSemester] ?? null, $_POST[$inputWeighting] ?? null);    
             }
             else {
                 $stillExams = false;
@@ -189,7 +191,7 @@ class ModuleController {
 
         while($stillBasicLiterature) {
             $inputBasicLiterarture = "module_add_basicLiterature_".$l;
-            if(isset($inputBasicLiterarture)) {
+            if(isset($_POST[$inputBasicLiterarture])) {
                 $basicLiterature[] = $_POST[$inputBasicLiterarture] ?? null;
             }
             else {
@@ -204,7 +206,7 @@ class ModuleController {
 
         while($stillDeepeningLiterature) {
             $inputDeepeningLiterarture = "module_add_deepeningLiterature_".$m;
-            if(isset($inputDeepeningLiterarture)) {
+            if(isset($_POST[$inputDeepeningLiterarture])) {
                 $deepeningLiterature[] = $_POST[$inputDeepeningLiterarture] ?? null;
             }
             else {
@@ -216,12 +218,6 @@ class ModuleController {
                 $stillDeepeningLiterature = false;
             }
         }
-       /* $categories = array(array($_POST["module_add_category"] ?? null, $_POST["module_add_categoryWorkload"] ?? null));
-        $exams = array(array($_POST["module_add_examType_0"] ?? null, $_POST["module_add_examDuration_0"] ?? null,
-                                $_POST["module_add_examCircumference_0"] ?? null,  $_POST["module_add_examPeriod_0"] ?? null, 
-                                $_POST["module_add_examWeighting_0"] ?? null));
-        $basicLiterature = array($_POST["module_add_basicLiterature_0"] ?? null);
-        $deepeningLiterature = array($_POST["module_add_deepeningLiterature_0"] ?? null);*/
 
         $bool = ModuleService::addModule(
             $_POST["module_add_name"] ?? null,
@@ -257,6 +253,9 @@ class ModuleController {
             $_POST["module_add_deepeningLiteraturePreNote"] ?? null,
             $deepeningLiterature,
             $_POST["module_add_deepeningLiteraturePostNote"] ?? null,
+            $_POST["module_add_overallGradeWeighting"] ?? null,
+            $_POST["module_add_presenceCreditHours"] ?? null,
+            $_POST["module_add_selfLearningCreditHours"] ?? null
         );
         $output = ob_get_clean();
 
@@ -289,7 +288,8 @@ class ModuleController {
             if(isset($_POST[$inputCategory])) {
                 $inputWorkload = "module_change_categoryWorkload_".$i;
                 $inputTheoryFlag = "module_change_TheoryFlag_".$i;
-                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null); 
+                $inputSemester = "module_change_categorySemester_".$i;
+                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null, $_POST[$inputSemester] ?? null); 
             }
             else {
                 $stillCategories = false;
@@ -303,7 +303,7 @@ class ModuleController {
 
         while($stillFields) {
             $inputField = "module_change_field_".$j;
-            if(isset($inputField)) {
+            if(isset($_POST[$inputField])) {
                 $fields[] = $_POST[$inputField] ?? null;
             }
             else {
@@ -318,12 +318,13 @@ class ModuleController {
 
         while($stillExams) {
             $inputExam = "module_change_examType_".$k;
-            if(isset($inputExam)) {
+            if(isset($_POST[$inputExam])) {
                 $inputDuration = "module_change_examDuration_".$k;
                 $inputCircumference = "module_change_examCircumference_".$k;
                 $inputPeriod = "module_change_examPeriod_".$k;
                 $inputWeighting = "module_change_examWeighting_".$k;
-                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputWeighting] ?? null);    
+                $inputExamSemester = "module_change_examSemester_".$k;
+                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputExamSemester] ?? null, $_POST[$inputWeighting] ?? null);    
             }
             else {
                 $stillExams = false;
@@ -337,7 +338,7 @@ class ModuleController {
        
         while($stillBasicLiterature) {
             $inputBasicLiterarture = "module_change_basicLiterature_".$l;
-            if(isset($inputBasicLiterarture)) {
+            if(isset($_POST[$inputBasicLiterarture])) {
                 $basicLiterature[] = $_POST[$inputBasicLiterarture] ?? null;
             }
             else {
@@ -352,7 +353,7 @@ class ModuleController {
         
         while($stillDeepeningLiterature) {
             $inputDeepeningLiterarture = "module_change_deepeningLiterature_".$m;
-            if(isset($inputDeepeningLiterarture)) {
+            if(isset($_POST[$inputDeepeningLiterarture])) {
                 $deepeningLiterature[] = $_POST[$inputDeepeningLiterarture] ?? null;
             }
             else {
@@ -400,6 +401,9 @@ class ModuleController {
             $_POST["module_change_deepeningLiteraturePreNote"] ?? null,
             $deepeningLiterature,
             $_POST["module_change_deepeningLiteraturePostNote"] ?? null,
+            $_POST["module_change_overallGradeWeighting"] ?? null, 
+            $_POST["module_change_presenceCreditHours"] ?? null, 
+            $_POST["module_change_selfLearningCreditHours"] ?? null
         );
         $output = ob_get_clean();
         
