@@ -82,6 +82,11 @@
     </div>
 
     <div class="form_item">
+        <label class="form_label" for="module_add_overallGradeWeighting">Gewichtung Modulnote für Gesamtnote:</label>
+        <input class="form_input" type="number" id="module_add_overallGradeWeighting" name="module_add_overallGradeWeighting"/>
+    </div>
+
+    <div class="form_item">
         <label class="form_label" for="module_add_usability">Verwendbarkeit:</label>
         <input class="form_input" type="string" id="module_add_usability" name="module_add_usability"/>
     </div>
@@ -134,11 +139,21 @@
    
     <h3>Lehr- und Lernformen/Workload</h3>
 
+    <div class="form_item">
+        <label class="form_label" for="module_add_presenceCreditHours">Präsenzveranstaltugen entsprechen (SWS):</label>
+        <input class="form_input" type="number" id="module_add_presenceCreditHours" name="module_add_presenceCreditHours"/>
+    </div>
+
+    <div class="form_item">
+        <label class="form_label" for="module_add_selfLearningCreditHours">EVL-Veranstaltungen entsprechen (SWS):</label>
+        <input class="form_input" type="number" id="module_add_selfLearningCreditHours" name="module_add_selfLearningCreditHours"/>
+    </div>
+
     <div class="form_group_container" id="module_add_categories_div">
-        <button class="form_add_button button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
-        <div class="form_group"> 
+        <button type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)">Kategorie hinzufügen</button>
+
+        <div class="form_group">
             <div class="form_item">
-                <!--how to implement the workload of Classroom courses -->
                 <label class="form_label" for="module_add_category_0">Kategorie:</label>
                 <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this);">
                     <?php
@@ -157,6 +172,11 @@
                 <label class="form_label" for="module_add_categoryWorkload_0">Workload (h):</label>
                 <input class="form_input" type="number" id="module_add_categoryWorkload_0" name="module_add_categoryWorkload_0"/>
             </div>
+            
+            <div class="form_item">
+                <label class="form_label" for="module_add_categorySemester_0">Semester:</label>
+                <input class="form_input" type="number" id="module_add_categorySemester_0" name="module_add_categorySemester_0"/>
+            </div>
 
             <div class="form_item" id="module_add_TheoryFlag_0">
                 <label class="form_label">Einteilung EVL Theorie/Praxis</label>
@@ -174,24 +194,22 @@
  
     <h3>Prüfungsleistungen (PL)</h3>
     <div class="form_group_container" id="module_add_exams_div">
-        <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
-
-        <div class="form_group"> 
+        <button type="button" name="module_add_examEntry" onclick="addExamEntry(true)">Prüfungsleistung hinzufügen</button>
+        <div class="form_group">
             <div class="form_item" id="module_add_examType_div">
                 <label class="form_label" for="module_add_examType_0">Art der PL:</label>
                 <select class="form_select" id="module_add_examType_0" name="module_add_examType_0">
                     <option value="1">Klausurarbeit</option>
-                    <option value="2">Mündliche Prüfungen</option>
+                    <option value="2">Mündliche Prüfung</option>
                     <option value="3">Mündliches Fachgespräch</option>
                     <option value="4">Präsentation</option>
                     <option value="5">Projektarbeit</option>
-                    <option value="6">Präsentation</option>
-                    <option value="7">Seminararbeit</option>
-                    <option value="8">Programmentwurf</option>
-                    <option value="9">Prüfung am Computer</option>
-                    <option value="10">Praktische Prüfung</option>
-                    <option value="11">Bachelorarbeit</option>
-                    <option value="12">Bachelorverteidigung</option>
+                    <option value="6">Seminararbeit</option>
+                    <option value="7">Programmentwurf</option>
+                    <option value="8">Prüfung am Computer</option>
+                    <option value="9">Praktische Prüfung</option>
+                    <option value="10">Bachelorthesis</option>
+                    <option value="11">Bachelorverteidigung</option>
                 </select>
             </div>
 
@@ -213,6 +231,11 @@
             <div class="form_item" id="module_add_examWeighting_div">
                 <label class="form_label" for="module_add_examWeighting_0">Gewichtung:</label>
                 <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
+            </div>
+
+            <div class="form_item">
+                <label class="form_label" for="module_add_examSemester_0">Semester:</label>
+                <input class="form_input" type="number" id="module_add_examSemester_0" name="module_add_examSemester_0"/>
             </div>
         </div>
     </div>    
@@ -248,7 +271,7 @@
         <label class="form_label" for="module_add_basicLiteraturePreNote">Basisliteratur (Vorbemerkungen):</label>
         <input class="form_editor" type="string" id="module_add_basicLiteraturePreNote" name="module_add_basicLiteraturePreNote"/>
     </div>
-<!--TODO: add more-->    
+
     <div class="form_item" id="module_add_basicLiterature_div">
         <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:</label>
         <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
@@ -280,7 +303,7 @@
         <label class="form_label" for="module_add_deepeningLiteraturePreNote">Vertiefende Literatur (Vorbemerkungen):</label>
         <input class="form_editor" type="string" id="module_add_deepeningLiteraturePreNote" name="module_add_deepeningLiteraturePreNote"/>
     </div>
-<!--TODO: add more-->    
+
     <div class="form_item" id="module_add_deepeningLiterature_div">
         <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:</label>
         <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>

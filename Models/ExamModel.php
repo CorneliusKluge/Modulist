@@ -60,7 +60,8 @@ class ExamModel {
             $examDuration = mysqli_real_escape_string($db, $exam[1]);
             $examCircumference = mysqli_real_escape_string($db, $exam[2]);
             $examPeriod = mysqli_real_escape_string($db, $exam[3]);
-            $examWeighting = mysqli_real_escape_string($db, $exam[4]);
+            $examSemester = mysqli_real_escape_string($db, $exam[4]);
+            $examWeighting = mysqli_real_escape_string($db, $exam[5]);
 
             if(empty($examType)) {
                 $examType = 0;
@@ -70,12 +71,16 @@ class ExamModel {
                 $examDuration = "NULL";
             }
 
-            if(!empty($examWeighting) && !empty($examPeriod)) {
-                $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examWeighting) 
-                                VALUES ($moduleID, $examType, $examDuration, NULLIF('$examCircumference',''), '$examPeriod', $examWeighting)";
-                $result = mysqli_query($db, $insert);
+            if(empty($examSemester)) {
+                $examSemester = "NULL";
             }
-            return $result;
+
+            if(!empty($examWeighting) && !empty($examPeriod)) {
+                $insert = "INSERT INTO exams (moduleID, examType, examDuration, examCircumference, examPeriod, examSemester, examWeighting) 
+                                VALUES ($moduleID, $examType, $examDuration, NULLIF('$examCircumference',''), '$examPeriod', $examSemester, $examWeighting)";
+                $result = mysqli_query($db, $insert);
+                return $result;
+            }
         }
         return false;
     }
@@ -92,7 +97,7 @@ class ExamModel {
         return $result;
     }
 
-    static function updateExamOfModule($id, $moduleID, $exam) {
+    /*static function updateExamOfModule($id, $moduleID, $exam) {
         $db = DatabaseService::getDatabaseObject();
         if(!empty($exam)){
             if(empty($moduleID)) {
@@ -124,5 +129,5 @@ class ExamModel {
             return $result;
         }
         return false;
-    }
+    }*/
 }
