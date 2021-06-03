@@ -12,6 +12,7 @@
             </form>
         </div>
     </div>
+    <div id="overlay" class="overlay"></div>
     <?php
     }
     else {
@@ -20,5 +21,6 @@
         Die ausgewählte Modulkategorie konnte nicht gefunden werden.
         <button class="button_close">OK</button>
     </div>
+    <div id="overlay" class="overlay"></div>
 <?php
 }

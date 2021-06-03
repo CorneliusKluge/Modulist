@@ -12,11 +12,14 @@ if($result) {
         </form>
     </div>
 </div>
+    <div id="overlay" class="overlay"></div>
 <?php
 }
 else {
 ?>
+<div class="message_container">
     Das ausgewählte Modul konnte nicht gefunden werden.
     <button class="button">OK</button>
+</div>
 <?php
 }
