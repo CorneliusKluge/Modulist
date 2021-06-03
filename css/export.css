@@ -29,5 +29,154 @@ h1 {
 }
 
 .intro_name_mail_grid {
-    display: grid;
+    padding-top: 10px;
+}
+
+.intro_name_mail_grid table {
+    width: max-content;
+}
+
+.intro_name_mail_grid .column_1 {
+    text-align: left;
+}
+
+.intro_name_mail_grid .column_2 {
+    text-align: right;
+}
+
+
+.table_container {
+    padding: 10px 45px 20px 45px;
+    font-size: 13px;
+}
+
+.module_table { 
+    border-collapse: collapse;
+    padding-top: 30px;
+}
+
+.module_table td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    width: 13px;
+}
+
+.module_table .table_text{
+    text-align: left;
+    width: 350px;
+}
+
+.module_table .cell_styled {
+    background-color: lightgrey;
+}
+
+.places_code {
+    padding: 10px 45px 20px 45px;
+    font-size: 13px;
+}
+
+/*---------------------ModuleView----------------------*/ 
+
+.module {
+    padding: 10px 45px 20px 45px;
+    font-size: 13px;
+}
+
+.top_headline {
+    font-size: 14px;
+    padding: 2px;
+    background-color: grey;
+    color: white;
+    width: max-content;
+}
+
+.columns-2 h2 {
+    font-size: 14px;
+    padding: 2px;
+    background-color: lightgrey;
+    width: max-content;
+}
+
+.columns-2 td{
+    width: 293px; 
+    padding-bottom: 10px;
+}
+
+.td_first_column {
+    padding-right: 20px;
+}
+
+.columns-2 div {
+    width: 300px;
+}
+
+.row_item h2 {
+    font-size: 14px;
+    padding: 2px;
+    background-color: lightgrey;
+    width: max-content;
+}
+
+.row_item h3 {
+    font-size: 14px;
+    font-style: italic;
+    padding: 2px;
+    background-color: #F2F2F2;
+    width: max-content;
+}
+
+.row_item h4 {
+    font-size: 13px;
+    font-weight: lighter;
+    text-decoration: underline;
+}
+
+.workload_table {
+    width: max-content;
+    border-collapse: collapse;
+    padding-bottom: 15px;
+}
+
+.workload_table td {
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+.heading_1 {
+    background-color: lightgrey;
+    font-weight: bolder;
+}
+
+.heading_2 {
+    background-color: lightgrey;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.heading_3 {
+    background-color: lightgrey;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.right_column {
+    text-align: center;
+}
+
+.exam_table {
+    width: max-content;
+    border-collapse: collapse;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.exam_table td, th{
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+.exam_table .heading_1 {
+    background-color: lightgrey;
+    font-weight: bolder;
 }
