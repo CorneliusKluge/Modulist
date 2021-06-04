@@ -135,7 +135,7 @@ $fieldString = substr_replace($fieldString, " und", strrpos($fieldString, ","), 
 </div>
 
 
-<span class="page_break"></span>
+<!--<span class="page_break"></span>
 
 <b>Inhaltsverzeichnis</b>
 <?php
@@ -146,4 +146,6 @@ if($result->num_rows) {
     <?php
     }
 }
+?>
+-->
 

@@ -130,4 +130,15 @@ class ExamModel {
         }
         return false;
     }*/
+    static function getExamsByModuleIDAndSemester($moduleID, $semester) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $semester = mysqli_real_escape_string($db, $semester);
+
+        $query = "SELECT * FROM exams WHERE moduleID = $moduleID AND examSemester = $semester";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
 }

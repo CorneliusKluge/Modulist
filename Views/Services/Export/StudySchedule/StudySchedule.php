@@ -1,192 +1,143 @@
+<?php
+    use Modulist\Models\ExamModel;
+    use Modulist\Models\FieldModel;
+    use Modulist\Models\ModuleModel;
+ ?>
 <h1>Studienablaufplan</h1>
 <style>
     td {
-        border: 1p solid black;
+        border: 1px solid black;
+    }
+    th {
+        background-color: #09497d;
+        color: white;
+    }
+    .background-1 {
+        background-color: #009ee3;
+    }
+    .background-2 {
+        background-color: #66c5ee;
+    }
+    .background-3 {
+        background-color: #09e6f8;
+    }
+    .background-4 {
+        background-color: #c0c0c0;
+    }
+    .black {
+        color: black;
     }
 </style>
 <table>
     <tr>
-        <td colspan="2" rowspan="2">Studieninhalte</td>
-        <td colspan="12">Einordnung der Module in den Gesamtstudienplan</td>
-        <td colspan="4" rowspan="2">Workload</td>
-        <td rowspan="4">ECTS</td>
-        <td rowspan="4">Art + Dauer der Prüfungsleistung</td>
-        <td rowspan="4">Gewichtung der Prüfungsleistung für Modulnote(*)</td>
+        <th colspan="2" rowspan="2">Studieninhalte</th>
+        <th colspan="12">Einordnung der Module in den Gesamtstudienplan</th>
+        <th colspan="4" rowspan="2" class="background-1">Workload</th>
+        <th rowspan="4">ECTS</th>
+        <th rowspan="4">Art + Dauer der Prüfungsleistung</th>
+        <th rowspan="4">Gewichtung der Prüfungsleistung für Modulnote(*)</th>
     </tr>
     <tr>
-        <td colspan="12">Semester</td>
+        <th colspan="12">Semester</th>
     </tr>
     <tr>
-        <td rowspan="2">Modulcode</td>
-        <td rowspan="2">Modulbezeichnung</td>
-        <td colspan="2">1</td>
-        <td colspan="2">2</td>
-        <td colspan="2">3</td>
-        <td colspan="2">4</td>
-        <td colspan="2">5</td>
-        <td colspan="2">6</td>
-        <td rowspan="2">LVS</td>
-        <td rowspan="2">evL Theorie</td>
-        <td rowspan="2">evL Praxis</td>
-        <td rowspan="2">gesamt</td>
+        <th rowspan="2">Modulcode</th>
+        <th rowspan="2">Modulbezeichnung</th>
+        <th colspan="2">1</th>
+        <th colspan="2">2</th>
+        <th colspan="2">3</th>
+        <th colspan="2">4</th>
+        <th colspan="2">5</th>
+        <th colspan="2">6</th>
+        <th rowspan="2" class="background-1 black">LVS</th>
+        <th rowspan="2" class="background-2 black">evL Theorie</th>
+        <th rowspan="2" class="background-3 black">evL Praxis</th>
+        <th rowspan="2">gesamt</th>
     </tr>
     <tr>
-        <td>LVS</td>
-        <td>PL</td>
-        <td>LVS</td>
-        <td>PL</td>
-        <td>LVS</td>
-        <td>PL</td>
-        <td>LVS</td>
-        <td>PL</td>
-        <td>LVS</td>
-        <td>PL</td>
-        <td>LVS</td>
-        <td>PL</td>
-    </tr>
-    <tr>
-        <td colspan="21">Pflichtmodule Studiengang Informatiostechnologie</td>
+        <th>LVS</th>
+        <th>PL</th>
+        <th>LVS</th>
+        <th>PL</th>
+        <th>LVS</th>
+        <th>PL</th>
+        <th>LVS</th>
+        <th>PL</th>
+        <th>LVS</th>
+        <th>PL</th>
+        <th>LVS</th>
+        <th>PL</th>
     </tr>
     <?php
-        function getExamTypeString($examType) {
-            switch($examType) {
-                case 1:
-                    return "K"; // Klausurarbeit
-                    break;
-                case 2:
-                    return ""; // Mündliche Prüfung
-                    break;
-                case 3:
-                    return "MF"; // Mündliches Fachgespräch
-                    break;
-                case 4:
-                    return "PR"; // Präsentation
-                    break;
-                case 5:
-                    return "PA"; // Projektarbeit
-                    break;
-                case 7:
-                    return ""; // Seminararbeit
-                    break;
-                case 8:
-                    return "PE"; // Programmentwurf
-                    break;
-                case 9:
-                    return ""; // Praktische Prüfung
-                    break;
-                case 10:
-                    return "BTh"; // Bachelorthesis
-                    break;
-                case 11:
-                    return "V"; // Verteidigung
-                    break;
-            }
-        }
-        use Modulist\Models\ExamModel;
-        use Modulist\Models\FieldModel;
-        use Modulist\Models\ModuleModel;
-
-        foreach($courseModules as $module) {
-            $exams = ExamModel::getExamsByModuleID($module["ID"]);
-            $examCount = $exams->num_rows;
+        if($compulsoryCourseModules->num_rows) {
         ?>
             <tr>
-                <td rowspan="<?php echo $examCount;?>"><?php echo $module["code"];?></td>
-                <td rowspan="<?php echo $examCount;?>"><?php echo $module["name"];?></td>
-            	
-                <?php
-                foreach($exams as $exam) {
-                    $lvs = ModuleModel::getLVSByModuleIDAndSemster($module["ID"], $exam["examPeriod"]);
-                    $evlTheory = ModuleModel::getEVLTheoryByModuleIDAndSemester($module["ID"], $exam["examPeriod"]);
-                    $evlPractise = ModuleModel::getEVLPractiseByModuleIDAndSemester($module["ID"], $exam["examPeriod"]);
-                    ?>
-                    <td><?php if($exam["examPeriod"] == 1) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 1) { echo getExamTypeString($exam["examType"]);}?></td>
-                    <td><?php if($exam["examPeriod"] == 2) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 2) { echo getExamTypeString($exam["examType"]);}?></td>
-                    <td><?php if($exam["examPeriod"] == 3) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 3) { echo getExamTypeString($exam["examType"]);}?></td>
-                    <td><?php if($exam["examPeriod"] == 4) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 4) { echo getExamTypeString($exam["examType"]);}?></td>
-                    <td><?php if($exam["examPeriod"] == 5) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 5) { echo getExamTypeString($exam["examType"]);}?></td>
-                    <td><?php if($exam["examPeriod"] == 6) { echo $lvs;};?></td>
-                    <td><?php if($exam["examPeriod"] == 6) { echo getExamTypeString($exam["examType"]);}?></td>
-
-                    <td><?php echo $lvs;?></td>
-                    <td><?php echo $evlTheory;?></td>
-                    <td><?php echo $evlPractise;?></td>
-                <?php
-                }
-                ?>
-
-                <td rowspan="<?php echo $examCount;?>"><?php echo $module["credits"] * 30;?></td>
-                <td rowspan="<?php echo $examCount;?>"><?php echo $module["credits"];?></td>
-
-                <?php
-                foreach($exams as $exam) {
-                    ?>
-                    <td><?php echo getExamTypeString($exam["examType"]) . " " . $exam["examDuration"];?></td>
-                    <td><?php echo $exam["examWeighting"] . "%";?></td>
-                <?php
-                }
-                ?>
-            </tr>
-        <?php
-        }
-        foreach($fieldModules as $id => $modules) {
-            $fieldName = FieldModel::getFieldByID($id)->name;
-            ?>
-            <tr>
-                <td colspan="21">Pflichtmodule Studienrichtung <?php echo $fieldName;?></td>
+                <td colspan="21" class="background-4">Pflichtmodule Studiengang <?php echo $courseName;?></td>
             </tr>
             <?php
-            foreach($modules as $module) {
-                $exams = ExamModel::getExamsByModuleID($module["ID"]);
-                $examCount = $exams->num_rows;
+            foreach($compulsoryCourseModules as $module) {
+                printModule($module);
+            }
+        }
+        foreach($resultFields as $field) {
+            $modules = ModuleModel::getCompulsoryModulesByField($field["ID"]);
+            if($modules->num_rows) {
             ?>
                 <tr>
-                    <td rowspan="<?php echo $examCount;?>"><?php echo $module["code"];?></td>
-                    <td rowspan="<?php echo $examCount;?>"><?php echo $module["name"];?></td>
-                    <?php
-                    foreach($exams as $exam) {
-                        $lvs = ModuleModel::getLVSByModuleIDAndSemster($module["ID"], $exam["examPeriod"]);
-                        $evlTheory = ModuleModel::getEVLTheoryByModuleIDAndSemester($module["ID"], $exam["examPeriod"]);
-                        $evlPractise = ModuleModel::getEVLPractiseByModuleIDAndSemester($module["ID"], $exam["examPeriod"]);
-                        ?>
-                        <td><?php if($exam["examPeriod"] == 1) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 1) { echo getExamTypeString($exam["examType"]);}?></td>
-                        <td><?php if($exam["examPeriod"] == 2) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 2) { echo getExamTypeString($exam["examType"]);}?></td>
-                        <td><?php if($exam["examPeriod"] == 3) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 3) { echo getExamTypeString($exam["examType"]);}?></td>
-                        <td><?php if($exam["examPeriod"] == 4) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 4) { echo getExamTypeString($exam["examType"]);}?></td>
-                        <td><?php if($exam["examPeriod"] == 5) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 5) { echo getExamTypeString($exam["examType"]);}?></td>
-                        <td><?php if($exam["examPeriod"] == 6) { echo $lvs;};?></td>
-                        <td><?php if($exam["examPeriod"] == 6) { echo getExamTypeString($exam["examType"]);}?></td>
-
-                        <td><?php echo $lvs;?></td>
-                        <td><?php echo $evlTheory;?></td>
-                        <td><?php echo $evlPractise;?></td>
-                    <?php
-                    }
-                    ?>
-                    <td rowspan="<?php echo $examCount;?>"><?php echo $module["credits"] * 30;?></td>
-
-                    <td rowspan="<?php echo $examCount;?>"><?php echo $module["credits"];?></td>
-
-                    <?php
-                    foreach($exams as $exam) {
-                        ?>
-                        <td><?php echo getExamTypeString($exam["examType"]) . " " . $exam["examDuration"];?></td>
-                        <td><?php echo $exam["examWeighting"] . "%";?></td>
-                    <?php
-                    }
-                    ?>
+                    <td colspan="21" class="background-4">Pflichtmodule Studienrichtung <?php echo $field["name"];?></td>
                 </tr>
+                <?php
+                foreach($modules as $module) {
+                    printModule($module);
+                }
+            }
+        }
+
+        if($electiveCourseModules->num_rows) {
+        ?>
+            <tr>
+                <td colspan="21" class="background-4">Wahlpflichtmodule Studiengang <?php echo $courseName;?></td>
+            </tr>
             <?php
+            foreach($electiveCourseModules as $module) {
+                printModule($module);
+            }
+        }
+        foreach($resultFields as $field) {
+            $modules = ModuleModel::getElectiveModulesByField($field["ID"]);
+            if($modules->num_rows) {
+            ?>
+                <tr>
+                    <td colspan="21" class="background-4">Wahlpflichtmodule Studienrichtung <?php echo $field["name"];?></td>
+                </tr>
+                <?php
+                foreach($modules as $module) {
+                    printModule($module);
+                }
+            }
+        }
+
+        if($practicalCourseModules->num_rows) {
+        ?>
+            <tr>
+                <td colspan="21" class="background-4">Praxismodule Studiengang <?php echo $courseName;?></td>
+            </tr>
+            <?php
+            foreach($practicalCourseModules as $module) {
+                printModule($module);
+            }
+        }
+        foreach($resultFields as $field) {
+            $modules = ModuleModel::getPracticalModulesByField($field["ID"]);
+            if($modules->num_rows) {
+            ?>
+                <tr>
+                    <td colspan="21" class="background-4">Praxismodule Studienrichtung <?php echo $field["name"];?></td>
+                </tr>
+                <?php
+                foreach($modules as $module) {
+                    printModule($module);
+                }
             }
         }
         $error = error_get_last();
@@ -195,3 +146,100 @@
         echo "</pre>";
     ?>
 </table>
+<?php
+function printModule($module) {
+?>
+    <tr>
+        <td rowspan="<?php echo $module["duration"];?>"><?php echo $module["code"];?></td>
+        <td rowspan="<?php echo $module["duration"];?>"><?php echo $module["name"];?></td>
+        <?php
+        for($i = 1; $i <= $module["duration"]; $i++) {
+            if($i > 1) {
+                echo "</tr><tr>";
+            }
+            $lvs = ModuleModel::getLVSByModuleIDAndSemster($module["ID"], $module["semester"] + $i - 1);
+            $evlTheory = ModuleModel::getEVLTheoryByModuleIDAndSemester($module["ID"], $module["semester"]  + $i - 1);
+            $evlPractise = ModuleModel::getEVLPractiseByModuleIDAndSemester($module["ID"], $module["semester"]  + $i - 1);
+
+            $exams = ExamModel::getExamsByModuleIDAndSemester($module["ID"], $module["semester"] + $i - 1);
+            $examString = "";
+            $examString2 = "";
+            $examString3 = "";
+            if($exams->num_rows) {
+                foreach($exams as $exam) {
+                    $examString .= getExamTypeString($exam["examType"]) . "<br>";
+                    if(!empty($exam["examDuration"])) {
+                        $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examDuration"] . "<br>";
+                    }
+                    else {
+                        $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examCircumference"] . "<br>";
+                    }
+                    $examString3 .= $exam["examWeighting"] . "%" . "<br>";
+                }
+            }
+            ?>
+            <td><?php if($module["semester"] + $i - 1 == 1) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 1) { echo $examString;}?></td>
+            <td><?php if($module["semester"] + $i - 1 == 2) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 2) { echo $examString;}?></td>
+            <td><?php if($module["semester"] + $i - 1 == 3) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 3) { echo $examString;}?></td>
+            <td><?php if($module["semester"] + $i - 1 == 4) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 4) { echo $examString;}?></td>
+            <td><?php if($module["semester"] + $i - 1 == 5) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 5) { echo $examString;}?></td>
+            <td><?php if($module["semester"] + $i - 1 == 6) { echo $lvs;};?></td>
+            <td><?php if($module["semester"] + $i - 1 == 6) { echo $examString;}?></td>
+
+            <td class="background-1"><?php echo $lvs;?></td>
+            <td class="background-2"><?php echo $evlTheory;?></td>
+            <td class="background-3"><?php echo $evlPractise;?></td>
+
+            <td><?php echo $module["credits"] * 30;?></td>
+            <td><?php echo $module["credits"];?></td>
+
+            <td><?php echo $examString2;?></td>
+            <td><?php echo $examString3;?></td>
+        <?php
+        }
+        ?>
+    </tr>
+<?php
+}
+function getExamTypeString($examType) {
+    switch($examType) {
+        case 1:
+            return "K"; // Klausurarbeit
+            break;
+        case 2:
+            return "MP"; // Mündliche Prüfung
+            break;
+        case 3:
+            return "MF"; // Mündliches Fachgespräch
+            break;
+        case 4:
+            return "PR"; // Präsentation
+            break;
+        case 5:
+            return "PA"; // Projektarbeit
+            break;
+        case 6:
+            return "SE"; // Seminararbeit
+            break;
+        case 7:
+            return "PE"; // Programmentwurf
+            break;
+        case 8:
+            return "PC"; // Prüfung am Computer
+            break;
+        case 9:
+            return "PP"; // Praktische Prüfung
+            break;
+        case 10:
+            return "BTh"; // Bachelorthesis
+            break;
+        case 11:
+            return "V"; // Verteidigung
+            break;
+    }
+}

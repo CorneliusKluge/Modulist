@@ -99,7 +99,7 @@ if($result->num_rows) {
                 </tr>
                 <tr>
                     <td class="heading_2">Präsenzveranstaltungen</td>
-                    <td class="heading_3" class="right_column"><?php echo $module["presenceCreditHours"];?></td>
+                    <td class="heading_3" class="right_column"><?php if(!empty($module["presenceCreditHours"])){ echo "entspricht " . $module["presenceCreditHours"] . " SWS";}?></td>
                 </tr>
                 <?php
                     $workload = 0;
@@ -120,7 +120,7 @@ if($result->num_rows) {
                 ?>
                 <tr>
                     <td class="heading_2">Eigenverantwortliches Lernen</td>
-                    <td class="heading_3" class="right_column"><?php echo $module["selfLearningCreditHours"];?></td>
+                    <td class="heading_3" class="right_column"><?php if(!empty($module["selfLearningCreditHours"])){ echo "entspricht " . $module["selfLearningCreditHours"] . " SWS";}?></td>
                 </tr>
                 <?php
                     $resultNonPresence = CategoryModel::getTheoryCategoriesByModuleID($module["ID"]);
@@ -160,7 +160,7 @@ if($result->num_rows) {
                     foreach($resultExams as $exam) {
                     ?>
                         <tr>
-                            <td><?php echo $exam["examType"];?></td>
+                            <td><?php echo getExamTypeString($exam["examType"]);?></td>
                             <td><?php echo $exam["examDuration"];?></td>
                             <td><?php echo $exam["examCircumference"];?></td>
                             <td><?php echo $exam["examPeriod"];?></td>
@@ -278,4 +278,40 @@ if($result->num_rows) {
     <?php
     }
 }
-
+function getExamTypeString($examType) {
+    switch($examType) {
+        case 1:
+            return "Klausurarbeit"; // Klausurarbeit
+            break;
+        case 2:
+            return "Mündliche Prüfung"; // Mündliche Prüfung
+            break;
+        case 3:
+            return "Mündliches Fachgespräch"; // Mündliches Fachgespräch
+            break;
+        case 4:
+            return "Präsentation"; // Präsentation
+            break;
+        case 5:
+            return "Projektarbeit"; // Projektarbeit
+            break;
+        case 6:
+            return "Seminararbeit"; // Seminararbeit
+            break;
+        case 7:
+            return "Programmentwurf"; // Programmentwurf
+            break;
+        case 8:
+            return "Prüfung am Computer"; // Prüfung am Computer
+            break;
+        case 9:
+            return "Praktische Prüfung"; // Praktische Prüfung
+            break;
+        case 10:
+            return "Bachelorarbeit"; // Bachelorthesis
+            break;
+        case 11:
+            return "Verteidigung"; // Verteidigung
+            break;
+    }
+}
