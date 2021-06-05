@@ -35,7 +35,7 @@
     <div class="form_item" id="module_change_field_div">
         <label class="form_label" for="module_change_field_0">Studienrichtung:**</label>
         <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)"></button>
-        <button class="button table_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldFields->num_rows) {
             $i = 0;
             foreach($oldFields as $oldField) {
@@ -226,7 +226,7 @@
                         <label for="<?php echo $inputTheoryFlagID_p;?>">EVL Praxis</label>
                     </div>
                 </div>
-                <button class="button table_delete_button" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
+                <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
             </div>
             <?php
             $i++;
@@ -275,7 +275,7 @@
                         <label class="form_radio_label" for="module_change_TheoryFlag_practical_0">EVL Praxis</label>
                     </div>
                 </div>
-                <button class="button table_delete_button" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
+                <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
             </div>
             <?php
         }
@@ -338,7 +338,7 @@
                         <label class="form_label" for="<?php echo $inputSemesterID;?>">Semester:</label>
                         <input class="form_input" type="number" id="<?php echo $inputSemesterID;?>" name="<?php echo $inputSemesterID;?>" value="<?php if(!empty($oldExam["examSemester"])) {echo $oldExam["examSemester"];}?>"/>
                     </div>
-                    <button class="button table_delete_button" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
+                    <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
                 </div>
                 <?php
                 $i++;
@@ -388,7 +388,7 @@
                     <label class="form_label" for="module_change_examSemester_0">Semester:</label>
                     <input class="form_input" type="number" id="module_change_examSemester_0" name="module_change_examSemester_0"/>
                 </div>
-                <button class="button table_delete_button" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
+                <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
             </div>
             <?php
         }
@@ -429,7 +429,7 @@
     <div class="form_item" id="module_change_basicLiterature_div">
         <label class="form_label" for="module_change_basicLiterature">Basisliteratur:**</label>
         <button class="form_add_button button" type="button" name="module_change_basicLiteratureEntry" onclick="addBasicLiteratureEntry(false)"></button>
-        <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldBasicLiterature->num_rows) {
             $i = 0;
             foreach($oldBasicLiterature as $oldBasicLit) {
@@ -491,7 +491,7 @@
     <div class="form_item" id="module_change_deepeningLiterature_div">
         <label class="form_label" for="module_change_deepeningLiterature">Vertiefende Literatur:**</label>
         <button class="form_add_button button" type="button" name="module_change_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(false)"></button>
-        <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldDeepeningLiterature->num_rows) {
             $i = 0;
             foreach($oldDeepeningLiterature as $oldDeepeningLit) {
@@ -544,7 +544,9 @@
         <input  class="form_editor" type="string" id="module_change_deepeningLiteraturePostNote" name="module_change_deepeningLiteraturePostNote" value="<?php echo $result->deepeningLiteraturePostNote;?>"/>
     </div>
 
-    <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    <div class="mandatory_notice">
+        <span>*Pflichtfeld</span><br>
+        <span>**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    </div>
     <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

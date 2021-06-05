@@ -35,7 +35,7 @@
     <div class="form_item" id="module_add_field_div">
         <label class="form_label" for="module_add_field_0">Studienrichtung:**</label>
         <button class="form_add_button button" type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_field_0" name="module_add_field_0">
             <?php
                 if($resultField->num_rows) {
@@ -195,7 +195,7 @@
                     <label class="form_radio_label" for="module_add_TheoryFlag_practical_0">EVL Praxis</label>
                 </div>
             </div>
-            <button class="button table_delete_button" type="button" name="module_add_removeCategory" onclick="removeEntry(this)"></button> 
+            <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_add_removeCategory" onclick="removeEntry(this)"></button> 
         </div>
     </div>
  
@@ -244,7 +244,7 @@
                 <label class="form_label" for="module_add_examSemester_0">Semester:</label>
                 <input class="form_input" type="number" id="module_add_examSemester_0" name="module_add_examSemester_0"/>
             </div>
-            <button class="button table_delete_button" type="button" name="module_add_removeExam" onclick="removeEntry(this)"></button>
+            <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_add_removeExam" onclick="removeEntry(this)"></button>
         </div>
     </div>    
 
@@ -283,7 +283,7 @@
     <div class="form_item" id="module_add_basicLiterature_div">
         <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:**</label>
         <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -316,7 +316,7 @@
     <div class="form_item" id="module_add_deepeningLiterature_div">
         <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:**</label>
         <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_deepeningLiterature_0" name="module_add_deepeningLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -340,7 +340,9 @@
         <input  class="form_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
     </div>
     
-    <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    <div class="mandatory_notice">
+        <span>*Pflichtfeld</span><br>
+        <span>**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    </div>
     <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>
