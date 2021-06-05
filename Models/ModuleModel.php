@@ -65,7 +65,7 @@ class ModuleModel {
     static function getModuleByName($name) {
         $db = DatabaseService::getDatabaseObject();
 
-        $name = mysqli_real_escape_string($db, $name);
+        $name = mysqli_real_escape_string($db, trim($name));
         
         $query = "SELECT * FROM modules WHERE name = '$name'";
         $result = mysqli_query($db, $query);
@@ -240,34 +240,34 @@ class ModuleModel {
     ) {
         $db = DatabaseService::getDatabaseObject();
 
-        $name = mysqli_real_escape_string($db, $name);
-        $nameEN = mysqli_real_escape_string($db, $nameEN);
-        $code = mysqli_real_escape_string($db, $code); 
-        $summary = mysqli_real_escape_string($db, $summary); 
-        $summaryEN = mysqli_real_escape_string($db, $summaryEN);
-        $type = mysqli_real_escape_string($db, $type);
+        $name = mysqli_real_escape_string($db, trim($name));
+        $nameEN = mysqli_real_escape_string($db, trim($nameEN));
+        $code = mysqli_real_escape_string($db, trim($code)); 
+        $summary = mysqli_real_escape_string($db, trim($summary)); 
+        $summaryEN = mysqli_real_escape_string($db, trim($summaryEN));
+        $type = mysqli_real_escape_string($db, trim($type));
         $semester = mysqli_real_escape_string($db, $semester);
         $duration = mysqli_real_escape_string($db, $duration);
         $credits = mysqli_real_escape_string($db, $credits);
-        $usability = mysqli_real_escape_string($db, $usability);
-        $examRequirement = mysqli_real_escape_string($db, $examRequirement);
-        $participationRequirement = mysqli_real_escape_string($db, $participationRequirement);
-        $studyContent = mysqli_real_escape_string($db, $studyContent);
-        $knowledgeBroadening = mysqli_real_escape_string($db, $knowledgeBroadening);
-        $knowledgeDeepening = mysqli_real_escape_string($db, $knowledgeDeepening);
-        $instrumentalCompetence = mysqli_real_escape_string($db, $instrumentalCompetence);
-        $systemicCompetence = mysqli_real_escape_string($db, $systemicCompetence);
-        $communicativeCompetence = mysqli_real_escape_string($db, $communicativeCompetence);
-        $responsibleName = mysqli_real_escape_string($db, $responsibleName);
-        $responsibleEmail = mysqli_real_escape_string($db, $responsibleEmail);
-        $lectureLanguage = mysqli_real_escape_string($db, $lectureLanguage);
-        $frequency = mysqli_real_escape_string($db, $frequency);
-        $media = mysqli_real_escape_string($db, $media);
-        $basicLiteraturePreNote = mysqli_real_escape_string($db, $basicLiteraturePreNote);
-        $basicLiteraturePostNote = mysqli_real_escape_string($db, $basicLiteraturePostNote);
-        $deepeningLiteraturePreNote = mysqli_real_escape_string($db, $deepeningLiteraturePreNote);
-        $deepeningLiteraturePostNote = mysqli_real_escape_string($db, $deepeningLiteraturePostNote);
-        $overallGradeWeighting = mysqli_real_escape_string($db, $overallGradeWeighting);
+        $usability = mysqli_real_escape_string($db, trim($usability));
+        $examRequirement = mysqli_real_escape_string($db, trim($examRequirement));
+        $participationRequirement = mysqli_real_escape_string($db, trim($participationRequirement));
+        $studyContent = mysqli_real_escape_string($db, trim($studyContent));
+        $knowledgeBroadening = mysqli_real_escape_string($db, trim($knowledgeBroadening));
+        $knowledgeDeepening = mysqli_real_escape_string($db, trim($knowledgeDeepening));
+        $instrumentalCompetence = mysqli_real_escape_string($db, trim($instrumentalCompetence));
+        $systemicCompetence = mysqli_real_escape_string($db, trim($systemicCompetence));
+        $communicativeCompetence = mysqli_real_escape_string($db, trim($communicativeCompetence));
+        $responsibleName = mysqli_real_escape_string($db, trim($responsibleName));
+        $responsibleEmail = mysqli_real_escape_string($db, trim($responsibleEmail));
+        $lectureLanguage = mysqli_real_escape_string($db, trim($lectureLanguage));
+        $frequency = mysqli_real_escape_string($db, trim($frequency));
+        $media = mysqli_real_escape_string($db, trim($media));
+        $basicLiteraturePreNote = mysqli_real_escape_string($db, trim($basicLiteraturePreNote));
+        $basicLiteraturePostNote = mysqli_real_escape_string($db, trim($basicLiteraturePostNote));
+        $deepeningLiteraturePreNote = mysqli_real_escape_string($db, trim($deepeningLiteraturePreNote));
+        $deepeningLiteraturePostNote = mysqli_real_escape_string($db, trim($deepeningLiteraturePostNote));
+        $overallGradeWeighting = mysqli_real_escape_string($db, trim($overallGradeWeighting));
         $presenceCreditHours = mysqli_real_escape_string($db, $presenceCreditHours);
         $selfLearningCreditHours = mysqli_real_escape_string($db, $selfLearningCreditHours);
 
@@ -283,10 +283,6 @@ class ModuleModel {
             $credits = "NULL";
         }
 
-        if(empty($overallGradeWeighting)) {
-            $overallGradeWeighting = "NULL";
-        }
-
         if(empty($presenceCreditHours)) {
             $presenceCreditHours = "NULL";
         }
@@ -300,13 +296,13 @@ class ModuleModel {
                                         knowledgeDeepening, instrumentalCompetence, systemicCompetence, communicativeCompetence,
                                         responsibleName, responsibleEmail, lectureLanguage, frequency, media, basicLiteraturePreNote, 
                                         basicLiteraturePostNote, deepeningLiteraturePreNote, deepeningLiteraturePostNote, overallGradeWeighting,
-                                        presenceCreditHours, selfLearningCreditHours) 
+                                        presenceCreditHours, selfLearningCreditHours, lockedFlag) 
                     VALUES ('$name', NULLIF('$nameEN',''), NULLIF('$code',''), NULLIF('$summary',''), NULLIF('$summaryEN',''), NULLIF('$type',''), 
                     $semester, $duration, $credits, NULLIF('$usability',''), NULLIF('$examRequirement',''), NULLIF('$participationRequirement',''),
                     NULLIF('$studyContent',''), NULLIF('$knowledgeBroadening',''), NULLIF('$knowledgeDeepening',''), NULLIF('$instrumentalCompetence',''),
                     NULLIF('$systemicCompetence',''), NULLIF('$communicativeCompetence',''), NULLIF('$responsibleName',''), NULLIF('$responsibleEmail',''), 
                     NULLIF('$lectureLanguage',''), NULLIF('$frequency',''), NULLIF('$media',''), NULLIF('$basicLiteraturePreNote',''), NULLIF('$basicLiteraturePostNote',''), 
-                    NULLIF('$deepeningLiteraturePreNote',''), NULLIF('$deepeningLiteraturePostNote',''), $overallGradeWeighting, $presenceCreditHours, $selfLearningCreditHours)";
+                    NULLIF('$deepeningLiteraturePreNote',''), NULLIF('$deepeningLiteraturePostNote',''), NULLIF('$overallGradeWeighting',''), $presenceCreditHours, $selfLearningCreditHours, 0)";
         
         $result = mysqli_query($db, $insert);
 
@@ -321,7 +317,11 @@ class ModuleModel {
         $field = mysqli_real_escape_string($db, $field);
         $courseID = mysqli_real_escape_string($db, $courseID);
 
-        if(!empty($field)) {
+        if(!empty($field) || $field == 0) {
+            if($field == 0) {
+                $field = "NULL";
+            }
+
             if(empty($moduleID)) {
                 return false;
             }
@@ -474,40 +474,43 @@ class ModuleModel {
         $deepeningLiteraturePostNote,
         $overallGradeWeighting,
         $presenceCreditHours,
-        $selfLearningCreditHours
+        $selfLearningCreditHours,
+        $lockedFlag
     ) {
         $db = DatabaseService::getDatabaseObject();
 
-        $name = mysqli_real_escape_string($db, $name);
-        $nameEN = mysqli_real_escape_string($db, $nameEN);
-        $code = mysqli_real_escape_string($db, $code); 
-        $summary = mysqli_real_escape_string($db, $summary); 
-        $summaryEN = mysqli_real_escape_string($db, $summaryEN);
-        $type = mysqli_real_escape_string($db, $type);
+        $name = mysqli_real_escape_string($db, trim($name));
+        $nameEN = mysqli_real_escape_string($db, trim($nameEN));
+        $code = mysqli_real_escape_string($db, trim($code)); 
+        $summary = mysqli_real_escape_string($db, trim($summary)); 
+        $summaryEN = mysqli_real_escape_string($db, trim($summaryEN));
+        $type = mysqli_real_escape_string($db, trim($type));
         $semester = mysqli_real_escape_string($db, $semester);
         $duration = mysqli_real_escape_string($db, $duration);
         $credits = mysqli_real_escape_string($db, $credits);
-        $usability = mysqli_real_escape_string($db, $usability);
-        $examRequirement = mysqli_real_escape_string($db, $examRequirement);
-        $participationRequirement = mysqli_real_escape_string($db, $participationRequirement);
-        $studyContent = mysqli_real_escape_string($db, $studyContent);
-        $knowledgeBroadening = mysqli_real_escape_string($db, $knowledgeBroadening);
-        $knowledgeDeepening = mysqli_real_escape_string($db, $knowledgeDeepening);
-        $instrumentalCompetence = mysqli_real_escape_string($db, $instrumentalCompetence);
-        $systemicCompetence = mysqli_real_escape_string($db, $systemicCompetence);
-        $communicativeCompetence = mysqli_real_escape_string($db, $communicativeCompetence);
-        $responsibleName = mysqli_real_escape_string($db, $responsibleName);
-        $responsibleEmail = mysqli_real_escape_string($db, $responsibleEmail);
-        $lectureLanguage = mysqli_real_escape_string($db, $lectureLanguage);
-        $frequency = mysqli_real_escape_string($db, $frequency);
-        $media = mysqli_real_escape_string($db, $media);
-        $basicLiteraturePreNote = mysqli_real_escape_string($db, $basicLiteraturePreNote);
-        $basicLiteraturePostNote = mysqli_real_escape_string($db, $basicLiteraturePostNote);
-        $deepeningLiteraturePreNote = mysqli_real_escape_string($db, $deepeningLiteraturePreNote);
-        $deepeningLiteraturePostNote = mysqli_real_escape_string($db, $deepeningLiteraturePostNote);
-        $overallGradeWeighting = mysqli_real_escape_string($db, $overallGradeWeighting);
+        $usability = mysqli_real_escape_string($db, trim($usability));
+        $examRequirement = mysqli_real_escape_string($db, trim($examRequirement));
+        $participationRequirement = mysqli_real_escape_string($db, trim($participationRequirement));
+        $studyContent = mysqli_real_escape_string($db, trim($studyContent));
+        $knowledgeBroadening = mysqli_real_escape_string($db, trim($knowledgeBroadening));
+        $knowledgeDeepening = mysqli_real_escape_string($db, trim($knowledgeDeepening));
+        $instrumentalCompetence = mysqli_real_escape_string($db, trim($instrumentalCompetence));
+        $systemicCompetence = mysqli_real_escape_string($db, trim($systemicCompetence));
+        $communicativeCompetence = mysqli_real_escape_string($db, trim($communicativeCompetence));
+        $responsibleName = mysqli_real_escape_string($db, trim($responsibleName));
+        $responsibleEmail = mysqli_real_escape_string($db, trim($responsibleEmail));
+        $lectureLanguage = mysqli_real_escape_string($db, trim($lectureLanguage));
+        $frequency = mysqli_real_escape_string($db, trim($frequency));
+        $media = mysqli_real_escape_string($db, trim($media));
+        $basicLiteraturePreNote = mysqli_real_escape_string($db, trim($basicLiteraturePreNote));
+        $basicLiteraturePostNote = mysqli_real_escape_string($db, trim($basicLiteraturePostNote));
+        $deepeningLiteraturePreNote = mysqli_real_escape_string($db, trim($deepeningLiteraturePreNote));
+        $deepeningLiteraturePostNote = mysqli_real_escape_string($db, trim($deepeningLiteraturePostNote));
+        $overallGradeWeighting = mysqli_real_escape_string($db, trim($overallGradeWeighting));
         $presenceCreditHours = mysqli_real_escape_string($db, $presenceCreditHours);
         $selfLearningCreditHours = mysqli_real_escape_string($db, $selfLearningCreditHours);
+        $lockedFlag = mysqli_real_escape_string($db, $lockedFlag);
+
 
         if(empty($semester)) {
             $semester = "NULL";
@@ -521,10 +524,6 @@ class ModuleModel {
             $credits = "NULL";
         }
 
-        if(empty($overallGradeWeighting)) {
-            $overallGradeWeighting = "NULL";
-        }
-
         if(empty($presenceCreditHours)) {
             $presenceCreditHours = "NULL";
         }
@@ -532,8 +531,12 @@ class ModuleModel {
         if(empty($selfLearningCreditHours)) {
             $selfLearningCreditHours = "NULL";
         }
+
+        if(empty($lockedFlag)) {
+            $lockedFlag = 0;
+        }
     
-        $insert = "UPDATE modules SET name = '$name', nameEN = NULLIF('$nameEN',''), code = NULLIF('$code',''), summary = NULLIF('$summary',''),
+        $query = "UPDATE modules SET name = '$name', nameEN = NULLIF('$nameEN',''), code = NULLIF('$code',''), summary = NULLIF('$summary',''),
                                       summaryEN = NULLIF('$summaryEN',''), type = NULLIF('$type',''), semester = $semester, duration = $duration,
                                       credits = $credits, usability = NULLIF('$usability',''), examRequirement = NULLIF('$examRequirement',''), 
                                       participationRequirement = NULLIF('$participationRequirement',''), studyContent = NULLIF('$studyContent',''), 
@@ -543,11 +546,27 @@ class ModuleModel {
                                       responsibleEmail = NULLIF('$responsibleEmail',''), lectureLanguage = NULLIF('$lectureLanguage',''), 
                                       frequency = NULLIF('$frequency',''), media = NULLIF('$media',''), basicLiteraturePreNote = NULLIF('$basicLiteraturePreNote',''), 
                                       basicLiteraturePostNote = NULLIF('$basicLiteraturePostNote',''), deepeningLiteraturePreNote = NULLIF('$deepeningLiteraturePreNote',''), 
-                                      deepeningLiteraturePostNote = NULLIF('$deepeningLiteraturePostNote',''), overallGradeWeighting = $overallGradeWeighting, 
-                                      presenceCreditHours = $presenceCreditHours, selfLearningCreditHours = $selfLearningCreditHours
+                                      deepeningLiteraturePostNote = NULLIF('$deepeningLiteraturePostNote',''), overallGradeWeighting = NULLIF('$overallGradeWeighting',''), 
+                                      presenceCreditHours = $presenceCreditHours, selfLearningCreditHours = $selfLearningCreditHours, lockedFlag = $lockedFlag
                                   WHERE ID =  $moduleID";
         
-        $result = mysqli_query($db, $insert);
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
+
+/*
+lock module 
+*/
+    static function lockModule($moduleID, $lockedFlag) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $moduleID = mysqli_real_escape_string($db, $moduleID);
+        $lockedFlag = mysqli_real_escape_string($db, $lockedFlag);
+
+        $query = "UPDATE modules SET lockedFlag = $lockedFlag WHERE ID = $moduleID";
+        $result = mysqli_query($db, $query);
 
         return $result;
     }

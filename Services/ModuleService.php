@@ -56,12 +56,13 @@ class ModuleService {
                         return false;
                     }
                 }      
-//TODO: insert more conditions (literatureModel checks, categoryModel ckecks, ...)
-            /*  if(!CourseModel::isCourseByID($code)) {
-                    echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";
-                    return false;
-                }
-            */
+
+                $moduleAdded = true;
+                $fieldAdded = true;
+                $categoriesAdded = true;
+                $examsAdded = true;
+                $basicLiteratureAdded = true;
+                $deepeningLiteratureAdded = true;
 
                 $moduleAdded = ModuleModel::addModule( 
                     $name, 
@@ -114,13 +115,32 @@ class ModuleService {
                 }
                 
                
+                if(!$moduleAdded) {
+                    echo "Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$fieldAdded) {
+                    echo "Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$categoriesAdded) {
+                    echo "Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$examsAdded) {
+                    echo "Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$basicLiteratureAdded) {
+                    echo "Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$deepeningLiteratureAdded) {
+                    echo "Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.";
+                }
 
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
                     echo "Das Modul wurde erfolgreich eingetragen.";
-                }
-                else {
-                    echo "Beim Anlegen des Moduls trat ein Fehler auf. "
-                        ."Bitte prüfen Sie das Modul im Bearbeitungsbereich oder fügen Sie das Modul erneut hinzu.";
                 }
 
                 return true;
@@ -199,17 +219,19 @@ class ModuleService {
     ) {
         if(isset($name)) {
             if(!empty($name)) {
-               ModuleModel::deleteModuleField($moduleID);
-               ModuleModel::deleteModuleCategory($moduleID);
-               ModuleModel::deleteModuleLiterature($moduleID);
-               ExamModel::deleteExamsByModuleID($moduleID);
-                   
-//TODO: insert more conditions (literatureModel checks, categoryModel ckecks, ...)
-            /*  if(!CourseModel::isCourseByID($code)) {
-                    echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";
-                    return false;
-                }
-            */
+                ModuleModel::deleteModuleField($moduleID);
+                ModuleModel::deleteModuleCategory($moduleID);
+                ModuleModel::deleteModuleLiterature($moduleID);
+                ExamModel::deleteExamsByModuleID($moduleID);
+                    
+                $moduleAdded = true;
+                $fieldAdded = true;
+                $categoriesAdded = true;
+                $examsAdded = true;
+                $basicLiteratureAdded = true;
+                $deepeningLiteratureAdded = true;
+
+                $lockedFlag = ModuleModel::getModuleByID($moduleID)->lockedFlag; 
 
                 $moduleAdded = ModuleModel::updateModule( 
                     $moduleID,
@@ -242,7 +264,8 @@ class ModuleService {
                     $deepeningLiteraturePostNote,
                     $overallGradeWeighting,
                     $presenceCreditHours,
-                    $selfLearningCreditHours
+                    $selfLearningCreditHours,
+                    $lockedFlag
                 );
 
                 if(!empty($fields)) {
@@ -275,12 +298,32 @@ class ModuleService {
                     }
                 }
 
+                if(!$moduleAdded) {
+                    echo "Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$fieldAdded) {
+                    echo "Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$categoriesAdded) {
+                    echo "Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$examsAdded) {
+                    echo "Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$basicLiteratureAdded) {
+                    echo "Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.";
+                }
+
+                if(!$deepeningLiteratureAdded) {
+                    echo "Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.";
+                }
+
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
                     echo "Das Modul wurde erfolgreich aktualisiert.";
-                }
-                else {
-                    echo "Beim Aktualisieren des Moduls trat ein Fehler auf. "
-                    ."Bitte prüfen Sie das Modul im Bearbeitungsbereich.";
                 }
 
                 return true;
@@ -291,6 +334,23 @@ class ModuleService {
         }
         else {
             echo "Bitte füllen Sie alle Pflichtfelder aus.";
+        }
+    }
+
+    static function lockModule($moduleID) {
+        $module = ModuleModel::getModuleByID($moduleID);
+
+        if(!empty($module)) {
+            $lockState = $module->lockedFlag;
+
+            if($lockState == 0) {
+                $lockState = 1;
+            }
+            else {
+                $lockState = 0;
+            }
+            
+            ModuleModel::lockModule($moduleID, $lockState);
         }
     }
 }

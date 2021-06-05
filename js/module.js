@@ -4,297 +4,325 @@ var examEntry = 0;
 var basicLiteratureEntry = 0;
 var deepeningLiteratureEntry = 0;
 
-//TODO: fill selectfield with options
-function addFieldEntry(addFlag) {
-    fieldEntry++;
-
-    var div;
-    var addOrChange;
-
-    if(addFlag) {
-        div = document.getElementById("module_add_field_div");
-        addOrChange = "_add_";
-    }
-    else {
-        div = document.getElementById("module_change_field_div");
-        addOrChange = "_change_";
-    }
-
-    var fieldID = "module" + addOrChange + "field_" + fieldEntry;
-
-    var fieldInput = document.createElement("select");
-    fieldInput.setAttribute("class", "form_select");
-    fieldInput.setAttribute("id", fieldID);
-    fieldInput.setAttribute("name", fieldID);
-
-    div.appendChild(fieldInput);
-}
-
-//TODO: fill selectfield with options
-function addCategoryEntry(addFlag) {
-    categoryEntry++;
-    var categoriesDiv;
-
-    if(addFlag) {
-        var categoriesDiv = document.getElementById("module_add_categories_div");
-        addOrChange = "_add_";
-    }
-    else {
-        categoriesDiv = document.getElementById("module_change_categories_div");
-        addOrChange = "_change_";
-    }
-
-    //category
-    var categoryDivId = "module" + addOrChange + "category_div_" + categoryEntry;
-    var categoryDiv = document.createElement("div");
-    categoryDiv.setAttribute("class", "form_item");
-    categoryDiv.setAttribute("id", categoryDivId);
-
-    var categoryId = "module" + addOrChange + "category_" + categoryEntry;
-    var categoryInput = document.createElement("select");
-    categoryInput.setAttribute("class", "form_select");
-    categoryInput.setAttribute("id", categoryId);
-    categoryInput.setAttribute("name", categoryId);
-   /* if(categories.length != 0) {
-        categories.forEach(category => {
-            categoryInput.options.add(new Option(category[0].toString())); //name
-        });
-    }*/
-
-    var categoryLabel = document.createElement("label");
-    categoryLabel.setAttribute("class", "form_label");
-    categoryLabel.setAttribute("for", categoryId);
-    categoryLabel.innerHTML = "Kategorie:";
-    
-    categoriesDiv.appendChild(categoryDiv);
-    categoryDiv.appendChild(categoryLabel);
-    categoryDiv.appendChild(categoryInput);
-
-    //workload
-    var workloadDivId = "module" + addOrChange + "categoryWorkload_div_" + categoryEntry;
-    var workloadDiv = document.createElement("div");
-    workloadDiv.setAttribute("class", "form_item");
-    workloadDiv.setAttribute("id", workloadDivId);
-
-    var workloadId = "module" + addOrChange + "categoryWorkload_" + categoryEntry;
-    var workloadInput = document.createElement("input");
-    workloadInput.setAttribute("class", "form_input");
-    workloadInput.setAttribute("type", "number");
-    workloadInput.setAttribute("id", workloadId);
-    workloadInput.setAttribute("name", workloadId);
-
-    var workloadLabel = document.createElement("label");
-    workloadLabel.setAttribute("class", "form_label");
-    workloadLabel.innerHTML = "Workload (h):";
-    workloadLabel.setAttribute("for", workloadId);
-
-    categoriesDiv.appendChild(workloadDiv);
-    workloadDiv.appendChild(workloadLabel);
-    workloadDiv.appendChild(workloadInput);
-
-    //selflearning theoryFlag divs and headline label
-    var theoryFlagDivID = "module" + addOrChange + "TheoryFlag_div_" + categoryEntry;
-    var theoryFlagDivID_t = "module" + addOrChange + "TheoryFlag_theory_div_" + categoryEntry;
-    var theoryFlagDivID_p = "module" + addOrChange + "TheoryFlag_practical_div_" + categoryEntry;
-
-    var theoryFlagDiv = document.createElement("div");
-    theoryFlagDiv.setAttribute("class", "form_item");
-    theoryFlagDiv.setAttribute("id", theoryFlagDivID);
-
-    var theoryFlagDiv_t = document.createElement("div");
-    theoryFlagDiv_t.setAttribute("class", "form_radio_entry");
-    theoryFlagDiv_t.setAttribute("id", theoryFlagDivID_t);
-
-    var theoryFlagDiv_p = document.createElement("div");
-    theoryFlagDiv_p.setAttribute("class", "form_radio_entry");
-    theoryFlagDiv_p.setAttribute("id", theoryFlagDivID_p);
-
-    var theoryFlagLabel = document.createElement("label");
-    theoryFlagLabel.setAttribute("class", "form_label");
-    theoryFlagLabel.innerHTML = "Einteilung EVL Theorie/Praxis";
-
-    categoriesDiv.appendChild(theoryFlagDiv);
-    theoryFlagDiv.appendChild(theoryFlagLabel);
-    theoryFlagDiv.appendChild(theoryFlagDiv_t);
-    theoryFlagDiv.appendChild(theoryFlagDiv_p);
-
-    //selflearning theoryFlag: theory
-    var theoryFlagId_t = "module" + addOrChange + "TheoryFlag_theory_" + categoryEntry;
-    var theoryFlagInput_t = document.createElement("input");
-    theoryFlagInput_t.setAttribute("class", "form_radio_box");
-    theoryFlagInput_t.setAttribute("type", "radio");
-    theoryFlagInput_t.setAttribute("id", theoryFlagId_t);
-    theoryFlagInput_t.setAttribute("name", theoryFlagId_t);
-
-    var theoryFlagLabel_t = document.createElement("label");
-    theoryFlagLabel_t.setAttribute("class", "form_radio_label");
-    theoryFlagLabel_t.innerHTML = "EVL Theorie";
-    theoryFlagLabel_t.setAttribute("for", theoryFlagId_t);
-
-    theoryFlagDiv_t.appendChild(theoryFlagInput_t);
-    theoryFlagDiv_t.appendChild(theoryFlagLabel_t);
-
-    //selflearning theoryFlag: practical
-    var theoryFlagId_p = "module" + addOrChange + "TheoryFlag_practical_" + categoryEntry;
-    var theoryFlagInput_p = document.createElement("input");
-    theoryFlagInput_p.setAttribute("class", "form_radio_box");
-    theoryFlagInput_p.setAttribute("type", "radio");
-    theoryFlagInput_p.setAttribute("id", theoryFlagId_p);
-    theoryFlagInput_p.setAttribute("name", theoryFlagId_p);
-
-    var theoryFlagLabel_p = document.createElement("label");
-    theoryFlagLabel_p.setAttribute("class", "form_radio_label");
-    theoryFlagLabel_p.innerHTML = "EVL Praxis";
-    theoryFlagLabel_p.setAttribute("for", theoryFlagId_p);
-
-    theoryFlagDiv_p.appendChild(theoryFlagInput_p);
-    theoryFlagDiv_p.appendChild(theoryFlagLabel_p);
-}
-
-function addExamEntry(addFlag) {
-    examEntry++;
-
-    var examTypeDiv;
-    var examDurationDiv;
-    var examCircumferenceDiv;
-    var examPeriodDiv;
-    var examWeigthingDiv;
-    var addOrChange;
-
-    if(addFlag) {
-        examTypeDiv = document.getElementById("module_add_examType_div");
-        examDurationDiv = document.getElementById("module_add_examDuration_div");
-        examCircumferenceDiv = document.getElementById("module_add_examCircumference_div");
-        examPeriodDiv = document.getElementById("module_add_examPeriod_div");
-        examWeigthingDiv = document.getElementById("module_add_examWeighting_div");
-
-        addOrChange = "_add_";
-    }
-    else {
-        examTypeDiv = document.getElementById("module_change_examType_div");
-        examDurationDiv = document.getElementById("module_change_examDuration_div");
-        examCircumferenceDiv = document.getElementById("module_change_examCircumference_div");
-        examPeriodDiv = document.getElementById("module_change_examPeriod_div");
-        examWeigthingDiv = document.getElementById("module_change_examWeighting_div");
-        addOrChange = "_change_";
-    }
-
-    var examTypeID = "module" + addOrChange + "examType_" + examEntry;
-    var examDurationID = "module" + addOrChange + "examDuration_" + examEntry;
-    var examCircumferenceID = "module" + addOrChange + "examCircumference_" + examEntry;
-    var examPeriodID = "module" + addOrChange + "examPeriod_" + examEntry;
-    var examWeigthingID = "module" + addOrChange + "examWeighting_" + examEntry;
-
-
-    var examTypeInput = document.createElement("select");
-    examTypeInput.setAttribute("class", "form_select");
-    examTypeInput.setAttribute("id", examTypeID);
-    examTypeInput.setAttribute("name", examTypeID);
-    examTypeInput.add(new Option("Klausurarbeit", "1"));
-    examTypeInput.add(new Option("Mündliche Prüfungen", "2"));
-    examTypeInput.add(new Option("Mündliches Fachgespräch", "3"));
-    examTypeInput.add(new Option("Präsentation", "4"));
-    examTypeInput.add(new Option("Projektarbeit", "5"));
-    examTypeInput.add(new Option("Präsentation", "6"));
-    examTypeInput.add(new Option("Seminararbeit", "7"));
-    examTypeInput.add(new Option("Programmentwurf", "8"));
-    examTypeInput.add(new Option("Prüfung am Computer", "9"));
-    examTypeInput.add(new Option("Praktische Prüfung", "10"));
-
-    var examDurationInput = document.createElement("input");
-    examDurationInput.setAttribute("class", "form_input");
-    examDurationInput.setAttribute("type", "string");
-    examDurationInput.setAttribute("id", examDurationID);
-    examDurationInput.setAttribute("name", examDurationID);
-
-    var examCircumferenceInput = document.createElement("input");
-    examCircumferenceInput.setAttribute("class", "form_input");
-    examCircumferenceInput.setAttribute("type", "string");
-    examCircumferenceInput.setAttribute("id", examCircumferenceID);
-    examCircumferenceInput.setAttribute("name", examCircumferenceID);
-
-    var examPeriodInput = document.createElement("input");
-    examPeriodInput.setAttribute("class", "form_input");
-    examPeriodInput.setAttribute("type", "string");
-    examPeriodInput.setAttribute("id", examPeriodID);
-    examPeriodInput.setAttribute("name", examPeriodID);
-
-    var examWeightingInput = document.createElement("input");
-    examWeightingInput.setAttribute("class", "form_input");
-    examWeightingInput.setAttribute("type", "string");
-    examWeightingInput.setAttribute("id", examWeigthingID);
-    examWeightingInput.setAttribute("name", examWeigthingID);
-
-    examTypeDiv.appendChild(examTypeInput);
-    examDurationDiv.appendChild(examDurationInput);
-    examCircumferenceDiv.appendChild(examCircumferenceInput);
-    examPeriodDiv.appendChild(examPeriodInput);
-    examWeigthingDiv.appendChild(examWeightingInput);
-}
-
-//TODO: fill selectfield with options
-function addBasicLiteratureEntry(addFlag) {
-    basicLiteratureEntry++;
-
-    var div;
-    var addOrChange;
-
-    if(addFlag) {
-        div = document.getElementById("module_add_basicLiterature_div");
-        addOrChange = "_add_";
-    }
-    else {
-        div = document.getElementById("module_change_basicLiterature_div");
-        addOrChange = "_change_";
-    }
-
-    var basicLiteratureID = "module" + addOrChange + "basicLiterature_" + basicLiteratureEntry;
-
-    var basicLiteratureInput = document.createElement("select");
-    basicLiteratureInput.setAttribute("class", "form_select");
-    basicLiteratureInput.setAttribute("id", basicLiteratureID);
-    basicLiteratureInput.setAttribute("name", basicLiteratureID);
-
-    div.appendChild(basicLiteratureInput);
-}
-
-//TODO: fill selectfield with options
-function addDeepeningLiteratureEntry(addFlag) {
-    deepeningLiteratureEntry++;
-
-    var div;
-    var addOrChange;
-
-    if(addFlag) {
-        div = document.getElementById("module_add_deepeningLiterature_div");
-        addOrChange = "_add_";
-    }
-    else {
-        div = document.getElementById("module_change_deepeningLiterature_div");
-        addOrChange = "_change_";
-    }
-
-    var deepeningLiteratureID = "module" + addOrChange + "deepeningLiterature_" + deepeningLiteratureEntry;
-
-    var deepeningLiteratureInput = document.createElement("select");
-    deepeningLiteratureInput.setAttribute("class", "form_select");
-    deepeningLiteratureInput.setAttribute("id", deepeningLiteratureID);
-    deepeningLiteratureInput.setAttribute("name", deepeningLiteratureID);
-
-    div.appendChild(deepeningLiteratureInput);
-}
-
-function check_status(obj) {
+function check_status(obj, addFlag) {
     var presenceFlag = obj.options[obj.selectedIndex].getAttribute('data-presenceFlag');
     var id = obj.getAttribute('data-id');
-    var div = document.getElementById("module_add_TheoryFlag_" + id);
+    
+    if(addFlag) {
+        var addOrChange = "add";
+    }
+    else {
+        var addOrChange = "change";
+    }
+
+    var div = document.getElementById("module_" + addOrChange + "_TheoryFlag_" + id);
 
     if(div) {
         if(presenceFlag == 1) {
-            div.classList.add("form_item--invisible");
+            div.classList.add("invisible");
+            descendants = document.querySelectorAll("#module_" + addOrChange + "_TheoryFlag_" + id + " *");
+            descendants.forEach(function(item) {
+                item.setAttribute("disabled", "disabled");
+            });
         }
         else {
-            div.classList.remove("form_item--invisible");
+            div.classList.remove("invisible");
+            descendants = document.querySelectorAll("#module_" + addOrChange + "_TheoryFlag_" + id + " *");
+            descendants.forEach(function(item) {
+                item.removeAttribute("disabled");
+            });
         }
+    }
+}
+
+function check_course(obj, addFlag) {
+    var courseID = obj.options[obj.selectedIndex].getAttribute('value');
+
+    if(addFlag) {
+        var fieldDiv = document.getElementById("module_add_field_div");
+    }
+    else {
+        var fieldDiv = document.getElementById("module_change_field_div");
+    }
+
+   
+    var fieldSelects = fieldDiv.querySelectorAll('select:not(.invisible)');
+    fieldSelects.forEach(function(fieldSelect) {
+        Array.from(fieldSelect.options).forEach(function(option) {
+            option.classList.add('invisible');
+            option.setAttribute("disabled", "disabled");
+        });
+
+
+        Array.from(fieldSelect.options).forEach(function(option) {
+            var dataCourse = option.getAttribute('data-course');
+            var value = option.getAttribute('value');
+
+            if(dataCourse == courseID || value == 0) {
+                option.classList.remove('invisible');
+                option.removeAttribute("disabled");
+            }
+        });
+        var fieldSelectClone = fieldSelect.cloneNode(true);
+        fieldSelect.replaceWith(fieldSelectClone);
+    });
+}
+
+function addFieldEntry(addFlag) {
+    if(addFlag) {
+        var div = document.getElementById("module_add_field_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_add_field_0");
+        var id = "module_add_field_" + i;
+    }
+    else {
+        var div = document.getElementById("module_change_field_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_change_field_0");
+        var id = "module_change_field_" + i;
+    }
+
+    var clone = elemToClone.cloneNode(true);
+    clone.setAttribute("id", id);
+    clone.setAttribute("name", id);
+
+    div.appendChild(clone);
+}
+
+function addBasicLiteratureEntry(addFlag) {
+    if(addFlag) {
+        var div = document.getElementById("module_add_basicLiterature_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_add_basicLiterature_0");
+        var id = "module_add_basicLiterature_" + i;
+    }
+    else {
+        var div = document.getElementById("module_change_basicLiterature_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_change_basicLiterature_0");
+        var id = "module_change_basicLiterature_0" + i;
+    }
+
+    var clone = elemToClone.cloneNode(true);
+    clone.setAttribute("id", id);
+    clone.setAttribute("name", id);
+
+    div.appendChild(clone);
+}
+
+function addDeepeningLiteratureEntry(addFlag) {
+    if(addFlag) {
+        var div = document.getElementById("module_add_deepeningLiterature_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_add_deepeningLiterature_0");
+        var id = "module_add_deepeningLiterature_" + i;
+    }
+    else {
+        var div = document.getElementById("module_change_deepeningLiterature_div");
+        var i = div.children.length - 2;
+
+        var elemToClone = document.getElementById("module_change_deepeningLiterature_0");
+        var id = "module_change_deepeningLiterature_" + i;
+    }
+
+    var clone = elemToClone.cloneNode(true);
+    clone.setAttribute("id", id);
+    clone.setAttribute("name", id);
+
+    div.appendChild(clone);
+}
+
+function addCategoryEntry(addFlag) {
+    if(addFlag ) {
+        var div = document.getElementById("module_add_categories_div");
+        var i = div.children.length - 1;
+        
+        var elemToClone = document.getElementById("module_add_categoryDiv_0");
+        var id = "module_add_categoryDiv_" + i;
+        var categoryID = "module_add_category_" + i;
+        var workloadID = "module_add_categoryWorkload_" + i;
+        var semesterID = "module_add_categorySemester_" + i;
+        var theoryFlagDivID = "module_add_TheoryFlag_" + i;
+        var theoryFlag_theoryID = "module_add_TheoryFlag_theory_" + i;
+        var theoryFlag_Name = "module_add_TheoryFlag_" + i;
+        var teoryFlag_practicalID = "module_add_TheoryFlag_practical_" + i;
+    }
+    else {
+        var div = document.getElementById("module_change_categories_div");
+        var i = div.children.length - 1;
+
+        var elemToClone = document.getElementById("module_change_categoryDiv_0");
+        var id = "module_change_categoryDiv_" + i;
+        var categoryID = "module_change_category_" + i;
+        var workloadID = "module_change_categoryWorkload_" + i;
+        var semesterID = "module_change_categorySemester_" + i;
+        var theoryFlagDivID = "module_change_TheoryFlag_" + i;
+        var theoryFlag_theoryID = "module_change_TheoryFlag_theory_" + i;
+        var theoryFlag_Name = "module_change_TheoryFlag_" + i;
+        var teoryFlag_practicalID = "module_change_TheoryFlag_practical_" + i;
+    }
+
+    var clone = elemToClone.cloneNode(true);
+    clone.setAttribute("id", id);
+    clone.setAttribute("name", id);
+
+    childDiv = clone.getElementsByTagName('div');
+
+    var categoryLabel = childDiv[0].getElementsByTagName('label');
+    categoryLabel[0].setAttribute("for", categoryID);
+
+    var categorySelect = childDiv[0].getElementsByTagName('select')
+    categorySelect[0].setAttribute("id", categoryID);
+    categorySelect[0].setAttribute("name", categoryID);
+    categorySelect[0].setAttribute("data-id", i);
+
+    var workloadLabel = childDiv[1].getElementsByTagName('label');
+    workloadLabel[0].setAttribute("for", workloadID);
+
+    var workloadInput = childDiv[1].getElementsByTagName('input');
+    workloadInput[0].setAttribute("id", workloadID);
+    workloadInput[0].setAttribute("name", workloadID);
+
+    var semesterLabel = childDiv[2].getElementsByTagName('label');
+    semesterLabel[0].setAttribute("for", semesterID);
+
+    var semesterInput = childDiv[2].getElementsByTagName('input')
+    semesterInput[0].setAttribute("id", semesterID);
+    semesterInput[0].setAttribute("name", semesterID);
+
+    var theoryFlagDiv = childDiv[3];
+    theoryFlagDiv.setAttribute("id", theoryFlagDivID);
+    
+    var theoryFlag_tDiv = theoryFlagDiv.getElementsByTagName('div')[0];
+    var theoryFlag_pDiv = theoryFlagDiv.getElementsByTagName('div')[1];
+
+    var theoryFlag_theory_label = theoryFlag_tDiv.getElementsByTagName('label');
+    theoryFlag_theory_label[0].setAttribute("for", theoryFlag_theoryID);
+
+    var theoryFlag_theory_input = theoryFlag_tDiv.getElementsByTagName('input');
+    theoryFlag_theory_input[0].setAttribute("id", theoryFlag_theoryID);
+    theoryFlag_theory_input[0].setAttribute("name", theoryFlag_Name);
+
+    var theoryFlag_practical_label = theoryFlag_pDiv.getElementsByTagName('label');
+    theoryFlag_practical_label[0].setAttribute("for", teoryFlag_practicalID);
+
+    var theoryFlag_prctical_input = theoryFlag_pDiv.getElementsByTagName('input');
+    theoryFlag_prctical_input[0].setAttribute("id", teoryFlag_practicalID);
+    theoryFlag_prctical_input[0].setAttribute("name", theoryFlag_Name);
+
+    descendants = clone.querySelectorAll("*");
+    descendants.forEach(function(item) {
+        item.removeAttribute("disabled");
+    });
+    clone.classList.remove("invisible");
+
+    div.appendChild(clone);
+}
+
+function addExamEntry(addFlag) {
+    if(addFlag ) {
+        var div = document.getElementById("module_add_exams_div");
+        var i = div.children.length - 1;
+        
+        var elemToClone = document.getElementById("module_add_examDiv_0");
+        var id = "module_add_examDiv_" + i;
+        var examTypeID = "module_add_examType_" + i;
+        var durationID = "module_add_examDuration_" + i;
+        var circumferenceID = "module_add_examCircumference_" + i;
+        var periodID = "module_add_examPeriod_" + i;
+        var weightingID = "module_add_examWeighting_" + i;
+        var semesterID = "module_add_examSemester_" + i;
+    }
+    else {
+        var div = document.getElementById("module_change_exams_div");
+        var i = div.children.length - 1;
+        
+        var elemToClone = document.getElementById("module_change_examDiv_0");
+        var id = "module_change_examDiv_" + i;
+        var examTypeID = "module_change_examType_" + i;
+        var durationID = "module_change_examDuration_" + i;
+        var circumferenceID = "module_change_examCircumference_" + i;
+        var periodID = "module_change_examPeriod_" + i;
+        var weightingID = "module_change_examWeighting_" + i;
+        var semesterID = "module_change_examSemester_" + i;
+    }
+
+    var clone = elemToClone.cloneNode(true);
+    clone.setAttribute("id", id);
+    clone.setAttribute("name", id);
+
+    childDiv = clone.getElementsByTagName('div');
+
+    var examTypeLabel = childDiv[0].getElementsByTagName('label');
+    examTypeLabel[0].setAttribute("for", examTypeID);
+
+    var examTypeSelect = childDiv[0].getElementsByTagName('select')
+    examTypeSelect[0].setAttribute("id", examTypeID);
+    examTypeSelect[0].setAttribute("name", examTypeID);
+
+    var durationLabel = childDiv[1].getElementsByTagName('label');
+    durationLabel[0].setAttribute("for", durationID);
+
+    var durationInput = childDiv[1].getElementsByTagName('input');
+    durationInput[0].setAttribute("id", durationID);
+    durationInput[0].setAttribute("name", durationID);    
+
+    var circumferencelabel = childDiv[2].getElementsByTagName('label');
+    circumferencelabel[0].setAttribute("for", circumferenceID);
+
+    var circumferenceInput = childDiv[2].getElementsByTagName('input');
+    circumferenceInput[0].setAttribute("id", circumferenceID);
+    circumferenceInput[0].setAttribute("name", circumferenceID);
+
+    var periodLabel = childDiv[3].getElementsByTagName('label');
+    periodLabel[0].setAttribute("for", periodID);
+
+    var periodInput = childDiv[3].getElementsByTagName('input');
+    periodInput[0].setAttribute("id", periodID);
+    periodInput[0].setAttribute("name", periodID);
+
+    var weightingLabel = childDiv[4].getElementsByTagName('label');
+    weightingLabel[0].setAttribute("for", weightingID);
+
+    var weightingInput = childDiv[4].getElementsByTagName('input');
+    weightingInput[0].setAttribute("id", weightingID);
+    weightingInput[0].setAttribute("name", weightingID);
+
+    var semesterLabel = childDiv[5].getElementsByTagName('label');
+    semesterLabel[0].setAttribute("for", semesterID);
+
+    var semesterInput = childDiv[5].getElementsByTagName('input')
+    semesterInput[0].setAttribute("id", semesterID);
+    semesterInput[0].setAttribute("name", semesterID);
+
+    descendants = clone.querySelectorAll("*");
+    descendants.forEach(function(item) {
+        item.removeAttribute("disabled");
+    });
+    clone.classList.remove("invisible");
+
+    div.appendChild(clone);
+}
+
+function removeEntry(button) {
+    button.parentElement.classList.add("invisible");
+    descendants = button.parentElement.querySelectorAll("*");
+    descendants.forEach(function(item) {
+        item.setAttribute("disabled", "disabled");
+    });
+}
+
+function removeLastSelectEntry(button) {
+    var div = button.parentElement;
+    var items = div.querySelectorAll('select:not(.invisible)');
+    if(items.length > 1) {
+        var item = items[items.length - 1];
+        item.setAttribute("disabled", "disabled");
+        item.classList.add("invisible");
     }
 }

@@ -1,59 +1,58 @@
 <div class="table_container">
     <div class="table_container_header">
         <h2>Liste der Module</h2>
-<!--TODO: place it right (stylesheet.css)-->
         <form method="POST">
             <input class="table_add_button button" type="submit" id="module_add_button" name="module_add_button" value=""/>
         </form>
     </div>
     <?php
-        if($result->num_rows) {
-    ?>
-<table id="module_list_table">
-    <!--what should be part of the table?-->
-    <th>Modulname</th>
-<!--<th>Modulname (Englisch)</th>-->
-    <th>Modulcode</th>
-<!--<th>Zusammenfassung</th>
-    <th>Zusammenfassung (Englisch)</th>-->
-    <th>Modultyp</th>
-    <th>Semester</th>
-<!--<th>Dauer</th>-->
-    <th>Credits</th>
-<!--<th>Verwendbarkeit</th>
-    <th>Zulassungsvoraussetzungen Prüfung</th>
-    <th>Teilnahmevoraussetzungen</th>
-    <th>Lerninhalte</th>
-    <th>Wissensverbreiterung</th>
-    <th>Wissensvertiefung</th>
-    <th>Instrumentale Kompetenz</th>
-    <th>Systemische Kompetenz</th>
-    <th>Kommunikative Kompetenz</th>-->
+    if($result->num_rows) {
+        ?>
+        <table id="module_list_table">
+            <!--what should be part of the table?-->
+            <th>Modulname</th>
+        <!--<th>Modulname (Englisch)</th>-->
+            <th>Modulcode</th>
+        <!--<th>Zusammenfassung</th>
+            <th>Zusammenfassung (Englisch)</th>-->
+            <th>Modultyp</th>
+            <th>Semester</th>
+        <!--<th>Dauer</th>-->
+            <th>Credits</th>
+        <!--<th>Verwendbarkeit</th>
+            <th>Zulassungsvoraussetzungen Prüfung</th>
+            <th>Teilnahmevoraussetzungen</th>
+            <th>Lerninhalte</th>
+            <th>Wissensverbreiterung</th>
+            <th>Wissensvertiefung</th>
+            <th>Instrumentale Kompetenz</th>
+            <th>Systemische Kompetenz</th>
+            <th>Kommunikative Kompetenz</th>-->
 
-    <!--or just show total workload?-->
-    <!--<th>Kategorie</th>-->
-    <th>Workload</th>
+            <!--or just show total workload?-->
+            <!--<th>Kategorie</th>-->
+            <th>Workload</th>
 
-<!--<th>Prüfungsart</th>
-    <th>Prüfungsdauer</th>
-    <th>Umfang</th>
-    <th>Prüfungszeitraum</th>
-    <th>Gewichtung</th>-->
-    <th>Verantwortlicher</th>
-<!--<th>Unterrichtssprache</th>
-    <th>Angebotsfrequenz</th>-->
-<!--<th>Medien/Arbeitsmaterialien</th>
-    <th>Basisliteratur (Vorbemerkung)</th>
-    <th>Basisliteratur</th>
-    <th>Basisliteratur (Nachbemerkung)</th>
-    <th>Vertiefende Literatur (Vorbemerkung)</th>
-    <th>Vertiefende Literatur</th>
-    <th>Vertiefende Literatur (Nachbemerkung)</th>-->
-    <th>Validität</th>
-    <th></th>
- 
-    <?php foreach($result as $module) {
-            ?>
+        <!--<th>Prüfungsart</th>
+            <th>Prüfungsdauer</th>
+            <th>Umfang</th>
+            <th>Prüfungszeitraum</th>
+            <th>Gewichtung</th>-->
+            <th>Verantwortlicher</th>
+        <!--<th>Unterrichtssprache</th>
+            <th>Angebotsfrequenz</th>-->
+        <!--<th>Medien/Arbeitsmaterialien</th>
+            <th>Basisliteratur (Vorbemerkung)</th>
+            <th>Basisliteratur</th>
+            <th>Basisliteratur (Nachbemerkung)</th>
+            <th>Vertiefende Literatur (Vorbemerkung)</th>
+            <th>Vertiefende Literatur</th>
+            <th>Vertiefende Literatur (Nachbemerkung)</th>-->
+            <th>Validität</th>
+            <th></th>
+        
+            <?php foreach($result as $module) {
+                ?>
                 <tr>
                     <!--what should be part of the table?-->
                     <td><?php echo $module["name"];?></td>
@@ -111,12 +110,14 @@
                         </form>
                     </td>
                 </tr>
-            <?php
+                <?php
             }
-        }
-        else {
-            echo "Aktuell sind keine Module eingetragen.";
-        }
+            ?>
+        </table>
+        <?php
+    }
+    else {
+        echo "Aktuell sind keine Module eingetragen.";
+    }
     ?>
-</table>
 </div>
