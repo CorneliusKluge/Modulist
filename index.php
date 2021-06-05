@@ -2,7 +2,6 @@
 
 namespace Modulist;
 
-use Modulist\Controllers\AjaxController;
 use Modulist\Controllers\CourseController;
 use Modulist\Controllers\ExportController;
 use Modulist\Controllers\FieldController;
@@ -15,7 +14,6 @@ use Modulist\Controllers\CategoryController;
 include("Controllers/ModuleController.php");
 include("Controllers/CategoryController.php");
 include("Controllers/ExportController.php");
-include("Controllers/AjaxController.php");
 include("Controllers/StudyManagementController.php");
 include("Controllers/CourseController.php");
 include("Controllers/FieldController.php");
@@ -63,9 +61,6 @@ class MainController {
                 break;
             case "field":
                 new FieldController();
-                break;
-            case "ajax":
-                new AjaxController();
                 break;
             case "literature":
                 new LiteratureController();

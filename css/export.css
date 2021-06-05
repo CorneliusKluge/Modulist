@@ -1,3 +1,6 @@
+@page {
+    margin-top: 100px;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -8,6 +11,14 @@ body {
     page-break-after: always;
 }
 
+header {
+    position: fixed;
+    top: -60px;
+    left: 0px;
+    right: 0px;
+    height: 100px;
+    padding: 0px 45px;
+}
 /*---------------------introView----------------------*/ 
 
 .heading_container {
@@ -75,12 +86,26 @@ h1 {
     padding: 10px 45px 20px 45px;
     font-size: 13px;
 }
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+a.thin {
+    font-weight: normal;
+}
 
 /*---------------------ModuleView----------------------*/ 
 
 .module {
     padding: 10px 45px 20px 45px;
     font-size: 13px;
+}
+
+.section_headline {
+    padding: 0px 45px;
+    margin-bottom: -15px;
+    font-size: 18px;
 }
 
 .top_headline {
@@ -179,4 +204,9 @@ h1 {
 .exam_table .heading_1 {
     background-color: lightgrey;
     font-weight: bolder;
+}
+
+.summary-pre-note {
+    font-weight: bold;
+    font-style: italic;
 }

@@ -625,7 +625,7 @@ class ModuleModel {
         return $result;
     }*/
 
-    static function getAllModulesOfCourse($courseID) {
+    static function getAllModulesOfCourseExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
         $courseID = mysqli_real_escape_string($db, $courseID);
@@ -633,7 +633,7 @@ class ModuleModel {
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
                     LEFT JOIN fields AS t3 ON t2.fieldID = t3.id
-                    WHERE t3.courseID = $courseID OR t2.courseID = $courseID";
+                    WHERE (t3.courseID = $courseID OR t2.courseID = $courseID) AND t1.lockedFlag = 0";
         $result = mysqli_query($db, $query);
         
         return $result;
@@ -703,74 +703,74 @@ class ModuleModel {
             return "";
         }
     }
-    static function getCompulsoryCourseModules($courseID) {
+    static function getCompulsoryCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
         $courseID = mysqli_real_escape_string($db, $courseID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.courseID = $courseID AND t1.type = 'Pflichtmodul' AND t2.fieldID IS NULL ORDER BY t1.semester";
+                    WHERE t2.courseID = $courseID AND t1.type = 'Pflichtmodul' AND t2.fieldID IS NULL AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;
     }
-    static function getElectiveCourseModules($courseID) {
+    static function getElectiveCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
         $courseID = mysqli_real_escape_string($db, $courseID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.courseID = $courseID AND t1.type = 'Wahlpflichtmodul' AND t2.fieldID IS NULL ORDER BY t1.semester";
+                    WHERE t2.courseID = $courseID AND t1.type = 'Wahlpflichtmodul' AND t2.fieldID IS NULL AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;
     }
-    static function getPracticalCourseModules($courseID) {
+    static function getPracticalCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
         $courseID = mysqli_real_escape_string($db, $courseID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.courseID = $courseID AND t1.type = 'Praxismodul' AND t2.fieldID IS NULL ORDER BY t1.semester";
+                    WHERE t2.courseID = $courseID AND t1.type = 'Praxismodul' AND t2.fieldID IS NULL AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;
     }
-    static function getCompulsoryModulesByField($fieldID) {
+    static function getCompulsoryModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
         $fieldID = mysqli_real_escape_string($db, $fieldID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.fieldID = $fieldID AND t1.type = 'Pflichtmodul' ORDER BY t1.semester";
+                    WHERE t2.fieldID = $fieldID AND t1.type = 'Pflichtmodul' AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;
     }
-    static function getElectiveModulesByField($fieldID) {
+    static function getElectiveModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
         $fieldID = mysqli_real_escape_string($db, $fieldID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.fieldID = $fieldID AND t1.type = 'Wahlpflichtmodul' ORDER BY t1.semester";
+                    WHERE t2.fieldID = $fieldID AND t1.type = 'Wahlpflichtmodul' AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;
     }
-    static function getPracticalModulesByField($fieldID) {
+    static function getPracticalModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
         $fieldID = mysqli_real_escape_string($db, $fieldID);
 
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
-                    WHERE t2.fieldID = $fieldID AND t1.type = 'Praxismodul' ORDER BY t1.semester";
+                    WHERE t2.fieldID = $fieldID AND t1.type = 'Praxismodul' AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;

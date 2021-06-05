@@ -205,11 +205,11 @@ function getFieldDeleteView(id) {
 
             var overlay = document.getElementById("overlay");
             if(overlay) {
-                overlay.classList.add("overlay--visible");
+                overlay.classList.remove("invisible");
             }
             var deleteFormContainer = document.getElementById("field_deleteForm_container");
             if(deleteFormContainer) {
-                deleteFormContainer.classList.add("field_deleteForm_container--visible");
+                deleteFormContainer.classList.remove("invisible");
             }
         }
     };
@@ -348,11 +348,11 @@ function getCourseDeleteView(id) {
 
             var overlay = document.getElementById("overlay");
             if(overlay) {
-                overlay.classList.add("overlay--visible");
+                overlay.classList.remove("invisible");
             }
             var deleteFormContainer = document.getElementById("course_deleteForm_container");
             if(deleteFormContainer) {
-                deleteFormContainer.classList.add("course_deleteForm_container--visible");
+                deleteFormContainer.classList.remove("invisible");
             }
         }
     };
@@ -456,11 +456,15 @@ function courseChangeFormEvent() {
 function closeEvent() {
     var overlay = document.getElementById("overlay");
     if(overlay) {
-        overlay.classList.remove("overlay--visible");
+        overlay.classList.add("invisible");
     }
 
-    var deleteFormContainer = document.getElementById("field_deleteForm_container");
-    if(deleteFormContainer) {
-        deleteFormContainer.classList.remove("field_deleteForm_container--visible");
+    var fieldDeleteFormContainer = document.getElementById("field_deleteForm_container");
+    if(fieldDeleteFormContainer) {
+        fieldDeleteFormContainer.classList.add("invisible");
+    }
+    var courseDeleteFormContainer = document.getElementById("course_deleteForm_container");
+    if(courseDeleteFormContainer) {
+        courseDeleteFormContainer.classList.add("invisible");
     }
 }

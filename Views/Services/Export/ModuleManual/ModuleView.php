@@ -3,14 +3,73 @@
 use Modulist\Models\CategoryModel;
 use Modulist\Models\ExamModel;
 use Modulist\Models\LiteratureModel;
+use Modulist\Models\ModuleModel;
 
-if($result->num_rows) {
-    foreach($result as $module) {
+if($compulsoryCourseModules->num_rows) {
+?>
+    <h1 class="section_headline" id="section_compulsoryCourse">Pflichtmodule Studiengang</h1>
+    <?php
+    foreach($compulsoryCourseModules as $module) {
+        printModule($module);
+    }
+}
+foreach($resultFields as $field) {
+    $modules = ModuleModel::getCompulsoryModulesByFieldExceptLocked($field["ID"]);
+    if($modules->num_rows) {
     ?>
-    <span class="page_break"></span>
+        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Pflichtmodule <?php echo $field["name"];?></h1>
+        <?php
+        foreach($modules as $module) {
+            printModule($module);
+        }
+    }
+}
+
+if($electiveCourseModules->num_rows) {
+?>
+    <h1 class="section_headline" id="section_electiveCourse">Wahlpflichtmodule Studiengang</h1>
+    <?php
+    foreach($electiveCourseModules as $module) {
+        printModule($module);
+    }
+}
+foreach($resultFields as $field) {
+    $modules = ModuleModel::getElectiveModulesByFieldExceptLocked($field["ID"]);
+    if($modules->num_rows) {
+    ?>
+        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Wahlpflichtmodule <?php echo $field["name"];?></h1>
+        <?php
+        foreach($modules as $module) {
+            printModule($module);
+        }
+    }
+}
+
+if($practicalCourseModules->num_rows) {
+?>
+    <h1 class="section_headline" id="section_practicalCourse">Praxismodule Studiengang</h1>
+    <?php
+    foreach($practicalCourseModules as $module) {
+        printModule($module);
+    }
+}
+foreach($resultFields as $field) {
+    $modules = ModuleModel::getPracticalModulesByFieldExceptLocked($field["ID"]);
+    if($modules->num_rows) {
+    ?>
+        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Praxismodule <?php echo $field["name"];?></h1>
+        <?php
+        foreach($modules as $module) {
+            printModule($module);
+        }
+    }
+}
+function printModule($module) {
+?>
     <div class="module">
-        <h2 class="top_headline"><?php echo $module["name"];?></h2>
+        <h2 class="top_headline" id="module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></h2>
         <div>
+            <span class="summary-pre-note">Zusammenfassung:</span><br>
             <?php echo $module["summary"];?>
         </div>
         <div class="columns-2">
@@ -275,8 +334,8 @@ if($result->num_rows) {
             </div>
         </div>
     </div>
-    <?php
-    }
+    <span class="page_break"></span>
+<?php
 }
 function getExamTypeString($examType) {
     switch($examType) {

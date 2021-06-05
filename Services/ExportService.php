@@ -11,6 +11,9 @@ class ExportService {
     static function exportModuleManual($courseID, $lang) {
         if($lang == "de") {
             $courseName = CourseModel::getCourseByID($courseID)->name;
+            $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
+            $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
+            $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
             $resultFields = FieldModel::getFieldsByCourseID($courseID);
             
             ob_start();
@@ -18,7 +21,6 @@ class ExportService {
             $template = ob_get_clean();
 
             ob_start();
-            $result = ModuleModel::getAllModulesOfCourse($courseID);
             include("Views/Services/Export/ModuleManual/IntroView.php");
             include("Views/Services/Export/ModuleManual/ModuleView.php");
             $view = ob_get_clean();
@@ -28,21 +30,10 @@ class ExportService {
         }
         else {
             $courseNameEN = CourseModel::getCourseByID($courseID)->nameEN;
-            $courseModulesAll = mysqli_fetch_all(ModuleModel::getAllModulesOfCourse($courseID), MYSQLI_ASSOC);
+            $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
+            $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
+            $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
             $resultFields = FieldModel::getFieldsByCourseID($courseID);
-
-            if($resultFields->num_rows) {
-                foreach($resultFields as $field) {
-                    $fieldModules[$field["ID"]] = mysqli_fetch_all(ModuleModel::getAllModulesOfField($field["ID"]), MYSQLI_BOTH);
-                }
-            }
-
-            $courseModulesIntersect = array_uintersect_assoc($courseModulesAll, ...$fieldModules, ...[function($arr1, $arr2) {return $arr1 == $arr2;}]);
-            
-            foreach($fieldModules as $key => $value) {
-                $fieldModules[$key] = array_udiff($fieldModules[$key], $courseModulesIntersect, function($arr1, $arr2) { return $arr1["ID"] - $arr2["ID"];});
-            }
-            $courseModules = array_udiff($courseModulesAll, ...$fieldModules, ...[function($arr1, $arr2) { return $arr1["ID"] - $arr2["ID"];}]);
 
             ob_start();
             include("Views/Services/Export/ModuleManual/ModuleViewEN.php");
@@ -52,41 +43,10 @@ class ExportService {
         }
     }
     static function exportStudySchedule($courseID) {
-        /*$courseModulesAll = mysqli_fetch_all(ModuleModel::getAllModulesOfCourse($courseID), MYSQLI_ASSOC);
-        $resultFields = FieldModel::getFieldsByCourseID($courseID);
-
-        if($resultFields->num_rows) {
-            foreach($resultFields as $field) {
-                $fieldModules[$field["ID"]] = mysqli_fetch_all(ModuleModel::getAllModulesOfField($field["ID"]), MYSQLI_BOTH);
-            }
-        }
-        echo "<hr><pre>";
-        echo '$fieldModulesFirst';
-        print_r($fieldModules);
-        echo "</pre>";
-
-        $courseModulesIntersect = array_uintersect_assoc($courseModulesAll, ...$fieldModules, ...[function($arr1, $arr2) {return $arr1 == $arr2;}]);
-        
-        foreach($fieldModules as $key => $value) {
-            $fieldModules[$key] = array_udiff($fieldModules[$key], $courseModulesIntersect, function($arr1, $arr2) { return $arr1["ID"] - $arr2["ID"];});
-        }
-        $courseModules = array_udiff($courseModulesAll, ...$fieldModules, ...[function($arr1, $arr2) { return $arr1["ID"] - $arr2["ID"];}]);
-
-        echo "<hr><pre>";
-        //echo '$courseModelsAll';
-        //print_r($courseModulesAll);
-        echo '$courseModulesIntersect';
-        print_r($courseModulesIntersect);
-        echo '$fieldModules';
-        print_r($fieldModules);
-        echo '$courseModules';
-        print_r($courseModules);
-        echo "</pre>";
-        exit;*/
         $courseName = CourseModel::getCourseByID($courseID)->name;
-        $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModules($courseID);
-        $electiveCourseModules = ModuleModel::getElectiveCourseModules($courseID);
-        $practicalCourseModules = ModuleModel::getPracticalCourseModules($courseID);
+        $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
+        $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
+        $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
         $resultFields = FieldModel::getFieldsByCourseID($courseID);
 
         ob_start();
@@ -97,9 +57,9 @@ class ExportService {
     }
     static function exportExamSchedule($courseID) {
         $courseName = CourseModel::getCourseByID($courseID)->name;
-        $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModules($courseID);
-        $electiveCourseModules = ModuleModel::getElectiveCourseModules($courseID);
-        $practicalCourseModules = ModuleModel::getPracticalCourseModules($courseID);
+        $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
+        $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
+        $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
         $resultFields = FieldModel::getFieldsByCourseID($courseID);
 
         ob_start();

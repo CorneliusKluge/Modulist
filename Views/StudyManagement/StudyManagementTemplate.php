@@ -31,7 +31,7 @@
             <div class="course_management_container">
                 <div id="course_list_container"></div>
             </div>
-            <div id="course_deleteForm_container" class="message_container"></div>
+            <div id="course_deleteForm_container" class="message_container invisible"></div>
         </div>
 
         <div class="field_container">
@@ -40,15 +40,15 @@
                 <button type="button" id="field_add_button" class="table_add_button button" value=""></button>
             </div>
             <div id="field_form_container"></div>
-            <div id="field_message_container" class="message_container"></div>
+            
+            <div id="field_message_container"></div>
             <div class="field_management_container">
-               
                 <div id="field_list_container"></div>
             </div>
-            <div id="field_deleteForm_container" class="message_container"></div> 
+            <div id="field_deleteForm_container" class="message_container invisible"></div> 
         </div>
 
-        <div id="overlay" class="overlay overlay--invisible"></div>
+        <div id="overlay" class="overlay invisible"></div>
         <script src="js/deleteView.js"></script>
     </body>
 </html>

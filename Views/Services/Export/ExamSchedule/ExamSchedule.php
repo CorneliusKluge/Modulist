@@ -44,7 +44,7 @@
             }
         }
         foreach($resultFields as $field) {
-            $modules = ModuleModel::getCompulsoryModulesByField($field["ID"]);
+            $modules = ModuleModel::getCompulsoryModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
             ?>
                 <tr>
@@ -68,7 +68,7 @@
             }
         }
         foreach($resultFields as $field) {
-            $modules = ModuleModel::getElectiveModulesByField($field["ID"]);
+            $modules = ModuleModel::getElectiveModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
             ?>
                 <tr>
@@ -92,7 +92,7 @@
             }
         }
         foreach($resultFields as $field) {
-            $modules = ModuleModel::getPracticalModulesByField($field["ID"]);
+            $modules = ModuleModel::getPracticalModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
             ?>
                 <tr>
@@ -104,10 +104,6 @@
                 }
             }
         }
-        $error = error_get_last();
-        echo "<pre>";
-        print_r($error);
-        echo "</pre>";
     ?>
 </table>
 <?php
