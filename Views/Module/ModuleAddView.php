@@ -33,7 +33,7 @@
     </div>
 
     <div class="form_item" id="module_add_field_div">
-        <label class="form_label" for="module_add_field_0">Studienrichtung:</label>
+        <label class="form_label" for="module_add_field_0">Studienrichtung:**</label>
         <button class="form_add_button button" type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)"></button>
         <button class="button table_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_field_0" name="module_add_field_0">
@@ -236,7 +236,7 @@
             </div>
 
             <div class="form_item" id="module_add_examWeighting_div">
-                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:**</label>
+                <label class="form_label" for="module_add_examWeighting_0">Gewichtung (%):**</label>
                 <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
             </div>
 
@@ -281,7 +281,7 @@
     </div>
 
     <div class="form_item" id="module_add_basicLiterature_div">
-        <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:</label>
+        <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:**</label>
         <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
         <button class="button table_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
@@ -314,7 +314,7 @@
     </div>
 
     <div class="form_item" id="module_add_deepeningLiterature_div">
-        <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:</label>
+        <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:**</label>
         <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>
         <button class="button table_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_deepeningLiterature_0" name="module_add_deepeningLiterature_0">
@@ -341,6 +341,6 @@
     </div>
     
     <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
     <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>
