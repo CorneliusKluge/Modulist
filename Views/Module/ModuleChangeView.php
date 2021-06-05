@@ -33,7 +33,7 @@
     </div>
    
     <div class="form_item" id="module_change_field_div">
-        <label class="form_label" for="module_change_field_0">Studienrichtung:</label>
+        <label class="form_label" for="module_change_field_0">Studienrichtung:**</label>
         <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)"></button>
         <button class="button table_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldFields->num_rows) {
@@ -190,7 +190,7 @@
             ?>
             <div class="form_group" id="<?php echo $inputCategoryDiv;?>">
                 <div class="form_item">
-                    <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:</label>
+                    <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:**</label>
                     <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>" data-id="<?php echo $i;?>" onchange="check_status(this, false);">
                         <?php
                             $invisibleFlag = 0;
@@ -236,7 +236,7 @@
             ?>
             <div class="form_group" id="module_add_categoryDiv_0">
                 <div class="form_item" id="module_add_TheoryFlag_0">
-                    <label class="form_label" for="module_change_category_0">Kategorie:</label>
+                    <label class="form_label" for="module_change_category_0">Kategorie:**</label>
                     <select class="form_select" id="module_change_category_0" name="module_change_category_0">
                         <?php
                             $invisibleFlag = 0;
@@ -298,7 +298,7 @@
                 ?>
                 <div class="form_group" id="<?php echo $divID;?>">
                     <div class="form_item" id="module_change_examType_div">
-                        <label class="form_label" for="<?php echo $inputExamType;?>">Art der PL:</label>
+                        <label class="form_label" for="<?php echo $inputExamType;?>">Art der PL:**</label>
                         <select class="form_select" id="<?php echo $inputExamType;?>" name="<?php echo $inputExamType;?>">
                             <option value="1" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 1) {?> selected <?php }}?>>Klausurarbeit</option>
                             <option value="2" <?php if(!empty($oldExam["examType"])) {if($oldExam["examType"] == 2) {?> selected <?php }}?>>Mündliche Prüfung</option>
@@ -325,12 +325,12 @@
                     </div>
 
                     <div class="form_item" id="module_change_examPeriod_div">
-                        <label class="form_label" for="<?php echo $inputPeriod;?>">Prüfungszeitraum:</label>
+                        <label class="form_label" for="<?php echo $inputPeriod;?>">Prüfungszeitraum:**</label>
                         <input class="form_input" type="string" id="<?php echo $inputPeriod;?>" name="<?php echo $inputPeriod;?>"  value="<?php if(!empty($oldExam["examPeriod"])) {echo $oldExam["examPeriod"];}?>"/>
                     </div>
 
                     <div class="form_item" id="module_change_examWeighting_div">
-                        <label class="form_label" for="<?php echo $inputWeightingID;?>">Gewichtung:</label>
+                        <label class="form_label" for="<?php echo $inputWeightingID;?>">Gewichtung (%):**</label>
                         <input class="form_input" type="string" id="<?php echo $inputWeightingID;?>" name="<?php echo $inputWeightingID;?>"  value="<?php if(!empty($oldExam["examWeighting"])) {echo $oldExam["examWeighting"];}?>"/>
                     </div>
 
@@ -380,7 +380,7 @@
                 </div>
 
                 <div class="form_item" id="module_change_examWeighting_div">
-                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:**</label>
+                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung (%):**</label>
                     <input class="form_input" type="string" id="module_change_examWeighting" name="module_change_examWeighting_0"/>
                 </div>
 
@@ -427,7 +427,7 @@
     </div>
 
     <div class="form_item" id="module_change_basicLiterature_div">
-        <label class="form_label" for="module_change_basicLiterature">Basisliteratur:</label>
+        <label class="form_label" for="module_change_basicLiterature">Basisliteratur:**</label>
         <button class="form_add_button button" type="button" name="module_change_basicLiteratureEntry" onclick="addBasicLiteratureEntry(false)"></button>
         <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldBasicLiterature->num_rows) {
@@ -489,7 +489,7 @@
     </div>
 
     <div class="form_item" id="module_change_deepeningLiterature_div">
-        <label class="form_label" for="module_change_deepeningLiterature">Vertiefende Literatur:</label>
+        <label class="form_label" for="module_change_deepeningLiterature">Vertiefende Literatur:**</label>
         <button class="form_add_button button" type="button" name="module_change_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(false)"></button>
         <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldDeepeningLiterature->num_rows) {
@@ -545,6 +545,6 @@
     </div>
 
     <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
     <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>
