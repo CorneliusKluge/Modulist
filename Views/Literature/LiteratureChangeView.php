@@ -4,17 +4,17 @@
     <h2>Literatur bearbeiten</h2>
 
     <div class="form_item">
-        <label class="form_label" for="literature_change_authors">Autoren:</label>
+        <label class="form_label" for="literature_change_authors">Autoren:*</label>
         <input class="form_input" type="string" id="literature_change_authors" name="literature_change_authors" value="<?php echo $result->authors;?>"/>
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="literature_change_title">Titel:</label>
+        <label class="form_label" for="literature_change_title">Titel:*</label>
         <input class="form_input" type="string" id="literature_change_title" name="literature_change_title" value="<?php echo $result->title;?>"/>
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="literature_change_year">Jahr der Veröffentlichung:</label>
+        <label class="form_label" for="literature_change_year">Jahr der Veröffentlichung:*</label>
         <input class="form_input" type="string" id="literature_change_year" name="literature_change_year" value="<?php echo $result->year;?>"/>
     </div>
  
@@ -37,5 +37,7 @@
         <label class="form_label" for="literature_change_isbn">ISBN:</label>
         <input class="form_input" type="string" id="literature_change_isbn" name="literature_change_isbn" value="<?php echo $result->isbn;?>"/>
     </div>
+    
+    <span class="mandatory_notice">*Pflichtfeld</span>
     <button class="form_submit button" type="submit" name="literature_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

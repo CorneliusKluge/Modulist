@@ -2,7 +2,7 @@
     <h2>Modul hinzufügen</h2>
 
     <div class="form_item">
-        <label class="form_label" for="module_add_name">Name:</label>
+        <label class="form_label" for="module_add_name">Name:*</label>
         <input class="form_input" type="string" id="module_add_name" name="module_add_name" required/>
     </div>
 
@@ -197,7 +197,7 @@
         <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
         <div class="form_group">
             <div class="form_item" id="module_add_examType_div">
-                <label class="form_label" for="module_add_examType_0">Art der PL:</label>
+                <label class="form_label" for="module_add_examType_0">Art der PL:**</label>
                 <select class="form_select" id="module_add_examType_0" name="module_add_examType_0">
                     <option value="1">Klausurarbeit</option>
                     <option value="2">Mündliche Prüfung</option>
@@ -224,12 +224,12 @@
             </div>
 
             <div class="form_item" id="module_add_examPeriod_div">
-                <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:</label>
+                <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:**</label>
                 <input class="form_input" type="string" id="module_add_examPeriod_0" name="module_add_examPeriod_0"/>
             </div>
 
             <div class="form_item" id="module_add_examWeighting_div">
-                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:</label>
+                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:**</label>
                 <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
             </div>
 
@@ -329,6 +329,8 @@
         <label class="form_label" for="module_add_deepeningLiteraturePostNote">Vertiefende Literatur (Nachbemerkungen):</label>
         <input  class="form_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
     </div>
-
+    
+    <span class="mandatory_notice">*Pflichtfeld</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
     <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>

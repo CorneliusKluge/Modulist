@@ -2,7 +2,7 @@
     <h2>Modul bearbeiten</h2>
 
     <div class="form_item">
-        <label class="form_label" for="module_change_name">Name:</label>
+        <label class="form_label" for="module_change_name">Name:*</label>
         <input class="form_input" type="string" id="module_change_name" name="module_change_name" value="<?php echo $result->name;?>"/>
     </div>
 
@@ -336,7 +336,7 @@
             ?>
             <div class="form_group">
                 <div class="form_item" id="module_change_examType_div">
-                    <label class="form_label" for="module_change_examType_0">Art der PL:</label>
+                    <label class="form_label" for="module_change_examType_0">Art der PL:**</label>
                     <select class="form_select" id="module_change_examType_0" name="module_change_examType_0">
                         <option value="1">Klausurarbeit</option>
                         <option value="2">Mündliche Prüfung</option>
@@ -363,12 +363,12 @@
                 </div>
 
                 <div class="form_item" id="module_change_examPeriod_div">
-                    <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:</label>
+                    <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:**</label>
                     <input class="form_input" type="string" id="module_change_examPeriod_0" name="module_change_examPeriod_0"/>
                 </div>
 
                 <div class="form_item" id="module_change_examWeighting_div">
-                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:</label>
+                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:**</label>
                     <input class="form_input" type="string" id="module_change_examWeighting" name="module_change_examWeighting_0"/>
                 </div>
 
@@ -529,5 +529,7 @@
         <input  class="form_editor" type="string" id="module_change_deepeningLiteraturePostNote" name="module_change_deepeningLiteraturePostNote" value="<?php echo $result->deepeningLiteraturePostNote;?>"/>
     </div>
 
+    <span class="mandatory_notice">*Pflichtfeld</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
     <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

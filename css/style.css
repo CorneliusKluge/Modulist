@@ -265,6 +265,10 @@ h4 {
     margin-left: 15px;
 }
 
+.mandatory_notice {
+    
+}
+
 .form_submit {
     width: 200px;
     align-self: flex-end;
