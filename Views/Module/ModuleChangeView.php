@@ -545,6 +545,6 @@
     </div>
 
     <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
     <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>
