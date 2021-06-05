@@ -2,7 +2,7 @@
     <h2>Modul bearbeiten</h2>
 
     <div class="form_item">
-        <label class="form_label" for="module_change_name">Name:</label>
+        <label class="form_label" for="module_change_name">Name:*</label>
         <input class="form_input" type="string" id="module_change_name" name="module_change_name" value="<?php echo $result->name;?>"/>
     </div>
 
@@ -19,7 +19,7 @@
     
     <div class="form_item">
         <label class="form_label" for="module_change_course">Studiengang:</label>
-        <select class="form_select" id="module_change_course" name="module_change_course">
+        <select class="form_select" id="module_change_course" name="module_change_course" onchange="check_course(this, false);">
             <?php
                 if($resultCourse->num_rows) {
                     foreach($resultCourse as $course) {
@@ -35,17 +35,19 @@
     <div class="form_item" id="module_change_field_div">
         <label class="form_label" for="module_change_field_0">Studienrichtung:</label>
         <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)"></button>
+        <button class="button table_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldFields->num_rows) {
             $i = 0;
             foreach($oldFields as $oldField) {
                 $inputID = "module_change_field_".$i;
                 ?>
                 <select class="form_select" id="<?php echo $inputID;?>" name="<?php echo $inputID;?>">
+                    <option value="0">Alle</option>
                     <?php
                         if($resultField->num_rows) {
                             foreach($resultField as $field) {
                             ?>
-                                <option value="<?php echo $field["ID"];?>" <?php if($field["ID"] == $oldField["fieldID"]) {?> selected <?php }?>><?php echo $field["name"];?></option>
+                                <option value="<?php echo $field["ID"];?>" data-course="<?php echo $field["courseID"];?>" <?php if($field["ID"] == $oldField["fieldID"]) {?> selected <?php }?>><?php echo $field["name"];?></option>
                             <?php
                             }
                         }
@@ -62,7 +64,7 @@
                     if($resultField->num_rows) {
                         foreach($resultField as $field) {
                         ?>
-                            <option value="<?php echo $field["ID"];?>"></option>
+                            <option value="<?php echo $field["ID"];?>" data-course="<?php echo $field["courseID"];?>"></option>
                         <?php
                         }
                     }
@@ -105,7 +107,7 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_overallGradeWeighting">Gewichtung Modulnote für Gesamtnote:</label>
-        <input class="form_input" type="number" id="module_change_overallGradeWeighting" name="module_change_overallGradeWeighting" value="<?php echo $result->overallGradeWeighting;?>"/>
+        <input class="form_input" type="string" id="module_change_overallGradeWeighting" name="module_change_overallGradeWeighting" value="<?php echo $result->overallGradeWeighting;?>"/>
     </div>
 
     <div class="form_item">
@@ -177,6 +179,7 @@
         <?php if($oldCategories->num_rows) {
             $i = 0;
             foreach($oldCategories as $oldCategory) {
+                $inputCategoryDiv = "module_change_categoryDiv_".$i;
                 $inputCategoryID = "module_change_category_".$i;
                 $inputWorkloadID = "module_change_categoryWorkload_".$i;
                 $inputSemesterID = "module_change_categorySemester_".$i;
@@ -185,15 +188,16 @@
                 $inputTheoryFlagName = "module_change_TheoryFlag_".$i;
                 $inputTheoryFlagDiv = "module_change_TheoryFlag_".$i;
             ?>
-            <div class="form_group">
-                <div class="form_group">
+            <div class="form_group" id="<?php echo $inputCategoryDiv;?>">
+                <div class="form_item">
                     <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:</label>
-                    <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>">
+                    <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>" data-id="<?php echo $i;?>" onchange="check_status(this, false);">
                         <?php
+                            $invisibleFlag = 0;
                             if($resultCategories->num_rows) {
                                 foreach($resultCategories as $category) {
                                 ?>
-                                    <option value="<?php echo $category["ID"];?>" <?php if($category["ID"] == $oldCategory["categoryID"]) {?> selected <?php }?>><?php echo $category["name"];?></option>
+                                    <option value="<?php echo $category["ID"];?>" data-presenceFlag="<?php echo $category["presenceFlag"];?>" <?php if($category["ID"] == $oldCategory["categoryID"]) { echo "selected"; $invisibleFlag = $category["presenceFlag"];}?>><?php echo $category["name"];?></option>
                                 <?php
                                 }
                             }
@@ -208,20 +212,21 @@
 
                 <div class="form_item">
                     <label class="form_label" for="<?php echo $inputSemesterID;?>">Semester:</label>
-                    <input class="form_input" type="number" id="<?php echo $inputSemesterID;?>" name="<?php echo $inputSemesterID;?>"/>
+                    <input class="form_input" type="number" id="<?php echo $inputSemesterID;?>" name="<?php echo $inputSemesterID;?>" value="<?php echo $oldCategory["semester"];?>"/>
                 </div>
 
-                <div class="form_item" id="<?php echo $inputTheoryFlagDiv;?>">
+                <div class="form_item <?php if($invisibleFlag) { echo "invisible";}?>" id="<?php echo $inputTheoryFlagDiv;?>">
                     <label class="form_label">Einteilung EVL Theorie/Praxis</label>
                     <div class="form_radio_entry">
-                        <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_t;?>" name="<?php echo $inputTheoryFlagName;?>" value="1" <?php if($oldCategory["theoryFlag"] === 1) {?> checked="checked" <?php }?>/>
+                        <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_t;?>" name="<?php echo $inputTheoryFlagName;?>" value="1" <?php if($oldCategory["theoryFlag"]) {?> checked="checked" <?php }?>/>
                         <label for="<?php echo $inputTheoryFlagID_t;?>">EVL Theorie</label>
                     </div>
                     <div class="form_radio_entry">
-                        <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_p;?>" name="<?php echo $inputTheoryFlagName;?>" value="0" <?php if($oldCategory["theoryFlag"] === 0) {?> checked="checked" <?php }?>/>
+                        <input class="form_radio" type="radio" id="<?php echo $inputTheoryFlagID_p;?>" name="<?php echo $inputTheoryFlagName;?>" value="0" <?php if(!$oldCategory["theoryFlag"] && isset($oldCategory["theoryFlag"])) {?> checked="checked" <?php }?>/>
                         <label for="<?php echo $inputTheoryFlagID_p;?>">EVL Praxis</label>
                     </div>
                 </div>
+                <button class="button table_delete_button" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
             </div>
             <?php
             $i++;
@@ -229,14 +234,18 @@
         }
         else {
             ?>
-            <div class="form_group">
+            <div class="form_group" id="module_add_categoryDiv_0">
                 <div class="form_item" id="module_add_TheoryFlag_0">
                     <label class="form_label" for="module_change_category_0">Kategorie:</label>
                     <select class="form_select" id="module_change_category_0" name="module_change_category_0">
                         <?php
+                            $invisibleFlag = 0;
                             if($resultCategories->num_rows) {
                                 foreach($resultCategories as $category) {
-                                ?>
+                                    if($i == 1) { 
+                                        $invisibleFlag = $category["presenceFlag"];
+                                    }
+                                    ?>
                                     <option value="<?php echo $category["ID"];?>"><?php echo $category["name"];?></option>
                                 <?php
                                 }
@@ -255,17 +264,18 @@
                     <input class="form_input" type="number" id="module_change_categorySemester_0" name="module_change_categorySemester_0"/>
                 </div>
 
-                <div class="form_item" id="module_change_TheoryFlag_0">
-                <label class="form_label">Einteilung EVL Theorie/Praxis</label>
+                <div class="form_item <?php if($invisibleFlag) { echo "invisible";}?>" id="module_change_TheoryFlag_0">
+                    <label class="form_label">Einteilung EVL Theorie/Praxis</label>
                     <div class="form_radio_entry">
                         <input class="form_radio_box" type="radio" id="module_change_TheoryFlag_theory_0" name="module_change_TheoryFlag_0" value="1"/>
-                        <label class="form_radio_label" for="module_change_TheoryFlag_0">EVL Theorie</label>
+                        <label class="form_radio_label" for="module_change_TheoryFlag_theory_0">EVL Theorie</label>
                     </div>
                     <div class="form_radio_entry">
                         <input class="form_radio_box" type="radio" id="module_change_TheoryFlag_practical_0" name="module_change_TheoryFlag_0" value="0"/>
-                        <label class="form_radio_label" for="module_change_TheoryFlag_0">EVL Praxis</label>
+                        <label class="form_radio_label" for="module_change_TheoryFlag_practical_0">EVL Praxis</label>
                     </div>
                 </div>
+                <button class="button table_delete_button" type="button" name="module_change_removeCategory" onclick="removeEntry(this)"></button> 
             </div>
             <?php
         }
@@ -278,6 +288,7 @@
         <?php if($oldExams->num_rows) {
             $i = 0;
             foreach($oldExams as $oldExam) {
+                $divID = "module_change_examDiv_".$i;
                 $inputExamType = "module_change_examType_".$i;
                 $inputDuration = "module_change_examDuration_".$i;
                 $inputCircumference = "module_change_examCircumference_".$i;
@@ -285,7 +296,7 @@
                 $inputWeightingID = "module_change_examWeighting_".$i;
                 $inputSemesterID = "module_add_examSemester_".$i;
                 ?>
-                <div class="form_group">
+                <div class="form_group" id="<?php echo $divID;?>">
                     <div class="form_item" id="module_change_examType_div">
                         <label class="form_label" for="<?php echo $inputExamType;?>">Art der PL:</label>
                         <select class="form_select" id="<?php echo $inputExamType;?>" name="<?php echo $inputExamType;?>">
@@ -325,8 +336,9 @@
 
                     <div class="form_item">
                         <label class="form_label" for="<?php echo $inputSemesterID;?>">Semester:</label>
-                        <input class="form_input" type="number" id="<?php echo $inputSemesterID;?>" name="<?php echo $inputSemesterID;?>"/>
+                        <input class="form_input" type="number" id="<?php echo $inputSemesterID;?>" name="<?php echo $inputSemesterID;?>" value="<?php if(!empty($oldExam["examSemester"])) {echo $oldExam["examSemester"];}?>"/>
                     </div>
+                    <button class="button table_delete_button" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
                 </div>
                 <?php
                 $i++;
@@ -334,9 +346,9 @@
         }
         else {
             ?>
-            <div class="form_group">
+            <div class="form_group" id="module_change_examDiv_0">
                 <div class="form_item" id="module_change_examType_div">
-                    <label class="form_label" for="module_change_examType_0">Art der PL:</label>
+                    <label class="form_label" for="module_change_examType_0">Art der PL:**</label>
                     <select class="form_select" id="module_change_examType_0" name="module_change_examType_0">
                         <option value="1">Klausurarbeit</option>
                         <option value="2">Mündliche Prüfung</option>
@@ -363,12 +375,12 @@
                 </div>
 
                 <div class="form_item" id="module_change_examPeriod_div">
-                    <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:</label>
+                    <label class="form_label" for="module_change_examPeriod_0">Prüfungszeitraum:**</label>
                     <input class="form_input" type="string" id="module_change_examPeriod_0" name="module_change_examPeriod_0"/>
                 </div>
 
                 <div class="form_item" id="module_change_examWeighting_div">
-                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:</label>
+                    <label class="form_label" for="module_change_examWeighting_0">Gewichtung:**</label>
                     <input class="form_input" type="string" id="module_change_examWeighting" name="module_change_examWeighting_0"/>
                 </div>
 
@@ -376,6 +388,7 @@
                     <label class="form_label" for="module_change_examSemester_0">Semester:</label>
                     <input class="form_input" type="number" id="module_change_examSemester_0" name="module_change_examSemester_0"/>
                 </div>
+                <button class="button table_delete_button" type="button" name="module_change_removeExam" onclick="removeEntry(this)"></button>
             </div>
             <?php
         }
@@ -416,6 +429,7 @@
     <div class="form_item" id="module_change_basicLiterature_div">
         <label class="form_label" for="module_change_basicLiterature">Basisliteratur:</label>
         <button class="form_add_button button" type="button" name="module_change_basicLiteratureEntry" onclick="addBasicLiteratureEntry(false)"></button>
+        <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldBasicLiterature->num_rows) {
             $i = 0;
             foreach($oldBasicLiterature as $oldBasicLit) {
@@ -477,6 +491,7 @@
     <div class="form_item" id="module_change_deepeningLiterature_div">
         <label class="form_label" for="module_change_deepeningLiterature">Vertiefende Literatur:</label>
         <button class="form_add_button button" type="button" name="module_change_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(false)"></button>
+        <button class="button table_delete_button" type="button" name="module_change_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <?php if($oldDeepeningLiterature->num_rows) {
             $i = 0;
             foreach($oldDeepeningLiterature as $oldDeepeningLit) {
@@ -529,5 +544,7 @@
         <input  class="form_editor" type="string" id="module_change_deepeningLiteraturePostNote" name="module_change_deepeningLiteraturePostNote" value="<?php echo $result->deepeningLiteraturePostNote;?>"/>
     </div>
 
+    <span class="mandatory_notice">*Pflichtfeld</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
     <button class="form_submit button" type="submit" name="module_change_submit" value="<?php echo $result->ID;?>">Speichern</button>
 </form>

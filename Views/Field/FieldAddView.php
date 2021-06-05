@@ -1,6 +1,6 @@
 <form method="POST" id="field_add_form" class="field_form_container">
     <div class="form_item">
-        <label class="form_label" for="field_add_name">Name:</label>
+        <label class="form_label" for="field_add_name">Name:*</label>
         <input class="form_input" type="string" id="field_add_name" name="field_add_name"/>
     </div>
 
@@ -10,7 +10,7 @@
     </div>
     
     <div class="form_item">
-        <label class="form_label" for="field_add_course">Studiengang:</label>
+        <label class="form_label" for="field_add_course">Studiengang:*</label>
         <select class="form_select" id="field_add_course" name="field_add_course">
             <?php
                 if($result->num_rows) {
@@ -24,5 +24,6 @@
         </select>
     </div>
 
+    <span class="mandatory_notice">*Pflichtfeld</span>
     <button class="form_submit button" type="button" id="field_add_submit">Speichern</button>
 </form>

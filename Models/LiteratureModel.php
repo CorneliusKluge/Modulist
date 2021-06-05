@@ -26,13 +26,13 @@ class LiteratureModel {
     ) {
         $db = DatabaseService::getDatabaseObject();
 
-        $authors = mysqli_real_escape_string($db, $authors);
-        $title = mysqli_real_escape_string($db, $title);
+        $authors = mysqli_real_escape_string($db, trim($authors));
+        $title = mysqli_real_escape_string($db, trim($title));
         $year = mysqli_real_escape_string($db, $year);
-        $edition = mysqli_real_escape_string($db, $edition);
-        $place = mysqli_real_escape_string($db, $place);
-        $publisher = mysqli_real_escape_string($db, $publisher);
-        $isbn = mysqli_real_escape_string($db, $isbn);
+        $edition = mysqli_real_escape_string($db, trim($edition));
+        $place = mysqli_real_escape_string($db, trim($place));
+        $publisher = mysqli_real_escape_string($db, trim($publisher));
+        $isbn = mysqli_real_escape_string($db, trim($isbn));
 
         if(empty($year)) {
             $year = "NULL";
@@ -64,17 +64,52 @@ class LiteratureModel {
         return $result;
     }
 
+    static function isLiteratureByATY($authors, $title, $year) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $authors = mysqli_real_escape_string($db, trim($authors));
+        $title = mysqli_real_escape_string($db, trim($title));
+        $year = mysqli_real_escape_string($db, $year);
+
+        $query = "SELECT * FROM literature WHERE authors = '$authors' AND title = '$title' AND year = $year";
+        $result = mysqli_query($db, $query);
+        if($result->num_rows) {
+            return true;
+        }
+        else { 
+            return false;
+        }      
+    }
+
+    static function isLiteratureByATYExceptSelf($id, $authors, $title, $year) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $id = mysqli_real_escape_string($db, $id);
+        $authors = mysqli_real_escape_string($db, trim($authors));
+        $title = mysqli_real_escape_string($db, trim($title));
+        $year = mysqli_real_escape_string($db, $year);
+
+        $query = "SELECT * FROM literature WHERE authors = '$authors' AND title = '$title' AND year = $year AND ID <> $id";
+        $result = mysqli_query($db, $query);
+        if($result->num_rows) {
+            return true;
+        }
+        else { 
+            return false;
+        }      
+    }
+
     static function changeLiterature($id, $authors, $title, $year, $edition, $place, $publisher, $isbn){
         $db = DatabaseService::getDatabaseObject();
 
         $id = mysqli_real_escape_string($db, $id);
-        $authors = mysqli_real_escape_string($db, $authors);
-        $title = mysqli_real_escape_string($db, $title);
+        $authors = mysqli_real_escape_string($db, trim($authors));
+        $title = mysqli_real_escape_string($db, trim($title));
         $year = mysqli_real_escape_string($db, $year);
-        $edition = mysqli_real_escape_string($db, $edition);
-        $place = mysqli_real_escape_string($db, $place);
-        $publisher = mysqli_real_escape_string($db, $publisher);
-        $isbn = mysqli_real_escape_string($db, $isbn);
+        $edition = mysqli_real_escape_string($db, trim($edition));
+        $place = mysqli_real_escape_string($db, trim($place));
+        $publisher = mysqli_real_escape_string($db, trim($publisher));
+        $isbn = mysqli_real_escape_string($db, trim($isbn));
 
         if(empty($year)) {
             $year = "NULL";
@@ -105,6 +140,7 @@ class LiteratureModel {
 
         return $result;
     }
+
     static function getBasicLiteratureByModuleID($moduleID) {
         $db = DatabaseService::getDatabaseObject();
 

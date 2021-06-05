@@ -261,6 +261,10 @@ h4 {
     margin-left: 15px;
 }
 
+.mandatory_notice {
+    
+}
+
 .form_submit {
     width: 200px;
     align-self: flex-end;
@@ -268,7 +272,7 @@ h4 {
     margin-left: calc(90% - 100px); /* subtract the margins + half of buttons width */
 }
 
-.form_item--invisible {
+.invisible {
     display: none;
 }
 /*------------------------table------------------------*/ 

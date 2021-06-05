@@ -57,6 +57,10 @@ class ModuleController {
         if(isset($_POST["module_delete_submit"])) {
             $this->moduleDeleteSubmit($_POST["module_delete_submit"]);
         }
+
+        if(isset($_POST["module_lock_button"])) {
+            $this->lockModule($_POST["module_lock_button"]);
+        }
     }
 
     public function getModuleAddSubmit()
@@ -124,99 +128,59 @@ class ModuleController {
     functions to change database entries
 */
     function moduleAddSubmit() {
-        $i = 0;
-        $j = 0;
-        $k = 0;
-        $l = 0;
-        $m = 0;
-        $stillCategories = true;
-        $stillFields = true;
-        $stillExams = true;
-        $stillBasicLiterature = true;
-        $stillDeepeningLiterature = true;
-
         ob_start();
-        while($stillCategories) {
-            $inputCategory = "module_add_category_".$i;
-            if(isset($_POST[$inputCategory])) {
-                $inputWorkload = "module_add_categoryWorkload_".$i;
-                $inputTheoryFlag = "module_add_TheoryFlag_".$i;
-                $inputSemester = "module_add_categorySemester_".$i;
-                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null, $_POST[$inputSemester] ?? null); 
-            }
-            else {
-                $stillCategories = false;
+        $cIndices = array();
+        $eIndices = array();
+        $fIndices = array();
+        $bLitIndices = array();
+        $dLitIndices = array();
+        $categories = array();
+        $exams = array();
+        $fields = array();
+        $basicLiterature = array();
+        $deepeningLiterature = array();
+
+
+        foreach($_POST as $key => $value) {
+            if(stripos($key, "module_add_category_") === 0) {
+                $cIndices[] = substr($key, strrpos($key, "_") + 1);
             }
 
-            $i++;
-            if($i = 5) {
-                $stillCategories = false;
+            if(stripos($key, "module_add_examType_") === 0) {
+                $eIndices[] = substr($key, strrpos($key, "_") + 1);
+            }
+
+            if(stripos($key, "module_add_field_") === 0) {
+                $fIndices[] = substr($key, strrpos($key, "_") + 1);
+            }
+
+            if(stripos($key, "module_add_basicLiterature_") === 0) {
+                $bLitIndices[] = substr($key, strrpos($key, "_") + 1);
+            }
+
+            if(stripos($key, "module_add_deepeningLiterature_") === 0) {
+                $dLitIndices[] = substr($key, strrpos($key, "_") + 1);
             }
         }
 
-        while($stillFields) {
-            $inputField = "module_add_field_".$j;
-            if(isset($_POST[$inputField])) {
-                $fields[] = $_POST[$inputField] ?? null;
-            }
-            else {
-                $stillFields = false;
-            }
-
-            $j++;
-            if($j = 5) {
-                $stillFields = false;
-            }
+        foreach($cIndices as $cIndex) {
+            $categories[] = array($_POST["module_add_category_" . $cIndex] ?? null, $_POST["module_add_categoryWorkload_" . $cIndex], $_POST["module_add_TheoryFlag_" . $cIndex] ?? null, $_POST["module_add_categorySemester_" . $cIndex] ?? null);
         }
 
-        while($stillExams) {
-            $inputExam = "module_add_examType_".$k;
-            if(isset($_POST[$inputExam])) {
-                $inputDuration = "module_add_examDuration_".$k;
-                $inputCircumference = "module_add_examCircumference_".$k;
-                $inputPeriod = "module_add_examPeriod_".$k;
-                $inputWeighting = "module_add_examWeighting_".$k;
-                $inputExamSemester = "module_add_examSemester_".$k;
-                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputExamSemester] ?? null, $_POST[$inputWeighting] ?? null);    
-            }
-            else {
-                $stillExams = false;
-            }
-
-            $k++;
-            if($k = 5) {
-                $stillExams = false;
-            }
+        foreach($eIndices as $eIndex) {
+            $exams[] = array($_POST["module_add_examType_" . $eIndex] ?? null, $_POST["module_add_examDuration_" . $eIndex] ?? null, $_POST["module_add_examCircumference_" . $eIndex] ?? null, $_POST["module_add_examPeriod_" . $eIndex] ?? null,$_POST["module_add_examSemester_" . $eIndex] ?? null, $_POST["module_add_examWeighting_" . $eIndex] ?? null);    
         }
 
-        while($stillBasicLiterature) {
-            $inputBasicLiterarture = "module_add_basicLiterature_".$l;
-            if(isset($_POST[$inputBasicLiterarture])) {
-                $basicLiterature[] = $_POST[$inputBasicLiterarture] ?? null;
-            }
-            else {
-                $stillBasicLiterature = false;
-            }
-
-            $l++;
-            if($l = 5) {
-                $stillBasicLiterature = false;
-            }
+        foreach($fIndices as $fIndex) {
+            $fields[] = $_POST["module_add_field_" . $fIndex] ?? null;
         }
 
-        while($stillDeepeningLiterature) {
-            $inputDeepeningLiterarture = "module_add_deepeningLiterature_".$m;
-            if(isset($_POST[$inputDeepeningLiterarture])) {
-                $deepeningLiterature[] = $_POST[$inputDeepeningLiterarture] ?? null;
-            }
-            else {
-                $stillDeepeningLiterature = false;
-            }
-            
-            $m++;
-            if($m = 5) {
-                $stillDeepeningLiterature = false;
-            }
+        foreach($bLitIndices as $bLitIndex) {
+            $basicLiterature[] = $_POST["module_add_basicLiterature_" . $bLitIndex] ?? null;
+        }
+
+        foreach($dLitIndices as $dLitIndex) {
+            $deepeningLiterature[] = $_POST["module_add_deepeningLiterature_" . $dLitIndex] ?? null;
         }
 
         $bool = ModuleService::addModule(
@@ -270,100 +234,59 @@ class ModuleController {
         echo $output;
     }
 
-    function moduleChangeSubmit($moduleID){
-        $i = 0;
-        $j = 0;
-        $k = 0;
-        $l = 0;
-        $m = 0;
-        $stillCategories = true;
-        $stillFields = true;
-        $stillExams = true;
-        $stillBasicLiterature = true;
-        $stillDeepeningLiterature = true;
-
+    function moduleChangeSubmit($moduleID) {
         ob_start();
-        while($stillCategories) {
-            $inputCategory = "module_change_category_".$i;
-            if(isset($_POST[$inputCategory])) {
-                $inputWorkload = "module_change_categoryWorkload_".$i;
-                $inputTheoryFlag = "module_change_TheoryFlag_".$i;
-                $inputSemester = "module_change_categorySemester_".$i;
-                $categories[] = array($_POST[$inputCategory] ?? null, $_POST[$inputWorkload] ?? null, $_POST[$inputTheoryFlag] ?? null, $_POST[$inputSemester] ?? null); 
+        $cIndices = array();
+        $eIndices = array();
+        $fIndices = array();
+        $bLitIndices = array();
+        $dLitIndices = array();
+        $categories = array();
+        $exams = array();
+        $fields = array();
+        $basicLiterature = array();
+        $deepeningLiterature = array();
+
+        foreach($_POST as $key => $value) {
+            if(stripos($key, "module_change_category_") === 0) {
+                $cIndices[] = substr($key, strrpos($key, "_") + 1);
             }
-            else {
-                $stillCategories = false;
+
+            if(stripos($key, "module_change_examType_") === 0) {
+                $eIndices[] = substr($key, strrpos($key, "_") + 1);
             }
-            $i++;
-            if($i = 5) {
-                $stillCategories = false;
+
+            if(stripos($key, "module_change_field_") === 0) {
+                $fIndices[] = substr($key, strrpos($key, "_") + 1);
+            }
+
+            if(stripos($key, "module_change_basicLiterature_") === 0) {
+                $bLitIndices[] = substr($key, strrpos($key, "_") + 1);
+            }
+
+            if(stripos($key, "module_change_deepeningLiterature_") === 0) {
+                $dLitIndices[] = substr($key, strrpos($key, "_") + 1);
             }
         }
-      
 
-        while($stillFields) {
-            $inputField = "module_change_field_".$j;
-            if(isset($_POST[$inputField])) {
-                $fields[] = $_POST[$inputField] ?? null;
-            }
-            else {
-                $stillFields = false;
-            }
-
-            $j++;
-            if($j = 5) {
-                $stillFields = false;
-            }
+        foreach($cIndices as $cIndex) {
+            $categories[] = array($_POST["module_change_category_" . $cIndex] ?? null, $_POST["module_change_categoryWorkload_" . $cIndex], $_POST["module_change_TheoryFlag_" . $cIndex] ?? null, $_POST["module_change_categorySemester_" . $cIndex] ?? null);
+        }
+    
+        foreach($eIndices as $eIndex) {
+            $exams[] = array($_POST["module_change_examType_" . $eIndex] ?? null, $_POST["module_change_examDuration_" . $eIndex] ?? null, $_POST["module_change_examCircumference_" . $eIndex] ?? null, $_POST["module_change_examPeriod_" . $eIndex] ?? null, $_POST["module_change_examWeighting_" . $eIndex] ?? null, $_POST["module_change_examSemester_" . $eIndex] ?? null);    
         }
 
-        while($stillExams) {
-            $inputExam = "module_change_examType_".$k;
-            if(isset($_POST[$inputExam])) {
-                $inputDuration = "module_change_examDuration_".$k;
-                $inputCircumference = "module_change_examCircumference_".$k;
-                $inputPeriod = "module_change_examPeriod_".$k;
-                $inputWeighting = "module_change_examWeighting_".$k;
-                $inputExamSemester = "module_change_examSemester_".$k;
-                $exams[] = array($_POST[$inputExam] ?? null, $_POST[$inputDuration] ?? null, $_POST[$inputCircumference] ?? null, $_POST[$inputPeriod] ?? null, $_POST[$inputExamSemester] ?? null, $_POST[$inputWeighting] ?? null);    
-            }
-            else {
-                $stillExams = false;
-            }
-
-            $k++;
-            if($k = 5) {
-                $stillExams = false;
-            }
+        foreach($fIndices as $fIndex) {
+            $fields[] = $_POST["module_change_field_" . $fIndex] ?? null;
         }
-       
-        while($stillBasicLiterature) {
-            $inputBasicLiterarture = "module_change_basicLiterature_".$l;
-            if(isset($_POST[$inputBasicLiterarture])) {
-                $basicLiterature[] = $_POST[$inputBasicLiterarture] ?? null;
-            }
-            else {
-                $stillBasicLiterature = false;
-            }
 
-            $l++;
-            if($l = 5) {
-                $stillBasicLiterature = false;
-            }
+        foreach($bLitIndices as $bLitIndex) {
+            $basicLiterature[] = $_POST["module_change_basicLiterature_" . $bLitIndex] ?? null;
         }
-        
-        while($stillDeepeningLiterature) {
-            $inputDeepeningLiterarture = "module_change_deepeningLiterature_".$m;
-            if(isset($_POST[$inputDeepeningLiterarture])) {
-                $deepeningLiterature[] = $_POST[$inputDeepeningLiterarture] ?? null;
-            }
-            else {
-                $stillDeepeningLiterature = false;
-            }
 
-            $m++;
-            if($m = 5) {
-                $stillDeepeningLiterature = false;
-            }
+        foreach($dLitIndices as $dLitIndex) {
+            $deepeningLiterature[] = $_POST["module_change_deepeningLiterature_" . $dLitIndex] ?? null;
         }
 
         $bool = ModuleService::updateModule(
@@ -407,6 +330,14 @@ class ModuleController {
         );
         $output = ob_get_clean();
         
+        echo $output;
+    }
+
+    function lockModule($moduleID) {
+        ob_start();
+        $bool = ModuleService::lockModule($moduleID);
+        $output = ob_get_clean();
+    
         echo $output;
     }
 }

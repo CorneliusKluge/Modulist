@@ -2,7 +2,7 @@
     <h2>Modul hinzufügen</h2>
 
     <div class="form_item">
-        <label class="form_label" for="module_add_name">Name:</label>
+        <label class="form_label" for="module_add_name">Name:*</label>
         <input class="form_input" type="string" id="module_add_name" name="module_add_name" required/>
     </div>
 
@@ -19,7 +19,7 @@
  
     <div class="form_item">
         <label class="form_label" for="module_add_course">Studiengang:</label>
-        <select class="form_select" id="module_add_course" name="module_add_course">
+        <select class="form_select" id="module_add_course" name="module_add_course" onchange="check_course(this, true);">
             <?php
                 if($resultCourse->num_rows) {
                         foreach($resultCourse as $course) {
@@ -35,6 +35,7 @@
     <div class="form_item" id="module_add_field_div">
         <label class="form_label" for="module_add_field_0">Studienrichtung:</label>
         <button class="form_add_button button" type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)"></button>
+        <button class="button table_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_field_0" name="module_add_field_0">
             <?php
                 if($resultField->num_rows) {
@@ -43,7 +44,7 @@
                     <?php
                     foreach($resultField as $field) {
                     ?>
-                        <option value="<?php echo $field["ID"];?>"><?php echo $field["name"];?></option>
+                        <option value="<?php echo $field["ID"];?>" data-course="<?php echo $field["courseID"];?>"><?php echo $field["name"];?></option>
                     <?php
                     }
                 }
@@ -83,7 +84,7 @@
 
     <div class="form_item">
         <label class="form_label" for="module_add_overallGradeWeighting">Gewichtung Modulnote für Gesamtnote:</label>
-        <input class="form_input" type="number" id="module_add_overallGradeWeighting" name="module_add_overallGradeWeighting"/>
+        <input class="form_input" type="string" id="module_add_overallGradeWeighting" name="module_add_overallGradeWeighting"/>
     </div>
 
     <div class="form_item">
@@ -152,15 +153,20 @@
     <div class="form_group_container" id="module_add_categories_div">
         <button class="form_add_button button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
 
-        <div class="form_group">
+        <div class="form_group" id="module_add_categoryDiv_0">
             <div class="form_item">
                 <label class="form_label" for="module_add_category_0">Kategorie:</label>
-                <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this);">
+                <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this, true);">
                     <?php
+                        $invisibleFlag = 0;
                         if($resultCategories->num_rows) {
+                            $i = 1;
                             foreach($resultCategories as $category) {
-                            ?>
-                                <option value="<?php echo $category["ID"];?>" data-presenceFlag="<?php echo $category["presenceFlag"];?>"><?php echo $category["name"];?></option>
+                                if($i == 1) { 
+                                    $invisibleFlag = $category["presenceFlag"];
+                                }
+                                ?>
+                                <option value="<?php echo $category["ID"];?>" data-presenceFlag="<?php echo $category["presenceFlag"];?>" <?php if($i++ == 1) { echo "selected";}?>><?php echo $category["name"];?></option>
                             <?php
                             }
                         }
@@ -178,28 +184,29 @@
                 <input class="form_input" type="number" id="module_add_categorySemester_0" name="module_add_categorySemester_0"/>
             </div>
 
-            <div class="form_item" id="module_add_TheoryFlag_0">
+            <div class="form_item <?php if($invisibleFlag) { echo "invisible";}?>" id="module_add_TheoryFlag_0">
                 <label class="form_label">Einteilung EVL Theorie/Praxis</label>
                 <div class="form_radio_entry">
                     <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_theory_0" name="module_add_TheoryFlag_0" value="1"/>
-                    <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Theorie</label>
+                    <label class="form_radio_label" for="module_add_TheoryFlag_theory_0">EVL Theorie</label>
                 </div>
                 <div class="form_radio_entry">
                     <input class="form_radio_box" type="radio" id="module_add_TheoryFlag_practical_0" name="module_add_TheoryFlag_0" value="0"/>
-                    <label class="form_radio_label" for="module_add_TheoryFlag_0">EVL Praxis</label>
+                    <label class="form_radio_label" for="module_add_TheoryFlag_practical_0">EVL Praxis</label>
                 </div>
             </div>
+            <button class="button table_delete_button" type="button" name="module_add_removeCategory" onclick="removeEntry(this)"></button> 
         </div>
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
     <div class="form_group_container" id="module_add_exams_div">
         <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
-        <div class="form_group">
+        <div class="form_group" id="module_add_examDiv_0">
             <div class="form_item" id="module_add_examType_div">
-                <label class="form_label" for="module_add_examType_0">Art der PL:</label>
+                <label class="form_label" for="module_add_examType_0">Art der PL:**</label>
                 <select class="form_select" id="module_add_examType_0" name="module_add_examType_0">
-                    <option value="1">Klausurarbeit</option>
+                    <option value="1" selected>Klausurarbeit</option>
                     <option value="2">Mündliche Prüfung</option>
                     <option value="3">Mündliches Fachgespräch</option>
                     <option value="4">Präsentation</option>
@@ -224,12 +231,12 @@
             </div>
 
             <div class="form_item" id="module_add_examPeriod_div">
-                <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:</label>
+                <label class="form_label" for="module_add_examPeriod_0">Prüfungszeitraum:**</label>
                 <input class="form_input" type="string" id="module_add_examPeriod_0" name="module_add_examPeriod_0"/>
             </div>
 
             <div class="form_item" id="module_add_examWeighting_div">
-                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:</label>
+                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:**</label>
                 <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
             </div>
 
@@ -237,6 +244,7 @@
                 <label class="form_label" for="module_add_examSemester_0">Semester:</label>
                 <input class="form_input" type="number" id="module_add_examSemester_0" name="module_add_examSemester_0"/>
             </div>
+            <button class="button table_delete_button" type="button" name="module_add_removeExam" onclick="removeEntry(this)"></button>
         </div>
     </div>    
 
@@ -275,6 +283,7 @@
     <div class="form_item" id="module_add_basicLiterature_div">
         <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:</label>
         <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
+        <button class="button table_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -307,6 +316,7 @@
     <div class="form_item" id="module_add_deepeningLiterature_div">
         <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:</label>
         <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>
+        <button class="button table_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_deepeningLiterature_0" name="module_add_deepeningLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -329,6 +339,8 @@
         <label class="form_label" for="module_add_deepeningLiteraturePostNote">Vertiefende Literatur (Nachbemerkungen):</label>
         <input  class="form_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
     </div>
-
+    
+    <span class="mandatory_notice">*Pflichtfeld</span>
+    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
     <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>

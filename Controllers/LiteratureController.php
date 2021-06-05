@@ -24,30 +24,27 @@ class LiteratureController {
 
     function getLiteratureView() {
         if(isset($_POST["literature_add_button"])) {
-            $view1 = $this->getLiteratureAddView(); // Calls the method "getliteratureAddView" and write its output/return value into the template
-            return $view1;
+            return $this->getLiteratureAddView(); // Calls the method "getliteratureAddView" and write its output/return value into the template
         }
 
         if(isset($_POST["literature_add_submit"])) {
-            $this->submitNewLiterature();
+            return $this->submitNewLiterature();
         }
 
         if(isset($_POST["literature_change_button"])) {
-            $view1 = $this->getLiteratureChangeView($_POST["literature_change_button"]);
-            return $view1;
+            return $this->getLiteratureChangeView($_POST["literature_change_button"]);
         }
 
         if(isset($_POST["literature_change_submit"])) {
-            $this->submitChangedLiterature($_POST["literature_change_submit"]);
+            return $this->submitChangedLiterature($_POST["literature_change_submit"]);
         }
 
         if(isset($_POST["literature_delete_button"])) {
-            $view1 = $this->getLiteratureDeleteView($_POST["literature_delete_button"]);
-            return $view1;
+            return $this->getLiteratureDeleteView($_POST["literature_delete_button"]);
         }
 
         if(isset($_POST["literature_delete_submit"])) {
-            $this->submitLiteratureDelete($_POST["literature_delete_submit"]);
+            return $this->submitLiteratureDelete($_POST["literature_delete_submit"]);
         }
     } 
 
@@ -56,7 +53,7 @@ class LiteratureController {
          // Get the content of the output buffer and stop output buffering
     
         ob_start();
-        $bool = LiteratureModel::addLiterature(
+        $bool = LiteratureService::addLiterature(
             $_POST["literature_add_authors"],
             $_POST["literature_add_title"],
             $_POST["literature_add_year"],
@@ -94,14 +91,14 @@ class LiteratureController {
             
             $result = LiteratureModel::getLiteratureByID($literatureID);
             include("Views/Literature/LiteratureChangeView.php");
+            
             $output = ob_get_clean();
-
             return $output;
         }
     }
     function submitChangedLiterature($literatureID){
         ob_start();
-        $bool = LiteratureModel::changeLiterature(
+        $bool = LiteratureService::changeLiterature(
             $literatureID,
             $_POST["literature_change_authors"],
             $_POST["literature_change_title"],
@@ -112,26 +109,25 @@ class LiteratureController {
             $_POST["literature_change_isbn"]
         );
         $output = ob_get_clean();
-
-        echo $output;
+        return $output;
     }
 
     function getLiteratureDeleteView($id){
         ob_start();
         $result = LiteratureModel::getLiteratureByID($id);
         include("Views/Literature/LiteratureDeleteView.php");
-        $output = ob_get_clean();
 
+        $output = ob_get_clean();
         return $output;
     }
 
     function submitLiteratureDelete($literatureID){
         ob_start();
 
-        $bool = LiteratureModel::deleteLiterature($literatureID);
+        $bool = LiteratureService::deleteLiterature($literatureID);
         
         $output = ob_get_clean();   
-        echo $output;
+        return $output;
     }
 
 }
