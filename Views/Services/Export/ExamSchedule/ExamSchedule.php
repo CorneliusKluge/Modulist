@@ -6,8 +6,16 @@
 <style>
     body {
         font-size: 10px;
+        font-family: Arial, Helvetica, sans-serif;
     }
-    td {
+    table {
+        border-collapse: collapse;
+        border: 3px solid black;
+    }
+    .header th{
+        border: 3px solid black;
+    }
+    td, th{
         border: 1px solid black;
     }
     th {
@@ -18,7 +26,7 @@
     }
 </style>
 <table>
-    <tr>
+    <tr class="header">
         <th rowspan="2">Modulcode</th>
         <th rowspan="2">Modulname</th>
         <th rowspan="2">Semester</th>
@@ -27,7 +35,7 @@
         <th colspan="3">Prüfungsleistung</th>
         <th rowspan="2">Gewichtung der Modulnote für die Gesamtnote</th>
     </tr>
-    <tr>
+    <tr class="header">
         <th>Art der PL</th>
         <th>Dauer/Umfang PL</th>
         <th>Gewichtung für die Modulnote in %</th>
