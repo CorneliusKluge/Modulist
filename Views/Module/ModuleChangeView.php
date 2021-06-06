@@ -65,7 +65,7 @@
                     if($resultField->num_rows) {
                         foreach($resultField as $field) {
                         ?>
-                            <option value="<?php echo $field["ID"];?>" data-course="<?php echo $field["courseID"];?>"></option>
+                            <option value="<?php echo $field["ID"];?>" data-course="<?php echo $field["courseID"];?>"><?php echo $field["name"];?></option>
                         <?php
                         }
                     }
