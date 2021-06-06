@@ -183,7 +183,7 @@ function printModule($module) {
                 </tr>
                 <tr>
                     <td class="heading_2">Präsenzveranstaltungen</td>
-                    <td class="heading_3" class="right_column"><?php if(!empty($module["presenceCreditHours"])){ echo "entspricht " . $module["presenceCreditHours"] . " SWS";}?></td>
+                    <td class="heading_3" style="text-align:center;" class="right_column"><?php if(!empty($module["presenceCreditHours"])){ echo "entspricht " . $module["presenceCreditHours"] . " SWS";}?></td>
                 </tr>
                 <?php
                     $workload = 0;
@@ -204,7 +204,7 @@ function printModule($module) {
                 ?>
                 <tr>
                     <td class="heading_2">Eigenverantwortliches Lernen</td>
-                    <td class="heading_3" class="right_column"><?php if(!empty($module["selfLearningCreditHours"])){ echo "entspricht " . $module["selfLearningCreditHours"] . " SWS";}?></td>
+                    <td class="heading_3" style="text-align:center;" class="right_column"><?php if(!empty($module["selfLearningCreditHours"])){ echo "entspricht " . $module["selfLearningCreditHours"] . " SWS";}?></td>
                 </tr>
                 <?php
                     $resultNonPresence = CategoryModel::getTheoryCategoriesByModuleID($module["ID"]);
