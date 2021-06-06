@@ -32,12 +32,11 @@ class ModuleController {
 */
     function decideModuleView() {
         if(isset($_POST["module_add_button"])) {
-            $view1 = $this->getModuleAddView(); // Calls the method "getModuleAddView" and write its output/return value into the template
-            return $view1;
+            return $this->getModuleAddView(); // Calls the method "getModuleAddView" and write its output/return value into the template
         }
 
         if(isset($_POST["module_add_submit"])) {
-            $this->getModuleAddSubmit();
+            return $this->getModuleAddSubmit();
         }
 
         if(isset($_POST["module_change_button"])) {
@@ -46,20 +45,19 @@ class ModuleController {
         }
 
         if(isset($_POST["module_change_submit"])) {
-            $this->moduleChangeSubmit($_POST["module_change_submit"]);
+            return $this->moduleChangeSubmit($_POST["module_change_submit"]);
         }
 
         if(isset($_POST["module_delete_button"])) {
-            $view1 = $this->getModuleDeleteView($_POST["module_delete_button"]);
-            return $view1;
+            return $this->getModuleDeleteView($_POST["module_delete_button"]);
         }
 
         if(isset($_POST["module_delete_submit"])) {
-            $this->moduleDeleteSubmit($_POST["module_delete_submit"]);
+            return $this->moduleDeleteSubmit($_POST["module_delete_submit"]);
         }
 
         if(isset($_POST["module_lock_button"])) {
-            $this->lockModule($_POST["module_lock_button"]);
+            return $this->lockModule($_POST["module_lock_button"]);
         }
     }
 
@@ -71,7 +69,7 @@ class ModuleController {
         }
         $output = ob_get_clean(); // Get the content of the output buffer and stop output buffering
 
-        echo $output;
+        return $output;
     }
 
     function getModuleAddView() {
@@ -231,7 +229,7 @@ class ModuleController {
         $bool = ModuleService::deleteModule($moduleID);
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function moduleChangeSubmit($moduleID) {
@@ -274,7 +272,7 @@ class ModuleController {
         }
     
         foreach($eIndices as $eIndex) {
-            $exams[] = array($_POST["module_change_examType_" . $eIndex] ?? null, $_POST["module_change_examDuration_" . $eIndex] ?? null, $_POST["module_change_examCircumference_" . $eIndex] ?? null, $_POST["module_change_examPeriod_" . $eIndex] ?? null, $_POST["module_change_examWeighting_" . $eIndex] ?? null, $_POST["module_change_examSemester_" . $eIndex] ?? null);    
+            $exams[] = array($_POST["module_change_examType_" . $eIndex] ?? null, $_POST["module_change_examDuration_" . $eIndex] ?? null, $_POST["module_change_examCircumference_" . $eIndex] ?? null, $_POST["module_change_examPeriod_" . $eIndex] ?? null, $_POST["module_change_examSemester_" . $eIndex] ?? null, $_POST["module_change_examWeighting_" . $eIndex] ?? null);    
         }
 
         foreach($fIndices as $fIndex) {
@@ -330,7 +328,7 @@ class ModuleController {
         );
         $output = ob_get_clean();
         
-        echo $output;
+        return $output;
     }
 
     function lockModule($moduleID) {
@@ -338,6 +336,6 @@ class ModuleController {
         $bool = ModuleService::lockModule($moduleID);
         $output = ob_get_clean();
     
-        echo $output;
+        return $output;
     }
 }

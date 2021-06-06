@@ -106,7 +106,7 @@
     </div>
 
     <div class="form_item">
-        <label class="form_label" for="module_add_overallGradeWeighting">Gewichtung Modulnote für Gesamtnote:</label>
+        <label class="form_label" for="module_change_overallGradeWeighting">Gewichtung Modulnote für Gesamtnote:</label>
         <input class="form_input" type="string" id="module_change_overallGradeWeighting" name="module_change_overallGradeWeighting" value="<?php echo $result->overallGradeWeighting;?>"/>
     </div>
 
@@ -294,7 +294,7 @@
                 $inputCircumference = "module_change_examCircumference_".$i;
                 $inputPeriod = "module_change_examPeriod_".$i;
                 $inputWeightingID = "module_change_examWeighting_".$i;
-                $inputSemesterID = "module_add_examSemester_".$i;
+                $inputSemesterID = "module_change_examSemester_".$i;
                 ?>
                 <div class="form_group" id="<?php echo $divID;?>">
                     <div class="form_item" id="module_change_examType_div">

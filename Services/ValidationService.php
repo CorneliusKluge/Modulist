@@ -121,7 +121,7 @@ class ValidationService {
 
             if($resultExams->num_rows) {
                 foreach($resultExams as $exam) {
-                    if(empty($exam["examType"]) || (empty($exam["examDuration"]) && empty($exam["examCircumference"])) || (empty($exam["examWeighting"]))) {
+                    if(empty($exam["examType"]) || (empty($exam["examDuration"]) && empty($exam["examCircumference"])) || empty($exam["examWeighting"]) || empty($exam["examSemester"])) {
                         return false;
                     }
                 }
