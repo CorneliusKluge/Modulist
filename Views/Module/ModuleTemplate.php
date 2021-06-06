@@ -15,7 +15,7 @@
     </head>
     <body>
         <header>
-            <a class="img-logo"></a>
+            <a href="./module"><img src="img/logo.png" class="header_logo"></a>
             <nav class="navbar">
                 <ul class="navbar_container">
                     <li class="navbar_entry"><a href="./module">Module</a></li>

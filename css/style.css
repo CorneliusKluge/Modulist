@@ -73,14 +73,22 @@ h4 {
 
 /*------------------------navbar------------------------*/
 
+.header_logo {
+    height: 70px;
+    margin: -50px -50px -75px 0px;
+}
+
 .navbar {
-    width: 100%;
-    background-color: #009ee3;
+    width: calc(100% - 226px);
+    margin-left: 220px;
+    background-color: #009ee3; 
+    border: 3px solid #09497D;
 }
 
 .navbar_container {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     height: 50px;
     padding: 0;
 }
@@ -91,7 +99,7 @@ h4 {
     margin: 5px;
     padding: 5px;
     font-family: 'Source Sans Pro',sans-serif;
-    font-size: large;
+    font-size: x-large;
     font-weight: 700;
     color: #fff;
     /* border-right: 2px solid white; */
@@ -334,7 +342,7 @@ table {
 .table_container {
     width: auto;
     margin: 30px 0;
-    border: 2px solid #000;
+    border: 1px solid #000;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     flex-flow: row wrap;
@@ -346,8 +354,9 @@ table {
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
-    margin-bottom: 10px;
     padding: 5px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-color: #808080;
     color: white;
 }
@@ -381,7 +390,7 @@ table {
 }
 
 th {
-    padding: 5px;
+    padding: 10px;
 }
 
 td {
@@ -391,6 +400,10 @@ td {
 
 .table_locked_row {
     background-color: rgba(0,0,0,0.2);
+}
+
+.table_validation_image {
+    max-width: 30px;
 }
 
 .table_row_functions {
@@ -477,7 +490,9 @@ td {
 .course_container,
 .field_container {
     margin: 30px 0;
-    border: 2px solid #000;
+    border: 1px solid #000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-color: #fff;
 }
 
@@ -487,6 +502,8 @@ td {
     width: auto;
     margin-bottom: 10px;
     padding: 0 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     flex-flow: row nowrap;
     align-items: stretch;
     background-color: #808080;
@@ -518,7 +535,9 @@ td {
 .export_study_schedule_container,
 .export_exam_schedules_container {
     margin: 30px 0;
-    border: 2px solid #000;
+    border: 1px solid #000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     background-color: #fff;
 }
 
@@ -529,6 +548,8 @@ td {
     width: auto;
     margin-bottom: 10px;
     padding: 0 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     flex-flow: row nowrap;
     align-items: stretch;
     background-color: #808080;
