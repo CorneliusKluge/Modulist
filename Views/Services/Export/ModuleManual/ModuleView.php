@@ -4,63 +4,88 @@ use Modulist\Models\CategoryModel;
 use Modulist\Models\ExamModel;
 use Modulist\Models\LiteratureModel;
 use Modulist\Models\ModuleModel;
+use Modulist\Services\ValidationService;
 
 if($compulsoryCourseModules->num_rows) {
-?>
-    <h1 class="section_headline" id="section_compulsoryCourse">Pflichtmodule Studiengang</h1>
-    <?php
-    foreach($compulsoryCourseModules as $module) {
-        printModule($module);
+    $compulsoryCourseModules = mysqli_fetch_all($compulsoryCourseModules, MYSQLI_ASSOC);
+    $compulsoryCourseModules = array_filter($compulsoryCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($compulsoryCourseModules)) {
+    ?>
+        <h1 class="section_headline" id="section_compulsoryCourse">Pflichtmodule Studiengang</h1>
+        <?php
+        foreach($compulsoryCourseModules as $module) {
+            printModule($module);
+        }
     }
 }
 foreach($resultFields as $field) {
     $modules = ModuleModel::getCompulsoryModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
-    ?>
-        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Pflichtmodule <?php echo $field["name"];?></h1>
-        <?php
-        foreach($modules as $module) {
-            printModule($module);
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
+        ?>
+            <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Pflichtmodule <?php echo $field["name"];?></h1>
+            <?php
+            foreach($modules as $module) {
+                printModule($module);
+            }
         }
     }
 }
 
 if($electiveCourseModules->num_rows) {
-?>
-    <h1 class="section_headline" id="section_electiveCourse">Wahlpflichtmodule Studiengang</h1>
-    <?php
-    foreach($electiveCourseModules as $module) {
-        printModule($module);
+    $electiveCourseModules = mysqli_fetch_all($electiveCourseModules, MYSQLI_ASSOC);
+    $electiveCourseModules = array_filter($electiveCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($electiveCourseModules)) {
+    ?>
+        <h1 class="section_headline" id="section_electiveCourse">Wahlpflichtmodule Studiengang</h1>
+        <?php
+        foreach($electiveCourseModules as $module) {
+            printModule($module);
+        }
     }
 }
 foreach($resultFields as $field) {
     $modules = ModuleModel::getElectiveModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
-    ?>
-        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Wahlpflichtmodule <?php echo $field["name"];?></h1>
-        <?php
-        foreach($modules as $module) {
-            printModule($module);
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
+        ?>
+            <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Wahlpflichtmodule <?php echo $field["name"];?></h1>
+            <?php
+            foreach($modules as $module) {
+                printModule($module);
+            }
         }
     }
 }
 
 if($practicalCourseModules->num_rows) {
-?>
-    <h1 class="section_headline" id="section_practicalCourse">Praxismodule Studiengang</h1>
-    <?php
-    foreach($practicalCourseModules as $module) {
-        printModule($module);
+    $practicalCourseModules = mysqli_fetch_all($practicalCourseModules, MYSQLI_ASSOC);
+    $practicalCourseModules = array_filter($practicalCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($practicalCourseModules)) {
+    ?>
+        <h1 class="section_headline" id="section_practicalCourse">Praxismodule Studiengang</h1>
+        <?php
+        foreach($practicalCourseModules as $module) {
+            printModule($module);
+        }
     }
 }
 foreach($resultFields as $field) {
     $modules = ModuleModel::getPracticalModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
-    ?>
-        <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Praxismodule <?php echo $field["name"];?></h1>
-        <?php
-        foreach($modules as $module) {
-            printModule($module);
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
+        ?>
+            <h1 class="section_headline" id="section_field_<?php echo $field["ID"];?>">Praxismodule <?php echo $field["name"];?></h1>
+            <?php
+            foreach($modules as $module) {
+                printModule($module);
+            }
         }
     }
 }
@@ -300,30 +325,30 @@ function printModule($module) {
                 <div>
                     <?php echo $module["deepeningLiteraturePreNote"];?>
                     <?php
-                        $resultBasicLiterature = LiteratureModel::getDeepeningLiteratureByModuleID($module["ID"]);
+                        $resultDeepeningLiterature = LiteratureModel::getDeepeningLiteratureByModuleID($module["ID"]);
 
-                        if($resultBasicLiterature->num_rows) {
-                            foreach($resultBasicLiterature as $basicLiterature) {
+                        if($resultDeepeningLiterature->num_rows) {
+                            foreach($resultDeepeningLiterature as $deepeningLiterature) {
                                 $str = "";
-                                $str .= $basicLiterature["authors"];
+                                $str .= $deepeningLiterature["authors"];
 
-                                if(!empty($basicLiterature["year"])) {
-                                    $str .= ", " . $basicLiterature["year"];
+                                if(!empty($deepeningLiterature["year"])) {
+                                    $str .= ", " . $deepeningLiterature["year"];
                                 }
-                                if(!empty($basicLiterature["title"])) {
-                                    $str .= ", " . $basicLiterature["title"];
+                                if(!empty($deepeningLiterature["title"])) {
+                                    $str .= ", " . $deepeningLiterature["title"];
                                 }
-                                if(!empty($basicLiterature["edition"])) {
-                                    $str .= ", " . $basicLiterature["edition"];
+                                if(!empty($deepeningLiterature["edition"])) {
+                                    $str .= ", " . $deepeningLiterature["edition"];
                                 }
-                                if(!empty($basicLiterature["place"])) {
-                                    $str .= ", " . $basicLiterature["place"];
+                                if(!empty($deepeningLiterature["place"])) {
+                                    $str .= ", " . $deepeningLiterature["place"];
                                 }
-                                if(!empty($basicLiterature["publisher"])) {
-                                    $str .= ", " . $basicLiterature["publisher"];
+                                if(!empty($deepeningLiterature["publisher"])) {
+                                    $str .= ", " . $deepeningLiterature["publisher"];
                                 }
-                                if(!empty($basicLiterature["isbn"])) {
-                                    $str .= ", " . $basicLiterature["isbn"];
+                                if(!empty($deepeningLiterature["isbn"])) {
+                                    $str .= ", " . $deepeningLiterature["isbn"];
                                 }
                                 echo $str;
                             }

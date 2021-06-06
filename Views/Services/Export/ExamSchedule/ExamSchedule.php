@@ -2,7 +2,9 @@
     use Modulist\Models\ExamModel;
     use Modulist\Models\FieldModel;
     use Modulist\Models\ModuleModel;
- ?>
+use Modulist\Services\ValidationService;
+
+?>
 <style>
     body {
         font-size: 10px;
@@ -34,73 +36,97 @@
     </tr>
     <?php
         if($compulsoryCourseModules->num_rows) {
-        ?>
-            <tr>
-                <td colspan="9" class="background-1">Pflichtmodule Studiengang <?php echo $courseName;?></td>
-            </tr>
-            <?php
-            foreach($compulsoryCourseModules as $module) {
-                printModule($module);
+            $compulsoryCourseModules = mysqli_fetch_all($compulsoryCourseModules, MYSQLI_ASSOC);
+            $compulsoryCourseModules = array_filter($compulsoryCourseModules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+            if(count($compulsoryCourseModules)) {
+            ?>
+                <tr>
+                    <td colspan="9" class="background-1">Pflichtmodule Studiengang <?php echo $courseName;?></td>
+                </tr>
+                <?php
+                foreach($compulsoryCourseModules as $module) {
+                    printModule($module);
+                }
             }
         }
         foreach($resultFields as $field) {
             $modules = ModuleModel::getCompulsoryModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
-            ?>
-                <tr>
-                    <td colspan="9" class="background-1">Pflichtmodule Studienrichtung <?php echo $field["name"];?></td>
-                </tr>
-                <?php
-                foreach($modules as $module) {
-                    printModule($module);
+                $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+                $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+                if(count($modules)) {
+                ?>
+                    <tr>
+                        <td colspan="9" class="background-1">Pflichtmodule Studienrichtung <?php echo $field["name"];?></td>
+                    </tr>
+                    <?php
+                    foreach($modules as $module) {
+                        printModule($module);
+                    }
                 }
             }
         }
 
         if($electiveCourseModules->num_rows) {
-        ?>
-            <tr>
-                <td colspan="9" class="background-1">Wahlpflichtmodule Studiengang <?php echo $courseName;?></td>
-            </tr>
-            <?php
-            foreach($electiveCourseModules as $module) {
-                printModule($module);
+            $electiveCourseModules = mysqli_fetch_all($electiveCourseModules, MYSQLI_ASSOC);
+            $electiveCourseModules = array_filter($electiveCourseModules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+            if(count($electiveCourseModules)) {
+            ?>
+                <tr>
+                    <td colspan="9" class="background-1">Wahlpflichtmodule Studiengang <?php echo $courseName;?></td>
+                </tr>
+                <?php
+                foreach($electiveCourseModules as $module) {
+                    printModule($module);
+                }
             }
         }
         foreach($resultFields as $field) {
             $modules = ModuleModel::getElectiveModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
-            ?>
-                <tr>
-                    <td colspan="9" class="background-1">Wahlpflichtmodule Studienrichtung <?php echo $field["name"];?></td>
-                </tr>
-                <?php
-                foreach($modules as $module) {
-                    printModule($module);
+                $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+                $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+                if(count($modules)) {
+                ?>
+                    <tr>
+                        <td colspan="9" class="background-1">Wahlpflichtmodule Studienrichtung <?php echo $field["name"];?></td>
+                    </tr>
+                    <?php
+                    foreach($modules as $module) {
+                        printModule($module);
+                    }
                 }
             }
         }
 
         if($practicalCourseModules->num_rows) {
-        ?>
-            <tr>
-                <td colspan="9" class="background-1">Praxismodule Studiengang <?php echo $courseName;?></td>
-            </tr>
-            <?php
-            foreach($practicalCourseModules as $module) {
-                printModule($module);
+            $practicalCourseModules = mysqli_fetch_all($practicalCourseModules, MYSQLI_ASSOC);
+            $practicalCourseModules = array_filter($practicalCourseModules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+            if(count($practicalCourseModules)) {
+            ?>
+                <tr>
+                    <td colspan="9" class="background-1">Praxismodule Studiengang <?php echo $courseName;?></td>
+                </tr>
+                <?php
+                foreach($practicalCourseModules as $module) {
+                    printModule($module);
+                }
             }
         }
         foreach($resultFields as $field) {
             $modules = ModuleModel::getPracticalModulesByFieldExceptLocked($field["ID"]);
             if($modules->num_rows) {
-            ?>
-                <tr>
-                    <td colspan="9" class="background-1">Praxismodule Studienrichtung <?php echo $field["name"];?></td>
-                </tr>
-                <?php
-                foreach($modules as $module) {
-                    printModule($module);
+                $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+                $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForExamSchedule($item["ID"]);});
+                if(count($modules)) {
+                ?>
+                    <tr>
+                        <td colspan="9" class="background-1">Praxismodule Studienrichtung <?php echo $field["name"];?></td>
+                    </tr>
+                    <?php
+                    foreach($modules as $module) {
+                        printModule($module);
+                    }
                 }
             }
         }

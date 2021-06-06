@@ -2,6 +2,7 @@
 
 use Modulist\Models\FieldModel;
 use Modulist\Models\ModuleModel;
+use Modulist\Services\ValidationService;
 
 $fieldString = "";
 foreach($resultFields as $field) {
@@ -143,73 +144,97 @@ $fieldString = substr_replace($fieldString, " und", strrpos($fieldString, ","), 
 <?php
 
 if($compulsoryCourseModules->num_rows) {
-?>
-    <br><a href="#section_compulsoryCourse" class="thin">Pflichtmodule Studiengang</a>
-    <?php
-    foreach($compulsoryCourseModules as $module) {
+    $compulsoryCourseModules = mysqli_fetch_all($compulsoryCourseModules, MYSQLI_ASSOC);
+    $compulsoryCourseModules = array_filter($compulsoryCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($compulsoryCourseModules)) {
     ?>
-        <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
-    <?php
+        <br><a href="#section_compulsoryCourse" class="thin">Pflichtmodule Studiengang</a>
+        <?php
+        foreach($compulsoryCourseModules as $module) {
+        ?>
+            <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
+        <?php
+        }
     }
 }
 foreach($resultFields as $field) {
     $modules = ModuleModel::getCompulsoryModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
-    ?>
-        <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Pflichtmodule <?php echo $field["name"];?></a>
-        <?php
-        foreach($modules as $module) {
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
         ?>
-            <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
-        <?php
+            <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Pflichtmodule <?php echo $field["name"];?></a>
+            <?php
+            foreach($modules as $module) {
+            ?>
+                <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
+            <?php
+            }
         }
     }
 }
 
 if($electiveCourseModules->num_rows) {
-?>
-    <br><a href="#section_electiveCourse" class="thin">Wahlpflichtmodule Studiengang</a>
-    <?php
-    foreach($electiveCourseModules as $module) {
+    $electiveCourseModules = mysqli_fetch_all($electiveCourseModules, MYSQLI_ASSOC);
+    $electiveCourseModules = array_filter($electiveCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($electiveCourseModules)) {
     ?>
-        <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
-    <?php
+        <br><a href="#section_electiveCourse" class="thin">Wahlpflichtmodule Studiengang</a>
+        <?php
+        foreach($electiveCourseModules as $module) {
+        ?>
+            <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
+        <?php
+        }
     }
 }
 foreach($resultFields as $field) {
     $modules = ModuleModel::getElectiveModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
+        ?>
+            <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Wahlpflichtmodule <?php echo $field["name"];?></a>
+            <?php
+            foreach($modules as $module) {
+            ?>
+                <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
+            <?php
+            }
+        }
+    }
+}
+
+if($practicalCourseModules->num_rows) {
+    $electiveCourseModules = mysqli_fetch_all($electiveCourseModules, MYSQLI_ASSOC);
+    $electiveCourseModules = array_filter($electiveCourseModules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+    if(count($electiveCourseModules)) {
     ?>
-        <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Wahlpflichtmodule <?php echo $field["name"];?></a>
+        <br><a href="#section_practicalCourse" class="thin">Praxismodule Studiengang</a>
         <?php
-        foreach($modules as $module) {
+        foreach($practicalCourseModules as $module) {
         ?>
             <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
         <?php
         }
     }
 }
-
-if($practicalCourseModules->num_rows) {
-?>
-    <br><a href="#section_practicalCourse" class="thin">Praxismodule Studiengang</a>
-    <?php
-        foreach($practicalCourseModules as $module) {
-        ?>
-            <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
-        <?php
-        }
-}
 foreach($resultFields as $field) {
     $modules = ModuleModel::getPracticalModulesByFieldExceptLocked($field["ID"]);
     if($modules->num_rows) {
-    ?>
-        <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Praxismodule <?php echo $field["name"];?></a>
-        <?php
-        foreach($modules as $module) {
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForModuleManual($item["ID"]);});
+        if(count($modules)) {
         ?>
-            <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
-        <?php
+            <br><a href="#section_field_<?php echo $field["ID"];?>" class="thin">Praxismodule <?php echo $field["name"];?></a>
+            <?php
+            foreach($modules as $module) {
+            ?>
+                <br><a href="#module_<?php echo $module["ID"];?>"><?php echo $module["name"];?></a>
+            <?php
+            }
         }
     }
 }

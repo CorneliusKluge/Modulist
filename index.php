@@ -35,6 +35,7 @@ include("Services/FieldService.php");
 include("Services/CourseService.php");
 include("Services/LiteratureService.php");
 include("Services/CategoryService.php");
+include("Services/ValidationService.php");
 
 // PDF-Bibliothek
 require_once('libs/dompdf/autoload.inc.php');
