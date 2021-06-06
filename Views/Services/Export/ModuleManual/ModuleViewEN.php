@@ -28,8 +28,8 @@
 <table>
     <?php
     use Modulist\Models\FieldModel;
-use Modulist\Models\ModuleModel;
-use Modulist\Services\ValidationService;
+    use Modulist\Models\ModuleModel;
+    use Modulist\Services\ValidationService;
 
     $courseModules = mysqli_fetch_all($courseModules, MYSQLI_ASSOC);
     $courseModules = array_filter($courseModules, function($item) {return ValidationService::isModuleValidForEnglishModuleManual($item["ID"]);});
@@ -41,7 +41,7 @@ use Modulist\Services\ValidationService;
         </tr>
         <tr>
             <td class="summary_align"><?php echo $module["summaryEN"];?></td>
-            <td><?php echo $module["semester"];?>st Semester</td>
+            <td><?php echo $module["semester"]; if($module["semester"] == 1) { echo "st Semester";} elseif($module["semester"] == 2){ echo "nd Semester";} else { echo "th Semester";}?></td>
             <td><?php echo $module["credits"];?> ECTS</td>
         </tr>
     <?php
@@ -64,7 +64,7 @@ use Modulist\Services\ValidationService;
                 </tr>
                 <tr>
                     <td><?php echo $module["summaryEN"];?></td>
-                    <td><?php echo $module["semester"];?>st Semester</td>
+                    <td><?php echo $module["semester"]; if($module["semester"] == 1) { echo "st Semester";} elseif($module["semester"] == 2){ echo "nd Semester";} else { echo "th Semester";}?></td>
                     <td><?php echo $module["credits"];?> ECTS</td>
                 </tr>
             <?php
