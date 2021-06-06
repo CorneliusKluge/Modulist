@@ -4,11 +4,16 @@ var examEntry = 0;
 var basicLiteratureEntry = 0;
 var deepeningLiteratureEntry = 0;
 
-document.addEventListener("click", function() {
-    alert("event");
+document.addEventListener("DOMContentLoaded", function() {
     var form = document.querySelector("form.form_container");
+    var changeSelect = document.querySelector("#module_change_course");
     if(form) {
-        form.addEventListener("load", initialCheckCourse, true);
+        if(changeSelect) {
+            form.addEventListener("load", initialCheckCourse(false));
+        }
+        else {
+            form.addEventListener("load", initialCheckCourse(true));
+        }
     }
 });
 
@@ -77,7 +82,6 @@ function checkCourse(obj, addFlag) {
 }
 
 function initialCheckCourse(addFlag) {
-    alert("Wird aufgerufen");
     if(addFlag) {
         var courseSelect = document.getElementById("module_add_course");
     }
