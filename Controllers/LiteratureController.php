@@ -7,24 +7,22 @@ use Modulist\Services\LiteratureService;
 
 class LiteratureController {
     function __construct() {
-        ob_start(); // Start output buffering
-        include("Views/Literature/LiteratureTemplate.php"); // Include the Template
-        $template = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+        ob_start(); 
+        include("Views/Literature/LiteratureTemplate.php"); 
+        $template = ob_get_clean(); 
         
-        // Fill the template with views
         $template = sprintf(
             $template,
             $view1 = $this->getLiteratureView(),
             $this->getLiteratureListView(),
-            "" 
         );
 
-        echo $template; // Output the template
+        echo $template; 
     }
 
     function getLiteratureView() {
         if(isset($_POST["literature_add_button"])) {
-            return $this->getLiteratureAddView(); // Calls the method "getliteratureAddView" and write its output/return value into the template
+            return $this->getLiteratureAddView(); 
         }
 
         if(isset($_POST["literature_add_submit"])) {
@@ -49,9 +47,7 @@ class LiteratureController {
     } 
 
 
-    function submitNewLiterature() {
-         // Get the content of the output buffer and stop output buffering
-    
+    function submitNewLiterature() {    
         ob_start();
         $bool = LiteratureService::addLiterature(
             $_POST["literature_add_authors"],
@@ -67,7 +63,7 @@ class LiteratureController {
         return $output;
     }
 
-    function getLiteratureAddView(){
+    function getLiteratureAddView() {
 
         ob_start();
         include("Views/Literature/LiteratureAddView.php");
@@ -76,7 +72,7 @@ class LiteratureController {
         return $output;
     }
 
-    function getLiteratureListView(){
+    function getLiteratureListView() {
         ob_start();
         $result = LiteratureModel::getAllLiterature();
         include("Views/Literature/LiteratureListView.php");
@@ -85,8 +81,8 @@ class LiteratureController {
         return $output;
     }
 
-    function getLiteratureChangeView($literatureID){
-        if($resultLiterature = LiteratureModel::getLiteratureByID($literatureID)){
+    function getLiteratureChangeView($literatureID) {
+        if($resultLiterature = LiteratureModel::getLiteratureByID($literatureID)) {
             ob_start();
             
             $result = LiteratureModel::getLiteratureByID($literatureID);
@@ -96,7 +92,7 @@ class LiteratureController {
             return $output;
         }
     }
-    function submitChangedLiterature($literatureID){
+    function submitChangedLiterature($literatureID) {
         ob_start();
         $bool = LiteratureService::changeLiterature(
             $literatureID,
@@ -112,7 +108,7 @@ class LiteratureController {
         return $output;
     }
 
-    function getLiteratureDeleteView($id){
+    function getLiteratureDeleteView($id) {
         ob_start();
         $result = LiteratureModel::getLiteratureByID($id);
         include("Views/Literature/LiteratureDeleteView.php");
@@ -121,7 +117,7 @@ class LiteratureController {
         return $output;
     }
 
-    function submitLiteratureDelete($literatureID){
+    function submitLiteratureDelete($literatureID) {
         ob_start();
 
         $bool = LiteratureService::deleteLiterature($literatureID);
@@ -129,5 +125,4 @@ class LiteratureController {
         $output = ob_get_clean();   
         return $output;
     }
-
 }

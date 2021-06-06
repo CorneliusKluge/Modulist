@@ -173,7 +173,7 @@
         <input class="form_input" type="number" id="module_change_selfLearningCreditHours" name="module_change_selfLearningCreditHours" value="<?php echo $result->selfLearningCreditHours;?>"/>
     </div>
    
-    <div class="form_group_container" id="module_change_categories_div">   
+    <div id="module_change_categories_div">   
         <button class="form_add_button form_add_button--on_entry button" type="button" name="module_change_categoryEntry" onclick="addCategoryEntry(false)"></button>
 
         <?php if($oldCategories->num_rows) {
@@ -264,7 +264,7 @@
                     <input class="form_input" type="number" id="module_change_categorySemester_0" name="module_change_categorySemester_0"/>
                 </div>
 
-                <div class="form_item <?php if($invisibleFlag) { echo "invisible";}?>" id="module_change_TheoryFlag_0">
+                <div class="form_item <?php if($invisibleFlag) {echo "invisible";}?>" id="module_change_TheoryFlag_0">
                     <label class="form_label">Einteilung EVL Theorie/Praxis</label>
                     <div class="form_radio_entry">
                         <input class="form_radio_box" type="radio" id="module_change_TheoryFlag_theory_0" name="module_change_TheoryFlag_0" value="1"/>
@@ -283,7 +283,7 @@
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
-    <div class="form_group_container" id="module_change_exams_div">
+    <div id="module_change_exams_div">
         <button class="form_add_button form_add_button--on_entry button" type="button" name="module_change_examEntry" onclick="addExamEntry(false)"></button>
         <?php if($oldExams->num_rows) {
             $i = 0;

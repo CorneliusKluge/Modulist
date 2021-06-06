@@ -51,7 +51,7 @@ class ModuleService {
                     return false;
                 }
                 if(!empty($code)) {
-                    if(ModuleModel::getModuleByModuleCode($code)){
+                    if(ModuleModel::getModuleByModuleCode($code)) {
                         echo "<div class='service_notice service_notice--failure'>Ein Modul mit diesem Modulcode gibt es bereits.</div>";
                         return false;
                     }

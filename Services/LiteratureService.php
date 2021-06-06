@@ -50,6 +50,7 @@ class LiteratureService{
             echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
+    
     static function deleteLiterature($id) {
         if(isset($id)) {
             if(!LiteratureModel::getLiteratureByID($id)) {

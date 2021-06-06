@@ -1,5 +1,3 @@
-<!-- %s  -->
-
 <form method="POST" class="form_container">
     <h2>Literatur hinzufügen</h2>
 

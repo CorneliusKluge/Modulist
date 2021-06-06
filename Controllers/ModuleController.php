@@ -11,20 +11,18 @@ use Modulist\Models\ModuleModel;
 use Modulist\Services\ModuleService;
 
 class ModuleController {
-    function __construct() { // Method which gets triggered whenever an object of the class "ModuleController" is created
-        ob_start(); // Start output buffering
-        include("Views/Module/ModuleTemplate.php"); // Include the Template
-        $template = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+    function __construct() { 
+        ob_start(); 
+        include("Views/Module/ModuleTemplate.php"); 
+        $template = ob_get_clean(); 
 
-        // Fill the template with views
         $template = sprintf(
             $template,
             $this->decideModuleView(),
             $this->getModuleListView(), 
-            ""
         );
 
-        echo $template; // Output the template
+        echo $template; 
     }
  
 /*
@@ -32,7 +30,7 @@ class ModuleController {
 */
     function decideModuleView() {
         if(isset($_POST["module_add_button"])) {
-            return $this->getModuleAddView(); // Calls the method "getModuleAddView" and write its output/return value into the template
+            return $this->getModuleAddView(); 
         }
 
         if(isset($_POST["module_add_submit"])) {
@@ -63,26 +61,26 @@ class ModuleController {
 
     public function getModuleAddSubmit()
     {
-        ob_start(); // Start output buffering
-        if(isset($_POST["module_add_submit"])) { // Check if form has been submitted
+        ob_start(); 
+        if(isset($_POST["module_add_submit"])) { 
             $this->moduleAddSubmit();
         }
-        $output = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+        $output = ob_get_clean(); 
 
         return $output;
     }
 
     function getModuleAddView() {
         
-        ob_start(); // Start output buffering
+        ob_start(); 
         $resultCourse = CourseModel::getAllCourses();
         $resultField = FieldModel::getAllFieldsJoinCourse();
         $resultCategories = CategoryModel::getAllCategories();
         $resultLiterature = LiteratureModel::getAllLiterature();
-        include("Views/Module/ModuleAddView.php"); // Include the View which contains the formular to create a new module
-        $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+        include("Views/Module/ModuleAddView.php"); 
+        $view = ob_get_clean(); 
 
-        return $view; // Return the view
+        return $view; 
     }
 
     function getModuleDeleteView($moduleID) {
@@ -94,7 +92,7 @@ class ModuleController {
         return $output;
     }
     
-    function getModuleChangeView($moduleID){
+    function getModuleChangeView($moduleID) {
         ob_start();
         $result = ModuleModel::getModuleByID($moduleID);
         $oldFields = ModuleModel::getAllModuleFields($moduleID);
@@ -113,13 +111,13 @@ class ModuleController {
         return $view;
     }
 
-    function getModuleListView(){
+    function getModuleListView() {
         ob_start();
         $result = ModuleModel::getModulesForList();
-        include("Views/Module/ModuleListView.php"); // Include the View which contains the list with all modules
-        $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+        include("Views/Module/ModuleListView.php"); 
+        $view = ob_get_clean(); 
 
-        return $view; // Return the view
+        return $view; 
     }
 
 /*

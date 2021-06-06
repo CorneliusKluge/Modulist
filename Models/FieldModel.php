@@ -20,6 +20,7 @@ class FieldModel {
             return false;
         }
     }
+
     static function addField($name, $nameEN, $courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -32,6 +33,7 @@ class FieldModel {
 
         return $result;
     }
+
     static function getAllFieldsJoinCourse() {
         $db = DatabaseService::getDatabaseObject();
 
@@ -40,6 +42,7 @@ class FieldModel {
 
         return $result;
     }
+
     static function getFieldByID($id) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -57,6 +60,7 @@ class FieldModel {
 
         return $result;
     }
+
     static function isFieldByNameExceptSelf($id, $name) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -73,6 +77,7 @@ class FieldModel {
             return false;
         }
     }
+
     static function updateField($id, $name, $nameEN, $courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -92,6 +97,7 @@ class FieldModel {
 
         return $result;
     }
+
     static function isFieldByID($id) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -107,6 +113,7 @@ class FieldModel {
             return false;
         }
     }
+
     static function deleteField($id) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -117,6 +124,7 @@ class FieldModel {
 
         return $result;
     }
+    
     static function getFieldsByCourseID($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
