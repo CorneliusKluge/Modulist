@@ -140,7 +140,7 @@ class ModuleService {
                 }
 
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
-                    echo "<div class='service_notice service_notice--failure'>Das Modul wurde erfolgreich eingetragen.</div>";
+                    echo "<div class='service_notice service_notice--success'>Das Modul wurde erfolgreich eingetragen.</div>";
                 }
 
                 return true;
