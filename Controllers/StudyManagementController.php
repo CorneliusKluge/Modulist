@@ -8,8 +8,6 @@ class StudyManagementController {
         include("Views/StudyManagement/StudyManagementTemplate.php");
         $template = ob_get_clean();
 
-        $template = sprintf($template, "", "", "");
-
         echo $template;
     }
 }
