@@ -49,12 +49,11 @@ class CategoryService {
     static function deleteCategory($id) {
         if(!CategoryModel::getCategoryByID($id)) {
             echo "<div class='service_notice service_notice--failure'>Die ausgewählte Modulkategorie konnte nicht gefunden werden.</div>";
+            
             return false;
         }
-
         CategoryModel::deleteCategory($id);
-
-        echo "<div class='service_notice service_notice--success'>Die ausgewählte Modulkategorie wurde erfolgreich gelöscht";
+        echo "<div class='service_notice service_notice--success'>Die ausgewählte Modulkategorie wurde erfolgreich gelöscht.</div>";
 
         return true;
     }

@@ -3,7 +3,7 @@
         <h2>Prüfungsplan exportieren</h2>
     </div>
     <form method="POST" class="export_form_container">
-        <div>
+        <div class="export_notice">
             Bitte beachten Sie, dass nur diejenigen Module exportiert werden, welche in der Listenansicht unter "Module" als valide gekennzeichnet sind.
         </div>
         <div class="form_item">
