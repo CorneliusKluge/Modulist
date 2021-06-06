@@ -313,7 +313,7 @@ function printModule($module) {
                                 if(!empty($basicLiterature["isbn"])) {
                                     $str .= ", " . $basicLiterature["isbn"];
                                 }
-                                echo $str;
+                                echo $str . "<br>";
                             }
                         }
                     ?>
@@ -350,7 +350,7 @@ function printModule($module) {
                                 if(!empty($deepeningLiterature["isbn"])) {
                                     $str .= ", " . $deepeningLiterature["isbn"];
                                 }
-                                echo $str;
+                                echo $str . "<br>";
                             }
                         }
                     ?>
