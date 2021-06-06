@@ -60,6 +60,7 @@
         else {
             ?>
             <select class="form_select" id="module_change_field_0" name="module_change_field_0">
+                <option value="0">Alle</option>
                 <?php
                     if($resultField->num_rows) {
                         foreach($resultField as $field) {
