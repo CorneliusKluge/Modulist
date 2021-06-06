@@ -32,21 +32,19 @@ class CategoryController {
             return $this->submitNewCategory();
         }
         if(isset($_POST["category_change_button"])) {
-            $view1 = $this->getCategoryChangeView($_POST["category_change_button"]);
-            return $view1;
+            return $this->getCategoryChangeView($_POST["category_change_button"]);
         }
 
         if(isset($_POST["category_change_submit"])) {
-            $this->categoryChangeSubmit($_POST["category_change_submit"]);
+            return $this->categoryChangeSubmit($_POST["category_change_submit"]);
         }
 
         if(isset($_POST["category_delete_button"])) {
-            $view1 = $this->getCategoryDeleteView($_POST["category_delete_button"]);
-            return $view1;
+            return $this->getCategoryDeleteView($_POST["category_delete_button"]);
         }
 
         if(isset($_POST["category_delete_submit"])) {
-            $this->submitCategoryDelete($_POST["category_delete_submit"]);
+            return $this->submitCategoryDelete($_POST["category_delete_submit"]);
         }
     }
 
@@ -89,7 +87,7 @@ function submitNewCategory() {
         );
         $output = ob_get_clean();
 
-        echo $output;
+        return $output;
     }
 
     function getCategoryChangeView($categoryID){
@@ -117,6 +115,6 @@ function submitNewCategory() {
         $bool = CategoryModel::deleteCategory($categoryID);
         
         $output = ob_get_clean();   
-        echo $output;
+        return $output;
     }
 }
