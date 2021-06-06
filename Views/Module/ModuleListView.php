@@ -35,10 +35,10 @@ if($result->num_rows) {
                     <td><?php echo $module["credits"];?></td>
                     <td><?php echo $module["totalworkload"];?></td>
                     <td><?php echo $module["responsibleName"];?></td>
-                    <td><?php echo intval(ValidationService::isModuleValidForModuleManual($module["ID"]));?></td>
-                    <td><?php echo intval(ValidationService::isModuleValidForEnglishModuleManual($module["ID"]));?></td>
-                    <td><?php echo intval(ValidationService::isModuleValidForStudySchedule($module["ID"]));?></td>
-                    <td><?php echo intval(ValidationService::isModuleValidForExamSchedule($module["ID"]));?></td>
+                    <td><img src="img/<?php if(ValidationService::isModuleValidForModuleManual($module["ID"])) {echo "tickIcon.svg";} else { echo "exclamationIcon.svg";}?>"></td>
+                    <td><img src="img/<?php if(ValidationService::isModuleValidForEnglishModuleManual($module["ID"])) {echo "tickIcon.svg";} else { echo "exclamationIcon.svg";}?>"></td>
+                    <td><img src="img/<?php if(ValidationService::isModuleValidForStudySchedule($module["ID"])) {echo "tickIcon.svg";} else { echo "exclamationIcon.svg";}?>"></td>
+                    <td><img src="img/<?php if(ValidationService::isModuleValidForExamSchedule($module["ID"])) {echo "tickIcon.svg";} else { echo "exclamationIcon.svg";}?>"></td>
                     <td class="table_row_functions">
                         <form method="POST">
                             <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>" class="button table_edit_button"></button>
