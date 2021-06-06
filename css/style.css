@@ -114,14 +114,17 @@ h4 {
     color: #fff;
     text-decoration: none;
 }
+
 .navbar_entry > a:visited {
     color: #fff;
 
 }
+
 .navbar_entry > a:hover {
     color: #09497D;
 
 }
+
 .navbar_entry > a:active {
     color: #09497D;
 
@@ -183,7 +186,7 @@ h4 {
     margin: 20px 5px 5px;
 }
 
-.message_button{
+.message_button {
     display: inline;
 }
 
@@ -211,10 +214,6 @@ h4 {
     padding: 5px 15px;
     background-color: #808080;
     color: white;
-}
-
-.form_group_container {
-    
 }
 
 .form_group {
@@ -285,7 +284,6 @@ h4 {
     transition: ease;
     transition-duration: 0.3s;
 }
-
 
 .form_delete_button {
     display: inline-block;
@@ -374,13 +372,13 @@ table {
     background-image: url('../img/plusIcon_1.svg');
     background-size: cover;
 }
+
 .table_add_button:hover {
     background-image: url('../img/plusHoverIcon.svg');
     background-size: cover;
     transition: ease;
     transition-duration: 0.3s;
 }
-
 
 th {
     padding: 5px;
@@ -412,6 +410,7 @@ td {
     background-image: url('../img/editIcon_1.svg');
     background-size: cover;
 }
+
 .table_edit_button:hover {
     background-image: url('../img/editHoverIcon.svg');
     background-size: cover;
@@ -431,6 +430,7 @@ td {
     background-image: url('../img/abortIcon_1.svg');
     background-size: cover;
 }
+
 .table_delete_button:hover {
     background-image: url('../img/abortHoverIcon.svg');
     background-size: cover;

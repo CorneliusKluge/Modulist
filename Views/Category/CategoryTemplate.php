@@ -22,10 +22,6 @@
             %1$s
 
             %2$s
-
-            %3$s
-
-            %4$s
         <script src="js/deleteView.js"></script>
     </body>
 </html>

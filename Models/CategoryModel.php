@@ -5,8 +5,8 @@ namespace Modulist\Models;
 use Modulist\Services\DatabaseService; 
 use mysqli;
 
-class CategoryModel{
-    static function getAllCategories(){
+class CategoryModel {
+    static function getAllCategories() {
         $db = DatabaseService::getDatabaseObject();
     
         $query = "SELECT * FROM categories";
@@ -61,7 +61,7 @@ class CategoryModel{
         $name = mysqli_real_escape_string($db, $name);
         $presenceFlag = mysqli_real_escape_string($db, $presenceFlag);
         $position = mysqli_real_escape_string($db, $position);
-        if(empty($presenceFlag)){
+        if(empty($presenceFlag)) {
             $presenceFlag = 0;
         }
         $insert = "INSERT INTO categories (name, presenceFlag, position) VALUES ('$name', $presenceFlag, $position)";
@@ -70,7 +70,7 @@ class CategoryModel{
         return $result;
     }
 
-    static function deleteCategory($id){
+    static function deleteCategory($id) {
         $db = DatabaseService::getDatabaseObject();
 
         $id = mysqli_real_escape_string($db, $id);
@@ -81,7 +81,7 @@ class CategoryModel{
         return $result;
     }
 
-    static function changeCategory($id, $name, $presenceFlag, $position){
+    static function changeCategory($id, $name, $presenceFlag, $position) {
         $db = DatabaseService::getDatabaseObject();
 
         $id = mysqli_real_escape_string($db, $id);
@@ -89,7 +89,7 @@ class CategoryModel{
         $presenceFlag = mysqli_real_escape_string($db, $presenceFlag);
         $position = mysqli_real_escape_string($db, $position);
 
-        if(empty($presenceFlag)){
+        if(empty($presenceFlag)) {
             $presenceFlag = 0;
         }
         $update = "UPDATE categories SET 
@@ -103,6 +103,7 @@ class CategoryModel{
         return $result;
 
     }
+    
     static function getPresenceCategoriesByModuleID($moduleID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -113,6 +114,7 @@ class CategoryModel{
 
         return $result;
     }
+
     static function getTheoryCategoriesByModuleID($moduleID) {
         $db = DatabaseService::getDatabaseObject();
 

@@ -33,7 +33,7 @@
             <?php
             }
         }
-        else{
+        else {
             echo "Aktuell sind keine Modulkategorien eingetragen.";
         }
     ?>

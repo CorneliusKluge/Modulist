@@ -44,6 +44,7 @@ class ExportService {
             ExportService::exportFile($view, "ModuleManual");
         }
     }
+
     static function exportStudySchedule($courseID) {
         $courseName = CourseModel::getCourseByID($courseID)->name;
         $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
@@ -57,6 +58,7 @@ class ExportService {
 
         ExportService::exportFile($view, "Studienablaufplan", "A3", "landscape");
     }
+    
     static function exportExamSchedule($courseID) {
         $courseName = CourseModel::getCourseByID($courseID)->name;
         $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);

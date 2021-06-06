@@ -33,6 +33,7 @@ class FieldService {
             echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
+    
     static function changeField($id, $name, $nameEN, $courseID) {
         if(isset($id, $name, $courseID)) {
             if(!empty($name) && !empty($courseID)) {
@@ -63,6 +64,7 @@ class FieldService {
             echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
+
     static function deleteField($id) {
         if(isset($id)) {
             if(!FieldModel::isFieldByID($id)) {

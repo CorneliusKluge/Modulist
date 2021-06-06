@@ -2,7 +2,7 @@
 if($result) {
 ?>
 <form method="POST" class="form_container">
-    <h2>Modulkategorie hinzufügen</h2>
+    <h2>Modulkategorie bearbeiten</h2>
 
     <div class="form_item">
         <label class="form_label" for="category_change_name">Name:*</label>

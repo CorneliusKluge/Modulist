@@ -10,18 +10,17 @@ class ModuleModel {
     Getting data from Database
 */    
     static function getAllModules() {
-        $db = DatabaseService::getDatabaseObject(); // Get the database object which contains login information to access the database
+        $db = DatabaseService::getDatabaseObject(); 
 
-        $query = "SELECT * FROM modules"; // A SQL query
-        $result = mysqli_query($db, $query); // Run the sql query and save the result in the variable $result
+        $query = "SELECT * FROM modules"; 
+        $result = mysqli_query($db, $query); 
 
-        return $result; // Return the result
+        return $result; 
     }
 
     static function getModulesForList() {
         $db = DatabaseService::getDatabaseObject();
         
-        //TODO: update sql statement if other colums needed 
         $query = "SELECT t1.*, t2.totalworkload FROM modules as t1 LEFT JOIN (SELECT moduleID, SUM(workload) as totalworkload FROM module_category_mm GROUP BY moduleID) as t2 ON t1.ID = t2.moduleID";
         $result = mysqli_query($db, $query);
 
@@ -31,16 +30,16 @@ class ModuleModel {
     static function getModuleByID($id) {
         $db = DatabaseService::getDatabaseObject();
 
-        $id = mysqli_real_escape_string($db, $id); // Mask the data to prevent sql injection
+        $id = mysqli_real_escape_string($db, $id);
 
         $query = "SELECT * FROM modules WHERE id = $id";
         $result = mysqli_query($db, $query);
 
-        if($result->num_rows) { // Check if there are data records (in this case: if there is a module with the given id)
-            $result = mysqli_fetch_object($result); // Convert the object into a normal php-object, so you can write e.g. $result->id to get the id of the current data record
+        if($result->num_rows) { 
+            $result = mysqli_fetch_object($result); 
         }
         else {
-            $result = false; // Return false if there is are no data records (no module with the given id)
+            $result = false; 
         }
         return $result;
     }
@@ -202,7 +201,6 @@ class ModuleModel {
         }
     }
 
-
 /*
     Add a new Module to Database
 */
@@ -310,8 +308,8 @@ class ModuleModel {
     }
 
 
-    static function addFieldToModule($moduleID, $field, $courseID){
-        $db = DatabaseService::getDatabaseObject();
+    static function addFieldToModule($moduleID, $field, $courseID) {
+        $db = DatabaseService::getDatabaseObject(); 
 
         $moduleID = mysqli_real_escape_string($db, $moduleID);
         $field = mysqli_real_escape_string($db, $field);
@@ -555,9 +553,8 @@ class ModuleModel {
         return $result;
     }
 
-
 /*
-lock module 
+    Lock module 
 */
     static function lockModule($moduleID, $lockedFlag) {
         $db = DatabaseService::getDatabaseObject();
@@ -571,79 +568,9 @@ lock module
         return $result;
     }
 
-   /* static function updateFieldsOfModule($id, $moduleID, $field, $course){
-        $db = DatabaseService::getDatabaseObject();
-
-        if(!empty($field)) {
-            $id = mysqli_real_escape_string($db, $id);
-            $moduleID = mysqli_real_escape_string($db, $moduleID);
-            $field = mysqli_real_escape_string($db, $field);
-            $course = mysqli_real_escape_string($db, $course);
-
-            if(empty($moduleID)) {
-                return false;
-            }
-
-            $insert = "UPDATE module_field_mm SET moduleID = $moduleID, fieldID = $field, courseID = $course WHERE ID = $id)";
-            $result = mysqli_query($db, $insert);
-            return $result;
-        }
-    }
-    
-    static function updateCategoriesOfModule($id, $moduleID, $category) {
-        $db = DatabaseService::getDatabaseObject();
-
-        if(!empty($categories)) {
-
-            if(empty($moduleID)) {
-                return false;
-            }
-
-            $id = mysqli_real_escape_string($db, $id);
-            $moduleID = mysqli_real_escape_string($db, $moduleID);
-
-            $categoryID = mysqli_real_escape_string($db, $category[0]);
-            $workload = mysqli_real_escape_string($db, $category[1]);
-            $theoryFlag = mysqli_real_escape_string($db, $category[2]);
-
-            if(empty($categoryID)) {
-                return false;
-            }
-                
-            if(empty($workload)) {
-                $workload = "NULL";
-            }
-
-            if(empty($theoryFlag) && $theoryFlag !== "0") {
-                $theoryFlag = "NULL";
-            }
-                
-            $insert = "UPDATE module_category_mm SET moduleID = $moduleID, categoryID = $categoryID, workload = $workload, theoryFlag = $theoryFlag WHERE ID = $id";
-                
-            $result = mysqli_query($db, $insert);
-        }
-        return $result;
-    }
-
-    static function updateLiteratureOfModule($id, $moduleID, $literatureID, $basicLiteratureFlag) {
-        $db = DatabaseService::getDatabaseObject();
-
-        if(!empty($literatureID)) {
-            $id = mysqli_real_escape_string($db, $id);
-            $moduleID = mysqli_real_escape_string($db, $moduleID);
-            $literatureID = mysqli_real_escape_string($db, $literatureID);
-            $basicLiteratureFlag = mysqli_real_escape_string($db, $basicLiteratureFlag);
-
-                 
-            $insert = "UPDATE module_literature_mm SET moduleID = $moduleID, literatureID = $literatureID, 
-                                                       basicLiteratureFlag = $basicLiteratureFlag
-                                                   WHERE ID = $id"; 
-                
-            $result = mysqli_query($db, $insert);
-        }
-        return $result;
-    }*/
-
+/*
+    Functions needed for export 
+*/
     static function getAllModulesOfCourseExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -688,6 +615,7 @@ lock module
             return "";
         }
     }
+
     static function getEVLTheoryByModuleIDAndSemester($moduleID, $semester) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -705,6 +633,7 @@ lock module
             return "";
         }
     }
+
     static function getEVLPractiseByModuleIDAndSemester($moduleID, $semester) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -722,6 +651,7 @@ lock module
             return "";
         }
     }
+
     static function getCompulsoryCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -734,6 +664,7 @@ lock module
         
         return $result;
     }
+
     static function getElectiveCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -746,6 +677,7 @@ lock module
 
         return $result;
     }
+
     static function getPracticalCourseModulesExceptLocked($courseID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -758,6 +690,7 @@ lock module
 
         return $result;
     }
+
     static function getCompulsoryModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -770,6 +703,7 @@ lock module
 
         return $result;
     }
+
     static function getElectiveModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -782,6 +716,7 @@ lock module
 
         return $result;
     }
+
     static function getPracticalModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 
@@ -807,6 +742,7 @@ lock module
 
         return $result;
     }
+
     static function getModulesByFieldExceptLocked($fieldID) {
         $db = DatabaseService::getDatabaseObject();
 

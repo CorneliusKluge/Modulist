@@ -127,10 +127,9 @@ class LiteratureModel {
         $result = mysqli_query($db, $update);
 
         return $result;
-
     }
 
-    static function deleteLiterature($id){
+    static function deleteLiterature($id) {
         $db = DatabaseService::getDatabaseObject();
 
         $id = mysqli_real_escape_string($db, $id);
@@ -151,6 +150,7 @@ class LiteratureModel {
 
         return $result;
     }
+    
     static function getDeepeningLiteratureByModuleID($moduleID) {
         $db = DatabaseService::getDatabaseObject();
 

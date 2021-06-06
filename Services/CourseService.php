@@ -27,6 +27,7 @@ class CourseService {
             echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
+
     static function changeCourse($id, $name, $nameEN) {
         if(isset($id, $name)) {
             if(!empty($name)) {
@@ -53,6 +54,7 @@ class CourseService {
             echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
+    
     static function deleteCourse($id) {
         if(isset($id)) {
             if(!CourseModel::isCourseByID($id)) {

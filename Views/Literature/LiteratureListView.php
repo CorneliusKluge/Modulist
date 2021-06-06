@@ -5,7 +5,6 @@
             <input class="table_add_button button" name="literature_add_button" type="submit" value=""/>
         </form>
     </div>
-<!--TODO: place it right (stylesheet.css)-->
     <?php
         if($result->num_rows) {
     ?>
@@ -28,7 +27,6 @@
                     <td><?php echo $literature["publisher"];?></td>
                     <td><?php echo $literature["isbn"];?></td>
                     
-                    <td><!--TODO: proof validity and show result--></td>
                     <td class="table_row_functions">
                         <form method="POST">
                             <button type="submit" name="literature_change_button" value="<?php echo $literature["ID"];?>" class="button table_edit_button"></button>

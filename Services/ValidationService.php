@@ -75,6 +75,7 @@ class ValidationService {
             return false;
         }
     }
+    
     static function isModuleValidForEnglishModuleManual($moduleID) {
         if($result = ModuleModel::getModuleByID($moduleID)) {
             if(empty($result->code) || empty($result->nameEN) || empty($result->summaryEN) || empty($result->semester) || empty($result->credits)) {
@@ -87,6 +88,7 @@ class ValidationService {
             return false;
         }
     }
+
     static function isModuleValidForStudySchedule($moduleID) {
         if($result = ModuleModel::getModuleByID($moduleID)) {
             if(empty($result->code) || empty($result->name) || empty($result->semester) || empty($result->credits) || empty($result->duration)) {
@@ -111,6 +113,7 @@ class ValidationService {
             return false;
         }
     }
+
     static function isModuleValidForExamSchedule($moduleID) {
         if($result = ModuleModel::getModuleByID($moduleID)) {
             if(empty($result->code) || empty($result->name) || empty($result->semester) || empty($result->credits) || empty($result->examRequirement) || empty($result->overallGradeWeighting)) {

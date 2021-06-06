@@ -5,26 +5,23 @@ use Modulist\Services\CategoryService;
 use Modulist\Models\CategoryModel;
 
 class CategoryController {
-    function __construct() { // Method which gets triggered whenever an object of the class "ModuleController" is created
-        ob_start(); // Start output buffering
-        include("Views/Category/CategoryTemplate.php"); // Include the Template
-        $template = ob_get_clean(); // Get the content of the output buffer and stop output buffering
+    function __construct() { 
+        ob_start(); 
+        include("Views/Category/CategoryTemplate.php"); 
+        $template = ob_get_clean(); 
 
-        // Fill the template with views
         $template = sprintf(
             $template,
             $this->getCategoryView(),
             $this->getCategoryListView(),
-            "",
-            "" 
         );
 
-        echo $template; // Output the template
+        echo $template; 
     }
     
     function getCategoryView() {
         if(isset($_POST["category_add_button"])) {
-            $view1 = $this->getCategoryAddView(); // Calls the method "getCategoryAddView" and write its output/return value into the template
+            $view1 = $this->getCategoryAddView(); 
             return $view1;
         }
 
@@ -49,15 +46,13 @@ class CategoryController {
     }
 
     function getCategoryAddView() {
-        ob_start(); // Start output buffering
-        include("Views/Category/CategoryAddView.php"); // Include the View which contains the formular to create a new module
-        $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
-        return $view; // Return the view
+        ob_start();
+        include("Views/Category/CategoryAddView.php"); 
+        $view = ob_get_clean(); 
+        return $view; 
     }
 
-function submitNewCategory() {
-        // Get the content of the output buffer and stop output buffering
-   
+function submitNewCategory() {   
        ob_start();
        $bool = CategoryService::addCategory(
            $_POST["category_add_name"] ?? NULL,
@@ -69,12 +64,12 @@ function submitNewCategory() {
        return $output;
    }
 
-    function getCategoryListView(){
+    function getCategoryListView() {
         ob_start();
         $categories = CategoryModel::getAllCategories();
         include("Views/Category/CategoryListView.php");
-        $view = ob_get_clean(); // Get the content of the output buffer and stop output buffering
-        return $view; // Return the view
+        $view = ob_get_clean(); 
+        return $view; 
     }
 
     function categoryChangeSubmit($id) {
@@ -90,7 +85,7 @@ function submitNewCategory() {
         return $output;
     }
 
-    function getCategoryChangeView($categoryID){
+    function getCategoryChangeView($categoryID) {
         ob_start();
         
         $result = CategoryModel::getCategoryByID($categoryID);
@@ -100,7 +95,7 @@ function submitNewCategory() {
         return $output;
     }
 
-    function getCategoryDeleteView($id){
+    function getCategoryDeleteView($id) {
         ob_start();
         $result = CategoryModel::getCategoryByID($id);
         include("Views/Category/CategoryDeleteView.php");
@@ -109,7 +104,7 @@ function submitNewCategory() {
         return $output;
     }
 
-    function submitCategoryDelete($id){
+    function submitCategoryDelete($id) {
         ob_start();
 
         $bool = CategoryService::deleteCategory($id);
