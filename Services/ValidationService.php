@@ -107,6 +107,32 @@ class ValidationService {
                 return false;
             }
 
+            $workload = 0;
+
+            $resultPresence = CategoryModel::getPresenceCategoriesByModuleID($result->ID);
+            if($resultPresence->num_rows) {
+                foreach($resultPresence as $category) {
+                    if(empty($category["name"]) || empty($category["workload"])) {
+                        return false;
+                    }
+                    $workload += $category["workload"];
+                }
+            }
+
+            $resultNonPresence = CategoryModel::getTheoryCategoriesByModuleID($result->ID);
+            if($resultNonPresence->num_rows) {
+                foreach($resultNonPresence as $category) {
+                    if(empty($category["name"]) || empty($category["workload"])) {
+                        return false;
+                    }
+                    $workload += $category["workload"];
+                }
+            }
+
+            if($workload != $result->credits * 30) {
+                return false;
+            }
+
             return true;
         }
         else {

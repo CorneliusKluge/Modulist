@@ -11,7 +11,7 @@ class ExamModel {
 
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
-        $query = "SELECT * FROM exams WHERE moduleID = $moduleID";
+        $query = "SELECT * FROM exams WHERE moduleID = $moduleID ORDER BY examSemester";
         $result = mysqli_query($db, $query);
 
         return $result;

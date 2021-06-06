@@ -203,18 +203,9 @@ function printModule($module) {
 
             $exams = ExamModel::getExamsByModuleIDAndSemester($module["ID"], $module["semester"] + $i - 1);
             $examString = "";
-            $examString2 = "";
-            $examString3 = "";
             if($exams->num_rows) {
                 foreach($exams as $exam) {
                     $examString .= getExamTypeString($exam["examType"]) . "<br>";
-                    if(!empty($exam["examDuration"])) {
-                        $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examDuration"] . "<br>";
-                    }
-                    else {
-                        $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examCircumference"] . "<br>";
-                    }
-                    $examString3 .= $exam["examWeighting"] . "%" . "<br>";
                 }
             }
             ?>
@@ -236,12 +227,29 @@ function printModule($module) {
             <td class="background-2"><?php echo $evlTheory;?></td>
             <td class="background-3"><?php echo $evlPractise;?></td>
 
-            <td class="align_center"><?php echo $module["credits"] * 30;?></td>
-            <td class="align_center"><?php echo $module["credits"];?></td>
-
-            <td class="align_center"><?php echo $examString2;?></td>
-            <td class="align_center"><?php echo $examString3;?></td>
-        <?php
+            <?php
+            if($i == 1) {
+                $examString2 = "";
+                $examString3 = "";
+                $exams = ExamModel::getExamsByModuleID($module["ID"], $module["semester"] + $i - 1);
+                if($exams->num_rows) {
+                    foreach($exams as $exam) {
+                        if(!empty($exam["examDuration"])) {
+                            $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examDuration"] . "<br>";
+                        }
+                        else {
+                            $examString2 .= getExamTypeString($exam["examType"]) . " " . $exam["examCircumference"] . "<br>";
+                        }
+                        $examString3 .= $exam["examWeighting"] . "%" . "<br>";
+                    }
+                }
+            ?>
+                <td rowspan="<?php echo $module["duration"];?>" class="align_center"><?php echo $module["credits"] * 30;?></td>
+                <td rowspan="<?php echo $module["duration"];?>" class="align_center"><?php echo $module["credits"];?></td>
+                <td rowspan="<?php echo $module["duration"];?>" class="align_center"><?php echo $examString2;?></td>
+                <td rowspan="<?php echo $module["duration"];?>" class="align_center"><?php echo $examString3;?></td>
+            <?php
+            }
         }
         ?>
     </tr>
