@@ -19,7 +19,7 @@
     
     <div class="form_item">
         <label class="form_label" for="module_change_course">Studiengang:</label>
-        <select class="form_select" id="module_change_course" name="module_change_course" onchange="check_course(this, false);">
+        <select class="form_select" id="module_change_course" name="module_change_course" onchange="checkCourse(this, false);">
             <?php
                 if($resultCourse->num_rows) {
                     foreach($resultCourse as $course) {
@@ -34,8 +34,8 @@
    
     <div class="form_item" id="module_change_field_div">
         <label class="form_label" for="module_change_field_0">Studienrichtung:**</label>
-        <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false)"></button>
-        <button class="button form_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="form_add_button button" type="button" name="module_change_fieldEntry" onclick="addFieldEntry(false);"></button>
+        <button class="button form_delete_button" type="button" name="module_change_removefieldEntry" onclick="removeLastSelectEntry(this);"></button>
         <?php if($oldFields->num_rows) {
             $i = 0;
             foreach($oldFields as $oldField) {
@@ -192,7 +192,7 @@
             <div class="form_group" id="<?php echo $inputCategoryDiv;?>">
                 <div class="form_item">
                     <label class="form_label" for="<?php echo $inputCategoryID;?>">Kategorie:**</label>
-                    <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>" data-id="<?php echo $i;?>" onchange="check_status(this, false);">
+                    <select class="form_select" id="<?php echo $inputCategoryID;?>" name="<?php echo $inputCategoryID;?>" data-id="<?php echo $i;?>" onchange="checkStatus(this, false);">
                         <?php
                             $invisibleFlag = 0;
                             if($resultCategories->num_rows) {

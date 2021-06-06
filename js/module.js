@@ -4,7 +4,15 @@ var examEntry = 0;
 var basicLiteratureEntry = 0;
 var deepeningLiteratureEntry = 0;
 
-function check_status(obj, addFlag) {
+document.addEventListener("click", function() {
+    alert("event");
+    var form = document.querySelector("form.form_container");
+    if(form) {
+        form.addEventListener("load", initialCheckCourse, true);
+    }
+});
+
+function checkStatus(obj, addFlag) {
     var presenceFlag = obj.options[obj.selectedIndex].getAttribute('data-presenceFlag');
     var id = obj.getAttribute('data-id');
     
@@ -35,7 +43,7 @@ function check_status(obj, addFlag) {
     }
 }
 
-function check_course(obj, addFlag) {
+function checkCourse(obj, addFlag) {
     var courseID = obj.options[obj.selectedIndex].getAttribute('value');
 
     if(addFlag) {
@@ -66,6 +74,17 @@ function check_course(obj, addFlag) {
         var fieldSelectClone = fieldSelect.cloneNode(true);
         fieldSelect.replaceWith(fieldSelectClone);
     });
+}
+
+function initialCheckCourse(addFlag) {
+    alert("Wird aufgerufen");
+    if(addFlag) {
+        var courseSelect = document.getElementById("module_add_course");
+    }
+    else {
+        var courseSelect = document.getElementById("module_change_course");
+    }
+    checkCourse(courseSelect, addFlag);
 }
 
 function addFieldEntry(addFlag) {

@@ -19,7 +19,7 @@
  
     <div class="form_item">
         <label class="form_label" for="module_add_course">Studiengang:</label>
-        <select class="form_select" id="module_add_course" name="module_add_course" onchange="check_course(this, true);">
+        <select class="form_select" id="module_add_course" name="module_add_course" onchange="checkCourse(this, true);">
             <?php
                 if($resultCourse->num_rows) {
                         foreach($resultCourse as $course) {
@@ -156,7 +156,7 @@
         <div class="form_group" id="module_add_categoryDiv_0">
             <div class="form_item">
                 <label class="form_label" for="module_add_category_0">Kategorie:</label>
-                <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="check_status(this, true);">
+                <select class="form_select" id="module_add_category_0" name="module_add_category_0" data-id="0" onchange="checkStatus(this, true);">
                     <?php
                         $invisibleFlag = 0;
                         if($resultCategories->num_rows) {
