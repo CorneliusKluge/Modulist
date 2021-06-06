@@ -113,7 +113,7 @@ class ValidationService {
     }
     static function isModuleValidForExamSchedule($moduleID) {
         if($result = ModuleModel::getModuleByID($moduleID)) {
-            if(empty($result->code) || empty($result->name) || empty($result->semester) || empty($result->credits) || empty($result->examRequirement) || empty($result->overallGradeWeighting)) { // ??? Weighting for overall grade
+            if(empty($result->code) || empty($result->name) || empty($result->semester) || empty($result->credits) || empty($result->examRequirement) || empty($result->overallGradeWeighting)) {
                 return false;
             }
 
