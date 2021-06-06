@@ -425,12 +425,36 @@ class ModuleModel {
         return $result;
     }
 
-    static function deleteModuleField($moduleID) {
+    static function deleteModuleFieldByModuleID($moduleID) {
         $db = DatabaseService::getDatabaseObject();
 
         $moduleID = mysqli_real_escape_string($db, $moduleID);
 
         $query = "DELETE FROM module_field_mm WHERE moduleID = $moduleID";
+
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
+    static function deleteModuleFieldByCourseID($courseID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $courseID = mysqli_real_escape_string($db, $courseID);
+
+        $query = "DELETE FROM module_field_mm WHERE courseID = $courseID";
+
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
+    static function deleteModuleFieldByFieldID($fieldID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $fieldID = mysqli_real_escape_string($db, $fieldID);
+
+        $query = "DELETE FROM module_field_mm WHERE fieldID = $fieldID";
 
         $result = mysqli_query($db, $query);
 

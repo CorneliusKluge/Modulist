@@ -4,6 +4,7 @@ namespace Modulist\Services;
 
 use Modulist\Models\CourseModel;
 use Modulist\Models\FieldModel;
+use Modulist\Models\ModuleModel;
 
 class FieldService {
     static function addField($name, $nameEN, $courseID) {
@@ -73,6 +74,7 @@ class FieldService {
             }
 
             FieldModel::deleteField($id);
+            ModuleModel::deleteModuleFieldByFieldID($id);
 
             echo "<div class='service_notice service_notice--success'>Die ausgewählte Studienrichtung wurde erfolgreich gelöscht";
 

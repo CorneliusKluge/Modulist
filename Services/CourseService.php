@@ -3,6 +3,7 @@
 namespace Modulist\Services;
 
 use Modulist\Models\CourseModel;
+use Modulist\Models\ModuleModel;
 
 class CourseService {
     static function addCourse($name, $nameEN) {
@@ -63,6 +64,7 @@ class CourseService {
             }
 
             CourseModel::deleteCourse($id);
+            ModuleModel::deleteModuleFieldByCourseID($id);
 
             echo "<div class='service_notice service_notice--success'>Der ausgewählte Studiengang wurde erfolgreich gelöscht";
 

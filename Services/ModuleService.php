@@ -162,7 +162,7 @@ class ModuleService {
             }
 
             $moduleDeleted = ModuleModel::deleteModule($id);
-            $fieldDeleted = ModuleModel::deleteModuleField($id);
+            $fieldDeleted = ModuleModel::deleteModuleFieldByModuleID($id);
             $categoriesDeleted = ModuleModel::deleteModuleCategory($id);
             $examsDeleted = ExamModel::deleteExamsByModuleID($id);
             $LiteratureDeleted = ModuleModel::deleteModuleLiterature($id);
@@ -219,7 +219,7 @@ class ModuleService {
     ) {
         if(isset($name)) {
             if(!empty($name)) {
-                ModuleModel::deleteModuleField($moduleID);
+                ModuleModel::deleteModuleFieldByModuleID($moduleID);
                 ModuleModel::deleteModuleCategory($moduleID);
                 ModuleModel::deleteModuleLiterature($moduleID);
                 ExamModel::deleteExamsByModuleID($moduleID);
