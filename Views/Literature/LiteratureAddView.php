@@ -15,7 +15,7 @@
 
     <div class="form_item">
         <label class="form_label" for="literature_add_year">Jahr der Veröffentlichung:*</label>
-        <input class="form_input" type="string" id="literature_add_year" name="literature_add_year"/>
+        <input class="form_input" type="number" id="literature_add_year" name="literature_add_year"/>
     </div>
  
     <div class="form_item">

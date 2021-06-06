@@ -15,7 +15,7 @@
 
     <div class="form_item">
         <label class="form_label" for="literature_change_year">Jahr der Veröffentlichung:*</label>
-        <input class="form_input" type="string" id="literature_change_year" name="literature_change_year" value="<?php echo $result->year;?>"/>
+        <input class="form_input" type="number" id="literature_change_year" name="literature_change_year" value="<?php echo $result->year;?>"/>
     </div>
  
     <div class="form_item">

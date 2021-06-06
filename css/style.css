@@ -140,10 +140,12 @@ h4 {
 
 .service_notice--success {
     border: 3px solid #00C927;
+    background-color: #ccffd6;
 }
 
 .service_notice--failure {
     border: 3px solid #E5004B;
+    background-color: #FDD0DF;
 }
 
 /*------------------------message------------------------*/
@@ -550,4 +552,13 @@ td {
     flex-flow: row wrap;
     align-items: flex-end;
     background-color: #fff;
+}
+
+.export_notice {
+    width: 100%;
+    margin: 0 25px;
+    padding: 10px;
+    border: 2px solid #000;
+    text-align: center;
+    background-color: #ECE5C6;
 }
