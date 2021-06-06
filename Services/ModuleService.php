@@ -47,12 +47,12 @@ class ModuleService {
         if(isset($name)) {
             if(!empty($name)) {
                 if(ModuleModel::getModuleByName($name)) {
-                    echo "Ein Modul mit diesem Namen gibt es bereits.";
+                    echo "<div class='service_notice service_notice--failure'>Ein Modul mit diesem Namen gibt es bereits.</div>";
                     return false;
                 }
                 if(!empty($code)) {
                     if(ModuleModel::getModuleByModuleCode($code)){
-                        echo "Ein Modul mit diesem Modulcode gibt es bereits.";
+                        echo "<div class='service_notice service_notice--failure'>Ein Modul mit diesem Modulcode gibt es bereits.</div>";
                         return false;
                     }
                 }      
@@ -116,48 +116,48 @@ class ModuleService {
                 
                
                 if(!$moduleAdded) {
-                    echo "Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$fieldAdded) {
-                    echo "Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$categoriesAdded) {
-                    echo "Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$examsAdded) {
-                    echo "Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$basicLiteratureAdded) {
-                    echo "Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$deepeningLiteratureAdded) {
-                    echo "Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
-                    echo "Das Modul wurde erfolgreich eingetragen.";
+                    echo "<div class='service_notice service_notice--failure'>Das Modul wurde erfolgreich eingetragen.</div>";
                 }
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
 
     static function deleteModule($id) {
         if(isset($id)) {
             if(!ModuleModel::getModuleByID($id)) {
-                echo "Das ausgewählte Modul konnte nicht gefunden werden.";
+                echo "<div class='service_notice service_notice--failure'>Das ausgewählte Modul konnte nicht gefunden werden.</div>";
                 return false;
             }
 
@@ -168,10 +168,10 @@ class ModuleService {
             $LiteratureDeleted = ModuleModel::deleteModuleLiterature($id);
 
             if($moduleDeleted && $fieldDeleted && $categoriesDeleted && $examsDeleted && $LiteratureDeleted) {
-                echo "Das ausgewählte Modul wurde erfolgreich gelöscht";
+                echo "<div class='service_notice service_notice--success'>Das ausgewählte Modul wurde erfolgreich gelöscht.</div>";
             }
             else {
-                echo "Es ist ein Fehler beim Löschen des Moduls aufgetreten. Bitte versuchen Sie es erneut.";
+                echo "<div class='service_notice service_notice--failure'>Es ist ein Fehler beim Löschen des Moduls aufgetreten. Bitte versuchen Sie es erneut.</div>";
             }
 
             return true;
@@ -299,41 +299,41 @@ class ModuleService {
                 }
 
                 if(!$moduleAdded) {
-                    echo "Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten des Moduls wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$fieldAdded) {
-                    echo "Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Studienrichtung wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$categoriesAdded) {
-                    echo "Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten für die Modulkategorie wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$examsAdded) {
-                    echo "Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Daten für die Prüfung wurden nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$basicLiteratureAdded) {
-                    echo "Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die Basisliteratur wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if(!$deepeningLiteratureAdded) {
-                    echo "Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.";
+                    echo "<div class='service_notice service_notice--failure'>Die vertiefende Literatur wurde nicht ordnungsgemäß gespeichert.</div>";
                 }
 
                 if($moduleAdded && $fieldAdded && $categoriesAdded && $examsAdded && $basicLiteratureAdded && $deepeningLiteratureAdded) {
-                    echo "Das Modul wurde erfolgreich aktualisiert.";
+                    echo "<div class='service_notice service_notice--success'>Das Modul wurde erfolgreich aktualisiert.</div>";
                 }
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
 

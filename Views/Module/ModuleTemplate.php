@@ -23,7 +23,6 @@
                     <li class="navbar_entry"><a href="./literature">Literatur</a></li>
                     <li class="navbar_entry"><a href="./studymanagement">Studienverwaltung</a></li>
                     <li class="navbar_entry"><a href="./export">Export</a></li>
-                    <!-- <li class="navbar_entry"><a  href="index.php?subcontroller=options">Optionen</a></li> -->
                 </ul>
             </nav>
         </header>

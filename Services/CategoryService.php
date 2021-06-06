@@ -9,22 +9,22 @@ class CategoryService {
         if(isset($name, $position)) {
             if(!empty($name) && !empty($position)) {
                 if(CategoryModel::getCategoryByName($name)) {
-                    echo "Eine Modulkategorie mit diesem Namen gibt es bereits.";
+                    echo "<div class='service_notice service_notice--failure'>Eine Modulkategorie mit diesem Namen gibt es bereits.</div>";
                     return false;
                 }
 
                 CategoryModel::addCategory($name, $presenceFlag, $position);
 
-                echo "Die Modulkategorie wurde erfolgreich eingetragen.";
+                echo "<div class='service_notice service_notice--success'>Die Modulkategorie wurde erfolgreich eingetragen.</div>";
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
     static function changeCategory($id, $name, $presenceFlag, $position) {
@@ -33,28 +33,28 @@ class CategoryService {
 
                 CategoryModel::changeCategory($id, $name, $presenceFlag, $position);
 
-                echo "Die Modulkategorie wurde erfolgreich geändert.";
+                echo "<div class='service_notice service_notice--success'>Die Modulkategorie wurde erfolgreich geändert.</div>";
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
 
     static function deleteCategory($id) {
         if(!CategoryModel::getCategoryByID($id)) {
-            echo "Die ausgewählte Modulkategorie konnte nicht gefunden werden.";
+            echo "<div class='service_notice service_notice--failure'>Die ausgewählte Modulkategorie konnte nicht gefunden werden.</div>";
             return false;
         }
 
         CategoryModel::deleteCategory($id);
 
-        echo "Die ausgewählte Modulkategorie wurde erfolgreich gelöscht";
+        echo "<div class='service_notice service_notice--success'>Die ausgewählte Modulkategorie wurde erfolgreich gelöscht";
 
         return true;
     }

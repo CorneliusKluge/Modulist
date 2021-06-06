@@ -127,6 +127,25 @@ h4 {
 
 }
 
+/*------------------------notice------------------------*/
+
+.service_notice {
+    width: auto;
+    margin: 30px 0;
+    padding: 15px;
+    background-color: #fff;
+    text-align: center;
+    font-weight: 600;
+}
+
+.service_notice--success {
+    border: 3px solid #00C927;
+}
+
+.service_notice--failure {
+    border: 3px solid #E5004B;
+}
+
 /*------------------------message------------------------*/
 
 .overlay {
@@ -144,6 +163,7 @@ h4 {
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
+    min-width: 250px;
     padding: 10px;
     border: 8px solid #09497D;
     border-radius: 8px;
@@ -252,6 +272,11 @@ h4 {
     background-image: url('../img/plusIcon_1.svg');
     background-size: cover;
 }
+
+.form_add_button--on_entry {
+    margin: 5px 5px 5px calc(100% - 15px);
+}
+
 .form_add_button:hover {
     background-image: url('../img/plusHoverIcon.svg');
     background-size: cover;
@@ -290,8 +315,7 @@ h4 {
 
 .mandatory_notice {
     width: calc(100% - 325px);
-    margin-bottom: 40px;
-    margin-left: 25px;
+    margin: 20px 0 40px 25px;
 }
 
 .form_submit {
