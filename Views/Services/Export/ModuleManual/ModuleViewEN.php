@@ -28,7 +28,11 @@
 <table>
     <?php
     use Modulist\Models\FieldModel;
+use Modulist\Models\ModuleModel;
+use Modulist\Services\ValidationService;
 
+    $courseModules = mysqli_fetch_all($courseModules, MYSQLI_ASSOC);
+    $courseModules = array_filter($courseModules, function($item) {return ValidationService::isModuleValidForEnglishModuleManual($item["ID"]);});
     foreach($courseModules as $module) {
     ?>
         <tr class="cell_style">
@@ -42,12 +46,14 @@
         </tr>
     <?php
     }
-    foreach($fieldModules as $id => $modules) {
+    foreach($resultFields as $field) {
+        $modules = ModuleModel::getModulesByFieldExceptLocked($field["ID"]);
+        $modules = mysqli_fetch_all($modules, MYSQLI_ASSOC);
+        $modules = array_filter($modules, function($item) {return ValidationService::isModuleValidForEnglishModuleManual($item["ID"]);});
         if(count($modules)) {
-            $fieldName = FieldModel::getFieldByID($id)->nameEN;
             ?>
             <tr class="heading_extra">
-                <td colspan="3"><?php echo $fieldName;?></td>
+                <td colspan="3"><?php echo $field["nameEN"];?></td>
             </tr>
             <?php
             foreach($modules as $module) {

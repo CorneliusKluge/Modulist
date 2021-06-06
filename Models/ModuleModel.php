@@ -731,7 +731,7 @@ lock module
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
                     WHERE t2.courseID = $courseID AND t1.type = 'Pflichtmodul' AND t2.fieldID IS NULL AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
-
+        
         return $result;
     }
     static function getElectiveCourseModulesExceptLocked($courseID) {
@@ -790,6 +790,31 @@ lock module
         $query = "SELECT t1.* FROM modules AS t1
                     JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
                     WHERE t2.fieldID = $fieldID AND t1.type = 'Praxismodul' AND t1.lockedFlag = 0 ORDER BY t1.semester";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+
+    static function getCourseModulesExceptLocked($courseID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $courseID = mysqli_real_escape_string($db, $courseID);
+
+        $query = "SELECT t1.* FROM modules AS t1
+                    JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
+                    WHERE t2.courseID = $courseID AND t2.fieldID IS NULL AND t1.lockedFlag = 0 ORDER BY t1.semester";
+        $result = mysqli_query($db, $query);
+
+        return $result;
+    }
+    static function getModulesByFieldExceptLocked($fieldID) {
+        $db = DatabaseService::getDatabaseObject();
+
+        $fieldID = mysqli_real_escape_string($db, $fieldID);
+
+        $query = "SELECT t1.* FROM modules AS t1
+                    JOIN module_field_mm AS t2 ON t1.id = t2.moduleID
+                    WHERE t2.fieldID = $fieldID AND t1.lockedFlag = 0 ORDER BY t1.semester";
         $result = mysqli_query($db, $query);
 
         return $result;

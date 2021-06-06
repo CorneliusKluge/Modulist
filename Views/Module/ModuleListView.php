@@ -6,7 +6,10 @@
         </form>
     </div>
     <?php
-    if($result->num_rows) {
+
+use Modulist\Services\ValidationService;
+
+if($result->num_rows) {
         ?>
         <table id="module_list_table">
             <th>Modulname</th>
@@ -16,7 +19,10 @@
             <th>Credits</th>
             <th>Workload</th>
             <th>Verantwortlicher</th>
-            <th>Validität</th>
+            <th>MD</th>
+            <th>ME</th>
+            <th>SP</th>
+            <th>PP</th>
             <th></th>
         
             <?php foreach($result as $module) {
@@ -29,7 +35,10 @@
                     <td><?php echo $module["credits"];?></td>
                     <td><?php echo $module["totalworkload"];?></td>
                     <td><?php echo $module["responsibleName"];?></td>
-                    <td><!--TODO: proof validity and show result--></td>
+                    <td><?php echo intval(ValidationService::isModuleValidForModuleManual($module["ID"]));?></td>
+                    <td><?php echo intval(ValidationService::isModuleValidForEnglishModuleManual($module["ID"]));?></td>
+                    <td><?php echo intval(ValidationService::isModuleValidForStudySchedule($module["ID"]));?></td>
+                    <td><?php echo intval(ValidationService::isModuleValidForExamSchedule($module["ID"]));?></td>
                     <td class="table_row_functions">
                         <form method="POST">
                             <button type="submit" name="module_change_button" value="<?php echo $module["ID"];?>" class="button table_edit_button"></button>

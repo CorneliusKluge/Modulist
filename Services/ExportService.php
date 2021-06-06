@@ -22,17 +22,19 @@ class ExportService {
 
             ob_start();
             include("Views/Services/Export/ModuleManual/IntroView.php");
+            $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
+            $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
+            $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
             include("Views/Services/Export/ModuleManual/ModuleView.php");
             $view = ob_get_clean();
 
             $template = sprintf($template, $view);
+
             ExportService::exportFile($template, "Modulhandbuch");
         }
         else {
             $courseNameEN = CourseModel::getCourseByID($courseID)->nameEN;
-            $compulsoryCourseModules = ModuleModel::getCompulsoryCourseModulesExceptLocked($courseID);
-            $electiveCourseModules = ModuleModel::getElectiveCourseModulesExceptLocked($courseID);
-            $practicalCourseModules = ModuleModel::getPracticalCourseModulesExceptLocked($courseID);
+            $courseModules = ModuleModel::getCourseModulesExceptLocked($courseID);
             $resultFields = FieldModel::getFieldsByCourseID($courseID);
 
             ob_start();
