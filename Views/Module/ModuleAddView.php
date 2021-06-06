@@ -33,9 +33,9 @@
     </div>
 
     <div class="form_item" id="module_add_field_div">
-        <label class="form_label" for="module_add_field_0">Studienrichtung:</label>
+        <label class="form_label" for="module_add_field_0">Studienrichtung:**</label>
         <button class="form_add_button button" type="button" name="module_add_fieldEntry" onclick="addFieldEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removefieldEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_field_0" name="module_add_field_0">
             <?php
                 if($resultField->num_rows) {
@@ -151,7 +151,7 @@
     </div>
 
     <div class="form_group_container" id="module_add_categories_div">
-        <button class="form_add_button button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
+        <button class="form_add_button form_add_button--on_entry button" type="button" name="module_add_categoryEntry" onclick="addCategoryEntry(true)"></button>
 
         <div class="form_group" id="module_add_categoryDiv_0">
             <div class="form_item">
@@ -195,13 +195,13 @@
                     <label class="form_radio_label" for="module_add_TheoryFlag_practical_0">EVL Praxis</label>
                 </div>
             </div>
-            <button class="button table_delete_button" type="button" name="module_add_removeCategory" onclick="removeEntry(this)"></button> 
+            <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_add_removeCategory" onclick="removeEntry(this)"></button> 
         </div>
     </div>
  
     <h3>Prüfungsleistungen (PL)</h3>
     <div class="form_group_container" id="module_add_exams_div">
-        <button class="form_add_button button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
+        <button class="form_add_button form_add_button--on_entry button" type="button" name="module_add_examEntry" onclick="addExamEntry(true)"></button>
         <div class="form_group" id="module_add_examDiv_0">
             <div class="form_item" id="module_add_examType_div">
                 <label class="form_label" for="module_add_examType_0">Art der PL:**</label>
@@ -236,7 +236,7 @@
             </div>
 
             <div class="form_item" id="module_add_examWeighting_div">
-                <label class="form_label" for="module_add_examWeighting_0">Gewichtung:**</label>
+                <label class="form_label" for="module_add_examWeighting_0">Gewichtung (%):**</label>
                 <input class="form_input" type="string" id="module_add_examWeighting_0" name="module_add_examWeighting_0"/>
             </div>
 
@@ -244,7 +244,7 @@
                 <label class="form_label" for="module_add_examSemester_0">Semester:</label>
                 <input class="form_input" type="number" id="module_add_examSemester_0" name="module_add_examSemester_0"/>
             </div>
-            <button class="button table_delete_button" type="button" name="module_add_removeExam" onclick="removeEntry(this)"></button>
+            <button class="button form_delete_button form_delete_button--on_entry" type="button" name="module_add_removeExam" onclick="removeEntry(this)"></button>
         </div>
     </div>    
 
@@ -281,9 +281,9 @@
     </div>
 
     <div class="form_item" id="module_add_basicLiterature_div">
-        <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:</label>
+        <label class="form_label" for="module_add_basicLiterature_0">Basisliteratur:**</label>
         <button class="form_add_button button" type="button" name="module_add_basicLiteratureEntry" onclick="addBasicLiteratureEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removeBasicLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_basicLiterature_0" name="module_add_basicLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -314,9 +314,9 @@
     </div>
 
     <div class="form_item" id="module_add_deepeningLiterature_div">
-        <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:</label>
+        <label class="form_label" for="module_add_deepeningLiterature_0">Vertiefende Literatur:**</label>
         <button class="form_add_button button" type="button" name="module_add_deepeningLiteratureEntry" onclick="addDeepeningLiteratureEntry(true)"></button>
-        <button class="button table_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
+        <button class="button form_delete_button" type="button" name="module_add_removeDeepeningLiteratureEntry" onclick="removeLastSelectEntry(this)"></button>
         <select class="form_select" id="module_add_deepeningLiterature_0" name="module_add_deepeningLiterature_0">
             <?php
                 if($resultLiterature->num_rows) {
@@ -340,7 +340,9 @@
         <input  class="form_editor" type="string" id="module_add_deepeningLiteraturePostNote" name="module_add_deepeningLiteraturePostNote"/>
     </div>
     
-    <span class="mandatory_notice">*Pflichtfeld</span>
-    <span class="mandatory_notice">**Pflichtfeld, falls Kategorien/Prüfungen/Literatureinträge ausgewählt</span>
+    <div class="mandatory_notice">
+        <span>*Pflichtfeld</span><br>
+        <span>**Pflichtfeld, falls Studienrichtung/Kategorien/Prüfungen/Literatureinträge gespeichert werden sollen</span>
+    </div>
     <input class="form_submit button" type="submit" name="module_add_submit"/>
 </form>

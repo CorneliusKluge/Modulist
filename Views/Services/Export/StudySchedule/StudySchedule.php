@@ -7,7 +7,15 @@ use Modulist\Services\ValidationService;
 ?>
 <h1>Studienablaufplan</h1>
 <style>
-    td {
+    h1 {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        border: 3px solid black;
+    }
+    td, th {
         border: 1px solid black;
     }
     th {
@@ -16,22 +24,32 @@ use Modulist\Services\ValidationService;
     }
     .background-1 {
         background-color: #009ee3;
+        text-align: center;
     }
     .background-2 {
         background-color: #66c5ee;
+        text-align: center;
     }
     .background-3 {
         background-color: #09e6f8;
+        text-align: center;
     }
     .background-4 {
         background-color: #c0c0c0;
+        
     }
     .black {
         color: black;
     }
+    .align_center {
+        text-align: center;
+    }
+    .header th{
+        border: 3px solid black;
+    }
 </style>
 <table>
-    <tr>
+    <tr class="header">
         <th colspan="2" rowspan="2">Studieninhalte</th>
         <th colspan="12">Einordnung der Module in den Gesamtstudienplan</th>
         <th colspan="4" rowspan="2" class="background-1">Workload</th>
@@ -39,10 +57,10 @@ use Modulist\Services\ValidationService;
         <th rowspan="4">Art + Dauer der Prüfungsleistung</th>
         <th rowspan="4">Gewichtung der Prüfungsleistung für Modulnote(*)</th>
     </tr>
-    <tr>
+    <tr class="header">
         <th colspan="12">Semester</th>
     </tr>
-    <tr>
+    <tr class="header">
         <th rowspan="2">Modulcode</th>
         <th rowspan="2">Modulbezeichnung</th>
         <th colspan="2">1</th>
@@ -56,7 +74,7 @@ use Modulist\Services\ValidationService;
         <th rowspan="2" class="background-3 black">evL Praxis</th>
         <th rowspan="2">gesamt</th>
     </tr>
-    <tr>
+    <tr class="header">
         <th>LVS</th>
         <th>PL</th>
         <th>LVS</th>
@@ -200,28 +218,29 @@ function printModule($module) {
                 }
             }
             ?>
-            <td><?php if($module["semester"] + $i - 1 == 1) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 1) { echo $examString;}?></td>
-            <td><?php if($module["semester"] + $i - 1 == 2) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 2) { echo $examString;}?></td>
-            <td><?php if($module["semester"] + $i - 1 == 3) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 3) { echo $examString;}?></td>
-            <td><?php if($module["semester"] + $i - 1 == 4) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 4) { echo $examString;}?></td>
-            <td><?php if($module["semester"] + $i - 1 == 5) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 5) { echo $examString;}?></td>
-            <td><?php if($module["semester"] + $i - 1 == 6) { echo $lvs;};?></td>
-            <td><?php if($module["semester"] + $i - 1 == 6) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 1) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 1) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 2) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 2) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 3) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 3) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 4) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 4) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 5) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 5) { echo $examString;}?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 6) { echo $lvs;};?></td>
+            <td class="align_center"><?php if($module["semester"] + $i - 1 == 6) { echo $examString;}?></td>
+            
 
             <td class="background-1"><?php echo $lvs;?></td>
             <td class="background-2"><?php echo $evlTheory;?></td>
             <td class="background-3"><?php echo $evlPractise;?></td>
 
-            <td><?php echo $module["credits"] * 30;?></td>
-            <td><?php echo $module["credits"];?></td>
+            <td class="align_center"><?php echo $module["credits"] * 30;?></td>
+            <td class="align_center"><?php echo $module["credits"];?></td>
 
-            <td><?php echo $examString2;?></td>
-            <td><?php echo $examString3;?></td>
+            <td class="align_center"><?php echo $examString2;?></td>
+            <td class="align_center"><?php echo $examString3;?></td>
         <?php
         }
         ?>

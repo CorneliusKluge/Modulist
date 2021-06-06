@@ -9,60 +9,60 @@ class CourseService {
         if(isset($name)) {
             if(!empty($name)) {
                 if(CourseModel::isCourseByName($name)) {
-                    echo "Einen Studiengang mit diesem Namen gibt es bereits.";
+                    echo "<div class='service_notice service_notice--failure'>Einen Studiengang mit diesem Namen gibt es bereits.</div>";
                     return false;
                 }
 
                 CourseModel::addCourse($name, $nameEN);
 
-                echo "Der Studiengang wurde erfolgreich eingetragen.";
+                echo "<div class='service_notice service_notice--success'>Der Studiengang wurde erfolgreich eingetragen.</div>";
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
     static function changeCourse($id, $name, $nameEN) {
         if(isset($id, $name)) {
             if(!empty($name)) {
                 if(!CourseModel::isCourseByID($id)) {
-                    echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";
+                    echo "<div class='service_notice service_notice--failure'><div class='service_notice service_notice--failure'>Der ausgewählte Studiengang konnte nicht gefunden werden.</div>";
                     return false;
                 }
                 if(CourseModel::isCourseByNameExceptSelf($id, $name)) {
-                    echo "Einen Studiengang mit diesem Namen gibt es bereits.";
+                    echo "<div class='service_notice service_notice--failure'>Einen Studiengang mit diesem Namen gibt es bereits.</div>";
                     return false;
                 }
 
                 CourseModel::updateCourse($id, $name, $nameEN);
 
-                echo "Der Studiengang wurde erfolgreich bearbeitet.";
+                echo "<div class='service_notice service_notice--success'>Der Studiengang wurde erfolgreich bearbeitet.</div>";
 
                 return true;
             }
             else {
-                echo "Bitte füllen Sie alle Pflichtfelder aus.";
+                echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
             }
         }
         else {
-            echo "Bitte füllen Sie alle Pflichtfelder aus.";
+            echo "<div class='service_notice service_notice--failure'>Bitte füllen Sie alle Pflichtfelder aus.</div>";
         }
     }
     static function deleteCourse($id) {
         if(isset($id)) {
             if(!CourseModel::isCourseByID($id)) {
-                echo "Der ausgewählte Studiengang konnte nicht gefunden werden.";
+                echo "<div class='service_notice service_notice--failure'>Der ausgewählte Studiengang konnte nicht gefunden werden.</div>";
                 return false;
             }
 
             CourseModel::deleteCourse($id);
 
-            echo "Der ausgewählte Studiengang wurde erfolgreich gelöscht";
+            echo "<div class='service_notice service_notice--success'>Der ausgewählte Studiengang wurde erfolgreich gelöscht";
 
             return true;
         }
