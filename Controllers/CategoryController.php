@@ -109,10 +109,10 @@ function submitNewCategory() {
         return $output;
     }
 
-    function submitCategoryDelete($categoryID){
+    function submitCategoryDelete($id){
         ob_start();
 
-        $bool = CategoryModel::deleteCategory($categoryID);
+        $bool = CategoryService::deleteCategory($id);
         
         $output = ob_get_clean();   
         return $output;
