@@ -9,12 +9,20 @@ foreach($resultFields as $field) {
     $fieldString .= $field["name"] . ", ";
 }
 $fieldString = substr($fieldString, 0, -2);
-$fieldString = substr_replace($fieldString, " und", strrpos($fieldString, ","), 1);
+$bool = false;
+if(strrpos($fieldString, ",")) {
+    $fieldString = substr_replace($fieldString, " und", strrpos($fieldString, ","), 1);
+    $bool = true;
+}
 ?>
 <div class="heading_container">
     <h1>Modulhandbuch für den Studiengang</h1>
     <?php echo $courseName;?>
-    <h1>mit den Studienrichtungen</h1>
+    <?php if($bool) { ?>
+        <h1>mit den Studienrichtungen</h1>
+    <?php } else { ?>
+        <h1>mit der Studienrichtung</h1>
+    <?php } ?>
     <?php echo $fieldString; ?>
     <br>
     <br>
